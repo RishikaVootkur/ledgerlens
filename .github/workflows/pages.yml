@@ -6,17 +6,15 @@ name: pages
 on:
   push:
     branches: [main]
-    paths: ["eval/**", "web/**", ".github/workflows/pages.yml"]
+    paths: ["eval/**", "web/**", "src/ledgerlens/eval/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -57,6 +55,9 @@ jobs:
 
   deploy:
     needs: build
+    permissions:
+      pages: write
+      id-token: write
     if: needs.build.outputs.ok == 'true'
     runs-on: ubuntu-latest
     environment:

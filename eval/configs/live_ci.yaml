@@ -1,14 +1,16 @@
 # Scheduled live eval in GitHub Actions (no vector index there): Gemini answers a few
-# smoke questions with the live SEC XBRL tool and the calculator. Kept to 4 questions
+# smoke questions with the live SEC XBRL tool and the calculator. Kept to 3 questions
+# and 2 planning rounds
 # so it fits Gemini 3.8 Flash's 20 free requests per day.
 name: live_ci
-description: "Weekly live check: Gemini 3.8 Flash with the XBRL tool on 4 smoke questions"
+description: "Weekly live check: Gemini 3.8 Flash with the XBRL tool on 3 smoke questions"
 model: gemini-3.8-flash
 search_tool: false
 xbrl_tool: true
 verify_numbers: true
 self_check: true
 datasets: [smoke]
-limit: 4
+limit: 3
+max_rounds: 2
 judge: false
 concurrency: 1

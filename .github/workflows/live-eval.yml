@@ -16,16 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'RishikaVootkur/ledgerlens'
     env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
       CACHE_DIR: /tmp/ledgerlens-cache
       DATA_DIR: /tmp/ledgerlens-data
     steps:
-      - name: Check the secret is configured
+      - name: Check the secrets are configured
         id: check
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
-          if [ -z "$GEMINI_API_KEY" ]; then
-            echo "GEMINI_API_KEY secret is not set; skipping the live eval." >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$GEMINI_API_KEY" ] || [ -z "$SEC_USER_AGENT" ]; then
+            echo "GEMINI_API_KEY or SEC_USER_AGENT secret is not set; skipping the live eval." >> "$GITHUB_STEP_SUMMARY"
             echo "ok=false" >> "$GITHUB_OUTPUT"
           else
             echo "ok=true" >> "$GITHUB_OUTPUT"
@@ -41,6 +42,9 @@ jobs:
         run: uv sync --frozen
       - name: Live eval
         if: steps.check.outputs.ok == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
           uv run ledgerlens eval run --config eval/configs/live_ci.yaml --split dev \
             --run-id live-ci --out "$RUNNER_TEMP/live.json"
@@ -55,6 +59,11 @@ jobs:
           lines += [f"| {k} | {v['value']:.4g} | {v['n']} |" for k, v in s.items()]
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as fh:
               fh.write("## LedgerLens live eval\n\n" + "\n".join(lines) + "\n")
+          quota = any("QuotaExhausted" in (r.get("error") or "") for r in run["results"])
+          if quota:
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as fh:
+                  fh.write("\nSkipped: the free-tier daily quota was already used today.\n")
+              raise SystemExit(0)
           errors = s.get("error_rate", {}).get("value", 0)
           acc = s.get("numeric_correct", {}).get("value", 0)
           print(f"error_rate={errors} numeric_correct={acc}")
