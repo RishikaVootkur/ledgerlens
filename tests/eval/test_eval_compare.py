@@ -168,3 +168,32 @@ def test_duplicate_qids_are_rejected(make_result: ResultBuilder, make_run: RunBu
     dup = make_run("dup", [make_result("q1", {}), make_result("q1", {})])
     with pytest.raises(ValueError, match="duplicate qid q1"):
         align(dup, dup)
+
+
+def test_latency_source_is_shared_by_both_runs(
+    make_result: ResultBuilder, make_run: RunBuilder
+) -> None:
+    timed_a = make_run("a", [make_result("q1", {}, latency_ms=10, wall_ms=500)])
+    timed_b = make_run("b", [make_result("q1", {}, latency_ms=20, wall_ms=700)])
+    report = compare_runs(timed_a, timed_b)
+    ops = {o.name: o for o in report.operational}
+    assert report.latency_source == "wall_ms"
+    assert (ops["latency_p50_ms"].a, ops["latency_p50_ms"].b) == (500, 700)
+    assert "Latency source: wall_ms." in render_markdown(report)
+    # B has no wall time, so both runs fall back to summed call latency.
+    untimed_b = make_run("b", [make_result("q1", {}, latency_ms=20)])
+    report = compare_runs(timed_a, untimed_b)
+    ops = {o.name: o for o in report.operational}
+    assert report.latency_source == "usage"
+    assert (ops["latency_p50_ms"].a, ops["latency_p50_ms"].b) == (10, 20)
+
+
+def test_markdown_escapes_names(make_result: ResultBuilder, make_run: RunBuilder) -> None:
+    a = make_run("run`a", [make_result("q1", {"a|b": 1.0})], config_name="cfg|x")
+    b = make_run("run-b", [make_result("q1", {"a|b": 0.0})])
+    md = render_markdown(compare_runs(a, b))
+    assert md.splitlines()[0] == "## Run comparison: ``run`a`` (A) vs `run-b` (B)"
+    assert "A = `cfg\\|x`" in md
+    assert "| a\\|b | 1.000 | 0.000 |" in md
+    # The terminal table shows names as they are.
+    assert "a|b" in render_text(compare_runs(a, b))
