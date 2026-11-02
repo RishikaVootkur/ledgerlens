@@ -1785,6 +1785,20 @@
       "CORRECT": 0.9286,
       "INCORRECT": 0.8261,
       "REFUSAL": 0.85
+    },
+    "parse_errors": 0,
+    "clean_n": 60,
+    "clean_accuracy": {
+      "value": 0.867,
+      "ci_low": 0.784,
+      "ci_high": 0.95,
+      "n": 60
+    },
+    "clean_kappa": {
+      "value": 0.771,
+      "ci_low": 0.651,
+      "ci_high": 0.891,
+      "n": 60
     }
   }
 }

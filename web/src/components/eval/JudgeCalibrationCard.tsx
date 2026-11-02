@@ -6,6 +6,12 @@ function labelName(label: string): string {
   return label.charAt(0).toUpperCase() + label.slice(1).toLowerCase().replace(/_/g, " ");
 }
 
+function calibrationNote(split: string): string {
+  return split === "test"
+    ? "Calibrated against FinanceBench human labels (held-out split)."
+    : `Calibrated against FinanceBench human labels (split: ${split}).`;
+}
+
 function Stat({ name, label, metric }: { name: string; label: string; metric: MetricValue }) {
   const ci = formatCI(name, metric.ci_low, metric.ci_high);
   return (
@@ -102,9 +108,17 @@ export function JudgeCalibrationCard({ calibration }: { calibration: JudgeCalibr
           </tbody>
         </table>
       </div>
+      {calibration.clean_n && calibration.clean_accuracy && calibration.clean_kappa ? (
+        <p className="mt-4 text-sm text-zinc-700 tabular-nums dark:text-zinc-300">
+          Untouched by prompt tuning (n={calibration.clean_n}): agreement{" "}
+          <span className="font-semibold">{formatMetric("judge_correct", calibration.clean_accuracy.value)}</span>{" "}
+          {formatCI("judge_correct", calibration.clean_accuracy.ci_low, calibration.clean_accuracy.ci_high)}, kappa{" "}
+          <span className="font-semibold">{formatMetric("kappa", calibration.clean_kappa.value)}</span>{" "}
+          {formatCI("kappa", calibration.clean_kappa.ci_low, calibration.clean_kappa.ci_high)}.
+        </p>
+      ) : null}
       <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">
-        Calibrated against FinanceBench human labels (held-out split
-        {calibration.split ? `: ${calibration.split}` : ""}). Judge prompt{" "}
+        {calibrationNote(calibration.split)} Judge prompt{" "}
         <span className="font-mono">{calibration.prompt_version}</span>.
       </p>
     </Card>

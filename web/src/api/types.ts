@@ -241,6 +241,13 @@ export interface JudgeCalibration {
   /** Rows are the human label, columns the judge label, both in `labels` order. */
   confusion: number[][];
   per_label_recall: Record<string, number>;
+  /** Labels the judge output could not be parsed for. */
+  parse_errors?: number | null;
+  created_at?: string | null;
+  /** The subset of examples never seen while tuning the judge prompt. */
+  clean_n?: number | null;
+  clean_accuracy?: MetricValue | null;
+  clean_kappa?: MetricValue | null;
 }
 
 export interface Dashboard {
