@@ -315,7 +315,8 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     finally:
         app.state.executor.shutdown(wait=False, cancel_futures=True)
         if traced:
-            shutdown_tracing()
+            # Off the event loop: flushing waits on the network (bounded to ~2 s).
+            await asyncio.to_thread(shutdown_tracing)
 
 
 def create_app() -> FastAPI:

@@ -21,10 +21,13 @@ def main() -> None:
     configure_logging(s.log_level, s.log_json)
     if s.phoenix_endpoint:
         # Every command (ask, and eval runs once they land) traces into Phoenix when
-        # PHOENIX_ENDPOINT is set. The SDK flushes pending spans at interpreter exit.
-        from ledgerlens.tracing import setup_tracing
+        # PHOENIX_ENDPOINT is set.
+        import atexit
 
-        setup_tracing()
+        from ledgerlens.tracing import setup_tracing, shutdown_tracing
+
+        if setup_tracing():
+            atexit.register(shutdown_tracing)  # bounded flush of pending spans at exit
 
 
 @app.command()
