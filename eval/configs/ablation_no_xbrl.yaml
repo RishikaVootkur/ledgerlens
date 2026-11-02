@@ -6,7 +6,7 @@ strategy: section
 method: hybrid
 k: 6
 max_rounds: 3
-xbrl_tool: true
+xbrl_tool: false
 verify_numbers: true
 self_check: true
 datasets: [xbrl, financebench, unanswerable]
