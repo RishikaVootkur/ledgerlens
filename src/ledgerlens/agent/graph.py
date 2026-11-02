@@ -129,6 +129,17 @@ def _filters_line(filters: SearchFilters) -> str:
     return f"Filters set by the user: {active}" if active else ""
 
 
+_GROUPED_REFS = re.compile(r"\[\s*(E\d+(?:\s*[,;]\s*E\d+)+)\s*\]")
+
+
+def split_grouped_refs(text: str) -> str:
+    """Models often group citations as [E1, E4]; rewrite them as [E1][E4] so every marker
+    is seen (a grouped marker used to look like no citation at all and forced a refusal)."""
+    return _GROUPED_REFS.sub(
+        lambda m: "".join(f"[{r.strip()}]" for r in re.split(r"[,;]", m.group(1))), text
+    )
+
+
 def parse_json_answer(text: str) -> dict[str, Any]:
     """Parse the model's JSON answer, tolerating code fences and stray prose."""
     cleaned = re.sub(r"^```(?:json)?|```$", "", text.strip(), flags=re.MULTILINE).strip()
@@ -399,6 +410,7 @@ def build_graph(run: _Run) -> Any:
             purpose="answer" if not problems else "repair",
         )
         draft = parse_json_answer(resp.content)
+        draft["answer"] = split_grouped_refs(str(draft.get("answer") or ""))
         return {"draft": draft, "problems": [], "steps": [*state.get("steps", []), "answer"]}
 
     def verify(state: State) -> State:

@@ -377,3 +377,21 @@ def test_verify_accepts_a_derived_percentage(scripted):
     assert not result.refused and result.answer_value == pytest.approx(6.43)
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(derived), _resp(derived)]
     assert run_agent("q2", AgentConfig(derive_numbers=False)).refused
+
+
+def test_grouped_citation_markers_are_split():
+    from ledgerlens.agent.graph import split_grouped_refs
+
+    assert (
+        split_grouped_refs("Cash was $21,846 million [E1, E4].")
+        == "Cash was $21,846 million [E1][E4]."
+    )
+    assert split_grouped_refs("x [E2;E3] y [E5]") == "x [E2][E3] y [E5]"
+
+
+def test_grouped_markers_no_longer_force_a_refusal(scripted):
+    queue, _ = scripted
+    grouped = answer_json(answer="Total net sales were $416,161 million in 2025 [E1, E1].")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped)]
+    result = run_agent("q", AgentConfig())
+    assert not result.refused and "[1]" in result.answer
