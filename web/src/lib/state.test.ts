@@ -78,9 +78,19 @@ describe("run results", () => {
   it("derives outcomes from the primary score", () => {
     expect(questionOutcome(result({ scores: { numeric_correct: 1 } }))).toBe("correct");
     expect(questionOutcome(result({ scores: { numeric_correct: null, judge_correct: 0 } }))).toBe("incorrect");
-    expect(questionOutcome(result({ scores: { refusal_correct: 1 } }))).toBe("correct");
+    expect(questionOutcome(result({ answerable: false, scores: { refusal_correct: 1 } }))).toBe("correct");
     expect(questionOutcome(result({ error: "Timeout" }))).toBe("error");
     expect(questionOutcome(result({}))).toBe("unscored");
+  });
+
+  it("uses refusal_correct on answerable questions only for false refusals", () => {
+    // Not refusing an answerable question says nothing about the answer itself.
+    expect(questionOutcome(result({ answerable: true, scores: { numeric_correct: null, refusal_correct: 1 } }))).toBe(
+      "unscored",
+    );
+    expect(questionOutcome(result({ answerable: true, scores: { refusal_correct: 0 } }))).toBe("incorrect");
+    expect(questionOutcome(result({ answerable: false, gold: null, scores: { refusal_correct: 1 } }))).toBe("correct");
+    expect(questionOutcome(result({ answerable: false, gold: null, scores: { refusal_correct: 0 } }))).toBe("incorrect");
   });
 
   it("prefers numeric over judge over refusal correctness", () => {

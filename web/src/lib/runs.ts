@@ -6,10 +6,17 @@ export type Outcome = "correct" | "incorrect" | "error" | "unscored";
 /** Score keys that decide correctness, in priority order. */
 export const PRIMARY_SCORES = ["numeric_correct", "judge_correct", "refusal_correct"] as const;
 
+/**
+ * The score that decides correctness. The runner writes refusal_correct on every
+ * row, so on an answerable question a 1 only means "did not refuse" and says
+ * nothing about the answer: it counts only when it is 0 (a false refusal).
+ */
 export function primaryScore(result: QuestionResult): { name: string; value: number } | null {
   for (const name of PRIMARY_SCORES) {
     const value = result.scores[name];
-    if (value !== null && value !== undefined) return { name, value };
+    if (value === null || value === undefined) continue;
+    if (name === "refusal_correct" && result.answerable && value >= 0.5) continue;
+    return { name, value };
   }
   return null;
 }
