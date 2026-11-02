@@ -8,11 +8,13 @@ from ledgerlens import __version__
 from ledgerlens.agent.cli import ask
 from ledgerlens.config import get_settings
 from ledgerlens.logging import configure_logging
+from ledgerlens.mcp_server import mcp_app
 from ledgerlens.retrieval.cli import index_app
 
 app = typer.Typer(help="LedgerLens: cited answers from SEC filings, with an eval lab.")
 app.add_typer(index_app, name="index")
 app.command("ask")(ask)
+app.add_typer(mcp_app, name="mcp")
 
 
 @app.callback()
