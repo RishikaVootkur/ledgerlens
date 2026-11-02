@@ -188,6 +188,9 @@ async def chat_events(
         filters=filters.model_dump(exclude_none=True),
     )
     try:
+        if slots.locked():
+            # All agent slots are busy: tell the UI instead of sending only pings.
+            yield _sse("step", {"name": "queued", "detail": "waiting for a free agent slot"})
         async with slots:
             # copy_context: usage tracking and tracing live in contextvars.
             ctx = contextvars.copy_context()
