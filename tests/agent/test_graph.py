@@ -133,7 +133,7 @@ def test_explicit_refusal_passes_through(scripted):
 def test_max_rounds_stops_tool_loop(scripted):
     queue, _ = scripted
     queue += [_resp(tool_calls=[search_call()]) for _ in range(2)] + [_resp(answer_json())]
-    result = run_agent("q", AgentConfig(max_rounds=2))
+    result = run_agent("q", AgentConfig(max_rounds=2, dedupe_tool_calls=False))
     assert result.steps.count("search_filings") == 2
 
 
@@ -311,3 +311,23 @@ def test_string_values_from_the_model_are_parsed():
             [],
         )
         assert out.answer_value == (pytest.approx(expected) if expected is not None else None)
+
+
+def test_repeated_tool_calls_are_skipped_and_end_gathering(scripted):
+    queue, seen = scripted
+    # The model asks for the same search three rounds in a row; dedupe stops after round 2.
+    queue += [
+        _resp(tool_calls=[search_call()]),
+        _resp(tool_calls=[search_call()]),
+        _resp(answer_json()),
+    ]
+    result = run_agent("q", AgentConfig(max_rounds=3))
+    assert result.steps.count("search_filings") == 1
+    assert [s["purpose"] for s in seen] == ["gather", "gather", "answer"]
+
+
+def test_dedupe_off_reproduces_repeats(scripted):
+    queue, _ = scripted
+    queue += [_resp(tool_calls=[search_call()]) for _ in range(3)] + [_resp(answer_json())]
+    result = run_agent("q", AgentConfig(max_rounds=3, dedupe_tool_calls=False))
+    assert result.steps.count("search_filings") == 3

@@ -53,6 +53,10 @@ class AgentConfig:
     verify_numbers: bool = True
     self_check: bool = True
     max_repairs: int = 1
+    # Skip tool calls identical to one already executed for this question; if a planning
+    # round proposes nothing new, go straight to answering. Off reproduces the original
+    # behavior (models often re-issue the same XBRL lookup every round).
+    dedupe_tool_calls: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -77,9 +81,16 @@ class _Run:
     config: AgentConfig
     registry: EvidenceRegistry
     on_step: StepCallback
+    executed: set[str] = field(default_factory=set)
 
 
 # ------------------------------------------------------------------ helpers
+
+
+def _call_key(tc: ToolCall) -> str:
+    """Tool name plus arguments with key order and blank values normalized away."""
+    args = {k: v for k, v in parse_arguments(tc.arguments).items() if v not in (None, "")}
+    return f"{tc.name}:{json.dumps(args, sort_keys=True)}"
 
 
 def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int = 18) -> str:
@@ -292,6 +303,14 @@ def build_graph(run: _Run) -> Any:
         )
         allowed = set(tool_names)
         pending = [tc for tc in resp.tool_calls if tc.name in allowed][:8]
+        if cfg.dedupe_tool_calls:
+            fresh = []
+            for tc in pending:
+                key = _call_key(tc)
+                if key not in run.executed:
+                    run.executed.add(key)
+                    fresh.append(tc)
+            pending = fresh
         return {"round": rnd, "pending": pending, "steps": [*state.get("steps", []), "plan"]}
 
     def call_tools(state: State) -> State:
