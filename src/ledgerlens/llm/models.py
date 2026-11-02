@@ -24,6 +24,7 @@ class ModelSpec:
     input_per_mtok: float
     output_per_mtok: float
     requests_per_minute: int
+    tokens_per_minute: int | None
     label: str
     extra: dict[str, object] = field(default_factory=dict)
 
@@ -52,6 +53,7 @@ MODELS: dict[str, ModelSpec] = {
             input_per_mtok=0.75,
             output_per_mtok=3.75,
             requests_per_minute=10,
+            tokens_per_minute=250_000,
             label="Gemini 3.8 Flash",
             extra={"reasoning_effort": "low"},
         ),
@@ -63,6 +65,7 @@ MODELS: dict[str, ModelSpec] = {
             input_per_mtok=0.80,
             output_per_mtok=4.00,
             requests_per_minute=30,
+            tokens_per_minute=8_000,
             label="Qwen3.8 27B (Groq)",
             extra={"reasoning_effort": "none"},
         ),
@@ -74,6 +77,7 @@ MODELS: dict[str, ModelSpec] = {
             input_per_mtok=0.15,
             output_per_mtok=0.60,
             requests_per_minute=30,
+            tokens_per_minute=8_000,
             label="GPT-OSS 120B (Groq)",
             extra={"reasoning_effort": "low"},
         ),
@@ -86,6 +90,7 @@ MODELS: dict[str, ModelSpec] = {
             input_per_mtok=0.0,
             output_per_mtok=0.0,
             requests_per_minute=600,
+            tokens_per_minute=None,
             label="Qwen3 8B (local Ollama)",
             extra={"think": False},
         ),

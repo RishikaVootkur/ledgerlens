@@ -11,6 +11,7 @@ Every call goes through `complete()`, which adds:
 from __future__ import annotations
 
 import contextlib
+import json
 import re
 import threading
 import time
@@ -36,7 +37,8 @@ from ledgerlens.schemas import Usage
 log = get_logger(__name__)
 
 NAMESPACE = "llm"
-_THINK_RE = re.compile(r"<think>.*?</think>\s*", re.DOTALL)
+# Also strips a <think> block the model never closed (truncated output).
+_THINK_RE = re.compile(r"<think>.*?(?:</think>\s*|$)", re.DOTALL)
 
 
 @dataclass
@@ -97,6 +99,10 @@ def track_usage() -> Iterator[UsageTracker]:
         _trackers.reset(token)
 
 
+# Note: contextvars do not flow into thread-pool workers by default. Callers that fan out
+# with a ThreadPoolExecutor submit `contextvars.copy_context().run` so usage is tracked.
+
+
 def _record(resp: LLMResponse) -> None:
     for tracker in _trackers.get():
         tracker.calls.append(resp)
@@ -106,20 +112,44 @@ def _record(resp: LLMResponse) -> None:
 
 
 class _Pacer:
-    """Spaces requests to one model at least 60/rpm seconds apart (thread safe)."""
+    """Per-model client-side pacing (thread safe).
+
+    Requests are spaced at least 60/rpm seconds apart, and when a model has a
+    tokens-per-minute cap (Groq free tier: 8000) the estimated tokens sent in the last
+    60 seconds are kept under it, so throughput does not depend on 429s and backoff.
+    """
 
     def __init__(self) -> None:
         self._lock = threading.Lock()
         self._next: dict[str, float] = {}
+        self._window: dict[str, list[tuple[float, int]]] = {}
 
-    def wait(self, spec: ModelSpec) -> None:
+    def wait(self, spec: ModelSpec, est_tokens: int = 0) -> None:
         interval = 60.0 / spec.requests_per_minute
         with self._lock:
             now = time.monotonic()
             start = max(now, self._next.get(spec.alias, now))
+            if spec.tokens_per_minute:
+                window = self._window.setdefault(spec.alias, [])
+                budget = spec.tokens_per_minute
+                # Drop entries that will have left the window by `start`.
+                window[:] = [(t, n) for t, n in window if t > start - 60]
+                used = sum(n for _, n in window)
+                for t, n in list(window):
+                    if used + est_tokens <= budget:
+                        break
+                    start = max(start, t + 60)
+                    used -= n
+                window.append((start, min(est_tokens, budget)))
             self._next[spec.alias] = start + interval
         if (delay := start - time.monotonic()) > 0:
             time.sleep(delay)
+
+
+def estimate_tokens(request: dict[str, Any]) -> int:
+    """Rough token estimate for pacing: ~4 characters per token plus the output budget."""
+    chars = len(json.dumps(request.get("messages", []))) + len(json.dumps(request.get("tools", [])))
+    return chars // 4 + int(request.get("max_tokens", 0)) // 2
 
 
 _pacer = _Pacer()
@@ -127,22 +157,69 @@ _pacer = _Pacer()
 
 # ------------------------------------------------------------------ retries
 
-_RETRYABLE = (
-    "RateLimitError",
-    "ServiceUnavailableError",
-    "InternalServerError",
-    "APIConnectionError",
-    "Timeout",
-    "APIError",
+
+class QuotaExhaustedError(RuntimeError):
+    """A per-day free-tier quota is used up. Retrying within minutes cannot help."""
+
+
+_RETRYABLE = frozenset(
+    {
+        "RateLimitError",
+        "ServiceUnavailableError",
+        "InternalServerError",
+        "BadGatewayError",
+        "APIConnectionError",
+        "Timeout",
+    }
 )
+_NEVER_RETRY = frozenset(
+    {
+        "AuthenticationError",
+        "PermissionDeniedError",
+        "BadRequestError",
+        "NotFoundError",
+        "UnprocessableEntityError",
+        "ContextWindowExceededError",
+        "ContentPolicyViolationError",
+        "APIResponseValidationError",
+        "JSONSchemaValidationError",
+        "UnsupportedParamsError",
+        "QuotaExhaustedError",
+    }
+)
+_DAILY_QUOTA = re.compile(r"per[ _-]?day|PerDay|RPD|TPD|daily", re.IGNORECASE)
 
 
 def _is_retryable(exc: BaseException) -> bool:
     # Match by class name so this module does not import litellm's exception tree eagerly.
     names = {cls.__name__ for cls in type(exc).__mro__}
-    if names & {"AuthenticationError", "BadRequestError", "NotFoundError"}:
+    if names & _NEVER_RETRY:
         return False
-    return bool(names & set(_RETRYABLE))
+    return bool(names & _RETRYABLE)
+
+
+def _retry_after(exc: BaseException | None) -> float | None:
+    """Seconds the server asked us to wait, from a `retry-after` header if present."""
+    headers = getattr(exc, "headers", None) or getattr(
+        getattr(exc, "response", None), "headers", None
+    )
+    if not headers:
+        return None
+    try:
+        value = headers.get("retry-after")
+        return float(value) if value is not None else None
+    except (TypeError, ValueError, AttributeError):
+        return None
+
+
+_backoff = wait_exponential_jitter(multiplier=2, max=90)
+
+
+def _wait(state: Any) -> float:
+    exc = state.outcome.exception() if state.outcome else None
+    if (server := _retry_after(exc)) is not None:
+        return min(server + 1.0, 120.0)
+    return float(_backoff(state))
 
 
 def _log_retry(state: Any) -> None:
@@ -158,9 +235,14 @@ def _log_retry(state: Any) -> None:
 # ------------------------------------------------------------------ core
 
 
-def _cache() -> ResponseCache:
+def _cache(*, replay: bool = False) -> ResponseCache:
+    """Live mode reads the local cache, then the committed one. Replay mode reads only the
+    committed `eval/cache`, so a replay that passes locally also passes in CI."""
     s = get_settings()
-    return ResponseCache(s.cache_dir, replay_dirs=[s.eval_dir / "cache"])
+    committed = s.eval_dir / "cache"
+    if replay:
+        return ResponseCache(committed)
+    return ResponseCache(s.cache_dir, replay_dirs=[committed])
 
 
 def _provider_kwargs(spec: ModelSpec) -> dict[str, Any]:
@@ -186,7 +268,7 @@ def _output_tokens(usage: Any) -> int:
 
 @retry(
     retry=retry_if_exception(_is_retryable),
-    wait=wait_exponential_jitter(multiplier=2, max=90),
+    wait=_wait,
     stop=stop_after_attempt(8),
     before_sleep=_log_retry,
     reraise=True,
@@ -196,11 +278,16 @@ def _call_provider(spec: ModelSpec, request: dict[str, Any]) -> tuple[Any, float
 
     litellm.suppress_debug_info = True
 
-    _pacer.wait(spec)
+    _pacer.wait(spec, estimate_tokens(request))
     started = time.perf_counter()
-    raw = litellm.completion(
-        model=spec.litellm_model, **request, **_provider_kwargs(spec), num_retries=0
-    )
+    try:
+        raw = litellm.completion(
+            model=spec.litellm_model, **request, **_provider_kwargs(spec), num_retries=0
+        )
+    except Exception as exc:
+        if type(exc).__name__ == "RateLimitError" and _DAILY_QUOTA.search(str(exc)):
+            raise QuotaExhaustedError(f"{spec.alias}: daily free-tier quota exhausted") from exc
+        raise
     return raw, (time.perf_counter() - started) * 1000
 
 
@@ -219,7 +306,7 @@ def complete(
     spec = get_model(model)
     request: dict[str, Any] = {
         "messages": messages,
-        "temperature": temperature,
+        "temperature": float(temperature),
         "max_tokens": max_tokens,
         **spec.extra,
     }
@@ -231,7 +318,7 @@ def complete(
         request["response_format"] = response_format
 
     key = cache_key(NAMESPACE, {"model": spec.litellm_model, **request})
-    cache = _cache()
+    cache = _cache(replay=get_settings().llm_mode == "replay")
     if (hit := cache.get(NAMESPACE, key)) is not None:
         resp = _from_record(spec, hit, key)
         _record(resp)
@@ -246,9 +333,11 @@ def complete(
         ToolCall(id=tc.id, name=tc.function.name, arguments=tc.function.arguments or "{}")
         for tc in (message.tool_calls or [])
     ]
+    finish_reason = getattr(raw.choices[0], "finish_reason", None)
     prompt_tokens = int(getattr(raw.usage, "prompt_tokens", 0) or 0)
     output_tokens = _output_tokens(raw.usage)
     record = {
+        "finish_reason": finish_reason,
         "model": spec.alias,
         "purpose": purpose,
         "created_at": datetime.now(UTC).isoformat(),
@@ -259,7 +348,12 @@ def complete(
         "completion_tokens": output_tokens,
         "latency_ms": round(latency_ms, 1),
     }
-    cache.put(NAMESPACE, key, record)
+    if content or tool_calls:
+        cache.put(NAMESPACE, key, record)
+    else:
+        # Never cache an empty answer (often a thinking budget that ate max_tokens):
+        # it would replay forever, including in the CI gate.
+        log.warning("llm.empty_response", model=spec.alias, finish_reason=finish_reason)
     resp = _from_record(spec, record, key, cached=False)
     log.info(
         "llm.call",
