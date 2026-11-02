@@ -5,16 +5,31 @@ from __future__ import annotations
 import typer
 
 from ledgerlens import __version__
+from ledgerlens.agent.cli import ask
 from ledgerlens.config import get_settings
 from ledgerlens.logging import configure_logging
+from ledgerlens.mcp_server import mcp_app
+from ledgerlens.retrieval.cli import index_app
 
 app = typer.Typer(help="LedgerLens: cited answers from SEC filings, with an eval lab.")
+app.add_typer(index_app, name="index")
+app.command("ask")(ask)
+app.add_typer(mcp_app, name="mcp")
 
 
 @app.callback()
 def main() -> None:
     s = get_settings()
     configure_logging(s.log_level, s.log_json)
+    if s.phoenix_endpoint:
+        # Every command (ask, and eval runs once they land) traces into Phoenix when
+        # PHOENIX_ENDPOINT is set.
+        import atexit
+
+        from ledgerlens.tracing import setup_tracing, shutdown_tracing
+
+        if setup_tracing():
+            atexit.register(shutdown_tracing)  # bounded flush of pending spans at exit
 
 
 @app.command()
@@ -82,3 +97,23 @@ def ingest_run(
         typer.echo(f"  failed {fid}: {err}", err=True)
     if summary.failed:
         raise typer.Exit(code=1)
+
+
+datasets_app = typer.Typer(help="Build the eval datasets committed under eval/datasets/.")
+app.add_typer(datasets_app, name="datasets")
+
+
+@datasets_app.command("build")
+def datasets_build(
+    only: list[str] | None = typer.Option(  # noqa: B008
+        None,
+        "--only",
+        help="Dataset to rebuild (repeatable): financebench, xbrl, unanswerable, smoke. "
+        "Rebuilding xbrl also rebuilds smoke.",
+    ),
+) -> None:
+    """Regenerate dataset JSONL files deterministically from cached sources."""
+    from ledgerlens.eval.datasets.build import build_datasets
+
+    for name, rows in build_datasets(only).items():
+        typer.echo(f"{name}: {rows} rows")

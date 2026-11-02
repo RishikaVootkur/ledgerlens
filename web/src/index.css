@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-accent-50: var(--color-teal-50);
+  --color-accent-100: var(--color-teal-100);
+  --color-accent-200: var(--color-teal-200);
+  --color-accent-300: var(--color-teal-300);
+  --color-accent-400: var(--color-teal-400);
+  --color-accent-500: var(--color-teal-500);
+  --color-accent-600: var(--color-teal-600);
+  --color-accent-700: var(--color-teal-700);
+  --color-accent-800: var(--color-teal-800);
+  --color-accent-900: var(--color-teal-900);
+  --color-accent-950: var(--color-teal-950);
+}
+
+@layer base {
+  html {
+    color-scheme: light dark;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-600 dark:outline-accent-400;
+  }
+}
+
+/* Rendered Markdown: answers and filing passages. */
+.md {
+  @apply text-[0.9375rem] leading-relaxed;
+}
+.md > * + * {
+  @apply mt-3;
+}
+.md.md-compact {
+  @apply text-[0.8125rem] leading-relaxed;
+}
+.md.md-compact th,
+.md.md-compact td {
+  @apply px-2 py-1 text-xs;
+}
+.md ul {
+  @apply list-disc space-y-1 pl-5;
+}
+.md ol {
+  @apply list-decimal space-y-1 pl-5;
+}
+.md strong {
+  @apply font-semibold text-zinc-950 dark:text-white;
+}
+.md code {
+  @apply rounded bg-zinc-100 px-1 py-0.5 font-mono text-[0.85em] dark:bg-zinc-800;
+}
+.md a:not(.cite-chip) {
+  @apply text-accent-700 underline underline-offset-2 dark:text-accent-300;
+}
+.md .table-wrap {
+  @apply overflow-x-auto rounded-md border border-zinc-200 dark:border-zinc-800;
+}
+.md table {
+  @apply w-full border-collapse text-sm tabular-nums;
+}
+.md th {
+  @apply bg-zinc-50 px-3 py-1.5 text-left font-medium whitespace-nowrap text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300;
+}
+.md td {
+  @apply border-t border-zinc-200 px-3 py-1.5 whitespace-nowrap dark:border-zinc-800;
+}
+.md th[align="right"],
+.md td[align="right"] {
+  @apply text-right;
+}
+.quote-mark {
+  @apply rounded-sm bg-amber-200/80 px-0.5 text-inherit dark:bg-amber-400/30;
+}
+
+.streaming-caret > :last-child::after {
+  content: "";
+  display: inline-block;
+  width: 0.5ch;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  opacity: 0.6;
+  animation: caret 1s steps(2, start) infinite;
+}
+@keyframes caret {
+  to {
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streaming-caret > :last-child::after {
+    animation: none;
+  }
+}

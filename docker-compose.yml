@@ -1,0 +1,67 @@
+# Lean stack for a 16 GB laptop that also runs Ollama on the host.
+# A fixed project name keeps containers and volumes shared across clones and worktrees.
+name: ledgerlens
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    ports: ["127.0.0.1:6333:6333"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    mem_limit: 2g
+    restart: unless-stopped
+
+  phoenix:
+    image: arizephoenix/phoenix:version-21.0.0
+    ports: ["127.0.0.1:6006:6006", "127.0.0.1:4317:4317"]
+    volumes: ["phoenix_data:/mnt/data"]
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+    mem_limit: 1g
+    restart: unless-stopped
+
+  api:
+    build: .
+    image: ledgerlens-api:local
+    ports: ["127.0.0.1:8000:8000"]
+    env_file:
+      - path: .env  # API keys; optional so the stack also starts in replay mode
+        required: false
+    environment:
+      LEDGERLENS_HOME: /app
+      QDRANT_URL: http://qdrant:6333
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      # Tracing is opt-in: set PHOENIX_ENDPOINT and PHOENIX_API_KEY in .env (see
+      # docs/observability.md). Inside the compose network Phoenix is reached by its
+      # service name, so any non-empty PHOENIX_ENDPOINT maps to http://phoenix:6006.
+      PHOENIX_ENDPOINT: ${PHOENIX_ENDPOINT:+http://phoenix:6006/v1/traces}
+      CORS_ORIGINS: http://localhost:8080,http://127.0.0.1:8080
+    volumes:
+      # Index and filings (LEDGERLENS_DATA_DIR points elsewhere, e.g. from a worktree).
+      # Must be writable by uid 10001 (SQLite WAL); on Linux see docs/decisions.md D17.
+      - ${LEDGERLENS_DATA_DIR:-./data}:/app/data
+      - ./eval:/app/eval:ro
+      - api_cache:/app/.cache
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      qdrant: { condition: service_started }
+      phoenix: { condition: service_started }
+    mem_limit: 1536m
+    # Lets a chat that is mid LLM call or in a 429 backoff finish before SIGKILL.
+    stop_grace_period: 30s
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    image: ledgerlens-web:local
+    ports: ["127.0.0.1:8080:8080"]
+    depends_on:
+      api: { condition: service_healthy }
+    mem_limit: 128m
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+  phoenix_data:
+  api_cache:

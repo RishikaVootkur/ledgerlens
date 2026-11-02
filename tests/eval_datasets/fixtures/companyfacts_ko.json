@@ -1,0 +1,111 @@
+{
+  "cik": 21344,
+  "entityName": "COCA COLA CO",
+  "facts": {
+    "dei": {
+      "EntityCommonStockSharesOutstanding": {
+        "units": {
+          "shares": [
+            {"end": "2026-10-20", "val": 4300, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      }
+    },
+    "us-gaap": {
+      "Revenues": {
+        "units": {
+          "USD": [
+            {"start": "2023-01-01", "end": "2023-12-31", "val": 45000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2024-01-01", "end": "2024-12-31", "val": 46000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 48000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2024-01-01", "end": "2024-12-31", "val": 45999, "accn": "acc-k24", "fy": 2024, "fp": "FY", "form": "10-K"},
+            {"start": "2026-01-01", "end": "2026-07-03", "val": 24900, "accn": "acc-q2", "fy": 2026, "fp": "Q2", "form": "10-Q"},
+            {"start": "2026-04-04", "end": "2026-07-03", "val": 12500, "accn": "acc-q2", "fy": 2026, "fp": "Q2", "form": "10-Q"},
+            {"start": "2025-06-28", "end": "2025-09-26", "val": 12400, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"},
+            {"start": "2026-01-01", "end": "2026-10-02", "val": 37900, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"},
+            {"start": "2026-07-04", "end": "2026-10-02", "val": 13000, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      },
+      "NetIncomeLoss": {
+        "units": {
+          "USD": [
+            {"start": "2024-01-01", "end": "2024-12-31", "val": 8000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 10000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2026-04-04", "end": "2026-07-03", "val": 2800, "accn": "acc-q2", "fy": 2026, "fp": "Q2", "form": "10-Q"},
+            {"start": "2026-07-04", "end": "2026-10-02", "val": 3000, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"},
+            {"start": "2026-01-01", "end": "2026-10-02", "val": 8300, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      },
+      "ProfitLoss": {
+        "units": {
+          "USD": [
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 10500, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2026-07-04", "end": "2026-10-02", "val": 3001, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      },
+      "NetIncomeLossAttributableToNoncontrollingInterest": {
+        "units": {
+          "USD": [
+            {"start": "2026-04-04", "end": "2026-07-03", "val": 100, "accn": "acc-q2", "fy": 2026, "fp": "Q2", "form": "10-Q"}
+          ]
+        }
+      },
+      "Liabilities": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 75000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "StockholdersEquity": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 25000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "OperatingIncomeLoss": {
+        "units": {
+          "USD": [
+            {"start": "2024-01-01", "end": "2024-12-31", "val": 11000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 12000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "Assets": {
+        "units": {
+          "USD": [
+            {"end": "2024-12-31", "val": 90000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"end": "2025-12-31", "val": 100000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"end": "2025-12-31", "val": 100000, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"},
+            {"end": "2026-10-02", "val": 105000, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      },
+      "AssetsCurrent": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 30000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "LiabilitiesCurrent": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 20000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "EarningsPerShareDiluted": {
+        "units": {
+          "USD/shares": [
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 2.3, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      }
+    }
+  }
+}

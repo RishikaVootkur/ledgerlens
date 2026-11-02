@@ -1,0 +1,1820 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-10-28T1402-full-gemini-flash",
+  "created_at": "2026-10-28T14:02:11Z",
+  "git_sha": "3f9c2e1a7b4d5c6e8f0a1b2c3d4e5f6a7b8c9d0e",
+  "config_name": "full: hybrid + rerank + XBRL verify (Gemini 2.5 Flash)",
+  "config": {
+    "retriever": "hybrid",
+    "reranker": "bge-reranker-v2-m3",
+    "chunker": "section",
+    "top_k": 10,
+    "xbrl_verify": true,
+    "model": "gemini-2.5-flash",
+    "temperature": 0,
+    "note": "sample data for UI development"
+  },
+  "split": "dev",
+  "datasets": [
+    "financebench",
+    "xbrl",
+    "unanswerable"
+  ],
+  "summary": {
+    "numeric_correct": {
+      "value": 0.712,
+      "ci_low": 0.666,
+      "ci_high": 0.758,
+      "n": 360
+    },
+    "judge_correct": {
+      "value": 0.748,
+      "ci_low": 0.704,
+      "ci_high": 0.792,
+      "n": 360
+    },
+    "citation_precision": {
+      "value": 0.861,
+      "ci_low": 0.83,
+      "ci_high": 0.892,
+      "n": 360
+    },
+    "citation_recall": {
+      "value": 0.794,
+      "ci_low": 0.755,
+      "ci_high": 0.833,
+      "n": 360
+    },
+    "refusal_correct": {
+      "value": 0.9,
+      "ci_low": 0.81,
+      "ci_high": 0.99,
+      "n": 40
+    },
+    "recall_at_1": {
+      "value": 0.524,
+      "ci_low": 0.474,
+      "ci_high": 0.574,
+      "n": 360
+    },
+    "recall_at_5": {
+      "value": 0.781,
+      "ci_low": 0.739,
+      "ci_high": 0.823,
+      "n": 360
+    },
+    "recall_at_10": {
+      "value": 0.833,
+      "ci_low": 0.795,
+      "ci_high": 0.871,
+      "n": 360
+    },
+    "mrr": {
+      "value": 0.612,
+      "ci_low": 0.571,
+      "ci_high": 0.653,
+      "n": 360
+    },
+    "ndcg_at_10": {
+      "value": 0.684,
+      "ci_low": 0.645,
+      "ci_high": 0.723,
+      "n": 360
+    },
+    "model_latency_p50_ms": {
+      "value": 6420,
+      "ci_low": 6040,
+      "ci_high": 6800,
+      "n": 360
+    },
+    "model_latency_p95_ms": {
+      "value": 14810,
+      "ci_low": 12710,
+      "ci_high": 16910,
+      "n": 360
+    },
+    "latency_p50_ms": {
+      "value": 9150,
+      "ci_low": 8250,
+      "ci_high": 10050,
+      "n": 360
+    },
+    "latency_p95_ms": {
+      "value": 41200,
+      "ci_low": 31400,
+      "ci_high": 51000,
+      "n": 360
+    },
+    "tokens_mean": {
+      "value": 9850,
+      "ci_low": 9440,
+      "ci_high": 10260,
+      "n": 360
+    },
+    "cost_usd_mean": {
+      "value": 0.0041,
+      "ci_low": 0.0038,
+      "ci_high": 0.0044,
+      "n": 360
+    },
+    "error_rate": {
+      "value": 0.008,
+      "ci_low": 0,
+      "ci_high": 0.017,
+      "n": 360
+    }
+  },
+  "summary_by_dataset": {
+    "financebench": {
+      "numeric_correct": {
+        "value": 0.654,
+        "ci_low": 0.594,
+        "ci_high": 0.714,
+        "n": 140
+      },
+      "judge_correct": {
+        "value": 0.701,
+        "ci_low": 0.643,
+        "ci_high": 0.759,
+        "n": 140
+      },
+      "citation_precision": {
+        "value": 0.832,
+        "ci_low": 0.792,
+        "ci_high": 0.872,
+        "n": 140
+      },
+      "citation_recall": {
+        "value": 0.763,
+        "ci_low": 0.713,
+        "ci_high": 0.813,
+        "n": 140
+      },
+      "recall_at_10": {
+        "value": 0.801,
+        "ci_low": 0.751,
+        "ci_high": 0.851,
+        "n": 140
+      }
+    },
+    "xbrl": {
+      "numeric_correct": {
+        "value": 0.781,
+        "ci_low": 0.721,
+        "ci_high": 0.841,
+        "n": 180
+      },
+      "judge_correct": {
+        "value": 0.802,
+        "ci_low": 0.744,
+        "ci_high": 0.86,
+        "n": 180
+      },
+      "citation_precision": {
+        "value": 0.889,
+        "ci_low": 0.849,
+        "ci_high": 0.929,
+        "n": 180
+      },
+      "citation_recall": {
+        "value": 0.821,
+        "ci_low": 0.771,
+        "ci_high": 0.871,
+        "n": 180
+      },
+      "recall_at_10": {
+        "value": 0.862,
+        "ci_low": 0.812,
+        "ci_high": 0.912,
+        "n": 180
+      }
+    },
+    "unanswerable": {
+      "refusal_correct": {
+        "value": 0.9,
+        "ci_low": 0.81,
+        "ci_high": 0.99,
+        "n": 40
+      }
+    }
+  },
+  "usage_total": {
+    "prompt_tokens": 3271840,
+    "completion_tokens": 140310,
+    "llm_calls": 1452,
+    "cost_usd": 1.4762,
+    "latency_ms": 2390400
+  },
+  "results": [
+    {
+      "qid": "xbrl-0040",
+      "dataset": "xbrl",
+      "question": "What was Apple's total revenue in fiscal 2021?",
+      "question_type": "yoy_change",
+      "answerable": true,
+      "ticker": "AAPL",
+      "fiscal_year": 2021,
+      "gold": "$15.6 billion",
+      "gold_value": 15600000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Apple's total revenue in fiscal 2021 was $15.6 billion [1].",
+        "refused": false,
+        "answer_value": 15600000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "AAPL-10K-2021FY:section:00100",
+            "filing_id": "AAPL-10K-2021FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 30,
+            "page_end": null,
+            "quote": "total revenue"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "AAPL-10K-2021FY:section:00100",
+          "AAPL-10K-2021FY:section:00010"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 9464,
+          "completion_tokens": 289,
+          "llm_calls": 3,
+          "cost_usd": 0.0035,
+          "latency_ms": 3680
+        }
+      },
+      "wall_ms": 4080,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00111",
+      "dataset": "financebench",
+      "question": "What was Microsoft's net income in fiscal 2022?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "MSFT",
+      "fiscal_year": 2022,
+      "gold": "$109.9 billion",
+      "gold_value": 109900000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Microsoft's net income in fiscal 2022 was $109.9 billion [1].",
+        "refused": false,
+        "answer_value": 109900000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "MSFT-10K-2022FY:section:00107",
+            "filing_id": "MSFT-10K-2022FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 33,
+            "page_end": null,
+            "quote": "net income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "MSFT-10K-2022FY:section:00107",
+          "MSFT-10K-2022FY:section:00011"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 11968,
+          "completion_tokens": 541,
+          "llm_calls": 4,
+          "cost_usd": 0.004,
+          "latency_ms": 7994
+        }
+      },
+      "wall_ms": 8394,
+      "scores": {
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0042",
+      "dataset": "xbrl",
+      "question": "What was JPMorgan's operating income in fiscal 2023?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "JPM",
+      "fiscal_year": 2023,
+      "gold": "$15.9 billion",
+      "gold_value": 15900000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "JPMorgan's operating income in fiscal 2023 was $15.9 billion [1].",
+        "refused": false,
+        "answer_value": 15900000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "JPM-10K-2023FY:section:00114",
+            "filing_id": "JPM-10K-2023FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 36,
+            "page_end": null,
+            "quote": "operating income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "JPM-10K-2023FY:section:00114",
+          "JPM-10K-2023FY:section:00012"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 6841,
+          "completion_tokens": 580,
+          "llm_calls": 5,
+          "cost_usd": 0.0057,
+          "latency_ms": 9726
+        }
+      },
+      "wall_ms": 10126,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00133",
+      "dataset": "financebench",
+      "question": "Did Coca-Cola's capital expenditures increase in fiscal 2024 compared with the prior year?",
+      "question_type": "domain",
+      "answerable": true,
+      "ticker": "KO",
+      "fiscal_year": 2024,
+      "gold": "Yes",
+      "gold_value": null,
+      "gold_unit": "text",
+      "prediction": {
+        "answer": "Yes, Coca-Cola's capital expenditures increased in fiscal 2024 [1].",
+        "refused": false,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [
+          {
+            "chunk_id": "KO-10K-2024FY:section:00121",
+            "filing_id": "KO-10K-2024FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 39,
+            "page_end": null,
+            "quote": "capital expenditures"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "KO-10K-2024FY:section:00121",
+          "KO-10K-2024FY:section:00013"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 7554,
+          "completion_tokens": 577,
+          "llm_calls": 3,
+          "cost_usd": 0.0053,
+          "latency_ms": 4587
+        }
+      },
+      "wall_ms": 4987,
+      "scores": {
+        "numeric_correct": null,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0044",
+      "dataset": "xbrl",
+      "question": "What was NVIDIA's diluted EPS in fiscal 2021?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "NVDA",
+      "fiscal_year": 2021,
+      "gold": "$1.55",
+      "gold_value": 1.55,
+      "gold_unit": "per_share",
+      "prediction": {
+        "answer": "NVIDIA's diluted EPS in fiscal 2021 was $1.55 [1].",
+        "refused": false,
+        "answer_value": 1.55,
+        "answer_unit": "per_share",
+        "citations": [
+          {
+            "chunk_id": "NVDA-10K-2021FY:section:00128",
+            "filing_id": "NVDA-10K-2021FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 42,
+            "page_end": null,
+            "quote": "diluted EPS"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "NVDA-10K-2021FY:section:00128",
+          "NVDA-10K-2021FY:section:00014"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 6135,
+          "completion_tokens": 415,
+          "llm_calls": 4,
+          "cost_usd": 0.0053,
+          "latency_ms": 9417
+        }
+      },
+      "wall_ms": 9817,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00155",
+      "dataset": "financebench",
+      "question": "What was Exxon Mobil's gross margin in fiscal 2022?",
+      "question_type": "yoy_change",
+      "answerable": true,
+      "ticker": "XOM",
+      "fiscal_year": 2022,
+      "gold": "43.4%",
+      "gold_value": 0.434,
+      "gold_unit": "percent",
+      "prediction": {
+        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 43.4% [1].",
+        "refused": false,
+        "answer_value": 0.434,
+        "answer_unit": "percent",
+        "citations": [
+          {
+            "chunk_id": "XOM-10K-2022FY:section:00135",
+            "filing_id": "XOM-10K-2022FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 45,
+            "page_end": null,
+            "quote": "gross margin"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "XOM-10K-2022FY:section:00135",
+          "XOM-10K-2022FY:section:00015"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 10178,
+          "completion_tokens": 485,
+          "llm_calls": 5,
+          "cost_usd": 0.0049,
+          "latency_ms": 10432
+        }
+      },
+      "wall_ms": 10832,
+      "scores": {
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "unans-006",
+      "dataset": "unanswerable",
+      "question": "What will Costco's total revenue be in fiscal 2029?",
+      "question_type": "forward_looking",
+      "answerable": false,
+      "ticker": "COST",
+      "fiscal_year": 2029,
+      "gold": null,
+      "gold_value": null,
+      "gold_unit": null,
+      "prediction": {
+        "answer": "I could not find support for a forward-looking figure in the filings, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
+        "retrieved_chunk_ids": [
+          "COST-10K-2023FY:section:00142",
+          "COST-10K-2023FY:section:00016"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "verify",
+          "answer"
+        ],
+        "usage": {
+          "prompt_tokens": 6762,
+          "completion_tokens": 508,
+          "llm_calls": 3,
+          "cost_usd": 0.0044,
+          "latency_ms": 9133
+        }
+      },
+      "wall_ms": 9533,
+      "scores": {
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": null
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00177",
+      "dataset": "financebench",
+      "question": "What was Nike's net income in fiscal 2024?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "NKE",
+      "fiscal_year": 2024,
+      "gold": "$30.9 billion",
+      "gold_value": 30900000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Nike's net income in fiscal 2024 was $30.9 billion [1].",
+        "refused": false,
+        "answer_value": 30900000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "NKE-10K-2024FY:section:00149",
+            "filing_id": "NKE-10K-2024FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 51,
+            "page_end": null,
+            "quote": "net income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "NKE-10K-2024FY:section:00149",
+          "NKE-10K-2024FY:section:00017"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 7632,
+          "completion_tokens": 208,
+          "llm_calls": 4,
+          "cost_usd": 0.0031,
+          "latency_ms": 5838
+        }
+      },
+      "wall_ms": 6238,
+      "scores": {
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0048",
+      "dataset": "xbrl",
+      "question": "What was Pfizer's operating income in fiscal 2021?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "PFE",
+      "fiscal_year": 2021,
+      "gold": "$28.1 billion",
+      "gold_value": 28100000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Pfizer's operating income in fiscal 2021 was $26.2 billion [1].",
+        "refused": false,
+        "answer_value": 26152533839.662796,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "PFE-10K-2021FY:section:00156",
+            "filing_id": "PFE-10K-2021FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 54,
+            "page_end": null,
+            "quote": "operating income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "PFE-10K-2021FY:section:00156",
+          "PFE-10K-2021FY:section:00018"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 9494,
+          "completion_tokens": 335,
+          "llm_calls": 5,
+          "cost_usd": 0.0033,
+          "latency_ms": 4406
+        }
+      },
+      "wall_ms": 4806,
+      "scores": {
+        "numeric_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
+      },
+      "error": null,
+      "failure_category": "table_misread",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "fb-00199",
+      "dataset": "financebench",
+      "question": "What was Caterpillar's capital expenditures in fiscal 2022?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "CAT",
+      "fiscal_year": 2022,
+      "gold": "$101.7 billion",
+      "gold_value": 101700000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "I could not find enough support in the filings to answer this, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
+        "retrieved_chunk_ids": [
+          "CAT-10K-2022FY:section:00163",
+          "CAT-10K-2022FY:section:00019"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "verify",
+          "answer"
+        ],
+        "usage": {
+          "prompt_tokens": 10260,
+          "completion_tokens": 323,
+          "llm_calls": 3,
+          "cost_usd": 0.0025,
+          "latency_ms": 7065
+        }
+      },
+      "wall_ms": 7465,
+      "scores": {
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 0,
+        "citation_precision": null,
+        "citation_recall": null,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": "bad_refusal",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "xbrl-0050",
+      "dataset": "xbrl",
+      "question": "What was Walmart's diluted EPS in fiscal 2023?",
+      "question_type": "yoy_change",
+      "answerable": true,
+      "ticker": "WMT",
+      "fiscal_year": 2023,
+      "gold": "$7.28",
+      "gold_value": 7.28,
+      "gold_unit": "per_share",
+      "prediction": {
+        "answer": "Walmart's diluted EPS in fiscal 2023 was $7.28 [1].",
+        "refused": false,
+        "answer_value": 7.28,
+        "answer_unit": "per_share",
+        "citations": [
+          {
+            "chunk_id": "WMT-10K-2023FY:section:00170",
+            "filing_id": "WMT-10K-2023FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 60,
+            "page_end": null,
+            "quote": "diluted EPS"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "WMT-10K-2023FY:section:00170",
+          "WMT-10K-2023FY:section:00020"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 8944,
+          "completion_tokens": 284,
+          "llm_calls": 4,
+          "cost_usd": 0.0029,
+          "latency_ms": 8360
+        }
+      },
+      "wall_ms": 8760,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00221",
+      "dataset": "financebench",
+      "question": "What was Amazon's gross margin in fiscal 2024?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "AMZN",
+      "fiscal_year": 2024,
+      "gold": "47.9%",
+      "gold_value": 0.479,
+      "gold_unit": "percent",
+      "prediction": {
+        "answer": "Amazon's gross margin in fiscal 2024 was 44.4% [1].",
+        "refused": false,
+        "answer_value": 0.44351641002472025,
+        "answer_unit": "percent",
+        "citations": [
+          {
+            "chunk_id": "AMZN-10K-2024FY:section:00177",
+            "filing_id": "AMZN-10K-2024FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 63,
+            "page_end": null,
+            "quote": "gross margin"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "AMZN-10K-2024FY:section:00177",
+          "AMZN-10K-2024FY:section:00021"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 8410,
+          "completion_tokens": 261,
+          "llm_calls": 5,
+          "cost_usd": 0.0025,
+          "latency_ms": 7279
+        }
+      },
+      "wall_ms": 7679,
+      "scores": {
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 0,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
+      },
+      "error": null,
+      "failure_category": "bad_refusal",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "xbrl-0052",
+      "dataset": "xbrl",
+      "question": "What was Apple's total revenue in fiscal 2021?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "AAPL",
+      "fiscal_year": 2021,
+      "gold": "$94.6 billion",
+      "gold_value": 94600000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Apple's total revenue in fiscal 2021 was $94.6 billion [1].",
+        "refused": false,
+        "answer_value": 94600000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "AAPL-10K-2021FY:section:00184",
+            "filing_id": "AAPL-10K-2021FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 66,
+            "page_end": null,
+            "quote": "total revenue"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "AAPL-10K-2021FY:section:00184",
+          "AAPL-10K-2021FY:section:00022"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 8582,
+          "completion_tokens": 218,
+          "llm_calls": 3,
+          "cost_usd": 0.0023,
+          "latency_ms": 9280
+        }
+      },
+      "wall_ms": 9680,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "unans-013",
+      "dataset": "unanswerable",
+      "question": "What will Microsoft's net income be in fiscal 2028?",
+      "question_type": "forward_looking",
+      "answerable": false,
+      "ticker": "MSFT",
+      "fiscal_year": 2028,
+      "gold": null,
+      "gold_value": null,
+      "gold_unit": null,
+      "prediction": {
+        "answer": "I could not find support for a forward-looking figure in the filings, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
+        "retrieved_chunk_ids": [
+          "MSFT-10K-2022FY:section:00191",
+          "MSFT-10K-2022FY:section:00023"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "verify",
+          "answer"
+        ],
+        "usage": {
+          "prompt_tokens": 8939,
+          "completion_tokens": 536,
+          "llm_calls": 4,
+          "cost_usd": 0.0057,
+          "latency_ms": 4883
+        }
+      },
+      "wall_ms": 5283,
+      "scores": {
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": null
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0054",
+      "dataset": "xbrl",
+      "question": "What was JPMorgan's operating income in fiscal 2023?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "JPM",
+      "fiscal_year": 2023,
+      "gold": "$68.6 billion",
+      "gold_value": 68599999999.99999,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "JPMorgan's operating income in fiscal 2023 was $68.6 billion [1].",
+        "refused": false,
+        "answer_value": 68599999999.99999,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "JPM-10K-2023FY:section:00198",
+            "filing_id": "JPM-10K-2023FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 72,
+            "page_end": null,
+            "quote": "operating income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "JPM-10K-2023FY:section:00198",
+          "JPM-10K-2023FY:section:00024"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 7585,
+          "completion_tokens": 362,
+          "llm_calls": 5,
+          "cost_usd": 0.002,
+          "latency_ms": 8036
+        }
+      },
+      "wall_ms": 8436,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00265",
+      "dataset": "financebench",
+      "question": "What was Coca-Cola's capital expenditures in fiscal 2024?",
+      "question_type": "yoy_change",
+      "answerable": true,
+      "ticker": "KO",
+      "fiscal_year": 2024,
+      "gold": "$35.6 billion",
+      "gold_value": 35600000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Coca-Cola's capital expenditures in fiscal 2024 was $35.6 billion [1].",
+        "refused": false,
+        "answer_value": 35600000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "KO-10K-2024FY:section:00205",
+            "filing_id": "KO-10K-2024FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 75,
+            "page_end": null,
+            "quote": "capital expenditures"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "KO-10K-2024FY:section:00205",
+          "KO-10K-2024FY:section:00025"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 9561,
+          "completion_tokens": 480,
+          "llm_calls": 3,
+          "cost_usd": 0.0042,
+          "latency_ms": 7725
+        }
+      },
+      "wall_ms": 8125,
+      "scores": {
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0056",
+      "dataset": "xbrl",
+      "question": "What was NVIDIA's diluted EPS in fiscal 2021?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "NVDA",
+      "fiscal_year": 2021,
+      "gold": "$4.76",
+      "gold_value": 4.76,
+      "gold_unit": "per_share",
+      "prediction": {
+        "answer": "NVIDIA's diluted EPS in fiscal 2021 was $4.76 [1].",
+        "refused": false,
+        "answer_value": 4.76,
+        "answer_unit": "per_share",
+        "citations": [
+          {
+            "chunk_id": "NVDA-10K-2021FY:section:00212",
+            "filing_id": "NVDA-10K-2021FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 78,
+            "page_end": null,
+            "quote": "diluted EPS"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "NVDA-10K-2021FY:section:00212",
+          "NVDA-10K-2021FY:section:00026"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 11616,
+          "completion_tokens": 294,
+          "llm_calls": 4,
+          "cost_usd": 0.0057,
+          "latency_ms": 10150
+        }
+      },
+      "wall_ms": 10550,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00287",
+      "dataset": "financebench",
+      "question": "What was Exxon Mobil's gross margin in fiscal 2022?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "XOM",
+      "fiscal_year": 2022,
+      "gold": "21.0%",
+      "gold_value": 0.21,
+      "gold_unit": "percent",
+      "prediction": {
+        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 17.6% [1].",
+        "refused": false,
+        "answer_value": 0.17603909379977267,
+        "answer_unit": "percent",
+        "citations": [
+          {
+            "chunk_id": "XOM-10K-2022FY:section:00219",
+            "filing_id": "XOM-10K-2022FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 31,
+            "page_end": null,
+            "quote": "gross margin"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "XOM-10K-2022FY:section:00219",
+          "XOM-10K-2022FY:section:00027"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 9246,
+          "completion_tokens": 401,
+          "llm_calls": 5,
+          "cost_usd": 0.0058,
+          "latency_ms": 10359
+        }
+      },
+      "wall_ms": 10759,
+      "scores": {
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 0,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
+      },
+      "error": null,
+      "failure_category": "arithmetic",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "xbrl-0058",
+      "dataset": "xbrl",
+      "question": "What was Costco's total revenue in fiscal 2023?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "COST",
+      "fiscal_year": 2023,
+      "gold": "$72.7 billion",
+      "gold_value": 72700000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Costco's total revenue in fiscal 2023 was $72.7 billion [1].",
+        "refused": false,
+        "answer_value": 72700000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "COST-10K-2023FY:section:00226",
+            "filing_id": "COST-10K-2023FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 34,
+            "page_end": null,
+            "quote": "total revenue"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "COST-10K-2023FY:section:00226",
+          "COST-10K-2023FY:section:00028"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 10113,
+          "completion_tokens": 220,
+          "llm_calls": 3,
+          "cost_usd": 0.0034,
+          "latency_ms": 6717
+        }
+      },
+      "wall_ms": 7117,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00309",
+      "dataset": "financebench",
+      "question": "What was Nike's net income in fiscal 2024?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "NKE",
+      "fiscal_year": 2024,
+      "gold": "$9.6 billion",
+      "gold_value": 9600000000,
+      "gold_unit": "USD",
+      "prediction": null,
+      "wall_ms": 30000,
+      "scores": {
+        "numeric_correct": null,
+        "refusal_correct": null,
+        "citation_precision": null,
+        "citation_recall": null,
+        "recall_at_5": null,
+        "recall_at_10": null,
+        "mrr": null,
+        "ndcg_at_10": null
+      },
+      "error": "TimeoutError: LLM call exceeded 30s after 3 retries",
+      "failure_category": "other",
+      "failure_note": null
+    },
+    {
+      "qid": "unans-020",
+      "dataset": "unanswerable",
+      "question": "What will Pfizer's operating income be in fiscal 2027?",
+      "question_type": "forward_looking",
+      "answerable": false,
+      "ticker": "PFE",
+      "fiscal_year": 2027,
+      "gold": null,
+      "gold_value": null,
+      "gold_unit": null,
+      "prediction": {
+        "answer": "I could not find support for a forward-looking figure in the filings, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
+        "retrieved_chunk_ids": [
+          "PFE-10K-2021FY:section:00240",
+          "PFE-10K-2021FY:section:00030"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "verify",
+          "answer"
+        ],
+        "usage": {
+          "prompt_tokens": 11425,
+          "completion_tokens": 495,
+          "llm_calls": 5,
+          "cost_usd": 0.0041,
+          "latency_ms": 10475
+        }
+      },
+      "wall_ms": 10875,
+      "scores": {
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": null
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00331",
+      "dataset": "financebench",
+      "question": "What was Caterpillar's capital expenditures in fiscal 2022?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "CAT",
+      "fiscal_year": 2022,
+      "gold": "$79.5 billion",
+      "gold_value": 79500000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Caterpillar's capital expenditures in fiscal 2022 was $73.0 billion [1].",
+        "refused": false,
+        "answer_value": 72959367573.79677,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "CAT-10K-2022FY:section:00247",
+            "filing_id": "CAT-10K-2022FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 43,
+            "page_end": null,
+            "quote": "capital expenditures"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "CAT-10K-2022FY:section:00247",
+          "CAT-10K-2022FY:section:00031"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 6327,
+          "completion_tokens": 417,
+          "llm_calls": 3,
+          "cost_usd": 0.0045,
+          "latency_ms": 5247
+        }
+      },
+      "wall_ms": 5647,
+      "scores": {
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
+      },
+      "error": null,
+      "failure_category": "retrieval_miss",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "xbrl-0062",
+      "dataset": "xbrl",
+      "question": "What was Walmart's diluted EPS in fiscal 2023?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "WMT",
+      "fiscal_year": 2023,
+      "gold": "$5.03",
+      "gold_value": 5.03,
+      "gold_unit": "per_share",
+      "prediction": {
+        "answer": "Walmart's diluted EPS in fiscal 2023 was $4.29 [1].",
+        "refused": false,
+        "answer_value": 4.290073336204398,
+        "answer_unit": "per_share",
+        "citations": [
+          {
+            "chunk_id": "WMT-10K-2023FY:section:00254",
+            "filing_id": "WMT-10K-2023FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 46,
+            "page_end": null,
+            "quote": "diluted EPS"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "WMT-10K-2023FY:section:00254",
+          "WMT-10K-2023FY:section:00032"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 9452,
+          "completion_tokens": 428,
+          "llm_calls": 4,
+          "cost_usd": 0.0021,
+          "latency_ms": 6353
+        }
+      },
+      "wall_ms": 6753,
+      "scores": {
+        "numeric_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
+      },
+      "error": null,
+      "failure_category": "table_misread",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
+    },
+    {
+      "qid": "fb-00353",
+      "dataset": "financebench",
+      "question": "Did Amazon's gross margin increase in fiscal 2024 compared with the prior year?",
+      "question_type": "domain",
+      "answerable": true,
+      "ticker": "AMZN",
+      "fiscal_year": 2024,
+      "gold": "Yes",
+      "gold_value": null,
+      "gold_unit": "text",
+      "prediction": {
+        "answer": "Yes, Amazon's gross margin increased in fiscal 2024 [1].",
+        "refused": false,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [
+          {
+            "chunk_id": "AMZN-10K-2024FY:section:00261",
+            "filing_id": "AMZN-10K-2024FY",
+            "section": "Item 7. MD&A > Results of Operations",
+            "page": 49,
+            "page_end": null,
+            "quote": "gross margin"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "AMZN-10K-2024FY:section:00261",
+          "AMZN-10K-2024FY:section:00033"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 7538,
+          "completion_tokens": 313,
+          "llm_calls": 5,
+          "cost_usd": 0.0042,
+          "latency_ms": 6511
+        }
+      },
+      "wall_ms": 6911,
+      "scores": {
+        "numeric_correct": null,
+        "judge_correct": null,
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0064",
+      "dataset": "xbrl",
+      "question": "What was Apple's total revenue in fiscal 2021?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "AAPL",
+      "fiscal_year": 2021,
+      "gold": "$76.8 billion",
+      "gold_value": 76800000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Apple's total revenue in fiscal 2021 was $76.8 billion [1].",
+        "refused": false,
+        "answer_value": 76800000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "AAPL-10K-2021FY:section:00268",
+            "filing_id": "AAPL-10K-2021FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 52,
+            "page_end": null,
+            "quote": "total revenue"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "AAPL-10K-2021FY:section:00268",
+          "AAPL-10K-2021FY:section:00034"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 8168,
+          "completion_tokens": 480,
+          "llm_calls": 3,
+          "cost_usd": 0.0031,
+          "latency_ms": 9909
+        }
+      },
+      "wall_ms": 10309,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "fb-00375",
+      "dataset": "financebench",
+      "question": "What was Microsoft's net income in fiscal 2022?",
+      "question_type": "yoy_change",
+      "answerable": true,
+      "ticker": "MSFT",
+      "fiscal_year": 2022,
+      "gold": "$83.6 billion",
+      "gold_value": 83600000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "Microsoft's net income in fiscal 2022 was $83.6 billion [1].",
+        "refused": false,
+        "answer_value": 83600000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "MSFT-10K-2022FY:section:00275",
+            "filing_id": "MSFT-10K-2022FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 55,
+            "page_end": null,
+            "quote": "net income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "MSFT-10K-2022FY:section:00275",
+          "MSFT-10K-2022FY:section:00035"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 10491,
+          "completion_tokens": 436,
+          "llm_calls": 4,
+          "cost_usd": 0.0031,
+          "latency_ms": 4530
+        }
+      },
+      "wall_ms": 4930,
+      "scores": {
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "xbrl-0066",
+      "dataset": "xbrl",
+      "question": "What was JPMorgan's operating income in fiscal 2023?",
+      "question_type": "single_fact",
+      "answerable": true,
+      "ticker": "JPM",
+      "fiscal_year": 2023,
+      "gold": "$46.1 billion",
+      "gold_value": 46100000000,
+      "gold_unit": "USD",
+      "prediction": {
+        "answer": "JPMorgan's operating income in fiscal 2023 was $46.1 billion [1].",
+        "refused": false,
+        "answer_value": 46100000000,
+        "answer_unit": "USD",
+        "citations": [
+          {
+            "chunk_id": "JPM-10K-2023FY:section:00282",
+            "filing_id": "JPM-10K-2023FY",
+            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
+            "page": 58,
+            "page_end": null,
+            "quote": "operating income"
+          }
+        ],
+        "retrieved_chunk_ids": [
+          "JPM-10K-2023FY:section:00282",
+          "JPM-10K-2023FY:section:00036"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "get_company_facts",
+          "verify",
+          "answer",
+          "self_check"
+        ],
+        "usage": {
+          "prompt_tokens": 8648,
+          "completion_tokens": 511,
+          "llm_calls": 5,
+          "cost_usd": 0.0046,
+          "latency_ms": 9291
+        }
+      },
+      "wall_ms": 9691,
+      "scores": {
+        "numeric_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    },
+    {
+      "qid": "unans-027",
+      "dataset": "unanswerable",
+      "question": "What will Coca-Cola's capital expenditures be in fiscal 2030?",
+      "question_type": "forward_looking",
+      "answerable": false,
+      "ticker": "KO",
+      "fiscal_year": 2030,
+      "gold": null,
+      "gold_value": null,
+      "gold_unit": null,
+      "prediction": {
+        "answer": "I could not find support for a forward-looking figure in the filings, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
+        "retrieved_chunk_ids": [
+          "KO-10K-2024FY:section:00289",
+          "KO-10K-2024FY:section:00037"
+        ],
+        "steps": [
+          "plan",
+          "search_filings",
+          "verify",
+          "answer"
+        ],
+        "usage": {
+          "prompt_tokens": 10383,
+          "completion_tokens": 409,
+          "llm_calls": 3,
+          "cost_usd": 0.005,
+          "latency_ms": 8291
+        }
+      },
+      "wall_ms": 8691,
+      "scores": {
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": null
+      },
+      "error": null,
+      "failure_category": null,
+      "failure_note": null
+    }
+  ]
+}
