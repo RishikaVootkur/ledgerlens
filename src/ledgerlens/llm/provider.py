@@ -329,21 +329,35 @@ def complete(
         return resp
 
 
+# OpenInference `llm.provider` values (Phoenix groups and prices spans by provider + model).
+_OI_PROVIDER = {"gemini": "google"}
+
+
 def _request_attributes(spec: ModelSpec, request: dict[str, Any], purpose: str) -> dict[str, Any]:
+    # input.value is left out: the messages below already carry the whole prompt, and a
+    # JSON copy would double the size of every LLM span.
     attrs: dict[str, Any] = {
         "llm.model_name": spec.model,
-        "llm.provider": spec.provider,
+        "llm.provider": _OI_PROVIDER.get(spec.provider, spec.provider),
         "llm.invocation_parameters": tracing.to_json(
             {k: v for k, v in request.items() if k not in ("messages", "tools")}
         ),
-        tracing.INPUT_VALUE: tracing.to_json(request["messages"]),
-        tracing.INPUT_MIME: "application/json",
         "ledgerlens.model_alias": spec.alias,
         "ledgerlens.purpose": purpose,
     }
     for i, message in enumerate(request["messages"]):
-        attrs[f"llm.input_messages.{i}.message.role"] = str(message.get("role", ""))
-        attrs[f"llm.input_messages.{i}.message.content"] = str(message.get("content") or "")
+        prefix = f"llm.input_messages.{i}.message"
+        attrs[f"{prefix}.role"] = str(message.get("role", ""))
+        attrs[f"{prefix}.content"] = str(message.get("content") or "")
+        if message.get("tool_call_id"):
+            attrs[f"{prefix}.tool_call_id"] = str(message["tool_call_id"])
+        for j, call in enumerate(message.get("tool_calls") or []):
+            function = call.get("function", {}) if isinstance(call, dict) else {}
+            call_prefix = f"{prefix}.tool_calls.{j}.tool_call"
+            if isinstance(call, dict) and call.get("id"):
+                attrs[f"{call_prefix}.id"] = str(call["id"])
+            attrs[f"{call_prefix}.function.name"] = str(function.get("name", ""))
+            attrs[f"{call_prefix}.function.arguments"] = str(function.get("arguments", ""))
     for i, tool in enumerate(request.get("tools") or []):
         attrs[f"llm.tools.{i}.tool.json_schema"] = tracing.to_json(tool)
     return attrs
