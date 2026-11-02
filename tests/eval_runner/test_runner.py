@@ -229,3 +229,18 @@ def test_xbrl_fact_from_the_right_filing_counts_as_retrieved():
     assert (
         s["recall_at_5"] == 1.0 and s["citation_recall"] == 1.0 and s["citation_precision"] == 1.0
     )
+
+
+def test_merge_runs_combines_disjoint_parts(isolated):
+    cfg = runner.EvalConfig(name="t", datasets=["smoke"])
+    a = runner.run_eval(cfg.model_copy(update={"qids": ["s1"]}), "dev", run_id="a")
+    b = runner.run_eval(cfg.model_copy(update={"qids": ["s2", "s3"]}), "dev", run_id="b")
+    merged = runner.merge_runs([a, b], "ab")
+    assert [r.qid for r in merged.results] == ["s1", "s2", "s3"]
+    assert merged.summary["numeric_correct"].n == 3
+    assert merged.config["merged_from"] == ["a", "b"]
+    with pytest.raises(ValueError):
+        runner.merge_runs([a, a], "dup")
+    other = runner.run_eval(cfg.model_copy(update={"qids": ["s2"], "k": 9}), "dev", run_id="c")
+    with pytest.raises(ValueError):
+        runner.merge_runs([a, other], "mixed")

@@ -330,3 +330,33 @@ def record_cache() -> int:
             dest.write_text(src.read_text())
             copied += 1
     return copied
+
+
+def merge_runs(parts: list[RunFile], run_id: str) -> RunFile:
+    """One run from parts that used the same config on disjoint questions."""
+
+    def comparable(run: RunFile) -> dict[str, object]:
+        return {k: v for k, v in run.config.items() if k not in ("datasets", "limit", "qids")}
+
+    first = parts[0]
+    if any(comparable(p) != comparable(first) for p in parts[1:]):
+        raise ValueError("can only merge runs made with the same config")
+    results = [r for p in parts for r in p.results]
+    qids = [r.qid for r in results]
+    if len(qids) != len(set(qids)):
+        raise ValueError("runs to merge share questions")
+    datasets: list[DatasetName] = []
+    for p in parts:
+        datasets.extend(d for d in p.datasets if d not in datasets)
+    config = {**first.config, "datasets": list(datasets), "merged_from": [p.run_id for p in parts]}
+    return first.model_copy(
+        update={
+            "run_id": run_id,
+            "datasets": datasets,
+            "config": config,
+            "results": results,
+            "summary": summarize_scores(results),
+            "summary_by_dataset": summarize_by_dataset(results),
+            "usage_total": sum((p.usage_total for p in parts), start=Usage()),
+        }
+    )
