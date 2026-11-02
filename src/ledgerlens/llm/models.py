@@ -58,6 +58,17 @@ MODELS: dict[str, ModelSpec] = {
             extra={"reasoning_effort": "low"},
         ),
         ModelSpec(
+            alias="gemini-3.5-flash-lite",
+            provider="gemini",
+            model="gemini-3.5-flash-lite",
+            family="gemini",
+            input_per_mtok=0.30,
+            output_per_mtok=2.50,
+            requests_per_minute=15,
+            tokens_per_minute=250_000,
+            label="Gemini 3.5 Flash-Lite",
+        ),
+        ModelSpec(
             alias="groq-qwen3.8-27b",
             provider="groq",
             model="qwen/qwen3.8-27b",
@@ -97,7 +108,9 @@ MODELS: dict[str, ModelSpec] = {
     )
 }
 
-DEFAULT_ANSWER_MODEL = "gemini-3.8-flash"
+# Gemini 3.8 Flash allows only 20 free requests per day, so the default answer model is
+# Qwen3.8 27B on Groq (1000/day). The judge stays a different family (GPT-OSS).
+DEFAULT_ANSWER_MODEL = "groq-qwen3.8-27b"
 DEFAULT_JUDGE_MODEL = "groq-gpt-oss-120b"
 
 
