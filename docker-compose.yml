@@ -1,4 +1,7 @@
 # Lean stack for a 16 GB laptop that also runs Ollama on the host.
+# A fixed project name keeps containers and volumes shared across clones and worktrees.
+name: ledgerlens
+
 services:
   qdrant:
     image: qdrant/qdrant:v1.20.0
