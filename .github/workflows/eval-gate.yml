@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LLM_MODE: replay
-      CACHE_DIR: ${{ runner.temp }}/empty-cache
+      CACHE_DIR: /tmp/ledgerlens-empty-cache
       SEC_USER_AGENT: "LedgerLens CI ci@ledgerlens.invalid"
     steps:
       - uses: actions/checkout@v7
