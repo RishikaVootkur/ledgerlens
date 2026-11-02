@@ -64,6 +64,7 @@ NOOP = _NoopSpan()
 
 _tracer: Tracer | None = None
 _provider: TracerProvider | None = None
+_skip_logged = False
 
 
 def enabled() -> bool:
@@ -74,8 +75,9 @@ def setup_tracing(endpoint: str | None = None, *, provider: TracerProvider | Non
     """Start exporting spans. Returns True when tracing is on.
 
     `endpoint` defaults to the `PHOENIX_ENDPOINT` setting (for example
-    http://localhost:6006/v1/traces); with neither an endpoint nor a `provider` this is a
-    no-op. Tests pass their own `provider` (an SDK TracerProvider with an in-memory
+    http://localhost:6006/v1/traces). Tracing is opt-in: without an endpoint, or without
+    `PHOENIX_API_KEY` (Phoenix 21 rejects unauthenticated exports), this is a no-op that
+    logs once. Tests pass their own `provider` (an SDK TracerProvider with an in-memory
     exporter). Calling it again once tracing is on does nothing.
     """
     global _tracer, _provider
@@ -89,6 +91,17 @@ def setup_tracing(endpoint: str | None = None, *, provider: TracerProvider | Non
         if not endpoint:
             return False
         api_key = settings.phoenix_api_key
+        if api_key is None or not api_key.get_secret_value():
+            # Phoenix 21 has auth on: without a key every export batch would fail with 401.
+            global _skip_logged
+            if not _skip_logged:
+                _skip_logged = True
+                log.info(
+                    "tracing.disabled",
+                    reason="PHOENIX_API_KEY is not set (see docs/observability.md)",
+                    endpoint=endpoint,
+                )
+            return False
         try:
             from phoenix.otel import register
 
@@ -98,14 +111,14 @@ def setup_tracing(endpoint: str | None = None, *, provider: TracerProvider | Non
                 batch=True,
                 set_global_tracer_provider=False,
                 verbose=False,
-                api_key=api_key.get_secret_value() if api_key else None,
+                api_key=api_key.get_secret_value(),
                 # Exit-time flushing goes through shutdown_tracing, which is time-bounded.
                 shutdown_on_exit=False,
             )
         except Exception as exc:  # tracing must never stop the app from starting
             log.warning("tracing.setup_failed", error=type(exc).__name__, detail=str(exc)[:200])
             return False
-        log.info("tracing.enabled", endpoint=endpoint, project=PROJECT_NAME, api_key=bool(api_key))
+        log.info("tracing.enabled", endpoint=endpoint, project=PROJECT_NAME)
     _provider = provider
     _tracer = provider.get_tracer("ledgerlens")
     return True
