@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import dashboardJson from "../../public/mock/dashboard.json";
-import runJson from "../../public/mock/runs/2026-10-28T1402-full-gemini-flash.json";
+import dashboardJson from "../../mock/dashboard.json";
+import runJson from "../../mock/runs/2026-10-28T1402-full-gemini-flash.json";
 import { FAILURE_CATEGORIES, SCHEMA_VERSION, type Dashboard, type MetricValue, type RunFile } from "./types";
 
 // JSON imports widen literal unions to string, so check the shape at runtime

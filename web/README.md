@@ -26,7 +26,7 @@ npm run preview        # serve the last build
 | --- | --- | --- |
 | `VITE_API_BASE` | `/api` | Where the FastAPI routes live. |
 | `VITE_API_PROXY` | `http://localhost:8000` | Dev server only: target for the `/api` proxy. |
-| `VITE_DATA_BASE` | `/api/data` | Folder holding `dashboard.json` and `runs/{run_id}.json`. Use `/mock` for the sample files in `public/mock`. |
+| `VITE_DATA_BASE` | `/api/data` | Folder holding `dashboard.json` and `runs/{run_id}.json`. Use `/mock` for the sample files in `web/mock` (served by the dev server only). |
 | `VITE_STATIC` | unset | `1` turns off chat (static hosting with no backend). |
 | `VITE_MOCK_CHAT` | unset | `1` replays a recorded SSE sequence instead of calling `/api/chat`. |
 | `VITE_BASE` | `/` | Vite `base`; GitHub Pages serves the site under `/ledgerlens/`. |
@@ -38,8 +38,8 @@ makes README screenshots reproducible.
 ## Publishing the static dashboard
 
 `npm run build:static` writes `web/dist`. Copy `dashboard.json` and `runs/*.json` from the eval
-lab into `web/dist/data/` before uploading the folder to Pages. The sample files in `public/mock`
-are shipped too, but nothing reads them unless `VITE_DATA_BASE=/mock`.
+lab into `web/dist/data/` before uploading the folder to Pages. The sample data in `web/mock` is
+never copied into a build.
 
 ## Backend contract
 
