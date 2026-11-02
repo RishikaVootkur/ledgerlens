@@ -11,6 +11,7 @@ import sys
 from collections.abc import Callable
 from typing import Any, ClassVar
 
+import httpx
 import pytest
 from mcp.client._memory import InMemoryTransport
 from mcp.client.client import Client
@@ -21,6 +22,8 @@ from ledgerlens import mcp_server
 from ledgerlens.agent import tools as agent_tools
 from ledgerlens.agent import xbrl
 from ledgerlens.config import get_settings
+from ledgerlens.llm.cache import CacheMissError
+from ledgerlens.llm.provider import QuotaExhaustedError
 from ledgerlens.retrieval.filters import SearchFilters
 from ledgerlens.retrieval.retriever import Hit
 from ledgerlens.schemas import Chunk
@@ -175,7 +178,9 @@ async def test_calculate_rejects_injection(connect, expression):
     async with connect() as client:
         result = await client.call_tool("calculate", {"expression": expression})
         assert result.is_error
-        assert "calculate error" in result.content[0].text
+        assert result.content[0].text.startswith(
+            "Error executing tool calculate: Invalid expression"
+        )
 
 
 async def test_calculate_validates_input_length(connect):
@@ -252,17 +257,84 @@ async def test_search_filings_validates_arguments(connect):
         assert FakeRetriever.calls == []
 
 
-async def test_search_failure_is_a_tool_error(connect, monkeypatch):
+SECRET = "/home/ops/.ledgerlens/index sk-live-1234 10.0.0.5"
+
+
+def failing(exc: Exception) -> Callable[..., Any]:
+    def boom(*args: Any, **kwargs: Any) -> Any:
+        raise exc
+
+    return boom
+
+
+@pytest.mark.parametrize(
+    ("exc", "message"),
+    [
+        (ConnectionError(SECRET), mcp_server.SEARCH_DOWN),
+        (httpx.ConnectError(SECRET), mcp_server.SEARCH_DOWN),
+        (FileNotFoundError(SECRET), mcp_server.INDEX_MISSING),
+    ],
+)
+async def test_expected_search_failures_get_safe_messages(connect, monkeypatch, exc, message):
+    monkeypatch.setattr(agent_tools, "_search", failing(exc))
     async with connect() as client:
-
-        class Down(FakeRetriever):
-            def search(self, *args: Any, **kwargs: Any) -> list[Hit]:
-                raise ConnectionError("qdrant unreachable")
-
-        monkeypatch.setattr(agent_tools, "Retriever", Down)
         result = await client.call_tool("search_filings", {"query": "net sales"})
-        assert result.is_error
-        assert "ConnectionError: qdrant unreachable" in result.content[0].text
+    assert result.is_error
+    assert result.content[0].text == f"Error executing tool search_filings: {message}"
+
+
+async def test_unexpected_failures_reveal_nothing(connect, monkeypatch):
+    monkeypatch.setattr(agent_tools, "_search", failing(RuntimeError(SECRET)))
+    monkeypatch.setattr(agent_tools, "_table", failing(KeyError(SECRET)))
+    monkeypatch.setattr(xbrl, "_fetch_companyfacts", failing(TypeError(SECRET)))
+    calls = {
+        "search_filings": {"query": "net sales"},
+        "get_table": {"chunk_id": "x"},
+        "get_company_facts": {"ticker": "AAPL", "metric": "revenue"},
+    }
+    async with connect() as client:
+        for name, args in calls.items():
+            result = await client.call_tool(name, args)
+            assert result.is_error
+            assert result.content[0].text == f"Error executing tool {name}", name
+
+
+@pytest.mark.parametrize(
+    ("exc", "message"),
+    [
+        (httpx.ConnectError(SECRET), mcp_server.SEC_DOWN),
+        (ValueError(f"Set SEC_USER_AGENT in .env {SECRET}"), mcp_server.SEC_NOT_CONFIGURED),
+    ],
+)
+async def test_expected_sec_failures_get_safe_messages(connect, monkeypatch, exc, message):
+    monkeypatch.setattr(xbrl, "_fetch_companyfacts", failing(exc))
+    async with connect() as client:
+        result = await client.call_tool(
+            "get_company_facts", {"ticker": "AAPL", "metric": "revenue"}
+        )
+    assert result.content[0].text == f"Error executing tool get_company_facts: {message}"
+
+
+class AuthenticationError(Exception):
+    """Stands in for LiteLLM's class of the same name."""
+
+
+@pytest.mark.parametrize(
+    ("exc", "message"),
+    [
+        (QuotaExhaustedError(SECRET), mcp_server.LLM_QUOTA),
+        (AuthenticationError(SECRET), mcp_server.LLM_AUTH),
+        (CacheMissError(SECRET), mcp_server.LLM_REPLAY_MISS),
+        (httpx.ConnectError(SECRET), mcp_server.SEARCH_DOWN),
+    ],
+)
+async def test_expected_ask_failures_get_safe_messages(connect, monkeypatch, exc, message):
+    from ledgerlens.agent import graph
+
+    monkeypatch.setattr(graph, "run_agent", failing(exc))
+    async with connect() as client:
+        result = await client.call_tool("ask", {"question": "Apple FY2025 net sales?"})
+    assert result.content[0].text == f"Error executing tool ask: {message}"
 
 
 async def test_get_table_returns_every_chunk_of_the_table(connect):

@@ -9,8 +9,11 @@ companyfacts (cached on disk after the first fetch). Run with `ledgerlens mcp se
 from __future__ import annotations
 
 import json
-from typing import Annotated, Any, Literal
+import sqlite3
+from collections.abc import Callable
+from typing import Annotated, Any, Literal, NoReturn
 
+import httpx
 import typer
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -21,8 +24,12 @@ from ledgerlens import __version__
 from ledgerlens.agent import calc, xbrl
 from ledgerlens.agent import tools as agent_tools
 from ledgerlens.agent.xbrl import METRICS, Fact
+from ledgerlens.llm.cache import CacheMissError
+from ledgerlens.logging import get_logger
 from ledgerlens.schemas import AgentAnswer, FiscalPeriod, FormType
 from ledgerlens.universe import BY_TICKER, UNIVERSE
+
+log = get_logger(__name__)
 
 COMPANIES_URI = "ledgerlens://companies"
 MAX_K = 20
@@ -101,8 +108,65 @@ def _ticker(ticker: str) -> str:
     return value
 
 
-def _failed(name: str, exc: Exception) -> ToolError:
-    return ToolError(f"{name} failed: {type(exc).__name__}: {str(exc)[:200]}")
+# ------------------------------------------------------------------ failures
+#
+# Raw exception text can carry file paths, hostnames or provider account details, so it
+# never goes to the client. Failures we expect become a ToolError with a fixed message and
+# are logged here with the traceback; anything else propagates, and the SDK answers with
+# its generic "Error executing tool <name>" and logs the traceback itself.
+
+INDEX_MISSING = "The search index is not built on this server. Run `ledgerlens index build`."
+SEARCH_DOWN = "The search backend is unavailable. Check that Qdrant and Ollama are running."
+SEC_DOWN = "SEC companyfacts is unavailable right now. Try again later."
+SEC_NOT_CONFIGURED = "These facts are not cached and SEC_USER_AGENT is not set on the server."
+LLM_QUOTA = "The answer model's daily quota is exhausted. Use the other tools or retry later."
+LLM_RATE_LIMITED = "The answer model is rate limited. Retry in a minute."
+LLM_AUTH = "The server's LLM provider credentials were rejected."
+LLM_REPLAY_MISS = "The server runs in replay mode and has no recorded answer for this question."
+
+
+def _search_failure(exc: Exception) -> str | None:
+    from qdrant_client.http.exceptions import ApiException
+
+    if isinstance(exc, FileNotFoundError | sqlite3.OperationalError):
+        return INDEX_MISSING
+    if isinstance(exc, httpx.HTTPError | ConnectionError | ApiException):
+        return SEARCH_DOWN
+    return None
+
+
+def _sec_failure(exc: Exception) -> str | None:
+    if isinstance(exc, ValueError) and "SEC_USER_AGENT" in str(exc):
+        return SEC_NOT_CONFIGURED
+    if isinstance(exc, httpx.HTTPError | ConnectionError):
+        return SEC_DOWN
+    return None
+
+
+def _llm_failure(exc: Exception) -> str | None:
+    from ledgerlens.llm.provider import QuotaExhaustedError
+
+    if isinstance(exc, QuotaExhaustedError):
+        return LLM_QUOTA
+    if isinstance(exc, CacheMissError):
+        return LLM_REPLAY_MISS
+    # LiteLLM's exception classes, matched by name so this module does not import LiteLLM.
+    name = type(exc).__name__
+    if name == "RateLimitError":
+        return LLM_RATE_LIMITED
+    if name == "AuthenticationError":
+        return LLM_AUTH
+    return _search_failure(exc) or _sec_failure(exc)
+
+
+def _reraise_safely(
+    tool: str, exc: Exception, classify: Callable[[Exception], str | None]
+) -> NoReturn:
+    message = classify(exc)
+    if message is None:
+        raise exc
+    log.warning("mcp_tool_failed", tool=tool, error=type(exc).__name__, exc_info=exc)
+    raise ToolError(message) from exc
 
 
 # ------------------------------------------------------------------ tools
@@ -131,7 +195,7 @@ def search_filings(
     try:
         chunks = agent_tools._search(args, agent_tools.RetrievalConfig(k=k))
     except Exception as exc:
-        raise _failed("search_filings", exc) from exc
+        _reraise_safely("search_filings", exc, _search_failure)
     return SearchResult(query=query, results=_passages(chunks))
 
 
@@ -143,7 +207,7 @@ def get_table(
     try:
         chunks = agent_tools._table(chunk_id.strip())
     except Exception as exc:
-        raise _failed("get_table", exc) from exc
+        _reraise_safely("get_table", exc, _search_failure)
     if not chunks:
         raise ToolError(f"Unknown chunk_id {chunk_id!r}; pass a chunk_id from search_filings.")
     return TableResult(chunk_id=chunk_id, chunks=_passages(chunks))
@@ -178,7 +242,7 @@ def get_company_facts(
     try:
         facts = xbrl.get_company_facts(symbol, name, fiscal_year, duration)
     except Exception as exc:
-        raise _failed("get_company_facts", exc) from exc
+        _reraise_safely("get_company_facts", exc, _sec_failure)
     return FactsResult(ticker=symbol, metric=name, facts=facts)
 
 
@@ -193,7 +257,7 @@ def calculate(
     try:
         value = calc.calculate(expression)
     except calc.CalcError as exc:
-        raise ToolError(f"calculate error: {exc}") from exc
+        raise ToolError(f"Invalid expression: {exc}") from exc
     return CalcResult(expression=expression, value=value)
 
 
@@ -212,7 +276,7 @@ def ask(
     try:
         return run_agent(question, filters=filters)
     except Exception as exc:
-        raise _failed("ask", exc) from exc
+        _reraise_safely("ask", exc, _llm_failure)
 
 
 def list_companies() -> str:
