@@ -14,8 +14,12 @@ export function ChunkViewer({ citation }: { citation: Citation }) {
 
   useEffect(() => {
     if (!ready) return;
-    const mark = bodyRef.current?.querySelector<HTMLElement>("mark[data-quote]");
-    mark?.scrollIntoView?.({ block: "center", behavior: "smooth" });
+    // Scroll only the passage box; scrollIntoView would also move the page.
+    const box = bodyRef.current;
+    const mark = box?.querySelector<HTMLElement>("mark[data-quote]");
+    if (!box || !mark) return;
+    const offset = mark.getBoundingClientRect().top - box.getBoundingClientRect().top;
+    box.scrollTo?.({ top: box.scrollTop + offset - box.clientHeight / 2, behavior: "smooth" });
   }, [ready, citation.quote]);
 
   if (state.status === "loading") return <LoadingBlock label="Loading passage" />;
