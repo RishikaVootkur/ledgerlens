@@ -244,8 +244,14 @@ def fiscal_year_and_period(
     grace for 52/53-week calendars is on or after the report date. The quarter is
     4 minus the number of whole quarters (91.3 days, rounded) left until that year
     end. A 10-K is always FY.
+
+    A year end in the first week of January (Johnson & Johnson's "0103") belongs to a
+    52/53-week year that is named for the previous calendar year, so it is treated
+    as "1231".
     """
     fye = fiscal_year_end if fiscal_year_end and len(fiscal_year_end) == 4 else "1231"
+    if fye[:2] == "01" and int(fye[2:]) <= 7:
+        fye = "1231"
     year = report_date.year - 1
     while report_date > _fy_end(year, fye) + timedelta(days=14):
         year += 1

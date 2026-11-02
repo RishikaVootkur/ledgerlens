@@ -35,6 +35,11 @@ FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
         (date(2025, 11, 23), "0831", "10-Q", (2026, "Q1")),  # Costco 12-week Q1
         (date(2026, 5, 10), "0831", "10-Q", (2026, "Q3")),
         (date(2026, 6, 30), None, "10-Q", (2026, "Q2")),  # missing FYE defaults to 1231
+        # Johnson & Johnson: fiscalYearEnd "0103" names the year by its December.
+        (date(2025, 12, 28), "0103", "10-K", (2025, "FY")),
+        (date(2027, 1, 3), "0103", "10-K", (2026, "FY")),  # 53-week year
+        (date(2026, 6, 28), "0103", "10-Q", (2026, "Q2")),
+        (date(2026, 9, 27), "0103", "10-Q", (2026, "Q3")),
     ],
 )
 def test_fiscal_year_and_period(report, fye, form, expected):
