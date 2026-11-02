@@ -51,6 +51,9 @@ TIMEOUT_S = 60.0
 GENERIC_USER_AGENT = "LedgerLens/0.1 (+https://github.com/RishikaVootkur/ledgerlens)"
 SEC_HOSTS = ("sec.gov",)
 RETRY_STATUS = {429, 500, 502, 503, 504}
+FORBIDDEN_BACKOFF_S = 10.0  # base wait after an SEC 403, doubled per attempt
+FORBIDDEN_BACKOFF_CAP_S = 300.0
+PERMANENT_STATUS = {404, 410}
 
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
 COMPANYFACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
@@ -194,9 +197,15 @@ class HttpCache:
                 if status == 200:
                     log.debug("fetched", url=url, bytes=len(resp.content))
                     return resp.content
-                if status not in RETRY_STATUS:
+                sec_forbidden = status == 403 and _is_sec(host)
+                if status not in RETRY_STATUS and not sec_forbidden:
                     raise FetchError(url, status, "HTTP error")
                 retry_after = _retry_after(resp.headers.get("Retry-After"))
+                if sec_forbidden:
+                    # SEC answers rate-limit breaches and bad user agents with 403.
+                    wait = min(FORBIDDEN_BACKOFF_CAP_S, FORBIDDEN_BACKOFF_S * 2**attempt)
+                    retry_after = max(retry_after or 0.0, wait)
+                    log.warning("sec_forbidden", url=url, body=resp.text[:200])
             except httpx.TransportError as exc:
                 log.warning("transport_error", url=url, error=type(exc).__name__)
             if attempt == MAX_RETRIES:

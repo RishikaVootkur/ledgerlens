@@ -173,6 +173,32 @@ def test_non_sec_hosts_get_generic_agent(tmp_path):
     assert route.calls[0].request.headers["User-Agent"] == edgar.GENERIC_USER_AGENT
 
 
+@respx.mock
+def test_sec_403_is_retried_with_long_backoff(tmp_path):
+    url = "https://www.sec.gov/Archives/edgar/data/1/2/doc.htm"
+    route = respx.get(url).mock(
+        side_effect=[
+            httpx.Response(403, text="Request Rate Threshold Exceeded"),
+            httpx.Response(200, content=b"<html>ok</html>"),
+        ]
+    )
+    sleeps: list[float] = []
+    http = HttpCache(tmp_path, sec_user_agent=UA, sleep=sleeps.append)
+    assert http.fetch(url) == b"<html>ok</html>"
+    assert route.call_count == 2
+    assert max(sleeps) >= edgar.FORBIDDEN_BACKOFF_S
+
+
+@respx.mock
+def test_non_sec_403_is_not_retried(tmp_path):
+    url = "https://example.com/doc.pdf"
+    route = respx.get(url).mock(return_value=httpx.Response(403))
+    http = HttpCache(tmp_path, sec_user_agent=UA, sleep=lambda _: None)
+    with pytest.raises(FetchError):
+        http.fetch(url)
+    assert route.call_count == 1
+
+
 def test_offline_cache_miss_raises(tmp_path):
     http = HttpCache(tmp_path, sec_user_agent=UA, offline=True)
     with pytest.raises(FetchError):
