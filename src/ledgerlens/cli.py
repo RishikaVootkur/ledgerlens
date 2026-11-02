@@ -21,3 +21,23 @@ def main() -> None:
 def version() -> None:
     """Print the package version."""
     typer.echo(__version__)
+
+
+datasets_app = typer.Typer(help="Build the eval datasets committed under eval/datasets/.")
+app.add_typer(datasets_app, name="datasets")
+
+
+@datasets_app.command("build")
+def datasets_build(
+    only: list[str] | None = typer.Option(  # noqa: B008
+        None,
+        "--only",
+        help="Dataset to rebuild (repeatable): financebench, xbrl, unanswerable, smoke. "
+        "Rebuilding xbrl also rebuilds smoke.",
+    ),
+) -> None:
+    """Regenerate dataset JSONL files deterministically from cached sources."""
+    from ledgerlens.eval.datasets.build import build_datasets
+
+    for name, rows in build_datasets(only).items():
+        typer.echo(f"{name}: {rows} rows")
