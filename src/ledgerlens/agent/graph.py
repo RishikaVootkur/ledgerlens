@@ -57,6 +57,10 @@ class AgentConfig:
     # round proposes nothing new, go straight to answering. Off reproduces the original
     # behavior (models often re-issue the same XBRL lookup every round).
     dedupe_tool_calls: bool = True
+    # Accept a number the model computed itself when it follows from two evidence numbers
+    # by one arithmetic step (sum, difference, ratio, percent, percent change). Off
+    # reproduces the original verifier, which refused such answers.
+    derive_numbers: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -198,6 +202,33 @@ def grounding_sources(registry: EvidenceRegistry) -> list[float]:
         if all(v in _CALC_CONSTANTS or _matches(v, base) for v in inputs):
             sources.extend(numbers_in(result))
     return sources
+
+
+def derivable(value: float, base: list[float], limit: int = 120) -> bool:
+    """True if `value` is one arithmetic step from two evidence numbers: a+b, a-b, a/b,
+    a/b*100 or (a-b)/b*100, with operands rescaled to a common reporting scale."""
+    nums = sorted({abs(b) for b in base if b}, reverse=True)[:limit]
+    target = abs(value)
+    if target == 0:
+        return False
+    for i, a in enumerate(nums):
+        for b in nums[i + 1 :] + nums[:i]:
+            for scale in (1.0, 1e3, 1e6, 1e-3, 1e-6):
+                bb = b * scale
+                candidates = (
+                    a + bb,
+                    a - bb,
+                    a / bb,
+                    a / bb * 100,
+                    (a - bb) / bb * 100,
+                    (bb - a) / a * 100,
+                    bb / a * 100,
+                )
+                for c in candidates:
+                    c = abs(c)
+                    if c and (abs(c - target) <= 0.005 * target or _matches(target, [c])):
+                        return True
+    return False
 
 
 def ungrounded_numbers(answer: str, sources: list[float]) -> list[float]:
@@ -375,7 +406,10 @@ def build_graph(run: _Run) -> Any:
         if not cfg.verify_numbers or draft.get("refused"):
             return {}
         run.on_step("verify", "checking every number against the evidence")
-        bad = ungrounded_numbers(str(draft.get("answer", "")), grounding_sources(run.registry))
+        sources = grounding_sources(run.registry)
+        bad = ungrounded_numbers(str(draft.get("answer", "")), sources)
+        if cfg.derive_numbers:
+            bad = [v for v in bad if not derivable(v, sources)]
         problems = list(state.get("problems") or [])
         if bad:
             shown = ", ".join(f"{v:,.6g}" for v in bad[:5])

@@ -64,6 +64,7 @@ class EvalConfig(BaseModel):
     verify_numbers: bool = True
     self_check: bool = True
     dedupe_tool_calls: bool = True
+    derive_numbers: bool = True
     datasets: list[DatasetName] = ["smoke"]
     # document: FinanceBench questions are searched within their own document, the
     # FinanceBench "single document" setting. open: no filter, the agent must find it.
@@ -95,6 +96,7 @@ class EvalConfig(BaseModel):
             verify_numbers=self.verify_numbers,
             self_check=self.self_check,
             dedupe_tool_calls=self.dedupe_tool_calls,
+            derive_numbers=self.derive_numbers,
         )
 
     @classmethod

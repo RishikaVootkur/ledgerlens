@@ -352,3 +352,28 @@ def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
         "unit": "USD",
     }
     assert finalize(draft, reg, []).answer_value == pytest.approx(359.2e9)
+
+
+def test_derived_numbers_are_accepted_but_invented_ones_are_not():
+    from ledgerlens.agent.graph import derivable
+
+    base = [416_161e6, 391_035e6, 25.3, 50.0]
+    assert derivable(6.4255, base)  # percent change 391,035 -> 416,161
+    assert derivable(807_196e6, base)  # sum
+    assert derivable(50.6, [25.3, 50.0])  # 25.3 / 50 * 100
+    assert not derivable(777.7, base)
+
+
+def test_verify_accepts_a_derived_percentage(scripted):
+    queue, _ = scripted
+    derived = answer_json(
+        answer="Net sales grew 6.43% to $416,161 million [E1].",
+        value=6.43,
+        scale="one",
+        unit="percent",
+    )
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(derived)]
+    result = run_agent("q", AgentConfig())
+    assert not result.refused and result.answer_value == pytest.approx(6.43)
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(derived), _resp(derived)]
+    assert run_agent("q2", AgentConfig(derive_numbers=False)).refused

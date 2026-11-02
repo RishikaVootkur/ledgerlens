@@ -1,0 +1,17 @@
+# Fix 2 before/after.
+name: ablation_no_derive
+description: "Before fix 2: verifier rejects numbers the model derived itself (original behavior)"
+model: gemini-3.5-flash-lite
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 2
+citation_support: false
+derive_numbers: false
