@@ -96,6 +96,10 @@ class DataPaths:
         return self.root / "filings.json"
 
     @property
+    def lock(self) -> Path:
+        return self.root / ".ingest.lock"
+
+    @property
     def reports(self) -> Path:
         return self.root / "reports"
 
@@ -379,6 +383,79 @@ def run(
         if unknown:
             raise ValueError(f"tickers not in the universe: {unknown}")
     paths = DataPaths(data_dir)
+    with RunLock(paths.lock):
+        return _run_locked(
+            paths,
+            tickers=tickers,
+            include_financebench=include_financebench,
+            strategies=strategies,
+            workers=workers,
+            refresh_index=refresh_index,
+            retry_failed=retry_failed,
+            docs_report=docs_report,
+            http=http,
+        )
+
+
+class RunLock:
+    """An exclusive lock file holding the owner's pid. A lock left by a dead process is
+    taken over; a live one raises, so two runs never share manifest or `.part` files."""
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+
+    def __enter__(self) -> RunLock:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        for _ in range(2):
+            try:
+                fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            except FileExistsError:
+                owner = _lock_owner(self.path)
+                if owner is not None and _pid_alive(owner):
+                    raise RuntimeError(
+                        f"another ingest run (pid {owner}) holds {self.path}"
+                    ) from None
+                log.warning("stale_lock_removed", path=str(self.path), pid=owner)
+                self.path.unlink(missing_ok=True)
+                continue
+            with os.fdopen(fd, "w") as fh:
+                fh.write(str(os.getpid()))
+            return self
+        raise RuntimeError(f"could not take the ingest lock at {self.path}")
+
+    def __exit__(self, *exc: object) -> None:
+        self.path.unlink(missing_ok=True)
+
+
+def _lock_owner(path: Path) -> int | None:
+    try:
+        return int(path.read_text().strip())
+    except (OSError, ValueError):
+        return None
+
+
+def _pid_alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _run_locked(
+    paths: DataPaths,
+    *,
+    tickers: list[str] | None,
+    include_financebench: bool,
+    strategies: list[str],
+    workers: int | None,
+    refresh_index: bool,
+    retry_failed: bool,
+    docs_report: Path | None,
+    http: HttpCache | None,
+) -> RunSummary:
     own_http = http is None
     http = http or HttpCache(paths.raw)
     manifest = Manifest(paths.manifest)

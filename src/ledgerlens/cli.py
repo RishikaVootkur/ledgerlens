@@ -51,21 +51,28 @@ def ingest_run(
     ),
     retry_failed: bool = typer.Option(False, help="Retry filings that failed permanently."),
 ) -> None:
-    """Select, download, parse and chunk filings, then write the quality report."""
+    """Select, download, parse and chunk filings, then write the quality report.
+
+    Exits with code 1 when any filing failed and 2 when another run holds the lock.
+    """
     from ledgerlens.ingest.pipeline import DOCS_REPORT, run
 
     ticker_list = _csv(tickers.upper() if tickers else None)
     full_run = ticker_list is None and financebench
-    summary = run(
-        get_settings().data_dir,
-        tickers=ticker_list,
-        include_financebench=financebench,
-        strategies=_csv(strategies),
-        workers=workers,
-        refresh_index=refresh_index,
-        retry_failed=retry_failed,
-        docs_report=DOCS_REPORT if full_run else None,
-    )
+    try:
+        summary = run(
+            get_settings().data_dir,
+            tickers=ticker_list,
+            include_financebench=financebench,
+            strategies=_csv(strategies),
+            workers=workers,
+            refresh_index=refresh_index,
+            retry_failed=retry_failed,
+            docs_report=DOCS_REPORT if full_run else None,
+        )
+    except RuntimeError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=2) from exc
     typer.echo(
         f"filings={len(summary.filings)} downloaded={summary.downloaded} "
         f"parsed={summary.parsed} chunked={summary.chunked} skipped={summary.skipped} "
@@ -73,3 +80,5 @@ def ingest_run(
     )
     for fid, err in sorted(summary.failed.items()):
         typer.echo(f"  failed {fid}: {err}", err=True)
+    if summary.failed:
+        raise typer.Exit(code=1)

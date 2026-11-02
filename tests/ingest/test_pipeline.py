@@ -190,3 +190,48 @@ def test_partial_run_keeps_the_whole_corpus(sec, tmp_path):
     assert [f["filing_id"] for f in json.loads(paths.filings.read_text())] == full
     report = json.loads((paths.reports / "quality.json").read_text())
     assert report["totals"]["filings"] == 4
+
+
+def test_live_lock_blocks_a_second_run(tmp_path):
+    import os
+
+    lock = DataPaths(tmp_path).lock
+    lock.write_text(str(os.getpid()))
+    with pytest.raises(RuntimeError, match="holds"):
+        run(tmp_path, tickers=[], include_financebench=False)
+    assert lock.exists()
+
+
+def test_stale_lock_is_taken_over(tmp_path):
+    lock = DataPaths(tmp_path).lock
+    lock.write_text("999999999")
+    summary = run(tmp_path, tickers=[], include_financebench=False)
+    assert summary.failed == {}
+    assert not lock.exists()
+
+
+def test_cli_exits_non_zero_when_filings_fail(fixtures, tmp_path, monkeypatch):
+    from typer.testing import CliRunner
+
+    from ledgerlens.cli import app
+    from ledgerlens.config import get_settings
+
+    monkeypatch.setenv("DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("SEC_USER_AGENT", UA)
+    get_settings.cache_clear()
+    try:
+        with respx.mock(assert_all_called=False) as mock:
+            mock.get(SUB_URL).mock(
+                return_value=httpx.Response(
+                    200, content=(fixtures / "submissions_aapl.json").read_bytes()
+                )
+            )
+            mock.get(FACTS_URL).mock(return_value=httpx.Response(404))
+            mock.get(url__startswith=DOC_PREFIX).mock(return_value=httpx.Response(404))
+            result = CliRunner().invoke(
+                app, ["ingest", "run", "--tickers", "AAPL", "--no-financebench", "--workers", "1"]
+            )
+    finally:
+        get_settings.cache_clear()
+    assert result.exit_code == 1
+    assert "failed=3" in result.output
