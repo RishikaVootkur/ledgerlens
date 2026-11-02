@@ -11,11 +11,13 @@ from ledgerlens.eval.stats import (
     bootstrap_ci,
     cohen_kappa,
     holm_bonferroni,
+    is_binary,
     mcnemar_exact,
     paired_bootstrap_diff,
     paired_permutation_test,
     percentile,
     summarize_latency,
+    wilson_ci,
 )
 
 # ---------------------------------------------------------------- bootstrap
@@ -70,6 +72,46 @@ def test_bootstrap_coverage_is_near_nominal() -> None:
         assert ci.ci_low is not None and ci.ci_high is not None
         hits += ci.ci_low <= 0.0 <= ci.ci_high
     assert 0.88 <= hits / trials <= 0.99
+
+
+# ---------------------------------------------------------------- Wilson
+
+
+def test_wilson_worked_examples() -> None:
+    # z = 1.959964, z^2 = 3.841459.
+    # 7 of 10: p = 0.7, denom = 1 + 3.841459/10 = 1.384146
+    #   center = (0.7 + 3.841459/20) / 1.384146 = 0.892073 / 1.384146 = 0.644490
+    #   half   = 1.959964 * sqrt(0.7*0.3/10 + 3.841459/400) / 1.384146
+    #          = 1.959964 * sqrt(0.030604) / 1.384146 = 0.247714
+    #   -> [0.396776, 0.892204]
+    seven = wilson_ci([1.0] * 7 + [0.0] * 3)
+    assert seven.value == 0.7 and seven.n == 10
+    assert seven.ci_low == pytest.approx(0.396776, abs=1e-5)
+    assert seven.ci_high == pytest.approx(0.892204, abs=1e-5)
+    # 10 of 10: center = 1.192073 / 1.384146 = 0.861234,
+    #   half = 1.959964 * sqrt(3.841459/400) / 1.384146 = 0.138767 -> [0.722467, 1].
+    ten = wilson_ci([1.0] * 10)
+    assert ten.ci_low == pytest.approx(0.722467, abs=1e-5)
+    assert ten.ci_high == 1.0
+    # Symmetric at 0 of 10.
+    zero = wilson_ci([0.0] * 10)
+    assert zero.ci_low == 0.0
+    assert zero.ci_high == pytest.approx(1 - 0.722467, abs=1e-5)
+
+
+def test_wilson_drops_none_and_validates() -> None:
+    assert wilson_ci([1.0, None, 0.0]).n == 2
+    with pytest.raises(ValueError, match="at least one"):
+        wilson_ci([None])
+    with pytest.raises(ValueError, match="0/1"):
+        wilson_ci([0.5])
+
+
+def test_is_binary() -> None:
+    assert is_binary([0.0, 1.0, None])
+    assert not is_binary([0.0, 0.5])
+    assert not is_binary([None])
+    assert not is_binary([])
 
 
 # ---------------------------------------------------------------- paired bootstrap

@@ -69,6 +69,42 @@ def bootstrap_ci(
     )
 
 
+def is_binary(values: Sequence[float | None]) -> bool:
+    """True when every non-None value is 0 or 1 (and there is at least one)."""
+    present = [v for v in values if v is not None]
+    return bool(present) and all(v in (0.0, 1.0) for v in present)
+
+
+def wilson_ci(values: Sequence[float | None], alpha: float = 0.05) -> MetricValue:
+    """Proportion of 1s with a Wilson score interval, for 0/1 outcomes.
+
+    With k successes in n trials, p = k/n and z the 1 - alpha/2 normal quantile:
+
+        center = (p + z^2 / 2n) / (1 + z^2 / n)
+        half   = z * sqrt(p (1 - p) / n + z^2 / 4n^2) / (1 + z^2 / n)
+
+    Unlike the percentile bootstrap, which collapses to [1, 1] when every
+    outcome is 1, this stays honest at 0% and 100% and on small slices
+    (10 of 10 correct gives [0.72, 1.00]). None values are dropped. Raises
+    ValueError when no values remain or a value is not 0 or 1.
+    """
+    data = _clean(values)
+    if data.size == 0:
+        raise ValueError("wilson_ci needs at least one non-None value")
+    if not np.isin(data, (0.0, 1.0)).all():
+        raise ValueError("wilson_ci needs 0/1 values")
+    n = int(data.size)
+    p = float(data.mean())
+    z = float(sps.norm.ppf(1 - alpha / 2))
+    denom = 1 + z**2 / n
+    center = (p + z**2 / (2 * n)) / denom
+    half = z * np.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / denom
+    # At p = 0 or 1 the bound is exactly 0 or 1; snap away float noise.
+    low = 0.0 if p == 0.0 else max(0.0, center - half)
+    high = 1.0 if p == 1.0 else min(1.0, center + half)
+    return MetricValue(value=p, ci_low=float(low), ci_high=float(high), n=n)
+
+
 def paired_bootstrap_diff(
     a: Sequence[float | None],
     b: Sequence[float | None],
@@ -89,6 +125,12 @@ def paired_bootstrap_diff(
     counting resamples at least as far from zero as the observed difference:
     p = (1 + #{|d* - d| >= |d|}) / (n_resamples + 1). The +1 keeps p above zero,
     as a finite resample cannot show a p-value of exactly 0.
+
+    Do not report this p-value for small n. The bootstrap distribution of a few
+    pairs is too narrow, so the test is anti-conservative: one pair with
+    difference 1 gives p = 1/2001. `compare_runs` uses only the interval from
+    this function and takes p-values from `mcnemar_exact` or
+    `paired_permutation_test`, which are exact or valid at any n.
     """
     xa, xb = _pairs(a, b)
     if xa.size == 0:
