@@ -7,7 +7,7 @@ tested against hand-computed values. The functions fall into five groups:
 * Relevance keys that turn labeled evidence and retrieved chunks into comparable
   strings: `evidence_keys`, `chunk_keys`, `citation_keys`.
 * Numbers: `find_numbers`, `parse_number`, `extract_answer_value`, `numeric_match`,
-  `numeric_correct`.
+  `numeric_match_kind`, `numeric_correct`.
 * Refusals: `is_refusal`, `refusal_correct`.
 * Citations: `citation_precision`, `citation_recall`.
 
@@ -22,6 +22,7 @@ import math
 import re
 from collections.abc import Collection, Sequence
 from dataclasses import dataclass
+from typing import Literal
 
 from ledgerlens.schemas import AgentAnswer, AnswerUnit, Chunk, Citation, Question
 
@@ -216,29 +217,43 @@ _SCALES: dict[str, float] = {
     "t": 1e12,
 }
 
+_CURRENCY = r"US\$|(?<![A-Za-z])USD|\$|€|£"
+
 # The number itself. The lookbehind stops matches inside words and ids (Q3, FY2023,
-# 1.2.3) and the lookahead skips form names such as 10-K and 10-Q.
+# 1.2.3), except right after "USD" ("USD3.4B"). The lookahead skips form names such
+# as 10-K and 10-Q.
 _NUMBER = re.compile(
-    r"(?<![\w.,])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?|\.\d+)(?!\d)(?!-[KQ]\b)"
+    r"(?:(?<![\w.,])|(?<=USD))"
+    r"(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?|\.\d+)(?!\d)(?!-[KQ]\b)"
 )
 # What may sit immediately before a number: an accounting parenthesis, a currency
 # marker and a sign, in either order ("-$5", "$-5", "($5", "$(5").
 _PREFIX = re.compile(
     r"(?P<open>\()?\s*"
-    r"(?:(?P<cur_a>US\$|(?<![A-Za-z])USD|\$|€|£)\s*)?"
+    rf"(?:(?P<cur_a>{_CURRENCY})\s*)?"
     r"(?:(?<!\w)(?P<sign>[-−]))?\s*"
-    r"(?:(?P<cur_b>US\$|(?<![A-Za-z])USD|\$)\s*)?"
+    rf"(?:(?P<cur_b>{_CURRENCY})\s*)?"
     r"(?P<open2>\()?\s*$"
 )
-# What may follow: a closing parenthesis, a scale word, a percent marker, an "x".
+# What may follow: a closing parenthesis, a scale word, a percent or basis-point
+# marker, an "x". A one-letter scale (k, M, B, T) must not run into a letter, digit or
+# apostrophe, so "3M's" is not 3 million.
 _SUFFIX = re.compile(
     r"\s*(?P<close1>\))?"
-    r"(?:\s*(?P<scale>thousand|million|billion|trillion|bn|mn|mm|tn|k|m|b|t)(?![A-Za-z]))?"
-    r"(?:\s*(?P<pct>%|percent(?![a-z])|per\s?cent(?![a-z])|pct(?![a-z])))?"
+    r"(?:\s*(?P<scale>(?:thousand|million|billion|trillion|bn|mn|mm|tn)(?![A-Za-z])"
+    r"|[kmbt](?![\w'’])))?"
+    r"(?:\s*(?:(?P<pct>%|percent(?![a-z])|per\s?cent(?![a-z])|pct(?![a-z]))"
+    r"|(?P<bps>basis\s+points?|bps?)(?![A-Za-z])))?"
     r"(?:\s*(?P<ratio>x|×)(?![A-Za-z]))?"
     r"\s*(?P<close2>\))?",
     re.IGNORECASE,
 )
+# The text between two numbers that makes the second the end of a range:
+# "10 - 12", "10-12%", "from $5 to $6 billion", "2019 through 2021".
+_RANGE_GAP = re.compile(rf"\s*(?:[-–—]|to|through)\s*(?:(?:{_CURRENCY})\s*)?", re.IGNORECASE)
+# Company names that start with digits. Without a currency marker these are names,
+# never amounts ("3M had revenue of $32.8 billion").
+_NAME_TOKENS = ("3M",)
 
 
 @dataclass(frozen=True)
@@ -248,6 +263,8 @@ class ParsedNumber:
     `value` is the signed number as written, before any scale word is applied
     ("$1.2 billion" has value 1.2 and scale 1e9). `decimals` is how many digits
     follow the decimal point, which fixes the precision the text shows.
+    `range_end` marks the second number of a range such as "from X to Y",
+    "X to Y" or "X-Y".
     """
 
     value: float
@@ -258,10 +275,11 @@ class ParsedNumber:
     ratio: bool
     start: int
     end: int
+    range_end: bool = False
 
     @property
     def base_value(self) -> float:
-        """The value in base units, e.g. 1.2e9 for "$1.2 billion"."""
+        """The value in base units, e.g. 1.2e9 for "$1.2 billion" and 0.5 for "50 bps"."""
         return self.value * self.scale
 
     @property
@@ -272,18 +290,39 @@ class ParsedNumber:
     @property
     def looks_like_year(self) -> bool:
         """A bare integer between 1900 and 2100, such as the 2023 in "fiscal 2023"."""
-        return not self.marked and self.decimals == 0 and 1900 <= self.value <= 2100
+        return not self.marked and self.decimals == 0 and 1900 <= abs(self.value) <= 2100
+
+
+def _is_name_token(text: str, start: int) -> bool:
+    for token in _NAME_TOKENS:
+        end = start + len(token)
+        if text.startswith(token, start) and (end == len(text) or not text[end].isalnum()):
+            return True
+    return False
 
 
 def find_numbers(text: str) -> list[ParsedNumber]:
     """Every number in `text`, in reading order, with sign, scale and unit markers.
 
-    Handles thousands separators, accounting negatives in parentheses
-    ("(1,234)", "$(1.2) million"), leading minus signs (ASCII and Unicode),
-    currency markers ($, US$, USD, €, £), scale words and suffixes (thousand, k,
-    million, M, mn, MM, billion, B, bn, trillion, T), percent markers (%,
-    percent, pct) and ratio suffixes (0.45x). A trailing sentence period is
-    ignored. Thousands separators must be commas in groups of three.
+    Handles:
+
+    * thousands separators (commas in groups of three) and a trailing period;
+    * accounting negatives in parentheses ("(1,234)", "$(1.2) million"), except a
+      bare year such as "(2022)", which is a label and stays positive;
+    * leading minus signs (ASCII and Unicode), except between two numbers: "10 - 12"
+      and "10-12%" are ranges, not a negative 12;
+    * currency markers ($, US$, USD, €, £), with or without a space ("USD3.4B");
+    * scale words and suffixes (thousand, k, million, M, mn, MM, billion, B, bn,
+      trillion, T); a one-letter suffix followed by a letter, digit or apostrophe
+      is not a scale;
+    * percent markers (%, percent, pct), basis points ("50 bps" is 0.5 percent)
+      and ratio suffixes (0.45x).
+
+    Skipped entirely: numbers glued to a word ("3M's", "5th", "2Q") and company
+    names in `_NAME_TOKENS` ("3M") without a currency marker.
+
+    Not handled: sign words. "A loss of $5 million" gives +5e6; the question
+    decides whether a loss is negative, so the scorer cannot.
     """
     found: list[ParsedNumber] = []
     for match in _NUMBER.finditer(text):
@@ -291,26 +330,58 @@ def find_numbers(text: str) -> list[ParsedNumber]:
         before = _PREFIX.search(text[max(0, match.start() - 8) : match.start()])
         after = _SUFFIX.match(text, match.end())
         assert before is not None and after is not None  # both patterns are all-optional
+        currency = bool(before.group("cur_a") or before.group("cur_b"))
+        scale_word, pct, bps, ratio = (after.group(g) for g in ("scale", "pct", "bps", "ratio"))
+        glued = match.end() < len(text) and text[match.end()].isalpha()
+        if (glued and not (scale_word or pct or bps or ratio)) or (
+            not currency and _is_name_token(text, match.start())
+        ):
+            continue
+        prev = found[-1] if found else None
+        range_end = prev is not None and bool(_RANGE_GAP.fullmatch(text, prev.end, match.start()))
         value = float(raw.replace(",", ""))
+        decimals = len(raw.split(".", 1)[1]) if "." in raw else 0
+        bare_year = (
+            not currency
+            and not (scale_word or pct or bps or ratio)
+            and decimals == 0
+            and 1900 <= value <= 2100
+        )
         opened = bool(before.group("open") or before.group("open2"))
         closed = bool(after.group("close1") or after.group("close2"))
-        if before.group("sign") or (opened and closed):
+        if (before.group("sign") and not range_end) or (opened and closed and not bare_year):
             value = -value
-        scale_word = after.group("scale")
-        decimals = len(raw.split(".", 1)[1]) if "." in raw else 0
+        if bps:
+            scale = 0.01
+        elif scale_word:
+            scale = _SCALES[scale_word.lower()]
+        else:
+            scale = 1.0
         found.append(
             ParsedNumber(
                 value=value,
-                scale=_SCALES[scale_word.lower()] if scale_word else 1.0,
+                scale=scale,
                 decimals=decimals,
-                currency=bool(before.group("cur_a") or before.group("cur_b")),
-                percent=bool(after.group("pct")),
-                ratio=bool(after.group("ratio")),
+                currency=currency,
+                percent=bool(pct or bps),
+                ratio=bool(ratio),
                 start=match.start(),
                 end=after.end(),
+                range_end=range_end,
             )
         )
     return found
+
+
+def _same_kind(first: ParsedNumber, second: ParsedNumber) -> bool:
+    """Whether two numbers can be the two ends of one range.
+
+    "12% to $5.6 billion" is a growth rate followed by an amount, not a range.
+    A bare first number takes its unit from the second ("10-12%", "$5-6 billion").
+    """
+    if first.percent and not second.percent:
+        return False
+    return not (second.percent and first.marked and not first.percent)
 
 
 def _headline(numbers: list[ParsedNumber], unit: AnswerUnit | None = None) -> ParsedNumber | None:
@@ -319,26 +390,36 @@ def _headline(numbers: list[ParsedNumber], unit: AnswerUnit | None = None) -> Pa
     Heuristic, in order:
 
     1. If `unit` is "percent", the first number with a percent marker. If `unit`
-       is "USD" or "per_share", the first number with a currency marker or scale.
+       is "USD" or "per_share", the first number with a currency marker, then the
+       first with a scale word.
     2. The first number with any marker (currency, scale, percent or ratio).
        Answers usually state the result with its unit and mention bare numbers
        (years, note numbers) only as context.
     3. The first number that does not look like a year (1900 to 2100, bare).
     4. The first number.
+
+    Then, if the pick is the start of a range ("from X to Y", "X to Y", "X-Y")
+    with compatible units, the end of the range is taken instead. For a change
+    ("margin fell from 30% to 25%") the end is the value the period closed at,
+    which is what a question about the later period asks for. A question about
+    the change itself should be answered with the change ("fell 5 points").
     """
     if not numbers:
         return None
+    pools: list[list[ParsedNumber]] = []
     if unit == "percent":
-        preferred = [n for n in numbers if n.percent]
+        pools.append([n for n in numbers if n.percent])
     elif unit in ("USD", "per_share"):
-        preferred = [n for n in numbers if n.currency or n.scale != 1.0]
-    else:
-        preferred = []
-    for pool in (preferred, [n for n in numbers if n.marked]):
-        if pool:
-            return pool[0]
-    not_years = [n for n in numbers if not n.looks_like_year]
-    return not_years[0] if not_years else numbers[0]
+        pools.append([n for n in numbers if n.currency])
+        pools.append([n for n in numbers if n.scale != 1.0 and not n.percent])
+    pools.append([n for n in numbers if n.marked])
+    pools.append([n for n in numbers if not n.looks_like_year])
+    pick = next((pool[0] for pool in pools if pool), numbers[0])
+    i = numbers.index(pick)
+    while i + 1 < len(numbers) and numbers[i + 1].range_end and _same_kind(pick, numbers[i + 1]):
+        i += 1
+        pick = numbers[i]
+    return pick
 
 
 def parse_number(text: str) -> float | None:
@@ -357,9 +438,9 @@ def extract_answer_value(answer_text: str, unit: AnswerUnit | None = None) -> fl
     """The headline number in base units, with scale words applied.
 
     "$1.2 billion" gives 1.2e9 and "USD 3.4B" gives 3.4e9. Percents stay in
-    percent points ("12.5%" gives 12.5); `numeric_match` accepts a fraction
-    against a percent. `unit` steers which number is chosen (see `_headline`).
-    Returns None for unit "text" or when there is no number.
+    percent points ("12.5%" gives 12.5, "50 bps" gives 0.5). `unit` steers which
+    number is chosen (see `_headline`). Returns None for unit "text" or when
+    there is no number.
     """
     if unit == "text":
         return None
@@ -367,24 +448,78 @@ def extract_answer_value(answer_text: str, unit: AnswerUnit | None = None) -> fl
     return None if headline is None else headline.base_value
 
 
+def _has_percent_marker(text: str, unit: AnswerUnit | None) -> bool:
+    headline = _headline(find_numbers(text), unit)
+    return headline is not None and headline.percent
+
+
 def _rounding_half_step(gold: float, gold_text: str, unit: AnswerUnit | None) -> float:
-    """Half of the last digit the gold text shows, in the units of `gold`.
+    """Half of the last digit the gold text shows, in base units.
 
     "$1.2 billion" shows tenths of a billion, so any prediction within 0.05e9 of
     the gold rounds to the same text. Returns 0 when the gold text has no
-    number or its value does not correspond to `gold` (directly or as a percent
-    stored as a fraction).
+    number or its headline value is not the gold.
     """
     headline = _headline(find_numbers(gold_text), unit)
-    if headline is None:
+    if headline is None or not math.isclose(headline.base_value, gold, rel_tol=1e-9, abs_tol=1e-12):
         return 0.0
-    half_step = 0.5 * 10.0 ** (-headline.decimals) * headline.scale
-    shown = headline.base_value
-    if math.isclose(shown, gold, rel_tol=1e-9, abs_tol=1e-12):
-        return half_step
-    if unit == "percent" and math.isclose(shown, gold * 100, rel_tol=1e-9, abs_tol=1e-12):
-        return half_step / 100
-    return 0.0
+    return 0.5 * 10.0 ** (-headline.decimals) * abs(headline.scale)
+
+
+MatchKind = Literal["tolerance", "fraction_as_percent", "gold_rounding"]
+
+ROUNDING_CAP = 5.0
+"""The gold-rounding allowance never exceeds this many times the relative tolerance."""
+
+
+def numeric_match_kind(
+    pred: float | None,
+    gold: float,
+    rel_tol: float,
+    *,
+    unit: AnswerUnit | None,
+    abs_tol: float = 0.0,
+    gold_text: str | None = None,
+    pred_percent_marked: bool = False,
+) -> MatchKind | None:
+    """How a prediction matches the gold, or None when it does not.
+
+    Checked in this order:
+
+    1. "tolerance": within max(`rel_tol` * |gold|, `abs_tol`) of the gold.
+       `abs_tol` is for golds near zero, where a relative tolerance collapses.
+    2. "fraction_as_percent": golds store percents as percent points (12.5 for
+       12.5%). When `unit` is "percent", the prediction carried no percent
+       marker (`pred_percent_marked` is False) and |pred| <= 1.5, the
+       prediction is read as a fraction and multiplied by 100, so 0.125
+       matches 12.5. Never the other way: "100%" against a gold of 1.0 fails.
+    3. "gold_rounding": with `gold_text`, a prediction that rounds to the
+       precision the gold text shows, capped at `ROUNDING_CAP` times the
+       relative tolerance. Gold "$1.2 billion" (rel_tol 1%) accepts 1.24e9,
+       but gold "$1 billion" does not accept 1.49e9: its allowance is
+       min(0.5e9, 5 * 1% * 1e9) = 0.05e9.
+
+    Scale errors and sign flips are never forgiven. A None or non-finite
+    prediction never matches. The kind lets reports count how many items pass
+    only through an allowance.
+    """
+    if pred is None or not math.isfinite(pred):
+        return None
+    eps = 1e-9 * max(1.0, abs(gold))  # float noise on the tolerance edge
+    tolerance = max(rel_tol * abs(gold), abs_tol)
+    candidates: list[tuple[float, MatchKind]] = [(pred, "tolerance")]
+    if unit == "percent" and not pred_percent_marked and abs(pred) <= 1.5:
+        candidates.append((pred * 100, "fraction_as_percent"))
+    for value, kind in candidates:
+        if abs(value - gold) <= tolerance + eps:
+            return kind
+    if gold_text is not None:
+        allowance = min(
+            _rounding_half_step(gold, gold_text, unit), ROUNDING_CAP * rel_tol * abs(gold)
+        )
+        if any(abs(value - gold) <= max(tolerance, allowance) + eps for value, _ in candidates):
+            return "gold_rounding"
+    return None
 
 
 def numeric_match(
@@ -395,55 +530,45 @@ def numeric_match(
     unit: AnswerUnit | None,
     abs_tol: float = 0.0,
     gold_text: str | None = None,
+    pred_percent_marked: bool = False,
 ) -> bool:
-    """Whether a predicted number matches the gold number.
-
-    A prediction matches when it is within max(`rel_tol` * |gold|, `abs_tol`)
-    of the gold (`abs_tol` is for golds near zero, where a relative tolerance
-    collapses). Two allowances, and nothing else:
-
-    * Percent as fraction: golds store percents as percent points (12.5 for
-      12.5%). When `unit` is "percent" a prediction of 0.125 is the same answer,
-      so the prediction is also tried multiplied and divided by 100.
-    * Gold rounding: when `gold_text` is given, a prediction that rounds to the
-      precision the gold text shows also matches. Gold "$1.2 billion" accepts
-      1.24e9 because the gold itself is only stated to a tenth of a billion.
-
-    Scale errors are never forgiven: 1.2e6 does not match 1.2e9, and a sign
-    flip does not match either. A None or non-finite prediction never matches.
-    """
-    if pred is None or not math.isfinite(pred):
-        return False
-    tolerance = max(rel_tol * abs(gold), abs_tol)
-    if gold_text is not None:
-        tolerance = max(tolerance, _rounding_half_step(gold, gold_text, unit))
-    # Absorb float noise, so a value exactly on the tolerance edge still matches.
-    tolerance += 1e-9 * max(1.0, abs(gold))
-    candidates = [pred, pred * 100, pred / 100] if unit == "percent" else [pred]
-    return any(abs(c - gold) <= tolerance for c in candidates)
+    """Whether a predicted number matches the gold. See `numeric_match_kind` for the rules."""
+    kind = numeric_match_kind(
+        pred,
+        gold,
+        rel_tol,
+        unit=unit,
+        abs_tol=abs_tol,
+        gold_text=gold_text,
+        pred_percent_marked=pred_percent_marked,
+    )
+    return kind is not None
 
 
 def numeric_correct(answer: AgentAnswer, question: Question) -> float | None:
     """Per-question numeric score: 1.0 if the answer's number matches the gold, else 0.0.
 
     Uses the agent's own `answer_value` when it set one, else the headline
-    number parsed from its text. Tolerances, unit and gold text come from the
-    question. None when the question has no numeric gold (text answers and
-    unanswerable questions), so it is skipped rather than scored.
+    number parsed from its text. Whether the answer showed a percent marker is
+    read from its text. Tolerances, unit and gold text come from the question.
+    None when the question has no numeric gold (text answers and unanswerable
+    questions), so it is skipped rather than scored.
     """
     gold = question.answer_value
-    if gold is None or question.answer_unit in (None, "text"):
+    unit = question.answer_unit
+    if gold is None or unit in (None, "text"):
         return None
     pred = answer.answer_value
     if pred is None:
-        pred = extract_answer_value(answer.answer, question.answer_unit)
+        pred = extract_answer_value(answer.answer, unit)
     matched = numeric_match(
         pred,
         gold,
         question.rel_tolerance,
-        unit=question.answer_unit,
+        unit=unit,
         abs_tol=question.abs_tolerance,
         gold_text=question.answer,
+        pred_percent_marked=_has_percent_marker(answer.answer, unit),
     )
     return 1.0 if matched else 0.0
 

@@ -20,6 +20,7 @@ from ledgerlens.eval.metrics import (
     ndcg_at_k,
     numeric_correct,
     numeric_match,
+    numeric_match_kind,
     parse_number,
     recall_at_k,
     refusal_correct,
@@ -236,7 +237,29 @@ PARSE_CASES: list[tuple[str, float | None, float | None]] = [
     ("2023-2024 change: 15", 15.0, 15.0),  # hyphen between years is not a minus sign
     ("in 2022 the ratio was 1.73", 1.73, 1.73),  # bare number beats a year
     ("2019", 2019.0, 2019.0),  # a lone year is still a number
-    ("about 7 to 9 months", 7.0, 7.0),
+    ("about 7 to 9 months", 9.0, 9.0),  # a range resolves to its end
+    # Company names are not amounts (review blocker): 3M is not 3 million.
+    ("3M's total revenue in FY2018 was $32.8 billion", 32.8, 32.8e9),
+    ("3M's capex ratio was 0.45", 0.45, 0.45),
+    ("3M had 1,577 million", 1577.0, 1.577e9),
+    ("3M revenue was $3M", 3.0, 3e6),  # with a currency marker, $3M is an amount
+    ("The 5th largest, at 7", 7.0, 7.0),  # a number glued to a word is skipped
+    # A parenthesized year is a label, not an accounting negative.
+    ("Net income (2022): 1,234", 1234.0, 1234.0),
+    ("(2022)", 2022.0, 2022.0),
+    # A hyphen between numbers is a range, not a minus sign.
+    ("10 - 12", 12.0, 12.0),
+    ("2019 - 2021", 2021.0, 2021.0),
+    ("Margin fell from 30% to 25%", 25.0, 25.0),
+    ("10-12%", 12.0, 12.0),
+    ("from $5 to $6 billion", 6.0, 6e9),
+    # A rate followed by an amount is not a range.
+    ("Revenue grew 12% to $5.6 billion", 12.0, 12.0),
+    ("USD3.4B", 3.4, 3.4e9),
+    ("50 basis points", 50.0, 0.5),
+    ("75 bps", 75.0, 0.75),
+    # Documented limitation: sign words are not read.
+    ("a loss of $5 million", 5.0, 5e6),
     ("no number here", None, None),
     ("", None, None),
 ]
@@ -259,13 +282,22 @@ def test_find_numbers_records_markers_and_precision() -> None:
     assert p.percent and not p.currency and p.decimals == 1
     [y] = find_numbers("2023")
     assert y.looks_like_year
+    start, end = find_numbers("10 - 12")
+    assert (start.value, start.range_end, end.value, end.range_end) == (10, False, 12, True)
+    # A minus that does not follow a number is still a sign.
+    [neg] = find_numbers("change of - 12")
+    assert neg.value == -12
 
 
 def test_extract_answer_value_uses_unit_to_choose() -> None:
     text = "Revenue rose from $5.0 billion to $6.0 billion, a 20% increase."
-    assert extract_answer_value(text) == pytest.approx(5e9)
+    # "from X to Y": the end of the range is the headline.
+    assert extract_answer_value(text) == pytest.approx(6e9)
     assert extract_answer_value(text, "percent") == pytest.approx(20.0)
     assert extract_answer_value("Up 3% to 1.2 million", "USD") == pytest.approx(1.2e6)
+    # For USD a currency-marked number beats a scale-only one.
+    assert extract_answer_value("1.5 million shares for $40 billion", "USD") == pytest.approx(40e9)
+    assert extract_answer_value("Revenue grew 12% to $5.6 billion", "USD") == pytest.approx(5.6e9)
     assert extract_answer_value("$5 billion", "text") is None
 
 
@@ -287,8 +319,17 @@ def test_numeric_match_never_forgives_scale_or_sign() -> None:
 def test_numeric_match_percent_as_fraction() -> None:
     assert numeric_match(0.125, 12.5, 0.01, unit="percent")
     assert numeric_match(12.5, 12.5, 0.01, unit="percent")
-    assert numeric_match(12.5, 0.125, 0.01, unit="percent")
     assert not numeric_match(0.135, 12.5, 0.01, unit="percent")
+    # A fraction reading needs no percent marker on the prediction ...
+    assert not numeric_match(0.125, 12.5, 0.01, unit="percent", pred_percent_marked=True)
+    # ... and |pred| <= 1.5: 1.25 can be a fraction (125%), 2.5 cannot.
+    assert numeric_match(1.25, 125.0, 0.01, unit="percent")
+    assert not numeric_match(2.5, 250.0, 0.01, unit="percent")
+    # Never divided by 100: these are 100x errors (review blocker).
+    assert not numeric_match(100, 1.0, 0.01, unit="percent")
+    assert not numeric_match(50, 0.5, 0.01, unit="percent")
+    assert not numeric_match(1250, 12.5, 0.01, unit="percent")
+    assert not numeric_match(12.5, 0.125, 0.01, unit="percent")
 
 
 def test_numeric_match_gold_rounding() -> None:
@@ -298,10 +339,18 @@ def test_numeric_match_gold_rounding() -> None:
     assert not numeric_match(1.24e9, 1.2e9, 0.01, unit="USD")
     # 1.26e9 rounds to 1.3 billion.
     assert not numeric_match(1.26e9, 1.2e9, 0.01, unit="USD", gold_text="$1.2 billion")
-    # "12.5%" shows tenths of a point: 12.54 matches with zero relative tolerance.
-    assert numeric_match(12.54, 12.5, 0.0, unit="percent", gold_text="12.5%")
-    # Gold stored as a fraction while the text shows a percent: step is 0.001 / 2.
-    assert numeric_match(0.1254, 0.125, 0.0, unit="percent", gold_text="12.5%")
+    # "12.5%" shows tenths of a point (half step 0.05). With rel_tol 0.1% the plain
+    # tolerance is 0.0125 and the cap is 5 * 0.0125 = 0.0625, so the allowance is 0.05.
+    assert numeric_match(12.54, 12.5, 0.001, unit="percent", gold_text="12.5%")
+    assert not numeric_match(12.54, 12.5, 0.001, unit="percent")
+    # With rel_tol 0 the cap is 0: rounding grants nothing.
+    assert not numeric_match(12.54, 12.5, 0.0, unit="percent", gold_text="12.5%")
+    # Round golds: "$1 billion" has half step 0.5e9 but the cap is 5 * 1% * 1e9 = 0.05e9.
+    assert not numeric_match(1.49e9, 1e9, 0.01, unit="USD", gold_text="$1 billion")
+    assert numeric_match(1.04e9, 1e9, 0.01, unit="USD", gold_text="$1 billion")
+    # "5%": half step 0.5, cap 5 * 1% * 5 = 0.25.
+    assert not numeric_match(5.4, 5, 0.01, unit="percent", gold_text="5%")
+    assert numeric_match(5.2, 5, 0.01, unit="percent", gold_text="5%")
     # Gold text that disagrees with the gold value grants nothing.
     assert not numeric_match(101.5, 100.0, 0.01, unit="USD", gold_text="about 7")
     assert not numeric_match(101.5, 100.0, 0.01, unit="USD", gold_text="no number")
@@ -315,6 +364,22 @@ def test_numeric_match_absolute_tolerance_and_bad_predictions() -> None:
     assert not numeric_match(None, 1.0, 0.01, unit="ratio")
     assert not numeric_match(math.nan, 1.0, 0.01, unit="ratio")
     assert not numeric_match(math.inf, 1.0, 0.01, unit="ratio")
+
+
+def test_numeric_match_kind_reports_the_allowance_used() -> None:
+    assert numeric_match_kind(100.5, 100.0, 0.01, unit="USD") == "tolerance"
+    assert numeric_match_kind(0.125, 12.5, 0.01, unit="percent") == "fraction_as_percent"
+    kind = numeric_match_kind(1.24e9, 1.2e9, 0.01, unit="USD", gold_text="$1.2 billion")
+    assert kind == "gold_rounding"
+    assert numeric_match_kind(2.0, 1.0, 0.01, unit="USD", gold_text="$1") is None
+
+
+def test_numeric_correct_reads_percent_marker_from_text() -> None:
+    q = _question(answer="12.5%", answer_value=12.5, answer_unit="percent")
+    assert numeric_correct(AgentAnswer(answer="The margin was 0.125."), q) == 1.0
+    # "0.125%" is a percent already, so it is not rescaled to 12.5.
+    assert numeric_correct(AgentAnswer(answer="The margin was 0.125%."), q) == 0.0
+    assert numeric_correct(AgentAnswer(answer="Margin fell from 30% to 12.5%."), q) == 1.0
 
 
 def test_numeric_correct_from_question() -> None:
