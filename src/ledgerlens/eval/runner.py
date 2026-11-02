@@ -20,7 +20,7 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, ConfigDict
 
-from ledgerlens.agent.graph import AgentConfig, run_agent
+from ledgerlens.agent.graph import AgentConfig, numbers_in, run_agent
 from ledgerlens.agent.tools import EvidenceItem, EvidenceRegistry, RetrievalConfig
 from ledgerlens.config import get_settings
 from ledgerlens.eval import metrics
@@ -163,7 +163,11 @@ def score(
             continue
         cited |= item_keys(item)
         if answer.answer_value is not None:
-            supported.append(_contains_value(item.text, answer.answer_value))
+            # A numeric citation supports the answer when its source states a number the
+            # answer relies on: the headline value, or an input it quotes (derived answers
+            # such as growth rates cite their inputs, which never contain the result).
+            stated = [answer.answer_value, *numbers_in(answer.answer)]
+            supported.append(any(_contains_value(item.text, v) for v in stated if v))
         elif support_check is not None:
             supported.append(support_check(answer.answer, item.text))
     relevant = metrics.evidence_keys(question)
