@@ -38,6 +38,35 @@
           ]
         }
       },
+      "ProfitLoss": {
+        "units": {
+          "USD": [
+            {"start": "2025-01-01", "end": "2025-12-31", "val": 10500, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"},
+            {"start": "2026-07-04", "end": "2026-10-02", "val": 3001, "accn": "acc-q3", "fy": 2026, "fp": "Q3", "form": "10-Q"}
+          ]
+        }
+      },
+      "NetIncomeLossAttributableToNoncontrollingInterest": {
+        "units": {
+          "USD": [
+            {"start": "2026-04-04", "end": "2026-07-03", "val": 100, "accn": "acc-q2", "fy": 2026, "fp": "Q2", "form": "10-Q"}
+          ]
+        }
+      },
+      "Liabilities": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 75000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
+      "StockholdersEquity": {
+        "units": {
+          "USD": [
+            {"end": "2025-12-31", "val": 25000, "accn": "acc-k25", "fy": 2025, "fp": "FY", "form": "10-K"}
+          ]
+        }
+      },
       "OperatingIncomeLoss": {
         "units": {
           "USD": [

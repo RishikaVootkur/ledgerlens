@@ -96,6 +96,14 @@ class Metric:
     unit: str = "USD"
     plural: bool = False
     labels: tuple[tuple[str, str], ...] = ()  # concept-specific label overrides
+    # Parent-only concepts (NetIncomeLoss, StockholdersEquity) differ from the consolidated
+    # line when there are noncontrolling interests. `parent_label` ("{co}" is the company)
+    # is used when `consolidated` or `nci` shows a material difference, or always if
+    # `always_parent` is set.
+    parent_label: str = ""
+    consolidated: str = ""
+    nci: str = ""
+    always_parent: bool = False
 
     def label_for(self, concept: str) -> str:
         return dict(self.labels).get(concept, self.label)
@@ -128,6 +136,9 @@ NET_INCOME = Metric(
             "net income attributable to common stockholders",
         ),
     ),
+    parent_label="net income attributable to {co}",
+    consolidated="ProfitLoss",
+    nci="NetIncomeLossAttributableToNoncontrollingInterest",
 )
 OPERATING_INCOME = Metric("operating_income", ("OperatingIncomeLoss",), "operating income")
 TOTAL_ASSETS = Metric("total_assets", ("Assets",), "total assets", flow=False, plural=True)
@@ -160,7 +171,15 @@ CURRENT_LIABILITIES = Metric(
     "current_liabilities", ("LiabilitiesCurrent",), "total current liabilities", flow=False
 )
 LIABILITIES = Metric("liabilities", ("Liabilities",), "total liabilities", flow=False)
-EQUITY = Metric("equity", ("StockholdersEquity",), "total stockholders' equity", flow=False)
+EQUITY = Metric(
+    "equity",
+    ("StockholdersEquity",),
+    "total stockholders' equity",
+    flow=False,
+    parent_label="total stockholders' equity attributable to {co} "
+    "(excluding noncontrolling interests)",
+    always_parent=True,
+)
 
 
 def revenue_metric(company: Company) -> Metric:
@@ -189,10 +208,12 @@ class Found:
     metric: Metric
     fact: Fact
     filing: CorpusFiling
+    company_short: str = ""
+    parent_only: bool = False  # differs materially from the consolidated amount
 
     @property
     def label(self) -> str:
-        return self.metric.label_for(self.fact.concept)
+        return joint_label(self)
 
     @property
     def filing_id(self) -> str:
@@ -226,7 +247,42 @@ class CompanyFacts:
         fact = select_fact(
             self.cf, concepts or metric.concepts, metric.unit, filing.accession, kind, end
         )
-        return None if fact is None else Found(metric, fact, filing)
+        if fact is None:
+            return None
+        return Found(
+            metric,
+            fact,
+            filing,
+            company_short=SHORT_NAMES[self.company.ticker],
+            parent_only=self._parent_only(metric, fact, kind),
+        )
+
+    def _parent_only(self, metric: Metric, fact: Fact, kind: PeriodKind) -> bool:
+        """True if the consolidated amount (incl. NCI) differs from `fact` beyond tolerance."""
+        if fact.concept != metric.concepts[0] or not metric.parent_label:
+            return False
+        if metric.always_parent:
+            return True
+        limit = FACT_TOL * abs(fact.value)
+        if metric.consolidated:
+            total = select_fact(
+                self.cf, (metric.consolidated,), metric.unit, fact.accession, kind, fact.end
+            )
+            if total is not None and abs(total.value - fact.value) > limit:
+                return True
+        if metric.nci:
+            nci = select_fact(self.cf, (metric.nci,), metric.unit, fact.accession, kind, fact.end)
+            if nci is not None and abs(nci.value) > limit:
+                return True
+        return False
+
+
+def joint_label(*found: Found) -> str:
+    """Label for one or more facts of the same metric; parent-only wording if any needs it."""
+    first = found[0]
+    if any(f.parent_only for f in found):
+        return first.metric.parent_label.format(co=first.company_short)
+    return first.metric.label_for(first.fact.concept)
 
 
 # ---------------------------------------------------------------- phrasing
@@ -236,18 +292,30 @@ def possessive(name: str) -> str:
     return f"{name}'" if name.endswith("s") else f"{name}'s"
 
 
-def period_phrase(filing: CorpusFiling, metric: Metric, *, prior_year: bool = False) -> str:
+def quarter_span(days: int | None) -> str:
+    """How filings name a quarter of this length: 12- and 16-week retail quarters
+    (Costco, PepsiCo) are "12 weeks", 13-week and calendar quarters "three months"."""
+    if days is not None and 80 <= days <= 86:
+        return "12 weeks"
+    if days is not None and 108 <= days <= 116:
+        return "16 weeks"
+    return "three months"
+
+
+def period_phrase(found: Found) -> str:
+    filing, metric = found.filing, found.metric
     assert filing.fiscal_year is not None
     if filing.form == "10-K":
-        fy = filing.fiscal_year - (1 if prior_year else 0)
-        end = prior_year_end(filing.period_end) if prior_year else filing.period_end
         if metric.flow:
-            return f"for fiscal year {fy} (the year ended {fmt_date(end)})"
-        return f"as of the end of fiscal year {fy} ({fmt_date(end)})"
+            return (
+                f"for fiscal year {filing.fiscal_year} (the year ended {fmt_date(found.fact.end)})"
+            )
+        return f"as of the end of fiscal year {filing.fiscal_year} ({fmt_date(found.fact.end)})"
     quarter = f"fiscal {filing.fiscal_year} {filing.fiscal_period}"
     if metric.flow:
-        return f"for the three months ended {fmt_date(filing.period_end)} ({quarter})"
-    return f"as of {fmt_date(filing.period_end)} (end of {quarter})"
+        span = quarter_span(found.fact.days)
+        return f"for the {span} ended {fmt_date(found.fact.end)} ({quarter})"
+    return f"as of {fmt_date(found.fact.end)} (end of {quarter})"
 
 
 def unit_suffix(metric: Metric) -> str:
@@ -317,8 +385,7 @@ def single_fact_questions(cf: CompanyFacts) -> list[Question]:
                 continue
             verb = "were" if metric.plural else "was"
             question = (
-                f"What {verb} {name} {found.label} {period_phrase(filing, metric)}, "
-                f"{unit_suffix(metric)}?"
+                f"What {verb} {name} {found.label} {period_phrase(found)}, {unit_suffix(metric)}?"
             )
             unit = metric.answer_unit
             out.append(
@@ -370,7 +437,7 @@ def yoy_questions(cf: CompanyFacts) -> list[Question]:
             if metric.flow
             else f"from the end of fiscal year {py} to the end of fiscal year {fy}"
         )
-        label = cur.label
+        label = joint_label(cur, prev)
         meta = {"metric": metric.key, **_inputs_meta([cur, prev])}
         base = {
             **_base(cf.company, filing),
@@ -493,7 +560,7 @@ def ratio_questions(cf: CompanyFacts) -> list[Question]:
                 continue
             value = ratio_value(num.fact.value, den.fact.value, ratio.unit)
             desc = ratio.phrase(num.label, den.label)
-            period = period_phrase(filing, ratio.numerator)
+            period = period_phrase(num)
             out.append(
                 Question.model_validate(
                     {
@@ -537,10 +604,11 @@ def qoq_questions(cf: CompanyFacts) -> list[Question]:
             continue
         pct = round(pct_change(cur.fact.value, prev.fact.value), 4)
         q = (
-            f"By what percentage did {name} quarterly {cur.label} change from the three "
-            f"months ended {fmt_date(early.period_end)} (fiscal {early.fiscal_year} "
-            f"{early.fiscal_period}) to the three months ended {fmt_date(late.period_end)} "
-            f"(fiscal {late.fiscal_year} {late.fiscal_period})? Give the signed percent change."
+            f"By what percentage did {name} quarterly {joint_label(cur, prev)} change from the "
+            f"{quarter_span(prev.fact.days)} ended {fmt_date(prev.fact.end)} (fiscal "
+            f"{early.fiscal_year} {early.fiscal_period}) to the {quarter_span(cur.fact.days)} "
+            f"ended {fmt_date(cur.fact.end)} (fiscal {late.fiscal_year} {late.fiscal_period})? "
+            "Give the signed percent change."
         )
         out.append(
             Question.model_validate(

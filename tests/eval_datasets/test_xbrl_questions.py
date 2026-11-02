@@ -6,6 +6,7 @@ from ledgerlens.eval.datasets.xbrl import (
     company_questions,
     pct_change,
     possessive,
+    quarter_span,
     ratio_value,
 )
 from ledgerlens.universe import BY_TICKER
@@ -85,3 +86,48 @@ def test_caps_are_per_type(ko_questions):
 def test_possessive():
     assert possessive("Apple") == "Apple's"
     assert possessive("American Express") == "American Express'"
+
+
+def test_net_income_says_attributable_when_consolidated_amount_differs(ko_questions):
+    # ProfitLoss 10,500 vs NetIncomeLoss 10,000 in the 10-K: beyond the 1% tolerance.
+    assert "net income attributable to Coca-Cola for fiscal year 2025" in (
+        ko_questions["xbrl-ko-10k2025fy-net_income"].question
+    )
+    assert "net income attributable to Coca-Cola" in (
+        ko_questions["xbrl-ko-10k2025fy-net_margin"].question
+    )
+    assert "net income attributable to Coca-Cola" in (
+        ko_questions["xbrl-ko-10k2025fy-net_income-yoy-pct"].question
+    )
+    # Q3: ProfitLoss 3,001 vs 3,000 is within tolerance, so plain wording.
+    q3 = ko_questions["xbrl-ko-10q2026q3-net_income"].question
+    assert "Coca-Cola's net income for the three months" in q3
+    # Q2 has a material NCI amount, so the change across Q2 and Q3 names the parent.
+    assert "net income attributable to Coca-Cola" in (
+        ko_questions["xbrl-ko-10q2026q3-net_income-qoq-pct"].question
+    )
+    assert ko_questions["xbrl-ko-10k2025fy-net_income"].answer_value == 10000
+
+
+def test_equity_ratios_name_parent_equity(ko_questions):
+    q = ko_questions["xbrl-ko-10k2025fy-liabilities_to_equity"]
+    assert q.answer_value == 3.0
+    assert (
+        "total stockholders' equity attributable to Coca-Cola (excluding noncontrolling "
+        "interests)" in q.question
+    )
+
+
+@pytest.mark.parametrize(
+    ("days", "span"),
+    [
+        (83, "12 weeks"),
+        (84, "12 weeks"),
+        (90, "three months"),
+        (91, "three months"),
+        (111, "16 weeks"),
+        (None, "three months"),
+    ],
+)
+def test_quarter_span_follows_fact_duration(days, span):
+    assert quarter_span(days) == span
