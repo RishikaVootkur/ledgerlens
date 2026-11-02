@@ -27,7 +27,7 @@ Labels, tolerances, evidence and metadata are the XBRL rows' own (see `xbrl.md`)
 
 ## Splits
 
-The pool is XBRL questions about the slice companies that are already in the XBRL `dev` split, so no held-out XBRL test question leaks into a set that is tuned against. From that pool, per type, questions are taken round-robin over AAPL, JPM, KO in SHA-256 order of `"smoke:" + source qid` until the mix (12 single_fact, 4 yoy_change, 4 multi_step) is filled. Every smoke row is `dev`.
+The pool is XBRL questions about the slice companies that are already in the XBRL `dev` split, so no held-out XBRL test question leaks into a set that is tuned against. From that pool, per type, questions are taken round-robin over AAPL, JPM, KO in SHA-256 order of `"smoke:" + source qid` until the mix (12 single_fact, 4 yoy_change, 4 multi_step) is filled. A candidate is skipped when an already picked row reads the same facts (same company, metric and filings, counting the absolute and percent variants of one change as the same), so all 20 rows, and in particular the 4 yoy_change rows, test different retrievals. Every smoke row is `dev`.
 
 ## Known limitations
 

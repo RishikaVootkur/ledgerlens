@@ -26,6 +26,8 @@ Written by hand in `src/ledgerlens/eval/datasets/seeds/unanswerable.yaml`. Each 
 
 The label is the category plus the `why` note (copied to `metadata.why`), checked against the corpus definition: the latest 10-K and two latest 10-Qs per universe company as of 2026-11-01, plus the FinanceBench source documents (which ingestion also loads). Old-period questions avoid periods that FinanceBench documents cover, including the multi-year comparatives inside older 10-Ks, by asking about specific quarters from 2008 to 2012. `metadata.in_universe` marks questions about universe companies, which are the harder cases because retrieval returns relevant-looking chunks.
 
+The seeds were also checked against the parsed corpus text (`data/parsed/*.json`) by searching for the key terms of each risky question. That check retired `unans-undisclosed-05` (Microsoft's revenue from OpenAI): the FY2026 10-K discloses it as a related-party amount ($24.1 billion), so it was replaced by `unans-undisclosed-11` (Xbox console units, which the filings never give). `unans-trivia-03` now asks only for the inventor's name, since the KO 10-K states the year sales began (1886).
+
 ## Splits
 
 Within each category, rows are ordered by the SHA-256 hex digest of the `qid`; the first `round(0.4 * n)` are `dev`, the rest `test`. The test split is held out and reported once, at the end.

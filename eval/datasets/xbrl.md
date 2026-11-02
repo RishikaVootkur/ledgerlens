@@ -37,7 +37,10 @@ Fact selection, in `src/ledgerlens/eval/datasets/facts.py`:
 - Concept fallbacks, first match wins: revenue `Revenues`, `RevenueFromContractWithCustomerExcludingAssessedTax`, `SalesRevenueNet`, `RevenueFromContractWithCustomerIncludingAssessedTax`; for Financials `RevenuesNetOfInterestExpense`, then `Revenues` (asked as "total net revenue"). Net income `NetIncomeLoss`, then `NetIncomeLossAvailableToCommonStockholdersBasic` (asked as "net income attributable to common stockholders"). Cash `CashAndCashEquivalentsAtCarryingValue`, then `CashAndDueFromBanks` (asked as "cash and due from banks"). R&D `ResearchAndDevelopmentExpense`, then the variant excluding acquired in-process R&D. Changes over time reuse the concept found for the later period.
 - XOM and CVX tag "Total revenues and other income" as `Revenues`, so their questions use that label.
 
-Questions name the company, the metric, the period (fiscal year with its end date, or "the three months ended" date with the fiscal quarter) and the unit. Derived questions state the formula, e.g. "net profit margin (net income divided by total revenue, as a percentage)".
+Questions name the company, the metric, the period and the unit. Derived questions state the formula, e.g. "net profit margin (net income divided by total revenue, as a percentage)".
+
+- Periods: fiscal year with its end date, or the quarter's length taken from the fact's own duration with its end date and fiscal quarter. 13-week and calendar quarters are "the three months ended", Costco's and PepsiCo's 12-week quarters are "the 12 weeks ended" (6 questions), and 16-week quarters would be "the 16 weeks ended", matching the column headings in those filings.
+- Parent-only amounts: `NetIncomeLoss` is net income attributable to the parent. When the consolidated `ProfitLoss` in the same filing and period differs from it by more than 1%, or the noncontrolling-interest amount is more than 1% of it, the question says "net income attributable to {company}" (24 questions, including margins and changes that use it). `StockholdersEquity` excludes noncontrolling interests, so every liabilities-to-equity question says "total stockholders' equity attributable to {company} (excluding noncontrolling interests)" (17 questions).
 
 Tolerances: `rel_tolerance` 0.01 for reported facts and 0.02 for derived values; percents also get `abs_tolerance` 0.05 points and ratios 0.005, so values near zero are not graded on noise.
 
@@ -49,11 +52,13 @@ Per-company caps (4 single_fact, 2 yoy_change, 3 multi_step) keep eval cost low 
 
 Within each `question_type`, rows are ordered by the SHA-256 hex digest of the `qid`; the first `round(0.4 * n)` are `dev`, the rest `test`. Qids are semantic (`xbrl-aapl-10k2025fy-revenue`), so the split of a question never depends on generation order. The test split is held out and reported once, at the end.
 
+Splits are by question, so dev and test can read the same reported fact: 59 of the 211 test questions use at least one fact that some dev question also uses (for example a revenue lookup in dev and a net margin over the same revenue in test). That is harmless for a retrieval system with nothing trained on dev. If dev is ever used to pick few-shot examples or tune prompts on specific facts, split by `(ticker, filing)` instead.
+
 ## Known limitations
 
 - Companies skipped in part: XOM's 2026 Q2 10-Q and both NEE 10-Qs have no facts in companyfacts at fetch time, so they yield no questions and their fiscal labels cannot be derived from XBRL. NEE has 10-K questions only and no revenue question (no revenue concept in the fallback chain).
 - Missing concepts drop questions: banks have no operating income or gross margin, several companies (JNJ, UNH, CAT, AMT) lack some balance sheet or income concepts in these filings.
-- Net income is `NetIncomeLoss`, the amount attributable to the parent; a model that answers with net income including noncontrolling interests will miss where the two differ.
+- Net income and equity are parent-only amounts. The wording says so where it matters (see Labeling), but a model that reads the consolidated "Net income" or "Total equity" line will still be graded wrong on those rows, e.g. NEE FY2025 (6,835M attributable vs 5,332M consolidated) and the AMT liabilities-to-equity ratio (equity 3,652.5M vs total equity 10,355.3M). The attributable check needs `ProfitLoss` or the NCI amount in companyfacts; a filer that tags neither gets plain "net income".
 - The two corpus 10-Qs are not always adjacent quarters (MSFT fiscal 2026 Q3 and fiscal 2027 Q1, NKE likewise, because Q4 is in the 10-K). The quarter change questions name both quarters explicitly.
 - The XBRL value is the ground truth even when the text of the filing rounds it differently (e.g. "$416.2 billion"); tolerances absorb normal rounding.
 - If the agent's `get_company_facts` tool exposes companyfacts directly, this set measures tool use more than retrieval; compare runs with and without that tool.

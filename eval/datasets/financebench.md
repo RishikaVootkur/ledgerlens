@@ -17,7 +17,7 @@ Credit: Pranab Islam, Anand Kannappan, Douwe Kiela, Rebecca Qian, Nino Scherrer,
 | novel_generated | 20 | 30 | 50 |
 | **total** | 60 | 90 | 150 |
 
-Answer units: 98 free text, 19 USD, 18 ratio, 15 percent.
+Answer units: 98 free text, 20 USD, 17 ratio, 15 percent.
 
 ## Collection
 
@@ -31,6 +31,8 @@ The gold labels are FinanceBench's own. The mapping to `Question` is mechanical:
 - `fiscal_year` comes from `doc_period`, `form` from `doc_type`, and `fiscal_period` from the doc name (`FY` for 10-Ks, `Q2` for `..._2023Q2_10Q`, empty for 8-Ks).
 - `ticker` is filled from a hand-written company to ticker map.
 - `answer_value` is set only when the whole gold answer is a single number. `$` and the question's "in USD millions" or "in USD billions" give a USD value in base units (`$1577.00` in millions is 1,577,000,000). `%` gives a percent stored as written (`1.9%` is 1.9). A bare number is a ratio unless the question asks for USD or a percent. Everything else has `answer_unit: text` and no value.
+- One hand-checked unit override (`UNIT_OVERRIDES` in the generator): `fb-01319` ("0" restructuring costs) is USD, because neither the answer nor the question names a unit.
+- Day counts: four golds are measured in days (`fb-06655`, `fb-10130` and `fb-06247` days payable outstanding, `fb-04103` cash conversion cycle). The contract's `AnswerUnit` has no days unit, so they are stored as `ratio` with the number of days as the value (93.86 means 93.86 days). Scoring is numeric either way; a scorer that prints units should not add "x" to these.
 - `abs_tolerance` is half a unit in the last decimal place of the gold (0.005 for `0.66`, 0.05 for `1.9%`), because FinanceBench golds are rounded. `rel_tolerance` stays at 0.01.
 - `question_reasoning`, `domain_question_num`, `justification`, `gics_sector`, `doc_link` and the other source fields are kept in `metadata`.
 
@@ -56,7 +58,7 @@ Within each `question_type`, rows are ordered by the SHA-256 hex digest of the `
 - 150 questions give wide confidence intervals; differences of a few points between configurations are usually noise. Report bootstrap intervals.
 - About two thirds of answers are free text and need a judge model; numeric scoring covers only the 52 rows with a parsed value.
 - Some golds use unstated conventions (fiscal year naming, rounding, "unadjusted" metrics). Rows such as `fb-00605` say so in the answer itself.
-- `ratio` also covers day counts (DPO, cash conversion cycle) because the contract has no days unit.
+- `ratio` also covers the four day-count golds (see Labeling) because the contract has no days unit.
 - The documents are older (2015 to 2024) than the rest of the corpus, so this set tests PDF parsing and page citations more than recency.
 
 ## License
