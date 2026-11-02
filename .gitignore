@@ -1,0 +1,34 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Data (downloaded at runtime)
+data/
+!data/.gitkeep
+
+# Local caches (the CI replay slice lives in eval/cache and is committed)
+.cache/
+
+# Node
+node_modules/
+web/dist/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
