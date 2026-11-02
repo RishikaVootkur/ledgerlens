@@ -244,3 +244,49 @@ def test_merge_runs_combines_disjoint_parts(isolated):
     other = runner.run_eval(cfg.model_copy(update={"qids": ["s2"], "k": 9}), "dev", run_id="c")
     with pytest.raises(ValueError):
         runner.merge_runs([a, other], "mixed")
+
+
+def test_derived_answers_are_supported_by_cited_inputs():
+    reg = EvidenceRegistry()
+    reg.add(
+        EvidenceItem(
+            "",
+            "fact",
+            "f24",
+            "KO-10K-2025FY",
+            "XBRL",
+            None,
+            None,
+            "10,631,000,000 USD for 2024",
+            "x",
+        )
+    )
+    reg.add(
+        EvidenceItem(
+            "",
+            "fact",
+            "f25",
+            "KO-10K-2025FY",
+            "XBRL",
+            None,
+            None,
+            "13,107,000,000 USD for 2025",
+            "x",
+        )
+    )
+    reg.add(
+        EvidenceItem(
+            "", "chunk", "c9", "KO-10K-2025FY", "s", 1, 1, "Unrelated text about bottlers.", "h"
+        )
+    )
+    a = AgentAnswer(
+        answer="Net income rose 23.29%, from $10,631 million [1] to $13,107 million [2].",
+        answer_value=23.29,
+        answer_unit="percent",
+        citations=[
+            Citation(chunk_id=c, filing_id="KO-10K-2025FY", section="s")
+            for c in ("f24", "f25", "c9")
+        ],
+    )
+    s = runner.score(q(value=23.29), a, reg)
+    assert s["citation_precision"] == pytest.approx(2 / 3)

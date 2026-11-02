@@ -331,3 +331,24 @@ def test_dedupe_off_reproduces_repeats(scripted):
     queue += [_resp(tool_calls=[search_call()]) for _ in range(3)] + [_resp(answer_json())]
     result = run_agent("q", AgentConfig(max_rounds=3, dedupe_tool_calls=False))
     assert result.steps.count("search_filings") == 3
+
+
+def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
+    reg = EvidenceRegistry()
+    reg.add(EvidenceItem("", "fact", "f1", "F", "S", None, None, "t", "h"))
+    draft = {
+        "answer": "Total assets were $359,241,000,000 [E1].",
+        "refused": False,
+        "value": "359,241,000,000",
+        "scale": "billion",
+        "unit": "USD",
+    }
+    assert finalize(draft, reg, []).answer_value == pytest.approx(359_241e6)
+    draft = {
+        "answer": "Total assets were $359.2 billion [E1].",
+        "refused": False,
+        "value": 359.2,
+        "scale": "billion",
+        "unit": "USD",
+    }
+    assert finalize(draft, reg, []).answer_value == pytest.approx(359.2e9)
