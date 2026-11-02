@@ -43,17 +43,34 @@ class DenseIndex:
         self.client = client
         self.collection = collection_name(strategy)
 
-    def ensure_collection(self) -> None:
-        if self.client.collection_exists(self.collection):
-            return
-        self.client.create_collection(
-            self.collection,
-            vectors_config=models.VectorParams(size=EMBED_DIM, distance=models.Distance.COSINE),
-            # Keep vectors on disk-backed memmap so the container stays small.
-            on_disk_payload=True,
-        )
+    def ensure_collection(self) -> bool:
+        """Create the collection if needed; return True when it was created (empty)."""
+        created = False
+        if not self.client.collection_exists(self.collection):
+            self.client.create_collection(
+                self.collection,
+                vectors_config=models.VectorParams(
+                    size=EMBED_DIM, distance=models.Distance.COSINE, on_disk=True
+                ),
+                # Vectors and payload both memory-mapped from disk: the container stays small.
+                on_disk_payload=True,
+            )
+            created = True
+        # Idempotent, so a run that died right after creating the collection still
+        # ends up with every filter field indexed.
         for field, schema in _INDEXED.items():
             self.client.create_payload_index(self.collection, field, field_schema=schema)
+        return created
+
+    def count(self) -> int:
+        return int(self.client.count(self.collection, exact=True).count)
+
+    def delete(self, chunk_ids: list[str]) -> None:
+        if chunk_ids:
+            self.client.delete(
+                self.collection,
+                points_selector=models.PointIdsList(points=[point_id(c) for c in chunk_ids]),
+            )
 
     def add(self, chunks: list[Chunk]) -> None:
         vectors = embed_documents([c.text for c in chunks])

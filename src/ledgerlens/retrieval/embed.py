@@ -8,7 +8,7 @@ runs do not re-embed the same questions.
 from __future__ import annotations
 
 import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential_jitter
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential_jitter
 
 from ledgerlens.config import get_settings
 from ledgerlens.llm.cache import ResponseCache, cache_key
@@ -18,7 +18,18 @@ EMBED_DIM = 768
 MAX_CHARS = 6000  # ~1.5k tokens; longer passages are truncated to protect the context window
 
 
-@retry(wait=wait_exponential_jitter(multiplier=1, max=30), stop=stop_after_attempt(5), reraise=True)
+def _transient(exc: BaseException) -> bool:
+    if isinstance(exc, httpx.TransportError):
+        return True
+    return isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code >= 500
+
+
+@retry(
+    retry=retry_if_exception(_transient),
+    wait=wait_exponential_jitter(multiplier=1, max=30),
+    stop=stop_after_attempt(5),
+    reraise=True,
+)
 def _embed_raw(texts: list[str]) -> list[list[float]]:
     base = get_settings().ollama_base_url
     resp = httpx.post(
