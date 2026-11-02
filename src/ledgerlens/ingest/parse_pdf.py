@@ -71,9 +71,24 @@ def _page_tables(
     return out
 
 
-def _inside(bbox: tuple[float, ...], boxes: list[tuple[float, float, float, float]]) -> bool:
-    cx, cy = (bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2
-    return any(b[0] <= cx <= b[2] and b[1] <= cy <= b[3] for b in boxes)
+Box = tuple[float, float, float, float]
+TABLE_OVERLAP = 0.5
+
+
+def overlap_ratio(bbox: tuple[float, ...], boxes: list[Box]) -> float:
+    """Largest share of `bbox`'s area that lies inside any of `boxes`."""
+    x0, y0, x1, y1 = (float(v) for v in bbox[:4])
+    area = max(x1 - x0, 0.0) * max(y1 - y0, 0.0)
+    if area <= 0:
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        return 1.0 if any(b[0] <= cx <= b[2] and b[1] <= cy <= b[3] for b in boxes) else 0.0
+    best = 0.0
+    for b in boxes:
+        w = min(x1, b[2]) - max(x0, b[0])
+        h = min(y1, b[3]) - max(y0, b[1])
+        if w > 0 and h > 0:
+            best = max(best, w * h / area)
+    return best
 
 
 def _join_lines(lines: list[str]) -> str:
@@ -87,9 +102,17 @@ def _join_lines(lines: list[str]) -> str:
 
 
 def _block_items(
-    block: dict[str, Any], page_no: int, edge: bool, body_size: float
+    block: dict[str, Any],
+    page_no: int,
+    edge: bool,
+    body_size: float,
+    table_boxes: list[Box] | None = None,
 ) -> list[tuple[float, float, RawItem]]:
-    """Split one text block into paragraphs, cutting at heading-like lines."""
+    """Split one text block into paragraphs, cutting at heading-like lines.
+
+    Spans that lie mostly inside a table box are dropped: the table already has them.
+    """
+    boxes = table_boxes or []
     out: list[tuple[float, float, RawItem]] = []
     x = float(block["bbox"][0])
     pending: list[str] = []
@@ -103,10 +126,15 @@ def _block_items(
             pending.clear()
 
     for line in block.get("lines", []):
-        spans = [s for s in line["spans"] if s["text"].strip()]
+        kept = [
+            s
+            for s in line["spans"]
+            if not boxes or overlap_ratio(tuple(s["bbox"]), boxes) <= TABLE_OVERLAP
+        ]
+        spans = [s for s in kept if s["text"].strip()]
         if not spans:
             continue
-        text = clean_text("".join(s["text"] for s in line["spans"]))
+        text = clean_text("".join(s["text"] for s in kept))
         ly = float(line["bbox"][1])
         size = max(float(s["size"]) for s in spans)
         bold = all(_span_bold(s) for s in spans)
@@ -142,7 +170,7 @@ def parse_pdf(raw: bytes, filing: FilingRef) -> ParsedFiling:
             words = page.get_text("words")
             # (y, x, item) so tables and text interleave in reading order.
             placed: list[tuple[float, float, RawItem]] = []
-            table_boxes: list[tuple[float, float, float, float]] = []
+            table_boxes: list[Box] = []
             for bbox, rows in _page_tables(page, words):
                 md = rows_to_markdown(rows)
                 if md is None:
@@ -152,11 +180,11 @@ def parse_pdf(raw: bytes, filing: FilingRef) -> ParsedFiling:
                 tid = f"{filing.filing_id}:table:{n_tables:04d}"
                 placed.append((bbox[1], bbox[0], RawItem("table", md, page_no, table_id=tid)))
             for block in pdict.get("blocks", []):
-                if block.get("type") != 0 or _inside(block["bbox"], table_boxes):
+                if block.get("type") != 0:
                     continue
                 y0, y1 = float(block["bbox"][1]), float(block["bbox"][3])
                 edge = y1 < height * EDGE_FRACTION or y0 > height * (1 - EDGE_FRACTION)
-                placed.extend(_block_items(block, page_no, edge, body_size))
+                placed.extend(_block_items(block, page_no, edge, body_size, table_boxes))
             placed.sort(key=lambda t: (round(t[0]), t[1]))
             page_items = [p[2] for p in placed]
             # Short text in the first or last slots of a page is a header/footer candidate.
@@ -164,7 +192,12 @@ def parse_pdf(raw: bytes, filing: FilingRef) -> ParsedFiling:
                 if it.kind == "para" and len(it.text) <= 60:
                     it.edge = True
             items.extend(page_items)
-        blocks = build_blocks(_merge_strong_runs(items), filing.form, n_pages=doc.page_count)
+        blocks = build_blocks(
+            _merge_strong_runs(items),
+            filing.form,
+            n_pages=doc.page_count,
+            repair_spacing_headings=True,
+        )
         log.debug(
             "parsed_pdf", filing_id=filing.filing_id, pages=doc.page_count, blocks=len(blocks)
         )

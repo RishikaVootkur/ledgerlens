@@ -79,3 +79,49 @@ def test_pdf_table_to_markdown(sample_pdf, pdf_ref):
     ]
     # Table words are not repeated as loose text.
     assert not any(b.kind == "text" and "Net sales" in b.text for b in parsed.blocks)
+
+
+def _span(text, bbox, size=10.0, flags=0):
+    return {"text": text, "bbox": bbox, "size": size, "flags": flags, "font": "Helvetica"}
+
+
+def test_overlap_ratio_uses_area_not_centre():
+    from ledgerlens.ingest.parse_pdf import overlap_ratio
+
+    table = [(100.0, 100.0, 300.0, 200.0)]
+    assert overlap_ratio((150, 120, 200, 130), table) == 1.0
+    assert overlap_ratio((10, 10, 50, 20), table) == 0.0
+    # Centre outside the table but 60% of the span inside it.
+    assert overlap_ratio((60, 150, 160, 160), table) == pytest.approx(0.6)
+
+
+def test_text_spans_inside_a_table_are_dropped():
+    from ledgerlens.ingest.parse_pdf import _block_items
+
+    table = [(100.0, 100.0, 300.0, 200.0)]
+    block = {
+        "bbox": (40, 90, 300, 220),
+        "lines": [
+            {
+                "bbox": (40, 90, 300, 100),
+                "spans": [_span("Net income rose sharply.", (40, 90, 95, 100))],
+            },
+            {
+                "bbox": (60, 150, 300, 160),
+                "spans": [
+                    _span("$ 4,869", (60, 150, 160, 160)),
+                    _span("5,058", (200, 150, 240, 160)),
+                ],
+            },
+            {
+                "bbox": (40, 210, 300, 220),
+                "spans": [_span("Cash grew too.", (40, 210, 90, 220))],
+            },
+        ],
+    }
+    items = _block_items(block, 1, False, 10.0, table)
+    texts = " ".join(i[2].text for i in items)
+    assert "Net income rose sharply." in texts
+    assert "Cash grew too." in texts
+    assert "4,869" not in texts
+    assert "5,058" not in texts
