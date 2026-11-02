@@ -175,7 +175,7 @@ async def chat_events(
         try:
             push("result", runner(req.question, config, filters, on_step))
         except ChatCancelledError:
-            push("cancelled", None)
+            pass  # the client is gone and nothing reads the queue any more
         except BaseException as exc:
             push("error", exc)
 
