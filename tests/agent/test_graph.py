@@ -354,20 +354,38 @@ def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
     assert finalize(draft, reg, []).answer_value == pytest.approx(359.2e9)
 
 
-def test_derived_numbers_are_accepted_but_invented_ones_are_not():
+def test_derived_numbers_need_stated_grounded_inputs():
+    from ledgerlens.agent.graph import derivable, stated_precision
+
+    assert derivable(6.43, [416_161e6, 391_035e6], 0.005 / 6.43)  # percent change
+    assert derivable(807_196e6, [416_161e6, 391_035e6], 1e-6)  # sum
+    assert derivable(50.56, [25.28e6, 50.0e6], 0.005 / 50.56)  # smaller over larger
+    assert derivable(1.46, [31_044e6, 21_281e6], 0.005 / 1.46)  # current ratio
+    assert not derivable(777.7, [31_044e6, 21_281e6], 0.05 / 777.7)
+    assert stated_precision("grew 6.43% to $7,110.5 million") == {
+        6.43: pytest.approx(0.005 / 6.43),
+        7_110.5e6: pytest.approx(0.05 / 7_110.5),
+    }
+
+
+def test_invented_values_are_rarely_derivable_from_stated_inputs():
+    import random
+
     from ledgerlens.agent.graph import derivable
 
-    base = [416_161e6, 391_035e6, 25.3, 50.0]
-    assert derivable(6.4255, base)  # percent change 391,035 -> 416,161
-    assert derivable(807_196e6, base)  # sum
-    assert derivable(50.6, [25.3, 50.0])  # 25.3 / 50 * 100
-    assert not derivable(777.7, base)
+    random.seed(0)
+    accepted = 0
+    for _ in range(2000):
+        inputs = [random.uniform(100, 99_999) * 1e6 for _ in range(3)]
+        invented = round(random.uniform(1, 100), 2)
+        accepted += derivable(invented, inputs, 0.005 / invented)
+    assert accepted / 2000 < 0.01
 
 
 def test_verify_accepts_a_derived_percentage(scripted):
     queue, _ = scripted
     derived = answer_json(
-        answer="Net sales grew 6.43% to $416,161 million [E1].",
+        answer="Net sales grew 6.43%, from $391,035 million to $416,161 million [E1].",
         value=6.43,
         scale="one",
         unit="percent",

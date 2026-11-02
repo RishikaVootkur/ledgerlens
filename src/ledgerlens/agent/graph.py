@@ -217,29 +217,49 @@ def grounding_sources(registry: EvidenceRegistry) -> list[float]:
     return sources
 
 
-def derivable(value: float, base: list[float], limit: int = 120) -> bool:
-    """True if `value` is one arithmetic step from two evidence numbers: a+b, a-b, a/b,
-    a/b*100 or (a-b)/b*100, with operands rescaled to a common reporting scale."""
-    nums = sorted({abs(b) for b in base if b}, reverse=True)[:limit]
+def stated_precision(text: str) -> dict[float, float]:
+    """Each number in `text` (scale words applied) mapped to half a unit of its last written
+    digit, relative to the value: "6.43%" -> 0.005 / 6.43; "$7,110.5 million" -> 0.05 / 7110.5."""
+    out: dict[float, float] = {}
+    for m in _NUM.finditer(re.sub(r"\[E\d+\]", " ", text)):
+        raw = m.group(2).replace(",", "")
+        value = float(raw)
+        if not value:
+            continue
+        decimals = len(raw.split(".")[1]) if "." in raw else 0
+        out[value * _MULT.get((m.group(3) or "").lower(), 1.0)] = 0.5 * 10**-decimals / value
+    return out
+
+
+def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
+    """True if `value` is one arithmetic step from two of `operands` (sum, difference,
+    either ratio, either ratio as a percent, or a percent change), equal within `rel_tol`
+    (half a unit of the last digit the answer wrote).
+
+    Operands are the other numbers the answer itself states that are grounded in the
+    evidence, so a derived value must be traceable to inputs shown in the answer. Over a
+    whole evidence set, one-step combinations match almost any invented value.
+    """
+    nums = sorted({abs(x) for x in operands if x})
     target = abs(value)
     if target == 0:
         return False
+    tol = max(rel_tol, 1e-6) * target
     for i, a in enumerate(nums):
-        for b in nums[i + 1 :] + nums[:i]:
-            for scale in (1.0, 1e3, 1e6, 1e-3, 1e-6):
-                bb = b * scale
-                candidates = (
-                    a + bb,
-                    a - bb,
-                    a / bb,
-                    a / bb * 100,
-                    (a - bb) / bb * 100,
-                    (bb - a) / a * 100,
-                    bb / a * 100,
-                )
-                for c in candidates:
-                    c = abs(c)
-                    if c and (abs(c - target) <= 0.005 * target or _matches(target, [c])):
+        for b in nums[i + 1 :]:
+            ops = (
+                a + b,
+                b - a,
+                b / a,
+                a / b,
+                b / a * 100,
+                a / b * 100,
+                (b - a) / a * 100,
+                (a - b) / b * 100,
+            )
+            for c in ops:
+                for unit in (1.0, 1e3, 1e6, 1e9):  # inputs may be stated in thousands/millions
+                    if abs(abs(c) * unit - target) <= tol:
                         return True
     return False
 
@@ -429,8 +449,19 @@ def build_graph(run: _Run) -> Any:
         run.on_step("verify", "checking every number against the evidence")
         sources = grounding_sources(run.registry)
         bad = ungrounded_numbers(str(draft.get("answer", "")), sources)
-        if cfg.derive_numbers:
-            bad = [v for v in bad if not derivable(v, sources)]
+        if cfg.derive_numbers and bad:
+            text = str(draft.get("answer", ""))
+            precision = stated_precision(text)
+            inputs = [v for v in numbers_in(text) if v not in bad and _matches(v, sources)]
+            # Cited XBRL facts state exactly one value each, so they are safe operands too
+            # (unlike table passages, whose dozens of numbers would match almost anything).
+            for ref in set(re.findall(r"\[(E\d+)\]", text)):
+                item = run.registry.items.get(ref)
+                if item is not None and item.kind == "fact":
+                    values = numbers_in(item.text.split(" for ")[0])
+                    if values:
+                        inputs.append(max(values, key=abs))
+            bad = [v for v in bad if not derivable(v, inputs, precision.get(v, 1e-4))]
         problems = list(state.get("problems") or [])
         if bad:
             shown = ", ".join(f"{v:,.6g}" for v in bad[:5])
