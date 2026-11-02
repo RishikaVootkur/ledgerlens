@@ -163,7 +163,8 @@ def _cached_tool(
     if replay:
         raise CacheMissError(f"No recorded result for tool {name} {args}")
     result = fn()
-    cache.put("tool", key, {**payload, "result": result})
+    if resolve_index_version(config) != "building":  # never cache a half-built index
+        cache.put("tool", key, {**payload, "result": result})
     return result
 
 

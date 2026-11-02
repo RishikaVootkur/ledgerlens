@@ -45,11 +45,15 @@ def build_index(
     all_chunks = list(store.iter_strategy(strategy))
     BM25Index.build(all_chunks).save(index_dir() / f"bm25_{strategy}")
     get_bm25.cache_clear()  # this process must not keep searching the old index
-    (index_dir() / f"version_{strategy}.txt").write_text(store.fingerprint(strategy))
+    version_file = index_dir() / f"version_{strategy}.txt"
+    # While vectors are being written the index is incomplete: mark it so nothing caches
+    # search results under the final fingerprint until embedding has finished.
+    version_file.write_text("building")
     stats = {"loaded": loaded, "removed": len(removed), "bm25_chunks": len(all_chunks)}
     stats["embedded"] = 0
     log.info("index.bm25", strategy=strategy, chunks=len(all_chunks), removed=len(removed))
     if not dense:
+        version_file.write_text(store.fingerprint(strategy))
         return stats
     index = get_dense(strategy)
     created = index.ensure_collection()
@@ -66,4 +70,5 @@ def build_index(
         store.mark_embedded([c.chunk_id for c in batch])
         stats["embedded"] += len(batch)
         log.info("index.dense", strategy=strategy, done=stats["embedded"], total=len(pending))
+    version_file.write_text(store.fingerprint(strategy))
     return stats
