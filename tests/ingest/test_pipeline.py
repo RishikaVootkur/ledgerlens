@@ -26,7 +26,7 @@ def sec(fixtures):
         docs = mock.get(url__startswith=DOC_PREFIX).mock(
             return_value=httpx.Response(200, content=html)
         )
-        yield sub, docs
+        yield sub, docs, mock
 
 
 def _run(tmp_path):
@@ -42,7 +42,7 @@ def _run(tmp_path):
 
 
 def test_second_run_does_no_network_or_parse_work(sec, tmp_path):
-    sub, docs = sec
+    sub, docs, _ = sec
     first = _run(tmp_path)
     assert len(first.filings) == 3
     assert (first.downloaded, first.parsed, first.chunked, first.failed) == (3, 3, 3, {})
@@ -172,3 +172,21 @@ def test_permanent_failure_needs_retry_failed(tmp_path):
     retried = _run_fb(tmp_path, retry_failed=True)
     assert retried.failed == {}
     assert gh.call_count == 2
+
+
+# ---------------------------------------------------------------- corpus outputs and lock
+
+
+def test_partial_run_keeps_the_whole_corpus(sec, tmp_path):
+    _fb_dataset(tmp_path)
+    mock = sec[2]
+    mock.get(FB_URL).mock(return_value=httpx.Response(200, content=_pdf_bytes()))
+    http = HttpCache(tmp_path / "raw", sec_user_agent=UA, sleep=lambda _: None)
+    run(tmp_path, tickers=["AAPL"], include_financebench=True, workers=1, http=http)
+    paths = DataPaths(tmp_path)
+    full = [f["filing_id"] for f in json.loads(paths.filings.read_text())]
+    assert len(full) == 4 and f"FB-{FB_DOC}" in full
+    _run(tmp_path)  # AAPL only, no FinanceBench
+    assert [f["filing_id"] for f in json.loads(paths.filings.read_text())] == full
+    report = json.loads((paths.reports / "quality.json").read_text())
+    assert report["totals"]["filings"] == 4

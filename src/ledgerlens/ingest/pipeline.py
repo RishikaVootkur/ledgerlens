@@ -8,7 +8,10 @@ done per filing with content hashes:
 - `chunk:{strategy}`: sha256 of the parsed input, chunker version, sha256 of
   `chunks/{strategy}/{id}.jsonl`.
 
-`filings.json` lists the FilingRefs ingested successfully by the latest run.
+`filings.json` and `reports/quality.*` cover the whole corpus: every filing in the
+manifest's current `selection` groups that parsed successfully, so a partial run
+(`--tickers`, `--strategies`) updates its own groups and never shrinks them. A lock
+file (`DATA_DIR/.ingest.lock`) stops two runs from sharing the same data folder.
 
 A step is skipped when its recorded input hash, version and output hash all still
 match what is on disk, so a second run makes no requests and parses nothing. The
@@ -137,6 +140,26 @@ class Manifest:
         e = self.data.get("filings", {}).get(filing_id)
         return e.get("error") if e else None
 
+    def corpus(self, paths: DataPaths) -> list[FilingRef]:
+        """Filings in the current selection that parsed successfully, in selection order.
+
+        Entries left behind by an older selection (for example after a refresh picked
+        newer 10-Qs) stay in the manifest and on disk but are not part of the corpus.
+        """
+        refs: list[FilingRef] = []
+        seen: set[str] = set()
+        filings = self.data.get("filings", {})
+        for ids in self.data.get("selection", {}).values():
+            for fid in ids:
+                e = filings.get(fid)
+                if fid in seen or not e or e.get("error") or "parse" not in e.get("steps", {}):
+                    continue
+                if not paths.parsed(fid).exists():
+                    continue
+                seen.add(fid)
+                refs.append(FilingRef.model_validate(e["ref"]))
+        return refs
+
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         tmp = self.path.with_name(self.path.name + ".part")
@@ -166,22 +189,32 @@ def select_all(
     summary: RunSummary,
     *,
     refresh: bool = False,
-) -> tuple[list[FilingRef], dict[str, str]]:
+) -> tuple[list[FilingRef], dict[str, str], dict[str, list[str]]]:
+    """Selected refs, FinanceBench fallback links, and filing ids per selection group.
+
+    Groups are `edgar:{ticker}` and `financebench`; a group whose selection failed is
+    left out so the corpus keeps its previous filings.
+    """
     refs: list[FilingRef] = []
+    groups: dict[str, list[str]] = {}
     companies = [BY_TICKER[t] for t in tickers] if tickers is not None else list(UNIVERSE)
     for c in companies:
         try:
             sub = fetch_submissions(c.cik, http, refresh=refresh)
             facts = fetch_companyfacts(c.cik, http, refresh=refresh)
-            refs.extend(select_from_submissions(sub, facts, ticker=c.ticker, company=c.name))
+            selected = select_from_submissions(sub, facts, ticker=c.ticker, company=c.name)
         except FetchError as exc:
             log.error("selection_failed", ticker=c.ticker, error=str(exc))
             summary.failed[f"{c.ticker}-submissions"] = str(exc)
+            continue
+        refs.extend(selected)
+        groups[f"edgar:{c.ticker}"] = [r.filing_id for r in selected]
     links: dict[str, str] = {}
     if include_financebench:
         fb_refs, links = financebench_filings(http.raw_dir)
         refs.extend(fb_refs)
-    return refs, links
+        groups["financebench"] = [r.filing_id for r in fb_refs]
+    return refs, links, groups
 
 
 # ---------------------------------------------------------------- download
@@ -351,10 +384,12 @@ def run(
     manifest = Manifest(paths.manifest)
     summary = RunSummary()
     try:
-        refs, links = select_all(
+        refs, links, groups = select_all(
             http, tickers, include_financebench, summary, refresh=refresh_index
         )
         summary.filings = refs
+        manifest.data.setdefault("selection", {}).update(groups)
+        manifest.save()
         jobs: list[tuple[FilingRef, Path, bool, list[str]]] = []
         for ref in refs:
             err = manifest.error(ref.filing_id)
@@ -381,12 +416,14 @@ def run(
         if own_http:
             http.close()
 
-    ok = [r for r in summary.filings if r.filing_id not in summary.failed]
+    # filings.json and the quality report always describe the whole corpus (every
+    # current selection group in the manifest), so a partial run never shrinks them.
+    corpus = manifest.corpus(paths)
     _write_atomic(
         paths.filings,
-        json.dumps([r.model_dump(mode="json") for r in ok], indent=2) + "\n",
+        json.dumps([r.model_dump(mode="json") for r in corpus], indent=2) + "\n",
     )
-    summary.report = build_report(ok, paths, strategies)
+    summary.report = build_report(corpus, paths, list(CHUNKERS))
     _, md_path = quality.write_reports(summary.report, paths.reports)
     if docs_report is not None:
         docs_report.parent.mkdir(parents=True, exist_ok=True)
