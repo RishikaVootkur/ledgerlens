@@ -83,3 +83,31 @@ def test_unknown_baseline_is_an_error(env):
     env.write_text(yaml.safe_dump(spec))
     with pytest.raises(ValueError):
         dashboard.write_dashboard(env)
+
+
+def test_rows_over_different_questions_are_rejected(env, tmp_path):
+    runs = tmp_path / "eval" / "runs"
+    (runs / "short.json").write_text(run("short", [1, 1, 1]).model_dump_json())
+    spec = yaml.safe_load(env.read_text())
+    spec["tables"][0]["rows"][1]["run_id"] = "short"
+    env.write_text(yaml.safe_dump(spec))
+    with pytest.raises(ValueError, match="different questions"):
+        dashboard.write_dashboard(env)
+
+
+def test_failure_examples_round_robin_and_limit(env, tmp_path):
+    runs = tmp_path / "eval" / "runs"
+    many = run("many", [0, 0, 0, 1, 1, 1], category="wrong_period")
+    for r, cat in zip(
+        many.results[:3], ("wrong_period", "retrieval_miss", "wrong_period"), strict=True
+    ):
+        r.failure_category = cat
+    (runs / "many.json").write_text(many.model_dump_json())
+    spec = yaml.safe_load(env.read_text())
+    spec["failures_from"] = ["many"]
+    spec["max_failure_examples"] = 2
+    env.write_text(yaml.safe_dump(spec))
+    out, _ = dashboard.write_dashboard(env)
+    data = json.loads(out.read_text())
+    assert data["failure_counts"] == {"wrong_period": 2, "retrieval_miss": 1}
+    assert [f["failure_category"] for f in data["failures"]] == ["retrieval_miss", "wrong_period"]

@@ -83,7 +83,13 @@ def build_table(spec: TableSpec) -> dict[str, Any]:
         paired: dict[str, dict[str, Any]] = {}
         if row.name != spec.baseline:
             report = compare_runs(base, run)
-            paired = {m.name: {"delta": m.delta, "p_value": m.p_value} for m in report.metrics}
+            if report.only_in_a or report.only_in_b:
+                raise ValueError(
+                    f"table {spec.id}: row {row.name!r} and baseline {spec.baseline!r} cover "
+                    "different questions; deltas would not match the shown values"
+                )
+            # Holm-adjusted across metrics, matching `eval compare`.
+            paired = {m.name: {"delta": m.delta, "p_value": m.p_holm} for m in report.metrics}
         cells: dict[str, Any] = {}
         for metric in spec.columns:
             comparison = paired.get(metric)
@@ -149,8 +155,11 @@ def build_dashboard(spec: ExperimentsSpec) -> dict[str, Any]:
     failure_counts, failures = _failures(spec.failures_from, spec.max_failure_examples)
     calibration = None
     if spec.judge_calibration:
-        data = json.loads((get_settings().eval_dir.parent / spec.judge_calibration).read_text())
-        calibration = {k: v for k, v in data.items() if k != "results"}
+        from ledgerlens.eval.calibration import CalibrationReport
+
+        path = get_settings().eval_dir.parent / spec.judge_calibration
+        report = CalibrationReport.model_validate_json(path.read_text())  # fail on format drift
+        calibration = report.model_dump(mode="json", exclude={"results"})
     return {
         "generated_at": datetime.now(UTC).isoformat(),
         "headline": {
