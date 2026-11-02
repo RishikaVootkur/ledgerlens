@@ -93,12 +93,19 @@ def is_page_number(text: str) -> bool:
     return bool(_PAGE_NO.match(text.strip()))
 
 
+def looks_like_column_header(text: str) -> bool:
+    """Bold table column lines such as `(Millions) 2018 2017 2016` are not headings."""
+    words = text.split()
+    numeric = sum(1 for w in words if any(ch.isdigit() for ch in w))
+    return text.startswith("(") or numeric * 2 >= len(words)
+
+
 def is_subheading(text: str) -> bool:
     if len(text) > MAX_SUBHEADING_LEN or len(text.split()) > MAX_SUBHEADING_WORDS:
         return False
     if not any(ch.isalpha() for ch in text):
         return False
-    if is_page_number(text):
+    if is_page_number(text) or looks_like_column_header(text):
         return False
     # Sentences ending in a full stop are bold emphasis, not headings.
     return not (text.endswith(".") and len(text.split()) > 6)

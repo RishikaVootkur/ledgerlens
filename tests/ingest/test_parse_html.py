@@ -89,3 +89,12 @@ def test_text_toc_run_is_demoted_and_10q_paths_include_part():
     headings = [b.section for b in blocks if b.kind == "heading"]
     assert headings == ["Part I", "Part I > Item 2. MD&A"]
     assert blocks[-1].section == "Part I > Item 2. MD&A"
+
+
+def test_column_header_lines_are_not_subheadings():
+    from ledgerlens.ingest.sections import is_subheading
+
+    assert not is_subheading("(Millions) 2018 2017 2016")
+    assert not is_subheading("2025 2024")
+    assert is_subheading("Note 1. Significant Accounting Policies")
+    assert is_subheading("2022 Employee Stock Plan")

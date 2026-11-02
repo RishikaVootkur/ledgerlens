@@ -14,7 +14,14 @@ from typing import Any
 
 import pymupdf
 
-from ledgerlens.ingest.sections import RawItem, build_blocks, clean_text, match_item, match_part
+from ledgerlens.ingest.sections import (
+    RawItem,
+    build_blocks,
+    clean_text,
+    looks_like_column_header,
+    match_item,
+    match_part,
+)
 from ledgerlens.ingest.tables import rows_to_markdown
 from ledgerlens.logging import get_logger
 from ledgerlens.schemas import FilingRef, ParsedFiling
@@ -187,6 +194,7 @@ def _merge_strong_runs(items: list[RawItem]) -> list[RawItem]:
             and not (match_item(it.text) or match_part(it.text))
             and not (match_item(prev.text) or match_part(prev.text))
             and len(prev.text) + len(it.text) <= 120
+            and not looks_like_column_header(it.text)
         ):
             prev.text = f"{prev.text} {it.text}"
             continue
