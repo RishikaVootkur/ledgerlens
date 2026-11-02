@@ -39,6 +39,11 @@ class CalibrationReport(BaseModel):
     confusion: list[list[int]]  # rows: human label, columns: judge label, order of `labels`
     per_label_recall: dict[str, float]
     parse_errors: int
+    # Prompt v2 was tuned after reading answers to these questions; test items about other
+    # questions form a clean subset that tuning never touched.
+    clean_n: int | None = None
+    clean_accuracy: MetricValue | None = None
+    clean_kappa: MetricValue | None = None
     results: list[CalibrationResult]
 
 
@@ -55,6 +60,15 @@ def _kappa_ci(
         stats.append(cohen_kappa([human[i] for i in idx], [judged[i] for i in idx]))
     low, high = np.percentile(stats, [2.5, 97.5])
     return MetricValue(value=point, ci_low=float(low), ci_high=float(high), n=n)
+
+
+def _tuning_questions() -> set[str]:
+    from ledgerlens.config import get_settings
+
+    path = get_settings().eval_dir / "datasets" / "judge_calibration_tuning_questions.txt"
+    if not path.exists():
+        return set()
+    return {x.strip() for x in path.read_text().splitlines() if x.strip() and not x.startswith("#")}
 
 
 def calibrate(
@@ -80,6 +94,10 @@ def calibrate(
     ]
     from ledgerlens.llm import DEFAULT_JUDGE_MODEL
 
+    tuned = _tuning_questions()
+    clean = [k for k, i in enumerate(items) if i.financebench_id not in tuned]
+    clean_h, clean_j = [human[k] for k in clean], [judged[k] for k in clean]
+
     return CalibrationReport(
         created_at=datetime.now(UTC),
         judge_model=model or DEFAULT_JUDGE_MODEL,
@@ -99,6 +117,13 @@ def calibrate(
             lab: (confusion[k][k] / max(1, sum(confusion[k]))) for k, lab in enumerate(labels)
         },
         parse_errors=sum(v.parse_error for v in verdicts),
+        clean_n=len(clean) if tuned else None,
+        clean_accuracy=wilson_ci(
+            [1.0 if h == j else 0.0 for h, j in zip(clean_h, clean_j, strict=True)]
+        )
+        if tuned and clean
+        else None,
+        clean_kappa=_kappa_ci(clean_h, clean_j) if tuned and len(set(clean_h)) > 1 else None,
         results=[
             CalibrationResult(
                 cid=i.cid,

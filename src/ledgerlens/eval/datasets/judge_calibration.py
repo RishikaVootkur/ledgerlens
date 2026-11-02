@@ -65,7 +65,9 @@ def _hash(text: str) -> str:
 
 def build(per_label: int = PER_LABEL) -> list[CalibrationItem]:
     """Deterministic: within each label, items are ordered by a hash of their id and the
-    first `per_label` are kept; the first 40% of those (by a second hash) form dev."""
+    first `per_label` are kept. The split is by FinanceBench question: about 40% of
+    questions (by a hash of the question id) are dev, so no question has answers in both
+    dev and test."""
     pool: dict[Label, list[CalibrationItem]] = {label: [] for label in LABEL_MAP.values()}
     for name in SOURCES:
         for row in _download(name):
@@ -91,11 +93,11 @@ def build(per_label: int = PER_LABEL) -> list[CalibrationItem]:
     chosen: list[CalibrationItem] = []
     for items in pool.values():
         items.sort(key=lambda i: _hash(i.cid))
-        picked = sorted(items[:per_label], key=lambda i: _hash("split:" + i.cid))
-        n_dev = round(len(picked) * DEV_FRACTION)
-        for i, item in enumerate(picked):
-            item.split = "dev" if i < n_dev else "test"
-        chosen.extend(picked)
+        chosen.extend(items[:per_label])
+    questions = sorted({i.financebench_id for i in chosen}, key=lambda q: _hash("split:" + q))
+    dev_questions = set(questions[: round(len(questions) * DEV_FRACTION)])
+    for item in chosen:
+        item.split = "dev" if item.financebench_id in dev_questions else "test"
     return sorted(chosen, key=lambda i: i.cid)
 
 
