@@ -14,7 +14,7 @@ from typing import Any
 import lxml.html
 
 from ledgerlens.ingest.sections import RawItem, build_blocks, clean_text
-from ledgerlens.ingest.tables import normalize_rows, rows_to_markdown, rows_to_text
+from ledgerlens.ingest.tables import rows_to_markdown
 from ledgerlens.logging import get_logger
 from ledgerlens.schemas import FilingRef, ParsedFiling
 
@@ -30,6 +30,17 @@ _BOLD_RE = re.compile(r"font-weight:\s*(bold|[6-9]00)")
 _BREAK_BEFORE = re.compile(r"(page-break-before|break-before):\s*(always|page)")
 _BREAK_AFTER = re.compile(r"(page-break-after|break-after):\s*(always|page)")
 _HIDDEN = re.compile(r"display:\s*none")
+_FONT_SIZE = re.compile(r"font-size:\s*([\d.]+)\s*(pt|px)")
+LARGE_FONT_RATIO = 1.2
+MAX_LARGE_HEADING_LEN = 160
+
+
+def _font_size(style: str) -> float | None:
+    m = _FONT_SIZE.search(style)
+    if not m:
+        return None
+    size = float(m.group(1))
+    return size * 0.75 if m.group(2) == "px" else size
 
 
 class _Walker:
@@ -38,7 +49,9 @@ class _Walker:
     def __init__(self, table_prefix: str) -> None:
         self.items: list[RawItem] = []
         self.page = 1
-        self.pieces: list[tuple[str, bool]] = []
+        self.pieces: list[tuple[str, bool, float | None]] = []
+        self.sizes: dict[int, float] = {}  # item index -> largest font size in it
+        self.chars_by_size: dict[float, int] = {}
         self.para_page = 1
         self.table_prefix = table_prefix
         self.n_tables = 0
@@ -46,19 +59,25 @@ class _Walker:
 
     # ------------------------------------------------------------ paragraphs
 
-    def add_text(self, text: str | None, bold: bool) -> None:
+    def add_text(self, text: str | None, bold: bool, size: float | None = None) -> None:
         if not text:
             return
-        if not self.pieces or not any(t.strip() for t, _ in self.pieces):
+        if not self.pieces or not any(t.strip() for t, _, _ in self.pieces):
             self.para_page = self.page
-        self.pieces.append((text, bold))
+        self.pieces.append((text, bold, size))
 
     def flush(self) -> None:
         if not self.pieces:
             return
-        text = clean_text("".join(t for t, _ in self.pieces))
+        text = clean_text("".join(t for t, _, _ in self.pieces))
         if text:
-            strong = all(b for t, b in self.pieces if t.strip())
+            strong = all(b for t, b, _ in self.pieces if t.strip())
+            sizes = [z for t, _, z in self.pieces if t.strip() and z is not None]
+            if sizes:
+                self.sizes[len(self.items)] = max(sizes)
+                for t, _, z in self.pieces:
+                    if z is not None:
+                        self.chars_by_size[z] = self.chars_by_size.get(z, 0) + len(t.strip())
             self.items.append(RawItem(kind="para", text=text, page=self.para_page, strong=strong))
         self.pieces = []
 
@@ -76,13 +95,21 @@ class _Walker:
 
     # ------------------------------------------------------------ tables
 
-    def add_table(self, el: Any) -> None:
+    def add_table(self, el: Any, bold: bool = False, size: float | None = None) -> None:
         self.flush()
         rows = _table_rows(el)
         md = rows_to_markdown(rows)
         if md is None:
-            for line in rows_to_text(normalize_rows(rows)):
-                self.items.append(RawItem(kind="para", text=line, page=self.page))
+            # A layout grid: read it as prose, one paragraph per row, keeping the
+            # styling so large or bold titles set in layout tables still count.
+            for tr in el.iter("tr"):
+                if _nearest_table(tr) is not el:
+                    continue
+                for cell in tr:
+                    if isinstance(cell.tag, str) and cell.tag.lower() in ("td", "th"):
+                        self.walk(cell, bold, size)
+                        self.add_text(" ", bold, size)
+                self.flush()
             return
         self.n_tables += 1
         self.items.append(
@@ -96,7 +123,7 @@ class _Walker:
 
     # ------------------------------------------------------------ walk
 
-    def walk(self, el: Any, bold: bool) -> None:
+    def walk(self, el: Any, bold: bool, size: float | None = None) -> None:
         tag = el.tag if isinstance(el.tag, str) else ""
         tag = tag.lower()
         if not tag or tag in _SKIP_TAGS:
@@ -110,18 +137,19 @@ class _Walker:
         if _BREAK_BEFORE.search(style):
             self.page_break()
         if tag == "table":
-            self.add_table(el)
+            self.add_table(el, bold, _font_size(style) or size)
         else:
             is_block = tag in _BLOCK_TAGS
             if is_block:
                 self.flush()
             here_bold = bold or tag in _BOLD_TAGS or bool(_BOLD_RE.search(style))
+            here_size = _font_size(style) or size
             if tag == "br":
-                self.add_text(" ", here_bold)
-            self.add_text(el.text, here_bold)
+                self.add_text(" ", here_bold, here_size)
+            self.add_text(el.text, here_bold, here_size)
             for child in el:
-                self.walk(child, here_bold)
-                self.add_text(child.tail, here_bold)
+                self.walk(child, here_bold, here_size)
+                self.add_text(child.tail, here_bold, here_size)
             if is_block:
                 self.flush()
         if _BREAK_AFTER.search(style):
@@ -130,6 +158,14 @@ class _Walker:
     def finish(self) -> list[RawItem]:
         self.flush()
         self._mark_edges()
+        # Short paragraphs set clearly larger than body text are heading candidates too
+        # (Intel styles its headings by size and colour, not weight).
+        if self.chars_by_size:
+            body = max(self.chars_by_size, key=lambda z: self.chars_by_size[z])
+            for idx, z in self.sizes.items():
+                it = self.items[idx]
+                if z >= body * LARGE_FONT_RATIO and len(it.text) <= MAX_LARGE_HEADING_LEN:
+                    it.strong = True
         return self.items
 
 
