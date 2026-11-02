@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+import threading
 from collections.abc import Iterable, Iterator
 from pathlib import Path
 
@@ -37,8 +38,20 @@ class ChunkStore:
     def __init__(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         self.path = path
-        self._db = sqlite3.connect(path, check_same_thread=False)
+        self._local = threading.local()
         self._db.executescript(_SCHEMA)
+
+    @property
+    def _db(self) -> sqlite3.Connection:
+        """One connection per thread: sqlite3 connections must not be shared across
+        threads (FastAPI runs sync endpoints in a thread pool). WAL lets readers proceed
+        while the indexer writes."""
+        conn: sqlite3.Connection | None = getattr(self._local, "conn", None)
+        if conn is None:
+            conn = sqlite3.connect(self.path, timeout=30)
+            conn.execute("PRAGMA journal_mode=WAL")
+            self._local.conn = conn
+        return conn
 
     def upsert(self, chunks: Iterable[Chunk]) -> int:
         rows = [
@@ -53,6 +66,45 @@ class ChunkStore:
                 rows,
             )
         return len(rows)
+
+    def replace_filing(
+        self, filing_id: str, strategy: ChunkStrategy, chunks: list[Chunk]
+    ) -> set[str]:
+        """Make the stored chunks of one filing exactly `chunks`; return ids that were removed
+        (re-chunking can produce fewer chunks, and stale ones must not stay searchable)."""
+        old = {
+            row[0]
+            for row in self._db.execute(
+                "SELECT chunk_id FROM chunks WHERE filing_id = ? AND strategy = ?",
+                (filing_id, strategy),
+            )
+        }
+        removed = old - {c.chunk_id for c in chunks}
+        with self._db:
+            self._db.executemany(
+                "DELETE FROM chunks WHERE chunk_id = ?", [(cid,) for cid in removed]
+            )
+            self._db.executemany(
+                "DELETE FROM embedded WHERE chunk_id = ?", [(cid,) for cid in removed]
+            )
+        self.upsert(chunks)
+        return removed
+
+    def reset_embedded(self, strategy: ChunkStrategy) -> None:
+        """Forget embedding bookkeeping, e.g. after the Qdrant collection was recreated."""
+        with self._db:
+            self._db.execute(
+                "DELETE FROM embedded WHERE chunk_id IN "
+                "(SELECT chunk_id FROM chunks WHERE strategy = ?)",
+                (strategy,),
+            )
+
+    def embedded_count(self, strategy: ChunkStrategy) -> int:
+        query = (
+            "SELECT COUNT(*) FROM embedded e JOIN chunks c ON c.chunk_id = e.chunk_id "
+            "WHERE c.strategy = ?"
+        )
+        return int(self._db.execute(query, (strategy,)).fetchone()[0])
 
     def get(self, chunk_id: str) -> Chunk | None:
         row = self._db.execute("SELECT body FROM chunks WHERE chunk_id = ?", (chunk_id,)).fetchone()
