@@ -45,7 +45,11 @@ def _clean(expression: str) -> str:
     """Accept what models naturally write: thousands separators, $, x for times, and %
     as percent (so modulo is not supported)."""
     expr = expression.strip()
-    expr = re.sub(r"(?<=\d),(?=\d{3}\b)", "", expr)
+    # Thousands separators only inside a grouped integer part, so "round(2.5,100)" keeps
+    # its argument comma.
+    expr = re.sub(
+        r"(?<![\d.])\d{1,3}(?:,\d{3})+(?![\d,])", lambda m: m.group(0).replace(",", ""), expr
+    )
     expr = expr.replace("$", "").replace("×", "*").replace("−", "-")
     expr = re.sub(r"(?<=\d)\s*%", "/100", expr)
     expr = re.sub(r"(?<=[\d)])\s*[xX]\s*(?=[\d(])", "*", expr)
@@ -58,14 +62,20 @@ def _eval(node: ast.AST) -> float:
     if isinstance(node, ast.Constant) and isinstance(node.value, int | float):
         if isinstance(node.value, bool):
             raise CalcError("booleans are not numbers")
-        return float(node.value)
+        value = float(node.value)
+        if not math.isfinite(value) or abs(value) > MAX_MAGNITUDE:
+            raise CalcError("number out of range")
+        return value
     if isinstance(node, ast.BinOp) and type(node.op) in _BINARY:
         left, right = _eval(node.left), _eval(node.right)
         if isinstance(node.op, ast.Pow) and abs(right) > MAX_EXPONENT:
             raise CalcError(f"exponent larger than {MAX_EXPONENT}")
         if isinstance(node.op, ast.Div) and right == 0:
             raise CalcError("division by zero")
-        result = _BINARY[type(node.op)](left, right)
+        try:
+            result = _BINARY[type(node.op)](left, right)
+        except (OverflowError, ZeroDivisionError) as exc:
+            raise CalcError("result out of range") from exc
     elif isinstance(node, ast.UnaryOp) and type(node.op) in _UNARY:
         result = _UNARY[type(node.op)](_eval(node.operand))
     elif (
