@@ -5,6 +5,11 @@ on:
     paths:
       - "web/**"
       - ".github/workflows/web.yml"
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - ".github/workflows/web.yml"
 
 permissions:
   contents: read
