@@ -83,3 +83,14 @@ def test_row_maps_to_question_with_one_based_page():
     assert q.evidence[0].page == 60  # 0-based 59 -> 1-based 60
     assert q.answer_value == pytest.approx(1.577e9) and q.answer_unit == "USD"
     assert q.metadata["question_reasoning"] == "Information extraction"
+
+
+def test_unit_override_for_zero_restructuring_costs():
+    row = {
+        **ROW,
+        "financebench_id": "financebench_id_01319",
+        "question": "What is the quantity of restructuring costs? If not outlined then state 0.",
+        "answer": "0",
+    }
+    q = to_question(row)
+    assert (q.answer_value, q.answer_unit) == (0.0, "USD")

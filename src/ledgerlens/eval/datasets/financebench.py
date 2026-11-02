@@ -74,6 +74,10 @@ TICKERS = {
     "Walmart": "WMT",
 }
 
+# Golds whose unit the answer and question text do not reveal, checked by hand.
+# 01319: "0" restructuring costs (an amount in USD; the question says "state 0").
+UNIT_OVERRIDES: dict[str, AnswerUnit] = {"financebench_id_01319": "USD"}
+
 _NUMBER = re.compile(
     r"^\s*(?P<neg1>-)?\s*(?P<dollar>\$)?\s*(?P<neg2>-)?\s*(?P<num>\d[\d,]*(?:\.\d+)?|\.\d+)"
     r"\s*(?P<suffix>%|percent|million|billion|mn|bn)?\s*\.?\s*$",
@@ -185,6 +189,7 @@ def to_question(row: dict[str, Any]) -> Question:
     }
     if parsed is not None:
         value, unit, abs_tol = parsed
+        unit = UNIT_OVERRIDES.get(row["financebench_id"], unit)
         data.update(answer_value=value, answer_unit=unit, abs_tolerance=abs_tol)
     else:
         data["answer_unit"] = "text"
