@@ -87,7 +87,9 @@ describe("run results", () => {
     const rows = [
       result({ qid: "a", dataset: "xbrl", scores: { numeric_accuracy: 1 }, ticker: "AAPL" }),
       result({ qid: "b", dataset: "financebench", scores: { numeric_accuracy: 0 } }),
+      result({ qid: "c", dataset: "financebench", scores: { citation_precision: 1 } }),
     ];
+    expect(filterResults(rows, { dataset: "all", outcome: "unscored", search: "" }).map((r) => r.qid)).toEqual(["c"]);
     expect(filterResults(rows, { dataset: "xbrl", outcome: "all", search: "" }).map((r) => r.qid)).toEqual(["a"]);
     expect(filterResults(rows, { dataset: "all", outcome: "incorrect", search: "" }).map((r) => r.qid)).toEqual(["b"]);
     expect(filterResults(rows, { dataset: "all", outcome: "all", search: "aapl" }).map((r) => r.qid)).toEqual(["a"]);

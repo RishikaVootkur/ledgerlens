@@ -41,6 +41,7 @@ const OUTCOMES: Array<{ value: ResultFilters["outcome"]; label: string }> = [
   { value: "incorrect", label: "Incorrect" },
   { value: "refused", label: "Refused" },
   { value: "error", label: "Errored" },
+  { value: "unscored", label: "Unscored" },
 ];
 
 function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
@@ -79,6 +80,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
           <span>
             {run.results.length} questions · {counts.correct} correct · {counts.incorrect} incorrect
             {counts.error ? ` · ${counts.error} errored` : ""}
+            {counts.unscored ? ` · ${counts.unscored} unscored` : ""}
           </span>
           {run.usage_total ? (
             <span title="List-price equivalent">
