@@ -7,19 +7,26 @@ than two independent averages.
 
 from __future__ import annotations
 
-from collections.abc import Sequence
 from typing import Literal
 
 from pydantic import BaseModel
 
+from ledgerlens.eval.markdown import md_cell, md_code
 from ledgerlens.eval.stats import (
     holm_bonferroni,
+    is_binary,
     mcnemar_exact,
     paired_bootstrap_diff,
     paired_permutation_test,
     percentile,
 )
-from ledgerlens.eval.summary import cost_usd, latency_ms, total_tokens
+from ledgerlens.eval.summary import (
+    LatencySource,
+    cost_usd,
+    latencies_ms,
+    latency_source,
+    total_tokens,
+)
 from ledgerlens.schemas import QuestionResult, RunFile
 
 TestName = Literal["mcnemar", "permutation"]
@@ -62,6 +69,7 @@ class ComparisonReport(BaseModel):
     only_in_b: list[str]
     metrics: list[MetricComparison]
     operational: list[OperationalComparison]
+    latency_source: LatencySource = "usage"
 
 
 def _by_qid(run: RunFile) -> dict[str, QuestionResult]:
@@ -86,10 +94,6 @@ def align(
     return pairs, sorted(set(ra) - set(rb)), sorted(set(rb) - set(ra))
 
 
-def _is_binary(values: Sequence[float]) -> bool:
-    return all(v in (0.0, 1.0) for v in values)
-
-
 def _compare_metric(
     name: str, pairs: list[tuple[QuestionResult, QuestionResult]], seed: int
 ) -> MetricComparison | None:
@@ -104,7 +108,7 @@ def _compare_metric(
     xb = [vb for _, vb in kept]
     delta, low, high, _ = paired_bootstrap_diff(xb, xa, seed=seed)
     test: TestName
-    if _is_binary(xa + xb):
+    if is_binary(xa + xb):
         test, p_value = "mcnemar", mcnemar_exact([v == 1.0 for v in xa], [v == 1.0 for v in xb])
     else:
         test, p_value = "permutation", paired_permutation_test(xb, xa, seed=seed)
@@ -122,10 +126,10 @@ def _compare_metric(
     )
 
 
-def _operational(results: list[QuestionResult]) -> dict[str, float | None]:
-    latencies = [v for r in results if (v := latency_ms(r)) is not None]
-    tokens = [v for r in results if (v := total_tokens(r)) is not None]
-    costs = [v for r in results if (v := cost_usd(r)) is not None]
+def _operational(results: list[QuestionResult], source: LatencySource) -> dict[str, float | None]:
+    latencies = [v for v in latencies_ms(results, source) if v is not None]
+    tokens = [t for r in results if (t := total_tokens(r)) is not None]
+    costs = [c for r in results if (c := cost_usd(r)) is not None]
     return {
         "latency_p50_ms": percentile(latencies, 50) if latencies else None,
         "latency_p95_ms": percentile(latencies, 95) if latencies else None,
@@ -149,8 +153,10 @@ def compare_runs(a: RunFile, b: RunFile, seed: int = 0) -> ComparisonReport:
       since a table of many metrics will otherwise show false positives.
 
     Operational figures (latency p50/p95, total tokens, total list-price cost,
-    error count) are computed over the same common questions. Questions only
-    in one run are dropped and listed in the report.
+    error count) are computed over the same common questions. Latency uses
+    `wall_ms` only when every common row in both runs has it, else the summed
+    call latency for all rows, so the two runs are timed the same way.
+    Questions only in one run are dropped and listed in the report.
     """
     pairs, only_a, only_b = align(a, b)
     names = sorted({k for ra, rb in pairs for k in (*ra.scores, *rb.scores)})
@@ -159,8 +165,9 @@ def compare_runs(a: RunFile, b: RunFile, seed: int = 0) -> ComparisonReport:
         metrics, holm_bonferroni([m.p_value for m in metrics]), strict=True
     ):
         metric.p_holm = adjusted
-    op_a = _operational([ra for ra, _ in pairs])
-    op_b = _operational([rb for _, rb in pairs])
+    rows_a, rows_b = [ra for ra, _ in pairs], [rb for _, rb in pairs]
+    source = latency_source(rows_a + rows_b)
+    op_a, op_b = _operational(rows_a, source), _operational(rows_b, source)
     return ComparisonReport(
         run_a=a.run_id,
         run_b=b.run_id,
@@ -171,6 +178,7 @@ def compare_runs(a: RunFile, b: RunFile, seed: int = 0) -> ComparisonReport:
         only_in_b=only_b,
         metrics=metrics,
         operational=[OperationalComparison(name=k, a=op_a[k], b=op_b[k]) for k in op_a],
+        latency_source=source,
     )
 
 
@@ -247,22 +255,23 @@ _FOOTNOTE = (
 def _coverage_line(report: ComparisonReport) -> str:
     return (
         f"{report.n_common} questions in both runs; dropped {len(report.only_in_a)} only in A "
-        f"and {len(report.only_in_b)} only in B."
+        f"and {len(report.only_in_b)} only in B. Latency source: {report.latency_source}."
     )
 
 
 def _md_table(header: list[str], rows: list[list[str]]) -> list[str]:
     lines = ["| " + " | ".join(header) + " |", "|" + "|".join("---" for _ in header) + "|"]
-    lines += ["| " + " | ".join(row) + " |" for row in rows]
+    lines += ["| " + " | ".join(md_cell(cell) for cell in row) + " |" for row in rows]
     return lines
 
 
 def render_markdown(report: ComparisonReport) -> str:
     """The report as GitHub Markdown: a header, a metric table and an operational table."""
     lines = [
-        f"## Run comparison: `{report.run_a}` (A) vs `{report.run_b}` (B)",
+        f"## Run comparison: {md_code(report.run_a)} (A) vs {md_code(report.run_b)} (B)",
         "",
-        f"Configs: A = `{report.config_a}`, B = `{report.config_b}`. {_coverage_line(report)}",
+        f"Configs: A = {md_code(report.config_a)}, B = {md_code(report.config_b)}. "
+        f"{_coverage_line(report)}",
         "",
     ]
     if report.metrics:

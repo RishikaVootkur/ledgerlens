@@ -8,7 +8,8 @@ import pytest
 
 from ledgerlens.eval.summary import (
     cost_usd,
-    latency_ms,
+    latencies_ms,
+    latency_source,
     summarize_by_dataset,
     summarize_scores,
     total_tokens,
@@ -45,16 +46,46 @@ def test_summarize_scores_bootstraps_each_key(make_result: ResultBuilder) -> Non
     assert ci.ci_low <= ci.value <= ci.ci_high
 
 
-def test_summary_handles_errors_and_wall_time(make_result: ResultBuilder) -> None:
+def test_latency_uses_one_source_for_every_row(make_result: ResultBuilder) -> None:
+    timed = make_result("q1", {}, latency_ms=50, wall_ms=900)
+    also_timed = make_result("q2", {}, latency_ms=70, wall_ms=1100)
+    untimed = make_result("q3", {}, latency_ms=80)
+    crashed = make_result("q4", {}, error="boom", answered=False)
+    # Every row has wall time: use it.
+    assert latency_source([timed, also_timed]) == "wall_ms"
+    assert latencies_ms([timed, also_timed]) == [900, 1100]
+    # One row lacks it: summed call latency for all rows, never a mix.
+    assert latency_source([timed, untimed]) == "usage"
+    assert latencies_ms([timed, untimed, crashed]) == [50, 80, None]
+    assert latencies_ms([timed], source="usage") == [50]
+    assert latency_source([]) == "usage"
+
+
+def test_summary_handles_errors(make_result: ResultBuilder) -> None:
     ok = make_result("q1", {"numeric_correct": 1.0}, latency_ms=50, wall_ms=900)
     crashed = make_result("q2", {"numeric_correct": None}, error="boom", answered=False)
-    assert latency_ms(ok) == 900  # wall time wins over summed call latency
-    assert latency_ms(crashed) is None
     assert total_tokens(crashed) is None and cost_usd(crashed) is None
     summary = summarize_scores([ok, crashed], n_resamples=50)
-    assert summary["latency_p50_ms"].value == 900
+    # The crashed row has no wall time, so both rows use summed call latency.
+    assert summary["latency_p50_ms"].value == 50
     assert summary["latency_p50_ms"].n == 1
     assert summary["error_rate"].value == 0.5
+
+
+def test_binary_scores_get_wilson_intervals(make_result: ResultBuilder) -> None:
+    # 10 of 10 correct. A percentile bootstrap would say [1, 1]; Wilson gives
+    # [0.7225, 1.0] (worked out in test_eval_stats.py).
+    results = [make_result(f"q{i}", {"numeric_correct": 1.0, "mrr": 1.0}) for i in range(10)]
+    summary = summarize_scores(results, n_resamples=50)
+    acc = summary["numeric_correct"]
+    assert acc.value == 1.0 and acc.ci_high == 1.0
+    assert acc.ci_low == pytest.approx(0.72246, abs=1e-4)
+    # error_rate is binary too: 0 of 10 gives [0, 0.2775].
+    assert summary["error_rate"].ci_high == pytest.approx(1 - 0.72246, abs=1e-4)
+    # A continuous key with the same values keeps the bootstrap.
+    results.append(make_result("q10", {"mrr": 0.5}))
+    mrr = summarize_scores(results, n_resamples=50)["mrr"]
+    assert mrr.n == 11 and mrr.ci_high == 1.0
 
 
 def test_summary_of_nothing(make_result: ResultBuilder) -> None:
