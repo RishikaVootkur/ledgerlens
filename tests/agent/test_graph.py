@@ -311,3 +311,24 @@ def test_string_values_from_the_model_are_parsed():
             [],
         )
         assert out.answer_value == (pytest.approx(expected) if expected is not None else None)
+
+
+def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
+    reg = EvidenceRegistry()
+    reg.add(EvidenceItem("", "fact", "f1", "F", "S", None, None, "t", "h"))
+    draft = {
+        "answer": "Total assets were $359,241,000,000 [E1].",
+        "refused": False,
+        "value": "359,241,000,000",
+        "scale": "billion",
+        "unit": "USD",
+    }
+    assert finalize(draft, reg, []).answer_value == pytest.approx(359_241e6)
+    draft = {
+        "answer": "Total assets were $359.2 billion [E1].",
+        "refused": False,
+        "value": 359.2,
+        "scale": "billion",
+        "unit": "USD",
+    }
+    assert finalize(draft, reg, []).answer_value == pytest.approx(359.2e9)

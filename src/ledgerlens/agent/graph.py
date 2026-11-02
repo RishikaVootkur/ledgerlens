@@ -532,6 +532,15 @@ def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[s
     if not refused and raw_value is not None:
         scale = _SCALES.get(str(draft.get("scale") or "one").lower(), 1.0)
         value = raw_value * (scale if unit in ("USD", "shares", "count") else 1.0)
+        # Models sometimes write the full number and also name a scale ("359,241,000,000"
+        # with "billion"). Prefer whichever reading the answer text itself states.
+        stated = numbers_in(text)
+
+        def said(x: float) -> bool:  # stated as-is, with no rescaling
+            return any(abs(x - v) <= 0.005 * abs(v) for v in stated if v)
+
+        if value != raw_value and not said(value) and said(raw_value):
+            value = raw_value
     answer_unit: AnswerUnit | None = unit if value is not None else None  # type: ignore[assignment]
     return AgentAnswer(
         answer=text if not refused or text else REFUSAL_TEXT,
