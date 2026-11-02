@@ -25,7 +25,9 @@ def configure_logging(level: str = "INFO", json: bool = False) -> None:
             renderer,
         ],
         wrapper_class=structlog.make_filtering_bound_logger(logging.getLevelName(level)),
-        logger_factory=structlog.PrintLoggerFactory(file=sys.stderr),
+        # Resolve sys.stderr on every call: test runners and CLIs swap the stream, and a
+        # logger bound to a closed stream would fail later with "I/O on closed file".
+        logger_factory=lambda *args: structlog.PrintLogger(sys.stderr),
     )
     _CONFIGURED = True
 
