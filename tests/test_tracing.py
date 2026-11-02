@@ -310,6 +310,22 @@ def test_setup_with_endpoint_registers_phoenix(monkeypatch):
         get_settings.cache_clear()
 
 
+def test_endpoint_without_api_key_is_a_noop_logged_once(monkeypatch):
+    registered, logged = [], []
+    monkeypatch.setattr("phoenix.otel.register", lambda **kw: registered.append(kw))
+    monkeypatch.setattr(tracing, "_skip_logged", False)
+    monkeypatch.setattr(
+        tracing, "log", SimpleNamespace(info=lambda event, **kw: logged.append(event))
+    )
+    monkeypatch.delenv("PHOENIX_API_KEY", raising=False)
+    monkeypatch.setattr(get_settings(), "phoenix_api_key", None)
+    assert tracing.setup_tracing("http://phoenix:6006/v1/traces") is False
+    assert tracing.setup_tracing("http://phoenix:6006/v1/traces") is False
+    assert not tracing.enabled()
+    assert registered == []
+    assert logged == ["tracing.disabled"]
+
+
 def test_clean_coerces_attribute_values():
     out = tracing.clean({"none": None, "s": "x" * 9000, "n": 3, "l": ["a", "b"], "d": {"k": 1}})
     assert "none" not in out
