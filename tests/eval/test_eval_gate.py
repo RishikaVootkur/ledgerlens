@@ -68,7 +68,7 @@ def test_drop_past_threshold_fails(make_result: ResultBuilder, make_run: RunBuil
 
     md = render_gate_markdown(result)
     assert "## LedgerLens eval gate: FAIL" in md
-    assert "| numeric_correct | 0.7500 | 0.5000 | -0.2500 | 0.0000 | 4 | FAIL |" in md
+    assert "| numeric_correct | 0.7500 | 0.5000 | -0.2500 | 0.0000 | 4 | 4/4 | FAIL |" in md
     assert "Correctness regressed (2):" in md
     assert "- `q1` numeric_correct: 1 -> 0" in md
     assert "Correctness fixed (1):" in md
@@ -119,8 +119,54 @@ def test_metric_that_disappears_fails(make_result: ResultBuilder, make_run: RunB
     assert not result.passed
     [metric] = result.metrics
     assert (metric.status, metric.candidate, metric.delta, metric.n) == ("FAIL", None, None, 0)
-    assert "mrr has baseline values but none in the candidate" in result.reasons
-    assert "| mrr | n/a | n/a | n/a | 0.0000 | 0 | FAIL |" in render_gate_markdown(result)
+    assert result.reasons == ["mrr is scored on 0 question(s), down from 1 in the baseline"]
+    assert "| mrr | n/a | n/a | n/a | 0.0000 | 0 | 1/0 | FAIL |" in render_gate_markdown(result)
+
+
+def test_dropping_a_metric_cannot_hide_a_regression(
+    make_result: ResultBuilder, make_run: RunBuilder
+) -> None:
+    # Baseline citation_precision (1, 1, 0) = 0.667. The candidate stops citing on q2,
+    # so its precision there becomes None. Over common scored questions (q0, q1) both
+    # means are 1.0: the drop check alone would pass. The scored-count check fails it.
+    gate = GateThresholds(max_drop={"citation_precision": 0.0}, correctness_metrics=[])
+    base, cand = _runs(
+        make_result,
+        make_run,
+        [{"citation_precision": v} for v in (1.0, 1.0, 0.0)],
+        [{"citation_precision": v} for v in (1.0, 1.0, None)],
+    )
+    result = check_gate(base, cand, gate)
+    assert not result.passed
+    [metric] = result.metrics
+    assert (metric.baseline, metric.candidate, metric.n) == (1.0, 1.0, 2)
+    assert (metric.n_baseline_scored, metric.n_candidate_scored) == (3, 2)
+    assert result.reasons == [
+        "citation_precision is scored on 2 question(s), down from 3 in the baseline"
+    ]
+    # Scoring more questions than the baseline is fine.
+    assert check_gate(cand, base, gate).passed
+
+
+def test_unscored_correctness_counts_as_a_regression(
+    make_result: ResultBuilder, make_run: RunBuilder
+) -> None:
+    base, cand = _runs(make_result, make_run, [{"judge_correct": 1.0}], [{"judge_correct": None}])
+    result = check_gate(base, cand, GateThresholds(correctness_metrics=["judge_correct"]))
+    [flip] = result.flips
+    assert (flip.candidate, flip.direction) == (None, "regressed")
+    assert "- `q0` judge_correct: 1 -> not scored" in render_gate_markdown(result)
+
+
+def test_comment_escapes_user_text(make_result: ResultBuilder, make_run: RunBuilder) -> None:
+    base = make_run("base|x", [make_result("q`1|a", {"a|b": 1.0})])
+    cand = make_run("cand", [make_result("q`1|a", {"a|b": 0.0}, error="boom")])
+    gate = GateThresholds(max_drop={"a|b": 0.0}, correctness_metrics=["a|b"])
+    md = render_gate_markdown(check_gate(base, cand, gate))
+    assert "Baseline `base\\|x` vs" in md
+    assert "| a\\|b | 1.0000 |" in md
+    assert "Errored questions: ``q`1\\|a``" in md
+    assert "- ``q`1\\|a`` a\\|b: 1 -> 0" in md
 
 
 def test_ungated_and_default_thresholds(make_result: ResultBuilder, make_run: RunBuilder) -> None:
@@ -128,7 +174,7 @@ def test_ungated_and_default_thresholds(make_result: ResultBuilder, make_run: Ru
     ungated = check_gate(base, cand, GateThresholds())
     assert ungated.passed
     assert ungated.metrics[0].status == "NOT GATED"
-    assert "| latency_score | 1.0000 | 0.0000 | -1.0000 | n/a | 1 | NOT GATED |" in (
+    assert "| latency_score | 1.0000 | 0.0000 | -1.0000 | n/a | 1 | 1/1 | NOT GATED |" in (
         render_gate_markdown(ungated)
     )
     defaulted = check_gate(base, cand, GateThresholds(default_max_drop=0.5))
