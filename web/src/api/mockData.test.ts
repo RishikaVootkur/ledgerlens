@@ -86,6 +86,25 @@ describe("mock run files", () => {
     expect(isRetrievalOnlyRun(run.results)).toBe(false);
   });
 
+  it("use the runner's score shape", () => {
+    for (const q of run.results.filter((r) => !r.error)) {
+      // The runner writes refusal_correct on every row and judges only FinanceBench.
+      expect(q.scores.refusal_correct, q.qid).not.toBeUndefined();
+      expect(q.scores.refusal_correct, q.qid).not.toBeNull();
+      expect("judge_correct" in q.scores, q.qid).toBe(q.dataset === "financebench");
+    }
+    // A text-gold question without a judge score has nothing that decides correctness.
+    const unjudged = run.results.find(
+      (q) => q.gold_unit === "text" && q.scores.judge_correct == null && !q.error,
+    );
+    expect(unjudged).toBeDefined();
+    expect(questionOutcome(unjudged!)).toBe("unscored");
+    // A false refusal on an answerable question counts as incorrect.
+    const falseRefusal = run.results.find((q) => q.answerable && q.prediction?.refused);
+    expect(falseRefusal).toBeDefined();
+    expect(questionOutcome(falseRefusal!)).toBe("incorrect");
+  });
+
   it("include a retrieval-only run with no predictions", () => {
     expectRunFile(retrievalRun);
     expect(retrievalRun.results.every((r) => r.prediction === null)).toBe(true);
