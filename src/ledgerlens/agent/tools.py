@@ -122,6 +122,7 @@ class EvidenceItem:
     page_end: int | None
     text: str
     header: str
+    doc_name: str | None = None
 
 
 @dataclass
@@ -268,6 +269,7 @@ def _register_chunks(
                 page_end=c.get("page_end"),
                 text=c["text"],
                 header=_chunk_header(c),
+                doc_name=c.get("doc_name"),
             )
         )
         body = item.text if full else item.text[:SNIPPET_CHARS]

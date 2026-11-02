@@ -400,9 +400,12 @@ def run_agent(
     config: AgentConfig | None = None,
     filters: SearchFilters | None = None,
     on_step: StepCallback | None = None,
+    registry: EvidenceRegistry | None = None,
 ) -> AgentAnswer:
+    """Answer one question. Pass `registry` to inspect the evidence afterwards (the eval
+    runner scores citations and retrieval against it)."""
     config = config or AgentConfig()
-    registry = EvidenceRegistry()
+    registry = registry if registry is not None else EvidenceRegistry()
     run = _Run(config=config, registry=registry, on_step=on_step or (lambda name, detail: None))
     graph = build_graph(run)
     with track_usage() as usage:
