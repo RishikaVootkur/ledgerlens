@@ -13,6 +13,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
+from ledgerlens import tracing
 from ledgerlens.agent.calc import CalcError, calculate
 from ledgerlens.agent.xbrl import METRICS, get_company_facts
 from ledgerlens.config import get_settings
@@ -159,9 +160,11 @@ def _cached_tool(
     }
     key = cache_key("tool", payload)
     if (hit := cache.get("tool", key)) is not None:
+        tracing.annotate({"ledgerlens.cached": True})
         return hit["result"]
     if replay:
         raise CacheMissError(f"No recorded result for tool {name} {args}")
+    tracing.annotate({"ledgerlens.cached": False})
     result = fn()
     cache.put("tool", key, {**payload, "result": result})
     return result
@@ -209,10 +212,57 @@ def _chunk_header(c: dict[str, Any]) -> str:
 def run_tool(
     name: str, args: dict[str, Any], registry: EvidenceRegistry, config: RetrievalConfig
 ) -> str:
-    """Execute one tool call, register its evidence and return compact text for the model."""
+    """Execute one tool call, register its evidence and return compact text for the model.
+
+    Each call is one span when tracing is on: RETRIEVER for search_filings, TOOL otherwise."""
+    if not tracing.enabled():
+        return _run_tool(name, args, registry, config)
+    kind: tracing.SpanKind = "RETRIEVER" if name == "search_filings" else "TOOL"
+    attributes = {
+        "tool.name": name,
+        "tool.parameters": tracing.to_json(args),
+        tracing.INPUT_VALUE: args.get("query") or tracing.to_json(args),
+    }
+    with tracing.span(name, kind, attributes) as span:
+        result = _run_tool(name, args, registry, config)
+        span.set_attribute(tracing.OUTPUT_VALUE, result[: tracing.MAX_TEXT])
+        return result
+
+
+def _retrieval_attributes(
+    args: dict[str, Any], config: RetrievalConfig, chunks: list[dict[str, Any]]
+) -> dict[str, Any]:
+    filters = {
+        k: args[k]
+        for k in ("ticker", "fiscal_year", "form", "filing_id", "doc_name", "strict_year")
+        if args.get(k) not in (None, "")
+    }
+    attrs: dict[str, Any] = {
+        "ledgerlens.retrieval.query": str(args.get("query", "")),
+        "ledgerlens.retrieval.method": config.method,
+        "ledgerlens.retrieval.strategy": config.strategy,
+        "ledgerlens.retrieval.k": config.k,
+        "ledgerlens.retrieval.filters": tracing.to_json(filters),
+        "ledgerlens.retrieval.chunk_ids": [str(c["chunk_id"]) for c in chunks],
+    }
+    for i, c in enumerate(chunks):
+        prefix = f"retrieval.documents.{i}.document"
+        attrs[f"{prefix}.id"] = str(c["chunk_id"])
+        attrs[f"{prefix}.content"] = str(c.get("text", ""))[:2000]
+        attrs[f"{prefix}.metadata"] = tracing.to_json(
+            {k: c.get(k) for k in ("filing_id", "section", "page", "fiscal_year", "form")}
+        )
+    return attrs
+
+
+def _run_tool(
+    name: str, args: dict[str, Any], registry: EvidenceRegistry, config: RetrievalConfig
+) -> str:
     try:
         if name == "search_filings":
             chunks = _cached_tool(name, args, config, lambda: _search(args, config))
+            if tracing.enabled():
+                tracing.annotate(_retrieval_attributes(args, config, chunks))
             return _register_chunks(chunks, registry) or "No matching passages."
         if name == "get_table":
             item = registry.items.get(str(args.get("evidence_id", "")).strip())
@@ -256,10 +306,12 @@ def run_tool(
             return f"[{item.ref}] {expression} = {value:.10g}"
         return f"Unknown tool {name}."
     except CalcError as exc:
+        tracing.mark_error(f"calculate error: {exc}")
         return f"calculate error: {exc}"
     except CacheMissError:
         raise
     except Exception as exc:  # tool failures are reported to the model, not raised
+        tracing.mark_error(f"{type(exc).__name__}: {str(exc)[:200]}")
         return f"{name} failed: {type(exc).__name__}: {str(exc)[:200]}"
 
 
