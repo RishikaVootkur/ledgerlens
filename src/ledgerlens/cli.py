@@ -45,7 +45,9 @@ def ingest_run(
     strategies: str = typer.Option("fixed,section", help="Chunk strategies to build."),
     workers: int | None = typer.Option(None, help="Parse worker processes."),
     refresh_index: bool = typer.Option(
-        False, help="Re-download EDGAR submissions indexes to pick up new filings."
+        False,
+        help="Re-download EDGAR submissions and companyfacts and update the shared "
+        "snapshot in DATA_DIR/raw/sec_api (rebuild the eval datasets afterwards).",
     ),
     retry_failed: bool = typer.Option(False, help="Retry filings that failed permanently."),
 ) -> None:

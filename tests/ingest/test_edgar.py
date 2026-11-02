@@ -199,6 +199,54 @@ def test_non_sec_403_is_not_retried(tmp_path):
     assert route.call_count == 1
 
 
+def _is_pdf(data: bytes) -> bool:
+    return data.startswith(b"%PDF-")
+
+
+@respx.mock
+def test_invalid_download_is_never_cached(tmp_path):
+    url = "https://raw.githubusercontent.com/org/repo/main/pdfs/X.pdf"
+    route = respx.get(url).mock(
+        side_effect=[
+            httpx.Response(200, content=b"version https://git-lfs.github.com/spec/v1"),
+            httpx.Response(200, content=b"%PDF-1.7 real"),
+        ]
+    )
+    http = HttpCache(tmp_path, sec_user_agent=UA, sleep=lambda _: None)
+    with pytest.raises(FetchError) as err:
+        http.fetch(url, validate=_is_pdf)
+    assert err.value.status == 200
+    assert not http.cache_path(url).exists()
+    assert http.fetch(url, validate=_is_pdf) == b"%PDF-1.7 real"
+    assert route.call_count == 2
+
+
+@respx.mock
+def test_bad_file_already_in_cache_is_replaced(tmp_path):
+    url = "https://raw.githubusercontent.com/org/repo/main/pdfs/Y.pdf"
+    respx.get(url).mock(return_value=httpx.Response(200, content=b"%PDF-1.7 good"))
+    http = HttpCache(tmp_path, sec_user_agent=UA, sleep=lambda _: None)
+    bad = http.cache_path(url)
+    bad.parent.mkdir(parents=True)
+    bad.write_bytes(b"<html>error page</html>")
+    assert http.fetch(url, validate=_is_pdf) == b"%PDF-1.7 good"
+    assert bad.read_bytes() == b"%PDF-1.7 good"
+
+
+@respx.mock
+def test_refresh_rewrites_the_shared_snapshot(fixtures, tmp_path):
+    snap = tmp_path / "sec_api" / "submissions" / "CIK0000320193.json"
+    snap.parent.mkdir(parents=True)
+    snap.write_text('{"old": true}')
+    respx.get(SUB_URL).mock(return_value=httpx.Response(200, content=b'{"new": true}'))
+    http = HttpCache(tmp_path, sec_user_agent=UA, sleep=lambda _: None)
+    assert http.fetch_json(SUB_URL) == {"old": True}
+    assert http.fetch_json(SUB_URL, refresh=True) == {"new": True}
+    # The next normal run sees the refreshed selection, not the old snapshot.
+    assert http.fetch_json(SUB_URL) == {"new": True}
+    assert http.requests_made == 1
+
+
 def test_offline_cache_miss_raises(tmp_path):
     http = HttpCache(tmp_path, sec_user_agent=UA, offline=True)
     with pytest.raises(FetchError):

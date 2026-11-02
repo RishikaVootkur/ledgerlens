@@ -94,3 +94,81 @@ def test_interrupted_run_resumes(sec, tmp_path):
 def test_unknown_ticker_is_rejected(tmp_path):
     with pytest.raises(ValueError):
         run(tmp_path, tickers=["NOPE"], include_financebench=False)
+
+
+# ---------------------------------------------------------------- FinanceBench failures
+
+FB_DOC = "ACME_2023_10K"
+FB_URL = f"https://raw.githubusercontent.com/patronus-ai/financebench/main/pdfs/{FB_DOC}.pdf"
+FB_LINK = "https://investors.example.com/acme-2023-10k.pdf"
+
+
+def _pdf_bytes() -> bytes:
+    import pymupdf
+
+    doc = pymupdf.open()
+    page = doc.new_page()
+    page.insert_text((72, 80), "Item 7. Management's Discussion and Analysis", fontsize=14)
+    page.insert_text((72, 110), "Revenue grew on strong demand.", fontsize=10)
+    data = bytes(doc.tobytes())
+    doc.close()
+    return data
+
+
+def _fb_dataset(tmp_path):
+    path = tmp_path / "raw" / "financebench" / "financebench_merged.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    row = {
+        "doc_name": FB_DOC,
+        "company": "Acme Widgets",
+        "doc_type": "10k",
+        "doc_period": 2023,
+        "doc_link": FB_LINK,
+    }
+    path.write_text(json.dumps(row) + "\n")
+
+
+def _run_fb(tmp_path, **kw):
+    http = HttpCache(tmp_path / "raw", sec_user_agent=UA, sleep=lambda _: None)
+    return run(tmp_path, tickers=[], include_financebench=True, workers=1, http=http, **kw)
+
+
+@respx.mock
+def test_invalid_download_is_transient_and_recovers(tmp_path):
+    _fb_dataset(tmp_path)
+    gh = respx.get(FB_URL).mock(
+        side_effect=[
+            httpx.Response(200, content=b"version https://git-lfs.github.com/spec/v1\n"),
+            httpx.Response(200, content=_pdf_bytes()),
+        ]
+    )
+    respx.get(FB_LINK).mock(return_value=httpx.Response(200, content=b"<html>login</html>"))
+    first = _run_fb(tmp_path)
+    fid = f"FB-{FB_DOC}"
+    assert fid in first.failed
+    manifest = Manifest(DataPaths(tmp_path).manifest)
+    assert manifest.error(fid) is not None
+    assert manifest.error(fid)["permanent"] is False
+    assert not list((tmp_path / "raw").rglob(f"{FB_DOC}.pdf"))  # nothing bad cached
+    second = _run_fb(tmp_path)  # transient errors are retried without --retry-failed
+    assert second.failed == {}
+    assert gh.call_count == 2
+    assert Manifest(DataPaths(tmp_path).manifest).error(fid) is None
+
+
+@respx.mock
+def test_permanent_failure_needs_retry_failed(tmp_path):
+    _fb_dataset(tmp_path)
+    gh = respx.get(FB_URL).mock(
+        side_effect=[httpx.Response(404), httpx.Response(200, content=_pdf_bytes())]
+    )
+    respx.get(FB_LINK).mock(return_value=httpx.Response(404))
+    first = _run_fb(tmp_path)
+    fid = f"FB-{FB_DOC}"
+    assert Manifest(DataPaths(tmp_path).manifest).error(fid)["permanent"] is True
+    assert fid in first.failed
+    skipped = _run_fb(tmp_path)
+    assert skipped.requests == 0 and fid in skipped.failed
+    retried = _run_fb(tmp_path, retry_failed=True)
+    assert retried.failed == {}
+    assert gh.call_count == 2

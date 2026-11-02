@@ -161,25 +161,44 @@ class HttpCache:
             return {"User-Agent": self._sec_ua, "Accept-Encoding": "gzip, deflate"}
         return {"User-Agent": GENERIC_USER_AGENT}
 
-    def fetch(self, url: str, *, refresh: bool = False) -> bytes:
+    def fetch(
+        self,
+        url: str,
+        *,
+        refresh: bool = False,
+        validate: Callable[[bytes], bool] | None = None,
+    ) -> bytes:
         """Return the bytes at `url`, from the snapshot or raw cache when present.
 
-        `refresh` skips both and re-downloads into the raw cache (never the snapshot).
+        `validate` checks the bytes (magic number, content type) before anything is
+        cached; invalid downloads raise `FetchError` and are never stored, and an
+        invalid file already in the cache is deleted and fetched again.
+
+        `refresh` skips the caches and re-downloads. For data.sec.gov JSON it rewrites
+        the shared snapshot, so later runs (and the eval dataset builder) see the same
+        new selection; that is logged because the eval datasets must then be rebuilt.
         """
         path = self.cache_path(url)
         snap = self.snapshot_path(url)
         if not refresh:
-            if snap is not None and snap.exists():
-                return snap.read_bytes()
-            if path.exists():
-                return path.read_bytes()
+            for cached in (snap, path):
+                if cached is None or not cached.exists():
+                    continue
+                data = cached.read_bytes()
+                if validate is None or validate(data):
+                    return data
+                log.warning("invalid_cached_file_removed", url=url, path=str(cached))
+                cached.unlink()
         if self.offline:
             raise FetchError(url, None, "offline and not cached")
         data = self._get(url)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = path.with_name(path.name + ".part")
-        tmp.write_bytes(data)
-        tmp.replace(path)
+        if validate is not None and not validate(data):
+            raise FetchError(url, 200, f"invalid content ({data[:40]!r})")
+        target = path
+        if refresh and snap is not None:
+            target = snap
+            log.warning("snapshot_updated", url=url, note="rebuild the eval datasets")
+        write_atomic_bytes(target, data)
         return data
 
     def _get(self, url: str) -> bytes:
@@ -219,6 +238,13 @@ class HttpCache:
 
     def fetch_json(self, url: str, *, refresh: bool = False) -> Any:
         return json.loads(self.fetch(url, refresh=refresh))
+
+
+def write_atomic_bytes(path: Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".part")
+    tmp.write_bytes(data)
+    tmp.replace(path)
 
 
 def _retry_after(value: str | None) -> float | None:
@@ -381,9 +407,7 @@ def fetch_companyfacts(
     except FetchError as exc:
         if exc.status != 404:
             raise
-        path = http.cache_path(url)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("{}", encoding="utf-8")
+        write_atomic_bytes(http.cache_path(url), b"{}")
         return None
     return data or None
 

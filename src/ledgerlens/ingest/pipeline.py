@@ -31,6 +31,7 @@ from ledgerlens.config import ROOT, get_settings
 from ledgerlens.ingest import quality
 from ledgerlens.ingest.chunk import CHUNKER_VERSION, CHUNKERS
 from ledgerlens.ingest.edgar import (
+    PERMANENT_STATUS,
     FetchError,
     HttpCache,
     fetch_companyfacts,
@@ -187,9 +188,13 @@ def select_all(
 
 
 def _valid(ref: FilingRef, data: bytes) -> bool:
+    """Magic-byte check so error pages and Git LFS pointers are never cached."""
     if ref.source_format == "pdf":
         return data[:5] == b"%PDF-"
-    return b"<" in data[:2048]
+    head = data[:4096].lower()
+    if b"request rate threshold exceeded" in head:
+        return False
+    return any(tag in head for tag in (b"<html", b"<?xml", b"<document", b"<body", b"<div"))
 
 
 def download(
@@ -205,16 +210,13 @@ def download(
             return path
     urls = [ref.source_url] + ([fallback] if fallback else [])
     last_error = ""
-    permanent = True
+    permanent = True  # only when every URL is gone for good (404/410)
     for url in urls:
         try:
-            data = http.fetch(url)
+            data = http.fetch(url, validate=lambda d: _valid(ref, d))
         except FetchError as exc:
             last_error = str(exc)
-            permanent = permanent and exc.status in (403, 404, 410)
-            continue
-        if not _valid(ref, data):
-            last_error = f"not a {ref.source_format} document: {url}"
+            permanent = permanent and exc.status in PERMANENT_STATUS
             continue
         path = http.cache_path(url)
         manifest.set_step(
