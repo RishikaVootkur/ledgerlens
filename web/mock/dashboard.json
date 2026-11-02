@@ -1,0 +1,1454 @@
+{
+  "generated_at": "2026-10-29T12:00:00Z",
+  "headline": {
+    "run_id": "2026-10-28T1402-full-gemini-flash",
+    "title": "Headline: full pipeline on the dev split (sample data)",
+    "metrics": {
+      "numeric_accuracy": {
+        "value": 0.712,
+        "ci_low": 0.666,
+        "ci_high": 0.758,
+        "n": 360
+      },
+      "judge_accuracy": {
+        "value": 0.748,
+        "ci_low": 0.704,
+        "ci_high": 0.792,
+        "n": 360
+      },
+      "citation_precision": {
+        "value": 0.861,
+        "ci_low": 0.83,
+        "ci_high": 0.892,
+        "n": 360
+      },
+      "citation_recall": {
+        "value": 0.794,
+        "ci_low": 0.755,
+        "ci_high": 0.833,
+        "n": 360
+      },
+      "refusal_accuracy": {
+        "value": 0.9,
+        "ci_low": 0.81,
+        "ci_high": 0.99,
+        "n": 40
+      },
+      "recall@10": {
+        "value": 0.833,
+        "ci_low": 0.795,
+        "ci_high": 0.871,
+        "n": 360
+      },
+      "latency_p50_ms": {
+        "value": 6420,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 360
+      },
+      "cost_per_question_usd": {
+        "value": 0.0041,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 360
+      }
+    }
+  },
+  "runs": [
+    {
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "config_name": "full: hybrid + rerank + XBRL verify (Gemini 2.5 Flash)",
+      "split": "dev",
+      "created_at": "2026-10-28T14:02:11Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.712,
+          "ci_low": 0.666,
+          "ci_high": 0.758,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.861,
+          "ci_low": 0.83,
+          "ci_high": 0.892,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 6420,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-27T0910-bm25",
+      "config_name": "retrieval: BM25 only",
+      "split": "dev",
+      "created_at": "2026-10-27T09:10:40Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.631,
+          "ci_low": 0.585,
+          "ci_high": 0.677,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.827,
+          "ci_low": 0.796,
+          "ci_high": 0.858,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.691,
+          "ci_low": 0.653,
+          "ci_high": 0.729,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.491,
+          "ci_low": 0.45,
+          "ci_high": 0.532,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 5320,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-27T1022-dense",
+      "config_name": "retrieval: dense only",
+      "split": "dev",
+      "created_at": "2026-10-27T10:22:05Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.66,
+          "ci_low": 0.614,
+          "ci_high": 0.706,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.84,
+          "ci_low": 0.809,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.746,
+          "ci_low": 0.708,
+          "ci_high": 0.784,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.529,
+          "ci_low": 0.488,
+          "ci_high": 0.57,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 5520,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-27T1135-hybrid-norerank",
+      "config_name": "retrieval: hybrid RRF, no rerank",
+      "split": "dev",
+      "created_at": "2026-10-27T11:35:52Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.693,
+          "ci_low": 0.647,
+          "ci_high": 0.739,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.861,
+          "ci_low": 0.83,
+          "ci_high": 0.892,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.802,
+          "ci_low": 0.764,
+          "ci_high": 0.84,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.548,
+          "ci_low": 0.507,
+          "ci_high": 0.589,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 5700,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-26T1650-fixed-chunks",
+      "config_name": "chunking: fixed 512 tokens",
+      "split": "dev",
+      "created_at": "2026-10-26T16:50:13Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.668,
+          "ci_low": 0.622,
+          "ci_high": 0.714,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.814,
+          "ci_low": 0.783,
+          "ci_high": 0.845,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.775,
+          "ci_low": 0.737,
+          "ci_high": 0.813,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 6420,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-26T1812-no-xbrl",
+      "config_name": "verification: XBRL check off",
+      "split": "dev",
+      "created_at": "2026-10-26T18:12:44Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.649,
+          "ci_low": 0.603,
+          "ci_high": 0.695,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.748,
+          "ci_low": 0.704,
+          "ci_high": 0.792,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.849,
+          "ci_low": 0.818,
+          "ci_high": 0.88,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 5040,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0034,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-29T0830-groq-llama",
+      "config_name": "model: Llama 3.3 70B (Groq)",
+      "split": "dev",
+      "created_at": "2026-10-29T08:30:27Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.684,
+          "ci_low": 0.638,
+          "ci_high": 0.73,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.727,
+          "ci_low": 0.683,
+          "ci_high": 0.771,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.822,
+          "ci_low": 0.791,
+          "ci_high": 0.853,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 3270,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 7610,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 10490,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0062,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-29T1115-qwen3-local",
+      "config_name": "model: Qwen3 8B (local, Ollama)",
+      "split": "dev",
+      "created_at": "2026-10-29T11:15:03Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.548,
+          "ci_low": 0.502,
+          "ci_high": 0.594,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.577,
+          "ci_low": 0.533,
+          "ci_high": 0.621,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.743,
+          "ci_low": 0.712,
+          "ci_high": 0.774,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 18220,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 41210,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 11760,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-24T1340-before-fixes",
+      "config_name": "before fixes: v0 table parser, naive period",
+      "split": "dev",
+      "created_at": "2026-10-24T13:40:00Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.615,
+          "ci_low": 0.569,
+          "ci_high": 0.661,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.667,
+          "ci_low": 0.623,
+          "ci_high": 0.711,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.832,
+          "ci_low": 0.801,
+          "ci_high": 0.863,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 6420,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "2026-10-25T1005-fix-tables",
+      "config_name": "fix 1: table parser keeps header rows",
+      "split": "dev",
+      "created_at": "2026-10-25T10:05:31Z",
+      "datasets": [
+        "financebench",
+        "xbrl",
+        "unanswerable"
+      ],
+      "summary": {
+        "numeric_accuracy": {
+          "value": 0.671,
+          "ci_low": 0.625,
+          "ci_high": 0.717,
+          "n": 360
+        },
+        "judge_accuracy": {
+          "value": 0.712,
+          "ci_low": 0.668,
+          "ci_high": 0.756,
+          "n": 360
+        },
+        "citation_precision": {
+          "value": 0.85,
+          "ci_low": 0.819,
+          "ci_high": 0.881,
+          "n": 360
+        },
+        "citation_recall": {
+          "value": 0.794,
+          "ci_low": 0.755,
+          "ci_high": 0.833,
+          "n": 360
+        },
+        "refusal_accuracy": {
+          "value": 0.9,
+          "ci_low": 0.81,
+          "ci_high": 0.99,
+          "n": 40
+        },
+        "recall@10": {
+          "value": 0.833,
+          "ci_low": 0.795,
+          "ci_high": 0.871,
+          "n": 360
+        },
+        "mrr": {
+          "value": 0.612,
+          "ci_low": 0.571,
+          "ci_high": 0.653,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 6420,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "latency_p95_ms": {
+          "value": 14810,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "tokens_per_question": {
+          "value": 9850,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        },
+        "cost_per_question_usd": {
+          "value": 0.0041,
+          "ci_low": null,
+          "ci_high": null,
+          "n": 360
+        }
+      }
+    }
+  ],
+  "tables": [
+    {
+      "id": "ablation-retrieval",
+      "title": "Retrieval method",
+      "description": "Same agent and model, only the retriever changes. Paired bootstrap against hybrid + rerank.",
+      "baseline": "Hybrid + rerank",
+      "columns": [
+        "recall@10",
+        "mrr",
+        "numeric_accuracy"
+      ],
+      "rows": [
+        {
+          "name": "BM25",
+          "run_id": "2026-10-27T0910-bm25",
+          "metrics": {
+            "recall@10": {
+              "value": 0.691,
+              "ci_low": 0.653,
+              "ci_high": 0.729,
+              "delta": -0.142,
+              "p_value": 0.0002
+            },
+            "mrr": {
+              "value": 0.491,
+              "ci_low": 0.45,
+              "ci_high": 0.532,
+              "delta": -0.121,
+              "p_value": 0.0001
+            },
+            "numeric_accuracy": {
+              "value": 0.631,
+              "ci_low": 0.585,
+              "ci_high": 0.677,
+              "delta": -0.081,
+              "p_value": 0.0008
+            }
+          }
+        },
+        {
+          "name": "Dense",
+          "run_id": "2026-10-27T1022-dense",
+          "metrics": {
+            "recall@10": {
+              "value": 0.746,
+              "ci_low": 0.708,
+              "ci_high": 0.784,
+              "delta": -0.087,
+              "p_value": 0.0011
+            },
+            "mrr": {
+              "value": 0.529,
+              "ci_low": 0.488,
+              "ci_high": 0.57,
+              "delta": -0.083,
+              "p_value": 0.0004
+            },
+            "numeric_accuracy": {
+              "value": 0.66,
+              "ci_low": 0.614,
+              "ci_high": 0.706,
+              "delta": -0.052,
+              "p_value": 0.012
+            }
+          }
+        },
+        {
+          "name": "Hybrid (RRF)",
+          "run_id": "2026-10-27T1135-hybrid-norerank",
+          "metrics": {
+            "recall@10": {
+              "value": 0.802,
+              "ci_low": 0.764,
+              "ci_high": 0.84,
+              "delta": -0.031,
+              "p_value": 0.081
+            },
+            "mrr": {
+              "value": 0.548,
+              "ci_low": 0.507,
+              "ci_high": 0.589,
+              "delta": -0.064,
+              "p_value": 0.003
+            },
+            "numeric_accuracy": {
+              "value": 0.693,
+              "ci_low": 0.647,
+              "ci_high": 0.739,
+              "delta": -0.019,
+              "p_value": 0.29
+            }
+          }
+        },
+        {
+          "name": "Hybrid + rerank",
+          "run_id": "2026-10-28T1402-full-gemini-flash",
+          "metrics": {
+            "recall@10": {
+              "value": 0.833,
+              "ci_low": 0.795,
+              "ci_high": 0.871
+            },
+            "mrr": {
+              "value": 0.612,
+              "ci_low": 0.571,
+              "ci_high": 0.653
+            },
+            "numeric_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.666,
+              "ci_high": 0.758
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ablation-chunking",
+      "title": "Chunking strategy",
+      "description": "Section-aware chunks keep tables whole; fixed windows split them.",
+      "baseline": "Section-aware",
+      "columns": [
+        "numeric_accuracy",
+        "recall@10",
+        "citation_precision"
+      ],
+      "rows": [
+        {
+          "name": "Fixed 512 tokens",
+          "run_id": "2026-10-26T1650-fixed-chunks",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.668,
+              "ci_low": 0.622,
+              "ci_high": 0.714,
+              "delta": -0.044,
+              "p_value": 0.006
+            },
+            "recall@10": {
+              "value": 0.775,
+              "ci_low": 0.737,
+              "ci_high": 0.813,
+              "delta": -0.058,
+              "p_value": 0.019
+            },
+            "citation_precision": {
+              "value": 0.814,
+              "ci_low": 0.783,
+              "ci_high": 0.845,
+              "delta": -0.047,
+              "p_value": 0.004
+            }
+          }
+        },
+        {
+          "name": "Section-aware",
+          "run_id": "2026-10-28T1402-full-gemini-flash",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.666,
+              "ci_high": 0.758
+            },
+            "recall@10": {
+              "value": 0.833,
+              "ci_low": 0.795,
+              "ci_high": 0.871
+            },
+            "citation_precision": {
+              "value": 0.861,
+              "ci_low": 0.83,
+              "ci_high": 0.892
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ablation-xbrl-verify",
+      "title": "XBRL verification",
+      "description": "Cross-checking extracted numbers against SEC company facts before answering.",
+      "baseline": "Verify on",
+      "columns": [
+        "numeric_accuracy",
+        "citation_precision",
+        "latency_p50_ms",
+        "cost_per_question_usd"
+      ],
+      "rows": [
+        {
+          "name": "Verify off",
+          "run_id": "2026-10-26T1812-no-xbrl",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.649,
+              "ci_low": 0.603,
+              "ci_high": 0.695,
+              "delta": -0.063,
+              "p_value": 0.0009
+            },
+            "citation_precision": {
+              "value": 0.849,
+              "ci_low": 0.818,
+              "ci_high": 0.88,
+              "delta": -0.012,
+              "p_value": 0.41
+            },
+            "latency_p50_ms": {
+              "value": 5040,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": -1380,
+              "p_value": 0.0001
+            },
+            "cost_per_question_usd": {
+              "value": 0.0034,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": -0.0007,
+              "p_value": 0.0001
+            }
+          }
+        },
+        {
+          "name": "Verify on",
+          "run_id": "2026-10-28T1402-full-gemini-flash",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.666,
+              "ci_high": 0.758
+            },
+            "citation_precision": {
+              "value": 0.861,
+              "ci_low": 0.83,
+              "ci_high": 0.892
+            },
+            "latency_p50_ms": {
+              "value": 6420,
+              "ci_low": null,
+              "ci_high": null
+            },
+            "cost_per_question_usd": {
+              "value": 0.0041,
+              "ci_low": null,
+              "ci_high": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "model-comparison",
+      "title": "Model comparison",
+      "description": "Same pipeline with three models. Cost is the list-price equivalent, even for free tiers and local inference.",
+      "baseline": "Gemini 2.5 Flash",
+      "columns": [
+        "numeric_accuracy",
+        "judge_accuracy",
+        "citation_precision",
+        "latency_p50_ms",
+        "tokens_per_question",
+        "cost_per_question_usd"
+      ],
+      "rows": [
+        {
+          "name": "Gemini 2.5 Flash",
+          "run_id": "2026-10-28T1402-full-gemini-flash",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.666,
+              "ci_high": 0.758
+            },
+            "judge_accuracy": {
+              "value": 0.748,
+              "ci_low": 0.704,
+              "ci_high": 0.792
+            },
+            "citation_precision": {
+              "value": 0.861,
+              "ci_low": 0.83,
+              "ci_high": 0.892
+            },
+            "latency_p50_ms": {
+              "value": 6420,
+              "ci_low": null,
+              "ci_high": null
+            },
+            "tokens_per_question": {
+              "value": 9850,
+              "ci_low": null,
+              "ci_high": null
+            },
+            "cost_per_question_usd": {
+              "value": 0.0041,
+              "ci_low": null,
+              "ci_high": null
+            }
+          }
+        },
+        {
+          "name": "Llama 3.3 70B (Groq)",
+          "run_id": "2026-10-29T0830-groq-llama",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.684,
+              "ci_low": 0.638,
+              "ci_high": 0.73,
+              "delta": -0.028,
+              "p_value": 0.21
+            },
+            "judge_accuracy": {
+              "value": 0.727,
+              "ci_low": 0.683,
+              "ci_high": 0.771,
+              "delta": -0.021,
+              "p_value": 0.34
+            },
+            "citation_precision": {
+              "value": 0.822,
+              "ci_low": 0.791,
+              "ci_high": 0.853,
+              "delta": -0.039,
+              "p_value": 0.03
+            },
+            "latency_p50_ms": {
+              "value": 3270,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": -3150,
+              "p_value": 0.0001
+            },
+            "tokens_per_question": {
+              "value": 10490,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": 640,
+              "p_value": 0.002
+            },
+            "cost_per_question_usd": {
+              "value": 0.0062,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": 0.0021,
+              "p_value": 0.0001
+            }
+          }
+        },
+        {
+          "name": "Qwen3 8B (local)",
+          "run_id": "2026-10-29T1115-qwen3-local",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.548,
+              "ci_low": 0.502,
+              "ci_high": 0.594,
+              "delta": -0.164,
+              "p_value": 0.0001
+            },
+            "judge_accuracy": {
+              "value": 0.577,
+              "ci_low": 0.533,
+              "ci_high": 0.621,
+              "delta": -0.171,
+              "p_value": 0.0001
+            },
+            "citation_precision": {
+              "value": 0.743,
+              "ci_low": 0.712,
+              "ci_high": 0.774,
+              "delta": -0.118,
+              "p_value": 0.0001
+            },
+            "latency_p50_ms": {
+              "value": 18220,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": 11800,
+              "p_value": 0.0001
+            },
+            "tokens_per_question": {
+              "value": 11760,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": 1910,
+              "p_value": 0.0001
+            },
+            "cost_per_question_usd": {
+              "value": 0,
+              "ci_low": null,
+              "ci_high": null,
+              "delta": -0.0041,
+              "p_value": 0.0001
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "error-fixes",
+      "title": "Targeted fixes",
+      "description": "Fixes chosen from the failure taxonomy, measured on the same dev questions.",
+      "baseline": "Before fixes",
+      "columns": [
+        "numeric_accuracy",
+        "judge_accuracy",
+        "citation_precision"
+      ],
+      "rows": [
+        {
+          "name": "Before fixes",
+          "run_id": "2026-10-24T1340-before-fixes",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.615,
+              "ci_low": 0.569,
+              "ci_high": 0.661
+            },
+            "judge_accuracy": {
+              "value": 0.667,
+              "ci_low": 0.623,
+              "ci_high": 0.711
+            },
+            "citation_precision": {
+              "value": 0.832,
+              "ci_low": 0.801,
+              "ci_high": 0.863
+            }
+          }
+        },
+        {
+          "name": "+ table parser fix",
+          "run_id": "2026-10-25T1005-fix-tables",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.671,
+              "ci_low": 0.625,
+              "ci_high": 0.717,
+              "delta": 0.056,
+              "p_value": 0.002
+            },
+            "judge_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.668,
+              "ci_high": 0.756,
+              "delta": 0.045,
+              "p_value": 0.011
+            },
+            "citation_precision": {
+              "value": 0.85,
+              "ci_low": 0.819,
+              "ci_high": 0.881,
+              "delta": 0.018,
+              "p_value": 0.07
+            }
+          }
+        },
+        {
+          "name": "+ fiscal period fix",
+          "run_id": "2026-10-28T1402-full-gemini-flash",
+          "metrics": {
+            "numeric_accuracy": {
+              "value": 0.712,
+              "ci_low": 0.666,
+              "ci_high": 0.758,
+              "delta": 0.097,
+              "p_value": 0.0001
+            },
+            "judge_accuracy": {
+              "value": 0.748,
+              "ci_low": 0.704,
+              "ci_high": 0.792,
+              "delta": 0.081,
+              "p_value": 0.0006
+            },
+            "citation_precision": {
+              "value": 0.861,
+              "ci_low": 0.83,
+              "ci_high": 0.892,
+              "delta": 0.029,
+              "p_value": 0.04
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "failure_counts": {
+    "retrieval_miss": 31,
+    "table_misread": 22,
+    "wrong_period": 18,
+    "arithmetic": 12,
+    "bad_refusal": 9,
+    "other": 7,
+    "hallucinated_citation": 5
+  },
+  "failures": [
+    {
+      "qid": "fb-00412",
+      "dataset": "financebench",
+      "question": "What is the FY2019 fixed asset turnover ratio for Activision Blizzard?",
+      "gold": "24.26",
+      "answer": "18.9",
+      "failure_category": "table_misread",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Read the 2018 PP&E column from the balance sheet table."
+    },
+    {
+      "qid": "fb-00087",
+      "dataset": "financebench",
+      "question": "What was 3M's FY2018 capital expenditure in USD millions?",
+      "gold": "$1,577",
+      "answer": "$1,350",
+      "failure_category": "retrieval_miss",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "The cash flow statement chunk was ranked 14th; only investing activities text was retrieved."
+    },
+    {
+      "qid": "xbrl-0142",
+      "dataset": "xbrl",
+      "question": "What was Costco's net income for fiscal 2023?",
+      "gold": "$6,292 million",
+      "answer": "$5,844 million",
+      "failure_category": "wrong_period",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Answered with fiscal 2022; the 52/53-week fiscal calendar was not resolved."
+    },
+    {
+      "qid": "fb-00233",
+      "dataset": "financebench",
+      "question": "What is the year-over-year change in Nike's gross margin from FY2022 to FY2023?",
+      "gold": "-1.1 pts",
+      "answer": "-2.5 pts",
+      "failure_category": "arithmetic",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Subtracted revenue growth rates instead of margins."
+    },
+    {
+      "qid": "unans-017",
+      "dataset": "unanswerable",
+      "question": "What will Apple's revenue be in fiscal 2027?",
+      "gold": null,
+      "answer": "$455 billion",
+      "failure_category": "bad_refusal",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Projected from the trend instead of refusing a forward-looking question."
+    },
+    {
+      "qid": "xbrl-0309",
+      "dataset": "xbrl",
+      "question": "How many shares did Coca-Cola repurchase in 2023?",
+      "gold": "8.9 million",
+      "answer": "8.9 million",
+      "failure_category": "hallucinated_citation",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Right number, but the citation points to a 2022 chunk that does not contain it."
+    },
+    {
+      "qid": "fb-00519",
+      "dataset": "financebench",
+      "question": "Does Pfizer have positive working capital as of FY2022?",
+      "gold": "Yes",
+      "answer": "No",
+      "failure_category": "table_misread",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Treated a subtotal row as total current liabilities."
+    },
+    {
+      "qid": "xbrl-0057",
+      "dataset": "xbrl",
+      "question": "What was JPMorgan's provision for credit losses in 2024?",
+      "gold": "$10,678 million",
+      "answer": "$9,320 million",
+      "failure_category": "wrong_period",
+      "run_id": "2026-10-28T1402-full-gemini-flash",
+      "explanation": "Used the 2023 column of a three-year table."
+    }
+  ],
+  "judge_calibration": {
+    "accuracy": {
+      "value": 0.913,
+      "ci_low": 0.868,
+      "ci_high": 0.958,
+      "n": 150
+    },
+    "kappa": {
+      "value": 0.792,
+      "ci_low": 0.698,
+      "ci_high": 0.886,
+      "n": 150
+    },
+    "n": 150,
+    "judge_model": "gemini-2.5-pro",
+    "confusion": [
+      [
+        88,
+        6
+      ],
+      [
+        7,
+        49
+      ]
+    ]
+  }
+}
