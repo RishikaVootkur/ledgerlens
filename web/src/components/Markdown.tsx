@@ -6,6 +6,11 @@ import { citationLabel, citeIndexFromHref, linkifyCitations } from "../lib/citat
 import { rehypeHighlightQuote } from "../lib/rehypeHighlight";
 import { cx } from "../lib/style";
 
+// Answers are model output built from untrusted filing text, so nothing in them
+// may make the browser fetch a remote resource. Raw HTML is already dropped
+// (no rehype-raw); this covers Markdown images.
+const BLOCKED_ELEMENTS = ["img", "picture", "source", "video", "audio", "iframe", "object", "embed"];
+
 const tableComponents: Components = {
   table: ({ children }) => (
     <div className="table-wrap">
@@ -91,7 +96,12 @@ export function AnswerMarkdown({
   );
   return (
     <div className={cx("md", streaming && "streaming-caret")}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={components}
+        disallowedElements={BLOCKED_ELEMENTS}
+        unwrapDisallowed
+      >
         {source}
       </ReactMarkdown>
     </div>
@@ -106,6 +116,8 @@ export function ChunkMarkdown({ text, quote }: { text: string; quote: string }) 
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[[rehypeHighlightQuote, { quote }]]}
         components={tableComponents}
+        disallowedElements={BLOCKED_ELEMENTS}
+        unwrapDisallowed
       >
         {text}
       </ReactMarkdown>

