@@ -10,7 +10,11 @@ and `quality.md` (summary tables). Checks:
 - duplicate chunks: exact (hash of the body text) and near (hash of lowercased
   alphanumerics only), per strategy across the corpus;
 - chunk size outside bounds (under `MIN_TOKENS` or over `MAX_TOKENS`);
-- 10-K filings with no Item 7 or Item 8 heading, 10-Qs with no Item 1 or Item 2.
+- 10-K filings with no Item 7 or Item 8 heading, 10-Qs with no Part I Item 1 or
+  Part I Item 2 (Part II has its own Items 1 and 2, which do not count);
+- 10-K/10-Q filings with more than `MAX_OUTSIDE_ITEM_SHARE` of their content blocks
+  outside any Item section (a sign the section paths failed);
+- table cells that hold more than one number (merged value columns).
 """
 
 from __future__ import annotations
@@ -23,14 +27,18 @@ from pathlib import Path
 from typing import Any
 
 from ledgerlens.ingest.chunk import approx_tokens, body_text
-from ledgerlens.ingest.sections import item_number, top_level_section
-from ledgerlens.ingest.tables import markdown_table_rows
+from ledgerlens.ingest.sections import item_key, top_level_section
+from ledgerlens.ingest.tables import markdown_table_rows, packed_cell
 from ledgerlens.schemas import Chunk, ParsedFiling
 
 MIN_TOKENS = 20
 MAX_TOKENS = 1200
 MAX_EXAMPLES = 10
-REQUIRED_ITEMS = {"10-K": ("7", "8"), "10-Q": ("1", "2")}
+MAX_OUTSIDE_ITEM_SHARE = 0.5
+REQUIRED_ITEMS: dict[str, tuple[tuple[str | None, str], ...]] = {
+    "10-K": ((None, "7"), (None, "8")),
+    "10-Q": (("Part I", "1"), ("Part I", "2")),
+}
 
 _NON_ALNUM = re.compile(r"[^a-z0-9]+")
 
@@ -73,11 +81,32 @@ def empty_sections(parsed: ParsedFiling) -> tuple[list[str], list[str]]:
 
 
 def missing_items(parsed: ParsedFiling) -> list[str]:
+    """Required Items with no heading. A 10-Q needs them under Part I."""
     required = REQUIRED_ITEMS.get(parsed.filing.form)
     if not required:
         return []
-    found = {item_number(b.section) for b in parsed.blocks if b.kind == "heading"}
-    return [f"Item {n}" for n in required if n not in found]
+    found = {item_key(b.section) for b in parsed.blocks if b.kind == "heading"}
+    return [
+        f"{part} Item {n}" if part else f"Item {n}"
+        for part, n in required
+        if (part, n) not in found
+    ]
+
+
+def outside_item_share(parsed: ParsedFiling) -> float | None:
+    """Share of content blocks not under any Item (10-K and 10-Q only)."""
+    if parsed.filing.form not in REQUIRED_ITEMS:
+        return None
+    content = [b for b in parsed.blocks if b.kind != "heading"]
+    if not content:
+        return None
+    outside = sum(1 for b in content if item_key(b.section) is None)
+    return round(outside / len(content), 3)
+
+
+def packed_cells(markdown: str) -> int:
+    """Body cells holding two or more numbers side by side."""
+    return sum(packed_cell(c) for row in markdown_table_rows(markdown)[1:] for c in row)
 
 
 def _hash(text: str) -> str:
@@ -106,6 +135,7 @@ def check(parsed: list[ParsedFiling], chunks: dict[str, list[Chunk]]) -> dict[st
     table_issue_counts: Counter[str] = Counter()
     table_examples: list[dict[str, Any]] = []
     n_tables = 0
+    n_packed = 0
     for p in parsed:
         empty_top, empty_sub = empty_sections(p)
         missing = missing_items(p)
@@ -114,6 +144,7 @@ def check(parsed: list[ParsedFiling], chunks: dict[str, list[Chunk]]) -> dict[st
             if b.kind != "table":
                 continue
             n_tables += 1
+            n_packed += packed_cells(b.text)
             for prob in table_problems(b.text):
                 issues[prob] += 1
                 table_issue_counts[prob] += 1
@@ -132,6 +163,7 @@ def check(parsed: list[ParsedFiling], chunks: dict[str, list[Chunk]]) -> dict[st
                 "empty_sections": empty_top,
                 "empty_subsections": len(empty_sub),
                 "missing_items": missing,
+                "outside_item_share": outside_item_share(p),
                 "table_issues": dict(issues),
             }
         )
@@ -165,6 +197,12 @@ def check(parsed: list[ParsedFiling], chunks: dict[str, list[Chunk]]) -> dict[st
         "empty_subsections": sum(f["empty_subsections"] for f in filings),
         "broken_tables": dict(table_issue_counts),
         "broken_tables_total": sum(table_issue_counts.values()),
+        "multi_number_cells": n_packed,
+        "filings_mostly_outside_items": [
+            {"filing_id": f["filing_id"], "share": f["outside_item_share"]}
+            for f in filings
+            if (f["outside_item_share"] or 0) > MAX_OUTSIDE_ITEM_SHARE
+        ],
         "filings_missing_items": [
             {"filing_id": f["filing_id"], "missing": f["missing_items"]}
             for f in filings
@@ -199,11 +237,15 @@ def to_markdown(report: dict[str, Any]) -> str:
         f"(in {t['filings_with_empty_sections']} filings) |",
         f"| Empty sub-sections | {t['empty_subsections']} |",
         f"| Broken tables | {t['broken_tables_total']} |",
+        f"| Table cells holding more than one number | {t['multi_number_cells']} |",
+        f"| 10-K/10-Q filings with over {MAX_OUTSIDE_ITEM_SHARE:.0%} of blocks outside any Item "
+        f"| {len(t['filings_mostly_outside_items'])} |",
     ]
     for prob, n in sorted(t["broken_tables"].items()):
         lines.append(f"| Broken tables: {prob} | {n} |")
     lines.append(
-        f"| Filings missing Item 7/8 (10-K) or 1/2 (10-Q) | {len(t['filings_missing_items'])} |"
+        "| Filings missing Item 7/8 (10-K) or Part I Item 1/2 (10-Q) "
+        f"| {len(t['filings_missing_items'])} |"
     )
     lines += [
         "",
@@ -227,26 +269,41 @@ def to_markdown(report: dict[str, Any]) -> str:
         lines += [
             f"- {m['filing_id']}: {', '.join(m['missing'])}" for m in t["filings_missing_items"]
         ]
+    if t["filings_mostly_outside_items"]:
+        lines += ["", "## Filings with most blocks outside any Item", ""]
+        lines += [
+            f"- {m['filing_id']}: {m['share']:.0%}" for m in t["filings_mostly_outside_items"]
+        ]
     lines += [
         "",
         "## Per filing",
         "",
-        "| Filing | Format | Blocks | Headings | Tables | Pages | Empty sections | Table issues |",
-        "|---|---|---|---|---|---|---|---|",
+        "| Filing | Format | Blocks | Headings | Tables | Pages | Outside Items "
+        "| Empty sections | Table issues |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for f in report["filings"]:
         issues = sum(f["table_issues"].values())
+        share = f.get("outside_item_share")
+        outside = "n/a" if share is None else f"{share:.0%}"
         lines.append(
             f"| {f['filing_id']} | {f['source_format']} | {f['blocks']} | {f['headings']} | "
-            f"{f['tables']} | {f['max_page']} | {len(f['empty_sections'])} | {issues} |"
+            f"{f['tables']} | {f['max_page']} | {outside} | {len(f['empty_sections'])} | "
+            f"{issues} |"
         )
     return "\n".join(lines) + "\n"
+
+
+def _write_atomic(path: Path, text: str) -> None:
+    tmp = path.with_name(path.name + ".part")
+    tmp.write_text(text, encoding="utf-8")
+    tmp.replace(path)
 
 
 def write_reports(report: dict[str, Any], reports_dir: Path) -> tuple[Path, Path]:
     reports_dir.mkdir(parents=True, exist_ok=True)
     json_path = reports_dir / "quality.json"
     md_path = reports_dir / "quality.md"
-    json_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    md_path.write_text(to_markdown(report), encoding="utf-8")
+    _write_atomic(json_path, json.dumps(report, indent=2) + "\n")
+    _write_atomic(md_path, to_markdown(report))
     return json_path, md_path

@@ -2,6 +2,8 @@ from ledgerlens.ingest.quality import (
     check,
     empty_sections,
     missing_items,
+    outside_item_share,
+    packed_cells,
     table_problems,
     to_markdown,
     write_reports,
@@ -74,3 +76,33 @@ def test_duplicates_and_size_bounds(html_ref, tmp_path):
     assert "| section | 5 |" in md
     json_path, md_path = write_reports(report, tmp_path)
     assert json_path.exists() and md_path.read_text() == md
+    assert not list(tmp_path.glob("*.part"))
+
+
+def test_10q_needs_part_i_items_and_flags_content_outside_items(html_ref):
+    q = html_ref.model_copy(update={"form": "10-Q", "fiscal_period": "Q2"})
+    blocks = [
+        Block(kind="heading", text="Funding", section="Cover > Funding"),
+        Block(kind="text", text="a", section="Cover > Funding"),
+        Block(kind="text", text="b", section="Cover > Funding"),
+        Block(kind="heading", text="Part II", section="Part II"),
+        Block(kind="heading", text="Item 1. Legal Proceedings", section="Part II > Item 1. Legal"),
+        Block(kind="text", text="c", section="Part II > Item 1. Legal"),
+        Block(kind="heading", text="Item 2. Sales", section="Part II > Item 2. Sales"),
+        Block(kind="text", text="d", section="Part II > Item 2. Sales"),
+    ]
+    parsed = ParsedFiling(filing=q, blocks=blocks)
+    assert missing_items(parsed) == ["Part I Item 1", "Part I Item 2"]
+    assert outside_item_share(parsed) == 0.5
+    report = check([parsed], {})
+    assert report["filings"][0]["missing_items"] == ["Part I Item 1", "Part I Item 2"]
+    blocks[1:3] = [Block(kind="text", text="x", section="Cover > Funding")] * 3
+    report = check([ParsedFiling(filing=q, blocks=blocks)], {})
+    assert report["totals"]["filings_mostly_outside_items"] == [
+        {"filing_id": q.filing_id, "share": 0.6}
+    ]
+
+
+def test_multi_number_cells_are_counted():
+    md = "| | 2018 2017 |\n|---|---|\n| Asia | 1,624 1,672 |\n| Europe | 1,751 |"
+    assert packed_cells(md) == 1
