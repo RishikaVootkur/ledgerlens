@@ -20,17 +20,24 @@ from ledgerlens.llm import DEFAULT_JUDGE_MODEL, complete
 Label = Literal["CORRECT", "INCORRECT", "REFUSAL"]
 LABELS: tuple[Label, ...] = ("CORRECT", "INCORRECT", "REFUSAL")
 
-JUDGE_PROMPT_VERSION = "v1"
+# v2 (tuned on the calibration dev split only): refusals take priority over
+# correctness, and empty or off-topic text counts as incorrect, matching how
+# FinanceBench's annotators labeled answers.
+JUDGE_PROMPT_VERSION = "v2"
 
 JUDGE_SYSTEM = """You grade answers to questions about company financial filings.
 Compare the candidate answer with the gold answer and reply with one label:
-- CORRECT: the candidate states the gold answer's key facts and numbers. Rounding,
-  units written differently (e.g. $1,577 million vs $1.58 billion) and extra correct
-  detail are fine. For yes/no questions the conclusion must match.
-- INCORRECT: a key number or conclusion is wrong, contradicts the gold answer, is
-  missing, or the answer is about a different company or period.
-- REFUSAL: the candidate declines or says the information is not available, without
-  committing to an answer.
+- REFUSAL: the candidate says it cannot answer, or that the information is not
+  available, not provided or not disclosed (including "as an AI I don't have access").
+  Use REFUSAL whenever the candidate declines, even if it adds general background, and
+  even though the gold answer exists. Check this first.
+- CORRECT: the candidate commits to an answer that states the gold answer's key facts
+  and numbers. Rounding, units written differently (e.g. $1,577 million vs $1.58
+  billion) and extra correct detail are fine. For yes/no questions the conclusion must
+  match.
+- INCORRECT: the candidate commits to an answer but a key number or conclusion is
+  wrong, contradicts the gold answer, or is about a different company or period. Text
+  that neither answers nor declines (empty, cut off, off-topic) is also INCORRECT.
 Return JSON only: {"label": "CORRECT|INCORRECT|REFUSAL", "reason": "one sentence"}"""
 
 JUDGE_USER = """Question: {question}
