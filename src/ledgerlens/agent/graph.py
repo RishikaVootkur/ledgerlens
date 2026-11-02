@@ -52,7 +52,9 @@ class AgentConfig:
     verify_numbers: bool = True
     self_check: bool = True
     max_repairs: int = 1
-    answer_evidence_chars: int = 14000
+    # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
+    # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
+    answer_evidence_chars: int = 10000
     temperature: float = 0.0
 
 
