@@ -42,7 +42,7 @@ export function QuestionDetail({ result }: { result: QuestionResult }) {
       </Field>
 
       <Field label="Gold">
-        <p className="text-sm tabular-nums">{result.gold ?? <span className="text-zinc-500">None (should refuse)</span>}</p>
+        <p className="text-sm tabular-nums">{result.gold ?? <span className="text-zinc-500 dark:text-zinc-400">None (should refuse)</span>}</p>
       </Field>
 
       <Field label="Answer">
@@ -61,7 +61,7 @@ export function QuestionDetail({ result }: { result: QuestionResult }) {
             />
           </div>
         ) : (
-          <p className="text-sm text-zinc-500">No prediction.</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">No prediction.</p>
         )}
       </Field>
 
@@ -85,7 +85,7 @@ export function QuestionDetail({ result }: { result: QuestionResult }) {
                 )}
               >
                 <p className="font-medium">
-                  <span className="mr-1.5 text-zinc-400 tabular-nums">{i + 1}.</span>
+                  <span className="mr-1.5 text-zinc-500 dark:text-zinc-400 tabular-nums">{i + 1}.</span>
                   {citationLabel(c)}
                 </p>
                 <p className="truncate text-xs text-zinc-500 dark:text-zinc-400" title={c.section}>
@@ -124,7 +124,7 @@ export function QuestionDetail({ result }: { result: QuestionResult }) {
         </Field>
       ) : null}
 
-      <p className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{result.qid}</p>
+      <p className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{result.qid}</p>
     </div>
   );
 }

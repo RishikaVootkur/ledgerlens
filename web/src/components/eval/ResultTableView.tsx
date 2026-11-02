@@ -30,7 +30,7 @@ function DeltaText({ metric, cell }: { metric: string; cell: TableCell }) {
     <span
       className={cx(
         "text-xs tabular-nums",
-        sig ? cx("font-semibold", toneClass[tone]) : "text-zinc-400 dark:text-zinc-500",
+        sig ? cx("font-semibold", toneClass[tone]) : "text-zinc-500 dark:text-zinc-400",
       )}
       title={p ? `${p}${sig ? " (significant)" : " (not significant)"}` : undefined}
     >
@@ -79,7 +79,7 @@ function WhiskerChart({ table }: { table: ResultTable }) {
           <span className="text-right font-medium tabular-nums">{formatMetric(metric, cell.value)}</span>
         </div>
       ))}
-      <div className="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)_4.5rem] gap-3 text-[10px] text-zinc-400 tabular-nums dark:text-zinc-500">
+      <div className="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)_4.5rem] gap-3 text-[10px] text-zinc-500 tabular-nums dark:text-zinc-400">
         <span />
         <span className="flex justify-between">
           <span>{formatMetric(metric, d0)}</span>
@@ -139,11 +139,11 @@ export function ResultTableView({ table }: { table: ResultTable }) {
                         {cell ? (
                           <div className="flex flex-col items-end">
                             <span className="font-medium">{formatMetric(c, cell.value)}</span>
-                            {ci ? <span className="text-[11px] text-zinc-400 dark:text-zinc-500">{ci}</span> : null}
+                            {ci ? <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{ci}</span> : null}
                             <DeltaText metric={c} cell={cell} />
                           </div>
                         ) : (
-                          <span className="text-zinc-400">n/a</span>
+                          <span className="text-zinc-500 dark:text-zinc-400">n/a</span>
                         )}
                       </td>
                     );

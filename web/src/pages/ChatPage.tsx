@@ -164,7 +164,7 @@ function LiveChat() {
                 {state.steps.length > 0 ? (
                   <StepTimeline steps={state.steps} live={streaming} />
                 ) : (
-                  <p className="text-sm text-zinc-500">Starting…</p>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">Starting…</p>
                 )}
               </div>
               <div className="min-w-0 space-y-4" aria-live="polite" aria-busy={streaming}>

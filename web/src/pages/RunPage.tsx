@@ -118,7 +118,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                   <tr key={d}>
                     <th scope="row" className="px-4 py-2 text-left font-medium sm:pl-5">
                       {d}
-                      <span className="ml-1.5 text-xs font-normal text-zinc-400">
+                      <span className="ml-1.5 text-xs font-normal text-zinc-500 dark:text-zinc-400">
                         n={Math.max(0, ...Object.values(run.summary_by_dataset[d] ?? {}).map((v) => v.n))}
                       </span>
                     </th>
@@ -126,7 +126,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                       const v = run.summary_by_dataset[d]?.[m];
                       return (
                         <td key={m} className="px-4 py-2 text-right">
-                          {v ? formatMetric(m, v.value) : <span className="text-zinc-400">n/a</span>}
+                          {v ? formatMetric(m, v.value) : <span className="text-zinc-500 dark:text-zinc-400">n/a</span>}
                         </td>
                       );
                     })}
@@ -237,7 +237,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                       >
                         {r.question}
                       </button>
-                      <span className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{r.qid}</span>
+                      <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{r.qid}</span>
                     </td>
                     <td className="hidden px-4 py-2.5 text-zinc-600 md:table-cell dark:text-zinc-400">{r.dataset}</td>
                     <td className="px-4 py-2.5">
@@ -247,7 +247,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                       {score ? (
                         <span title={metricLabel(score.name)}>{formatMetric(score.name, score.value)}</span>
                       ) : (
-                        <span className="text-zinc-400">n/a</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">n/a</span>
                       )}
                     </td>
                     <td className="hidden px-4 py-2.5 text-zinc-600 lg:table-cell dark:text-zinc-400">
@@ -258,7 +258,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
               })}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-5 py-6 text-center text-sm text-zinc-500">
+                  <td colSpan={5} className="px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
                     No questions match these filters.
                   </td>
                 </tr>

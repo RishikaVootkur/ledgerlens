@@ -42,7 +42,7 @@ export function MetricCard({ name, metric }: { name: string; metric: MetricValue
         <h3 className="truncate text-xs font-medium text-zinc-600 dark:text-zinc-400" title={spec.help}>
           {spec.label}
         </h3>
-        <span className="text-[11px] text-zinc-400 tabular-nums dark:text-zinc-500">n={metric.n}</span>
+        <span className="text-[11px] text-zinc-500 tabular-nums dark:text-zinc-400">n={metric.n}</span>
       </div>
       <p className="text-2xl font-semibold tracking-tight tabular-nums">{formatMetric(name, metric.value)}</p>
       <p className="h-4 text-xs text-zinc-500 tabular-nums dark:text-zinc-400">

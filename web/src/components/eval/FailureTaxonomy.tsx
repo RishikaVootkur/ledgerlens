@@ -51,7 +51,7 @@ export function FailureTaxonomy({
                 </span>
                 <span className="text-right text-zinc-600 tabular-nums dark:text-zinc-400">
                   {n}
-                  <span className="ml-1 text-[11px] text-zinc-400 dark:text-zinc-500">
+                  <span className="ml-1 text-[11px] text-zinc-500 dark:text-zinc-400">
                     {total ? `${Math.round((n / total) * 100)}%` : ""}
                   </span>
                 </span>
@@ -67,14 +67,14 @@ export function FailureTaxonomy({
         </h3>
         <div className="mt-2 divide-y divide-zinc-200 rounded-lg border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
           {shown.length === 0 ? (
-            <p className="px-3 py-3 text-sm text-zinc-500">No examples for this category.</p>
+            <p className="px-3 py-3 text-sm text-zinc-500 dark:text-zinc-400">No examples for this category.</p>
           ) : null}
           {shown.map((f) => (
             <details key={`${f.run_id}-${f.qid}`} className="group px-3 py-2.5 text-sm">
               <summary className="flex cursor-pointer list-none items-start gap-2 rounded [&::-webkit-details-marker]:hidden">
                 <svg
                   viewBox="0 0 12 12"
-                  className="mt-1 size-3 shrink-0 text-zinc-400 transition-transform group-open:rotate-90"
+                  className="mt-1 size-3 shrink-0 text-zinc-500 dark:text-zinc-400 transition-transform group-open:rotate-90"
                   aria-hidden="true"
                 >
                   <path d="M4 2.5L7.5 6 4 9.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

@@ -50,7 +50,7 @@ export function CitationList({
                 <span className="block text-xs text-zinc-600 tabular-nums dark:text-zinc-400">
                   {[f?.form, f?.period, pages].filter(Boolean).join(" · ")}
                 </span>
-                <span className="mt-0.5 block truncate text-xs text-zinc-500 dark:text-zinc-500" title={c.section}>
+                <span className="mt-0.5 block truncate text-xs text-zinc-500 dark:text-zinc-400" title={c.section}>
                   {c.section}
                 </span>
               </span>

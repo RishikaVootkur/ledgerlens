@@ -68,7 +68,7 @@ export function RunsTable({ runs }: { runs: DashboardRun[] }) {
                   >
                     {run.config_name}
                   </a>
-                  <span className="block font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{run.run_id}</span>
+                  <span className="block font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{run.run_id}</span>
                 </th>
                 <td className="px-4 py-2.5">
                   <Badge tone={run.split === "test" ? "accent" : "neutral"}>{run.split}</Badge>

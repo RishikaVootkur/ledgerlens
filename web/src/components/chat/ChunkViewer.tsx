@@ -60,7 +60,7 @@ export function ChunkViewer({ citation }: { citation: Citation }) {
       >
         <ChunkMarkdown text={chunk.text} quote={citation.quote} />
       </div>
-      <p className="font-mono text-[11px] break-all text-zinc-400 dark:text-zinc-500">{chunk.chunk_id}</p>
+      <p className="font-mono text-[11px] break-all text-zinc-500 dark:text-zinc-400">{chunk.chunk_id}</p>
     </div>
   );
 }

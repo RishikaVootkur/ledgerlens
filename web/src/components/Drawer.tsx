@@ -75,7 +75,7 @@ export function Drawer({
           <button
             type="button"
             onClick={onClose}
-            className="-m-1 rounded-md p-1 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            className="-m-1 rounded-md p-1 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
             aria-label="Close"
           >
             <svg viewBox="0 0 20 20" className="size-5" aria-hidden="true">
