@@ -154,7 +154,7 @@ export function ChatForm({
         ) : null}
       </div>
       {!busy && !question ? (
-        <div className="flex flex-wrap gap-2 pt-1" aria-label="Example questions">
+        <div className="flex flex-wrap gap-2 pt-1" role="group" aria-label="Example questions">
           {EXAMPLE_QUESTIONS.map((q) => (
             <button
               key={q}
