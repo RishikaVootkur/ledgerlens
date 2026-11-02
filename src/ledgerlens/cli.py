@@ -7,12 +7,14 @@ import typer
 from ledgerlens import __version__
 from ledgerlens.agent.cli import ask
 from ledgerlens.config import get_settings
+from ledgerlens.eval.cli import eval_app
 from ledgerlens.logging import configure_logging
 from ledgerlens.retrieval.cli import index_app
 
 app = typer.Typer(help="LedgerLens: cited answers from SEC filings, with an eval lab.")
 app.add_typer(index_app, name="index")
 app.command("ask")(ask)
+app.add_typer(eval_app, name="eval")
 
 
 @app.callback()
@@ -33,7 +35,7 @@ app.add_typer(datasets_app, name="datasets")
 
 @datasets_app.command("build")
 def datasets_build(
-    only: list[str] | None = typer.Option(  # noqa: B008
+    only: list[str] | None = typer.Option(
         None,
         "--only",
         help="Dataset to rebuild (repeatable): financebench, xbrl, unanswerable, smoke. "

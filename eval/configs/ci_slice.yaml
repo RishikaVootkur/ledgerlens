@@ -1,0 +1,17 @@
+# The slice the CI regression gate replays from the committed response cache.
+# Same agent as default.yaml, on the 20-question smoke set (AAPL, JPM, KO).
+name: ci_slice
+description: CI replay slice (smoke set) with the default agent
+model: groq-qwen3.8-27b
+strategy: section
+method: hybrid
+k: 6
+# Pinned to the index the replay cache was recorded against (see docs/eval-methodology.md).
+index_version: d94fbac6be01
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [smoke]
+scope: document
+concurrency: 3
