@@ -1,14 +1,22 @@
 import type { QuestionResult } from "../api/types";
+import { isRetrievalMetric, orderMetrics } from "./metrics";
 
 export type Outcome = "correct" | "incorrect" | "error" | "unscored";
 
 /** Score keys that decide correctness, in priority order. */
-export const PRIMARY_SCORES = ["numeric_accuracy", "judge_accuracy", "refusal_accuracy"] as const;
+export const PRIMARY_SCORES = ["numeric_correct", "judge_correct", "refusal_correct"] as const;
 
+/**
+ * The score that decides correctness. The runner writes refusal_correct on every
+ * row, so on an answerable question a 1 only means "did not refuse" and says
+ * nothing about the answer: it counts only when it is 0 (a false refusal).
+ */
 export function primaryScore(result: QuestionResult): { name: string; value: number } | null {
   for (const name of PRIMARY_SCORES) {
     const value = result.scores[name];
-    if (value !== null && value !== undefined) return { name, value };
+    if (value === null || value === undefined) continue;
+    if (name === "refusal_correct" && result.answerable && value >= 0.5) continue;
+    return { name, value };
   }
   return null;
 }
@@ -18,6 +26,21 @@ export function questionOutcome(result: QuestionResult): Outcome {
   const score = primaryScore(result);
   if (!score) return "unscored";
   return score.value >= 0.5 ? "correct" : "incorrect";
+}
+
+/** True when no question has a prediction or a correctness score (a retrieval-only run). */
+export function isRetrievalOnlyRun(results: QuestionResult[]): boolean {
+  const scored = results.filter((r) => !r.error);
+  return scored.length > 0 && scored.every((r) => r.prediction === null && primaryScore(r) === null);
+}
+
+/** Retrieval metric keys present in any question's scores, in display order. */
+export function retrievalScoreNames(results: QuestionResult[]): string[] {
+  const names = new Set<string>();
+  for (const r of results) {
+    for (const [k, v] of Object.entries(r.scores)) if (v != null && isRetrievalMetric(k)) names.add(k);
+  }
+  return orderMetrics([...names]);
 }
 
 export interface ResultFilters {

@@ -29,6 +29,7 @@ from tenacity import (
     wait_exponential_jitter,
 )
 
+from ledgerlens import tracing
 from ledgerlens.config import get_settings
 from ledgerlens.llm.cache import CacheMissError, ResponseCache, cache_key
 from ledgerlens.llm.models import GEMINI_OPENAI_BASE, ModelSpec, get_model
@@ -312,7 +313,9 @@ def complete(
     response_format: dict[str, Any] | None = None,
     purpose: str = "generic",
 ) -> LLMResponse:
-    """Run one chat completion through the cache, pacing and retry layers."""
+    """Run one chat completion through the cache, pacing and retry layers.
+
+    Each call is one LLM span when tracing is on (see `ledgerlens.tracing`)."""
     spec = get_model(model)
     request: dict[str, Any] = {
         "messages": messages,
@@ -326,7 +329,77 @@ def complete(
             request["tool_choice"] = tool_choice
     if response_format:
         request["response_format"] = response_format
+    if not tracing.enabled():
+        return _complete(spec, request, purpose)
+    with tracing.span(f"llm.{purpose}", "LLM", _request_attributes(spec, request, purpose)) as span:
+        resp = _complete(spec, request, purpose)
+        span.set_attributes(tracing.clean(_response_attributes(spec, resp)))
+        return resp
 
+
+# OpenInference `llm.provider` values (Phoenix groups and prices spans by provider + model).
+_OI_PROVIDER = {"gemini": "google"}
+
+
+def _request_attributes(spec: ModelSpec, request: dict[str, Any], purpose: str) -> dict[str, Any]:
+    # input.value is left out: the messages below already carry the whole prompt, and a
+    # JSON copy would double the size of every LLM span.
+    attrs: dict[str, Any] = {
+        "llm.model_name": spec.model,
+        "llm.provider": _OI_PROVIDER.get(spec.provider, spec.provider),
+        "llm.invocation_parameters": tracing.to_json(
+            {k: v for k, v in request.items() if k not in ("messages", "tools")}
+        ),
+        "ledgerlens.model_alias": spec.alias,
+        "ledgerlens.purpose": purpose,
+    }
+    for i, message in enumerate(request["messages"]):
+        prefix = f"llm.input_messages.{i}.message"
+        attrs[f"{prefix}.role"] = str(message.get("role", ""))
+        attrs[f"{prefix}.content"] = str(message.get("content") or "")
+        if message.get("tool_call_id"):
+            attrs[f"{prefix}.tool_call_id"] = str(message["tool_call_id"])
+        for j, call in enumerate(message.get("tool_calls") or []):
+            function = call.get("function", {}) if isinstance(call, dict) else {}
+            call_prefix = f"{prefix}.tool_calls.{j}.tool_call"
+            if isinstance(call, dict) and call.get("id"):
+                attrs[f"{call_prefix}.id"] = str(call["id"])
+            attrs[f"{call_prefix}.function.name"] = str(function.get("name", ""))
+            attrs[f"{call_prefix}.function.arguments"] = str(function.get("arguments", ""))
+    for i, tool in enumerate(request.get("tools") or []):
+        attrs[f"llm.tools.{i}.tool.json_schema"] = tracing.to_json(tool)
+    return attrs
+
+
+def _response_attributes(spec: ModelSpec, resp: LLMResponse) -> dict[str, Any]:
+    prompt_cost = resp.prompt_tokens * spec.input_per_mtok / 1e6
+    completion_cost = resp.completion_tokens * spec.output_per_mtok / 1e6
+    attrs: dict[str, Any] = {
+        "llm.token_count.prompt": resp.prompt_tokens,
+        "llm.token_count.completion": resp.completion_tokens,
+        "llm.token_count.total": resp.prompt_tokens + resp.completion_tokens,
+        "llm.cost.prompt": prompt_cost,
+        "llm.cost.completion": completion_cost,
+        "llm.cost.total": resp.cost_usd,
+        "ledgerlens.cost_label": tracing.COST_LABEL,
+        "ledgerlens.cached": resp.cached,
+        # Provider latency as recorded live; a cache hit reports the original latency.
+        "ledgerlens.latency_ms": resp.latency_ms,
+        "ledgerlens.cache_key": resp.cache_key[:16],
+        tracing.OUTPUT_VALUE: resp.content
+        or tracing.to_json([{"name": t.name, "arguments": t.arguments} for t in resp.tool_calls]),
+        "llm.output_messages.0.message.role": "assistant",
+        "llm.output_messages.0.message.content": resp.content,
+    }
+    for i, call in enumerate(resp.tool_calls):
+        prefix = f"llm.output_messages.0.message.tool_calls.{i}.tool_call"
+        attrs[f"{prefix}.function.name"] = call.name
+        attrs[f"{prefix}.function.arguments"] = call.arguments
+    return attrs
+
+
+def _complete(spec: ModelSpec, request: dict[str, Any], purpose: str) -> LLMResponse:
+    model = spec.alias
     key = cache_key(NAMESPACE, {"model": spec.litellm_model, **request})
     cache = _cache(replay=get_settings().llm_mode == "replay")
     if (hit := cache.get(NAMESPACE, key)) is not None:

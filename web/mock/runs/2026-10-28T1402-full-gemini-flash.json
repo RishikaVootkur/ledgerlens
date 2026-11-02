@@ -21,13 +21,13 @@
     "unanswerable"
   ],
   "summary": {
-    "numeric_accuracy": {
+    "numeric_correct": {
       "value": 0.712,
       "ci_low": 0.666,
       "ci_high": 0.758,
       "n": 360
     },
-    "judge_accuracy": {
+    "judge_correct": {
       "value": 0.748,
       "ci_low": 0.704,
       "ci_high": 0.792,
@@ -45,13 +45,25 @@
       "ci_high": 0.833,
       "n": 360
     },
-    "refusal_accuracy": {
+    "refusal_correct": {
       "value": 0.9,
       "ci_low": 0.81,
       "ci_high": 0.99,
       "n": 40
     },
-    "recall@10": {
+    "recall_at_1": {
+      "value": 0.524,
+      "ci_low": 0.474,
+      "ci_high": 0.574,
+      "n": 360
+    },
+    "recall_at_5": {
+      "value": 0.781,
+      "ci_low": 0.739,
+      "ci_high": 0.823,
+      "n": 360
+    },
+    "recall_at_10": {
       "value": 0.833,
       "ci_low": 0.795,
       "ci_high": 0.871,
@@ -63,40 +75,64 @@
       "ci_high": 0.653,
       "n": 360
     },
-    "latency_p50_ms": {
+    "ndcg_at_10": {
+      "value": 0.684,
+      "ci_low": 0.645,
+      "ci_high": 0.723,
+      "n": 360
+    },
+    "model_latency_p50_ms": {
       "value": 6420,
-      "ci_low": null,
-      "ci_high": null,
+      "ci_low": 6040,
+      "ci_high": 6800,
+      "n": 360
+    },
+    "model_latency_p95_ms": {
+      "value": 14810,
+      "ci_low": 12710,
+      "ci_high": 16910,
+      "n": 360
+    },
+    "latency_p50_ms": {
+      "value": 9150,
+      "ci_low": 8250,
+      "ci_high": 10050,
       "n": 360
     },
     "latency_p95_ms": {
-      "value": 14810,
-      "ci_low": null,
-      "ci_high": null,
+      "value": 41200,
+      "ci_low": 31400,
+      "ci_high": 51000,
       "n": 360
     },
-    "tokens_per_question": {
+    "tokens_mean": {
       "value": 9850,
-      "ci_low": null,
-      "ci_high": null,
+      "ci_low": 9440,
+      "ci_high": 10260,
       "n": 360
     },
-    "cost_per_question_usd": {
+    "cost_usd_mean": {
       "value": 0.0041,
-      "ci_low": null,
-      "ci_high": null,
+      "ci_low": 0.0038,
+      "ci_high": 0.0044,
+      "n": 360
+    },
+    "error_rate": {
+      "value": 0.008,
+      "ci_low": 0,
+      "ci_high": 0.017,
       "n": 360
     }
   },
   "summary_by_dataset": {
     "financebench": {
-      "numeric_accuracy": {
+      "numeric_correct": {
         "value": 0.654,
         "ci_low": 0.594,
         "ci_high": 0.714,
         "n": 140
       },
-      "judge_accuracy": {
+      "judge_correct": {
         "value": 0.701,
         "ci_low": 0.643,
         "ci_high": 0.759,
@@ -114,7 +150,7 @@
         "ci_high": 0.813,
         "n": 140
       },
-      "recall@10": {
+      "recall_at_10": {
         "value": 0.801,
         "ci_low": 0.751,
         "ci_high": 0.851,
@@ -122,13 +158,13 @@
       }
     },
     "xbrl": {
-      "numeric_accuracy": {
+      "numeric_correct": {
         "value": 0.781,
         "ci_low": 0.721,
         "ci_high": 0.841,
         "n": 180
       },
-      "judge_accuracy": {
+      "judge_correct": {
         "value": 0.802,
         "ci_low": 0.744,
         "ci_high": 0.86,
@@ -146,7 +182,7 @@
         "ci_high": 0.871,
         "n": 180
       },
-      "recall@10": {
+      "recall_at_10": {
         "value": 0.862,
         "ci_low": 0.812,
         "ci_high": 0.912,
@@ -154,7 +190,7 @@
       }
     },
     "unanswerable": {
-      "refusal_accuracy": {
+      "refusal_correct": {
         "value": 0.9,
         "ci_low": 0.81,
         "ci_high": 0.99,
@@ -218,12 +254,14 @@
       },
       "wall_ms": 4080,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -237,13 +275,13 @@
       "answerable": true,
       "ticker": "MSFT",
       "fiscal_year": 2022,
-      "gold": "$19.2 billion",
-      "gold_value": 19200000000,
+      "gold": "$109.9 billion",
+      "gold_value": 109900000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Microsoft's net income in fiscal 2022 was $19.2 billion [1].",
+        "answer": "Microsoft's net income in fiscal 2022 was $109.9 billion [1].",
         "refused": false,
-        "answer_value": 19200000000,
+        "answer_value": 109900000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -268,21 +306,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11243,
-          "completion_tokens": 598,
+          "prompt_tokens": 11968,
+          "completion_tokens": 541,
           "llm_calls": 4,
-          "cost_usd": 0.0054,
-          "latency_ms": 6998
+          "cost_usd": 0.004,
+          "latency_ms": 7994
         }
       },
-      "wall_ms": 7398,
+      "wall_ms": 8394,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -296,13 +337,13 @@
       "answerable": true,
       "ticker": "JPM",
       "fiscal_year": 2023,
-      "gold": "$108.4 billion",
-      "gold_value": 108400000000,
+      "gold": "$15.9 billion",
+      "gold_value": 15900000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "JPMorgan's operating income in fiscal 2023 was $108.4 billion [1].",
+        "answer": "JPMorgan's operating income in fiscal 2023 was $15.9 billion [1].",
         "refused": false,
-        "answer_value": 108400000000,
+        "answer_value": 15900000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -327,21 +368,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 9579,
-          "completion_tokens": 236,
+          "prompt_tokens": 6841,
+          "completion_tokens": 580,
           "llm_calls": 5,
-          "cost_usd": 0.0026,
-          "latency_ms": 10151
+          "cost_usd": 0.0057,
+          "latency_ms": 9726
         }
       },
-      "wall_ms": 10551,
+      "wall_ms": 10126,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -350,19 +393,19 @@
     {
       "qid": "fb-00133",
       "dataset": "financebench",
-      "question": "What was Coca-Cola's capital expenditures in fiscal 2024?",
-      "question_type": "single_fact",
+      "question": "Did Coca-Cola's capital expenditures increase in fiscal 2024 compared with the prior year?",
+      "question_type": "domain",
       "answerable": true,
       "ticker": "KO",
       "fiscal_year": 2024,
-      "gold": "$111.7 billion",
-      "gold_value": 111700000000,
-      "gold_unit": "USD",
+      "gold": "Yes",
+      "gold_value": null,
+      "gold_unit": "text",
       "prediction": {
-        "answer": "Coca-Cola's capital expenditures in fiscal 2024 was $98.6 billion [1].",
+        "answer": "Yes, Coca-Cola's capital expenditures increased in fiscal 2024 [1].",
         "refused": false,
-        "answer_value": 98583767738.085,
-        "answer_unit": "USD",
+        "answer_value": null,
+        "answer_unit": null,
         "citations": [
           {
             "chunk_id": "KO-10K-2024FY:section:00121",
@@ -386,25 +429,28 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 7083,
-          "completion_tokens": 420,
+          "prompt_tokens": 7554,
+          "completion_tokens": 577,
           "llm_calls": 3,
-          "cost_usd": 0.003,
-          "latency_ms": 10102
+          "cost_usd": 0.0053,
+          "latency_ms": 4587
         }
       },
-      "wall_ms": 10502,
+      "wall_ms": 4987,
       "scores": {
-        "numeric_accuracy": 0,
-        "judge_accuracy": 0,
+        "numeric_correct": null,
+        "judge_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
-        "citation_recall": 0,
-        "refusal_accuracy": null,
-        "recall@10": 0
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
-      "failure_category": "arithmetic",
-      "failure_note": "Sample note: see the failure taxonomy for the full description."
+      "failure_category": null,
+      "failure_note": null
     },
     {
       "qid": "xbrl-0044",
@@ -454,12 +500,14 @@
       },
       "wall_ms": 9817,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -473,13 +521,13 @@
       "answerable": true,
       "ticker": "XOM",
       "fiscal_year": 2022,
-      "gold": "35.2%",
-      "gold_value": 0.352,
+      "gold": "43.4%",
+      "gold_value": 0.434,
       "gold_unit": "percent",
       "prediction": {
-        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 35.2% [1].",
+        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 43.4% [1].",
         "refused": false,
-        "answer_value": 0.352,
+        "answer_value": 0.434,
         "answer_unit": "percent",
         "citations": [
           {
@@ -504,21 +552,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 9514,
-          "completion_tokens": 479,
+          "prompt_tokens": 10178,
+          "completion_tokens": 485,
           "llm_calls": 5,
-          "cost_usd": 0.0048,
-          "latency_ms": 8530
+          "cost_usd": 0.0049,
+          "latency_ms": 10432
         }
       },
-      "wall_ms": 8930,
+      "wall_ms": 10832,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -552,21 +603,18 @@
           "answer"
         ],
         "usage": {
-          "prompt_tokens": 8684,
-          "completion_tokens": 251,
+          "prompt_tokens": 6762,
+          "completion_tokens": 508,
           "llm_calls": 3,
-          "cost_usd": 0.0051,
-          "latency_ms": 7656
+          "cost_usd": 0.0044,
+          "latency_ms": 9133
         }
       },
-      "wall_ms": 8056,
+      "wall_ms": 9533,
       "scores": {
-        "numeric_accuracy": null,
-        "judge_accuracy": null,
+        "refusal_correct": 1,
         "citation_precision": null,
-        "citation_recall": null,
-        "refusal_accuracy": 1,
-        "recall@10": null
+        "citation_recall": null
       },
       "error": null,
       "failure_category": null,
@@ -580,13 +628,13 @@
       "answerable": true,
       "ticker": "NKE",
       "fiscal_year": 2024,
-      "gold": "$51.7 billion",
-      "gold_value": 51700000000,
+      "gold": "$30.9 billion",
+      "gold_value": 30900000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Nike's net income in fiscal 2024 was $43.0 billion [1].",
+        "answer": "Nike's net income in fiscal 2024 was $30.9 billion [1].",
         "refused": false,
-        "answer_value": 43033289253.15873,
+        "answer_value": 30900000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -620,16 +668,19 @@
       },
       "wall_ms": 6238,
       "scores": {
-        "numeric_accuracy": 0,
-        "judge_accuracy": 0,
-        "citation_precision": 0,
-        "citation_recall": 0,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
+        "citation_precision": 1,
+        "citation_recall": 1,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
-      "failure_category": "retrieval_miss",
-      "failure_note": "Sample note: see the failure taxonomy for the full description."
+      "failure_category": null,
+      "failure_note": null
     },
     {
       "qid": "xbrl-0048",
@@ -639,13 +690,13 @@
       "answerable": true,
       "ticker": "PFE",
       "fiscal_year": 2021,
-      "gold": "$74.9 billion",
-      "gold_value": 74900000000,
+      "gold": "$28.1 billion",
+      "gold_value": 28100000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Pfizer's operating income in fiscal 2021 was $63.7 billion [1].",
+        "answer": "Pfizer's operating income in fiscal 2021 was $26.2 billion [1].",
         "refused": false,
-        "answer_value": 63702611957.91304,
+        "answer_value": 26152533839.662796,
         "answer_unit": "USD",
         "citations": [
           {
@@ -670,21 +721,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 7886,
-          "completion_tokens": 252,
+          "prompt_tokens": 9494,
+          "completion_tokens": 335,
           "llm_calls": 5,
-          "cost_usd": 0.0059,
-          "latency_ms": 4221
+          "cost_usd": 0.0033,
+          "latency_ms": 4406
         }
       },
-      "wall_ms": 4621,
+      "wall_ms": 4806,
       "scores": {
-        "numeric_accuracy": 0,
-        "judge_accuracy": 0,
-        "citation_precision": 0,
+        "numeric_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 1,
         "citation_recall": 0,
-        "refusal_accuracy": null,
-        "recall@10": 0
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
       },
       "error": null,
       "failure_category": "table_misread",
@@ -698,24 +751,15 @@
       "answerable": true,
       "ticker": "CAT",
       "fiscal_year": 2022,
-      "gold": "$41.8 billion",
-      "gold_value": 41800000000,
+      "gold": "$101.7 billion",
+      "gold_value": 101700000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Caterpillar's capital expenditures in fiscal 2022 was $41.8 billion [1].",
-        "refused": false,
-        "answer_value": 41800000000,
-        "answer_unit": "USD",
-        "citations": [
-          {
-            "chunk_id": "CAT-10K-2022FY:section:00163",
-            "filing_id": "CAT-10K-2022FY",
-            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
-            "page": 57,
-            "page_end": null,
-            "quote": "capital expenditures"
-          }
-        ],
+        "answer": "I could not find enough support in the filings to answer this, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
         "retrieved_chunk_ids": [
           "CAT-10K-2022FY:section:00163",
           "CAT-10K-2022FY:section:00019"
@@ -723,31 +767,32 @@
         "steps": [
           "plan",
           "search_filings",
-          "get_company_facts",
           "verify",
-          "answer",
-          "self_check"
+          "answer"
         ],
         "usage": {
-          "prompt_tokens": 6712,
-          "completion_tokens": 404,
+          "prompt_tokens": 10260,
+          "completion_tokens": 323,
           "llm_calls": 3,
           "cost_usd": 0.0025,
-          "latency_ms": 5205
+          "latency_ms": 7065
         }
       },
-      "wall_ms": 5605,
+      "wall_ms": 7465,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
-        "citation_precision": 1,
-        "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 0,
+        "citation_precision": null,
+        "citation_recall": null,
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
-      "failure_category": null,
-      "failure_note": null
+      "failure_category": "bad_refusal",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
     },
     {
       "qid": "xbrl-0050",
@@ -797,12 +842,14 @@
       },
       "wall_ms": 8760,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -816,13 +863,13 @@
       "answerable": true,
       "ticker": "AMZN",
       "fiscal_year": 2024,
-      "gold": "52.7%",
-      "gold_value": 0.527,
+      "gold": "47.9%",
+      "gold_value": 0.479,
       "gold_unit": "percent",
       "prediction": {
-        "answer": "Amazon's gross margin in fiscal 2024 was 47.7% [1].",
+        "answer": "Amazon's gross margin in fiscal 2024 was 44.4% [1].",
         "refused": false,
-        "answer_value": 0.47671122719662967,
+        "answer_value": 0.44351641002472025,
         "answer_unit": "percent",
         "citations": [
           {
@@ -847,21 +894,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11037,
-          "completion_tokens": 361,
+          "prompt_tokens": 8410,
+          "completion_tokens": 261,
           "llm_calls": 5,
-          "cost_usd": 0.0026,
-          "latency_ms": 4384
+          "cost_usd": 0.0025,
+          "latency_ms": 7279
         }
       },
-      "wall_ms": 4784,
+      "wall_ms": 7679,
       "scores": {
-        "numeric_accuracy": 0,
-        "judge_accuracy": 0,
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
         "citation_precision": 0,
         "citation_recall": 0,
-        "refusal_accuracy": null,
-        "recall@10": 0
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
       },
       "error": null,
       "failure_category": "bad_refusal",
@@ -915,12 +965,14 @@
       },
       "wall_ms": 9680,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -954,21 +1006,18 @@
           "answer"
         ],
         "usage": {
-          "prompt_tokens": 7699,
-          "completion_tokens": 396,
+          "prompt_tokens": 8939,
+          "completion_tokens": 536,
           "llm_calls": 4,
-          "cost_usd": 0.0054,
-          "latency_ms": 9896
+          "cost_usd": 0.0057,
+          "latency_ms": 4883
         }
       },
-      "wall_ms": 10296,
+      "wall_ms": 5283,
       "scores": {
-        "numeric_accuracy": null,
-        "judge_accuracy": null,
+        "refusal_correct": 1,
         "citation_precision": null,
-        "citation_recall": null,
-        "refusal_accuracy": 1,
-        "recall@10": null
+        "citation_recall": null
       },
       "error": null,
       "failure_category": null,
@@ -982,13 +1031,13 @@
       "answerable": true,
       "ticker": "JPM",
       "fiscal_year": 2023,
-      "gold": "$42.9 billion",
-      "gold_value": 42900000000,
+      "gold": "$68.6 billion",
+      "gold_value": 68599999999.99999,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "JPMorgan's operating income in fiscal 2023 was $42.9 billion [1].",
+        "answer": "JPMorgan's operating income in fiscal 2023 was $68.6 billion [1].",
         "refused": false,
-        "answer_value": 42900000000,
+        "answer_value": 68599999999.99999,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1013,21 +1062,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 9180,
-          "completion_tokens": 306,
+          "prompt_tokens": 7585,
+          "completion_tokens": 362,
           "llm_calls": 5,
-          "cost_usd": 0.0036,
-          "latency_ms": 3587
+          "cost_usd": 0.002,
+          "latency_ms": 8036
         }
       },
-      "wall_ms": 3987,
+      "wall_ms": 8436,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -1041,13 +1092,13 @@
       "answerable": true,
       "ticker": "KO",
       "fiscal_year": 2024,
-      "gold": "$49.0 billion",
-      "gold_value": 49000000000,
+      "gold": "$35.6 billion",
+      "gold_value": 35600000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Coca-Cola's capital expenditures in fiscal 2024 was $49.0 billion [1].",
+        "answer": "Coca-Cola's capital expenditures in fiscal 2024 was $35.6 billion [1].",
         "refused": false,
-        "answer_value": 49000000000,
+        "answer_value": 35600000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1072,21 +1123,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 8846,
-          "completion_tokens": 302,
+          "prompt_tokens": 9561,
+          "completion_tokens": 480,
           "llm_calls": 3,
-          "cost_usd": 0.0044,
-          "latency_ms": 8405
+          "cost_usd": 0.0042,
+          "latency_ms": 7725
         }
       },
-      "wall_ms": 8805,
+      "wall_ms": 8125,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -1100,13 +1154,13 @@
       "answerable": true,
       "ticker": "NVDA",
       "fiscal_year": 2021,
-      "gold": "$6.43",
-      "gold_value": 6.43,
+      "gold": "$4.76",
+      "gold_value": 4.76,
       "gold_unit": "per_share",
       "prediction": {
-        "answer": "NVIDIA's diluted EPS in fiscal 2021 was $6.43 [1].",
+        "answer": "NVIDIA's diluted EPS in fiscal 2021 was $4.76 [1].",
         "refused": false,
-        "answer_value": 6.43,
+        "answer_value": 4.76,
         "answer_unit": "per_share",
         "citations": [
           {
@@ -1131,21 +1185,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 7391,
-          "completion_tokens": 352,
+          "prompt_tokens": 11616,
+          "completion_tokens": 294,
           "llm_calls": 4,
-          "cost_usd": 0.0037,
-          "latency_ms": 10052
+          "cost_usd": 0.0057,
+          "latency_ms": 10150
         }
       },
-      "wall_ms": 10452,
+      "wall_ms": 10550,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -1159,13 +1215,13 @@
       "answerable": true,
       "ticker": "XOM",
       "fiscal_year": 2022,
-      "gold": "56.8%",
-      "gold_value": 0.568,
+      "gold": "21.0%",
+      "gold_value": 0.21,
       "gold_unit": "percent",
       "prediction": {
-        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 56.8% [1].",
+        "answer": "Exxon Mobil's gross margin in fiscal 2022 was 17.6% [1].",
         "refused": false,
-        "answer_value": 0.568,
+        "answer_value": 0.17603909379977267,
         "answer_unit": "percent",
         "citations": [
           {
@@ -1190,25 +1246,28 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11700,
-          "completion_tokens": 429,
+          "prompt_tokens": 9246,
+          "completion_tokens": 401,
           "llm_calls": 5,
-          "cost_usd": 0.0057,
-          "latency_ms": 3678
+          "cost_usd": 0.0058,
+          "latency_ms": 10359
         }
       },
-      "wall_ms": 4078,
+      "wall_ms": 10759,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
-        "citation_precision": 1,
-        "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
+        "citation_precision": 0,
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
       },
       "error": null,
-      "failure_category": null,
-      "failure_note": null
+      "failure_category": "arithmetic",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
     },
     {
       "qid": "xbrl-0058",
@@ -1218,13 +1277,13 @@
       "answerable": true,
       "ticker": "COST",
       "fiscal_year": 2023,
-      "gold": "$69.9 billion",
-      "gold_value": 69900000000,
+      "gold": "$72.7 billion",
+      "gold_value": 72700000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Costco's total revenue in fiscal 2023 was $69.9 billion [1].",
+        "answer": "Costco's total revenue in fiscal 2023 was $72.7 billion [1].",
         "refused": false,
-        "answer_value": 69900000000,
+        "answer_value": 72700000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1249,21 +1308,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 9013,
-          "completion_tokens": 581,
+          "prompt_tokens": 10113,
+          "completion_tokens": 220,
           "llm_calls": 3,
-          "cost_usd": 0.0059,
-          "latency_ms": 8453
+          "cost_usd": 0.0034,
+          "latency_ms": 6717
         }
       },
-      "wall_ms": 8853,
+      "wall_ms": 7117,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -1277,18 +1338,20 @@
       "answerable": true,
       "ticker": "NKE",
       "fiscal_year": 2024,
-      "gold": "$42.1 billion",
-      "gold_value": 42100000000,
+      "gold": "$9.6 billion",
+      "gold_value": 9600000000,
       "gold_unit": "USD",
       "prediction": null,
       "wall_ms": 30000,
       "scores": {
-        "numeric_accuracy": 0,
-        "judge_accuracy": 0,
+        "numeric_correct": null,
+        "refusal_correct": null,
         "citation_precision": null,
-        "citation_recall": 0,
-        "refusal_accuracy": null,
-        "recall@10": null
+        "citation_recall": null,
+        "recall_at_5": null,
+        "recall_at_10": null,
+        "mrr": null,
+        "ndcg_at_10": null
       },
       "error": "TimeoutError: LLM call exceeded 30s after 3 retries",
       "failure_category": "other",
@@ -1322,21 +1385,18 @@
           "answer"
         ],
         "usage": {
-          "prompt_tokens": 10008,
-          "completion_tokens": 387,
+          "prompt_tokens": 11425,
+          "completion_tokens": 495,
           "llm_calls": 5,
-          "cost_usd": 0.003,
-          "latency_ms": 8548
+          "cost_usd": 0.0041,
+          "latency_ms": 10475
         }
       },
-      "wall_ms": 8948,
+      "wall_ms": 10875,
       "scores": {
-        "numeric_accuracy": null,
-        "judge_accuracy": null,
+        "refusal_correct": 1,
         "citation_precision": null,
-        "citation_recall": null,
-        "refusal_accuracy": 1,
-        "recall@10": null
+        "citation_recall": null
       },
       "error": null,
       "failure_category": null,
@@ -1350,13 +1410,13 @@
       "answerable": true,
       "ticker": "CAT",
       "fiscal_year": 2022,
-      "gold": "$9.1 billion",
-      "gold_value": 9100000000,
+      "gold": "$79.5 billion",
+      "gold_value": 79500000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Caterpillar's capital expenditures in fiscal 2022 was $9.1 billion [1].",
+        "answer": "Caterpillar's capital expenditures in fiscal 2022 was $73.0 billion [1].",
         "refused": false,
-        "answer_value": 9100000000,
+        "answer_value": 72959367573.79677,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1381,25 +1441,28 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11067,
-          "completion_tokens": 493,
+          "prompt_tokens": 6327,
+          "completion_tokens": 417,
           "llm_calls": 3,
-          "cost_usd": 0.0056,
-          "latency_ms": 8670
+          "cost_usd": 0.0045,
+          "latency_ms": 5247
         }
       },
-      "wall_ms": 9070,
+      "wall_ms": 5647,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 0,
+        "judge_correct": 0,
+        "refusal_correct": 1,
         "citation_precision": 1,
-        "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
       },
       "error": null,
-      "failure_category": null,
-      "failure_note": null
+      "failure_category": "retrieval_miss",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
     },
     {
       "qid": "xbrl-0062",
@@ -1409,13 +1472,13 @@
       "answerable": true,
       "ticker": "WMT",
       "fiscal_year": 2023,
-      "gold": "$9.97",
-      "gold_value": 9.97,
+      "gold": "$5.03",
+      "gold_value": 5.03,
       "gold_unit": "per_share",
       "prediction": {
-        "answer": "Walmart's diluted EPS in fiscal 2023 was $9.97 [1].",
+        "answer": "Walmart's diluted EPS in fiscal 2023 was $4.29 [1].",
         "refused": false,
-        "answer_value": 9.97,
+        "answer_value": 4.290073336204398,
         "answer_unit": "per_share",
         "citations": [
           {
@@ -1440,42 +1503,44 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11897,
-          "completion_tokens": 448,
+          "prompt_tokens": 9452,
+          "completion_tokens": 428,
           "llm_calls": 4,
-          "cost_usd": 0.0051,
-          "latency_ms": 3882
+          "cost_usd": 0.0021,
+          "latency_ms": 6353
         }
       },
-      "wall_ms": 4282,
+      "wall_ms": 6753,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 0,
+        "refusal_correct": 1,
         "citation_precision": 1,
-        "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "citation_recall": 0,
+        "recall_at_5": 0,
+        "recall_at_10": 0,
+        "mrr": 0,
+        "ndcg_at_10": 0
       },
       "error": null,
-      "failure_category": null,
-      "failure_note": null
+      "failure_category": "table_misread",
+      "failure_note": "Sample note: see the failure taxonomy for the full description."
     },
     {
       "qid": "fb-00353",
       "dataset": "financebench",
-      "question": "What was Amazon's gross margin in fiscal 2024?",
-      "question_type": "single_fact",
+      "question": "Did Amazon's gross margin increase in fiscal 2024 compared with the prior year?",
+      "question_type": "domain",
       "answerable": true,
       "ticker": "AMZN",
       "fiscal_year": 2024,
-      "gold": "44.6%",
-      "gold_value": 0.446,
-      "gold_unit": "percent",
+      "gold": "Yes",
+      "gold_value": null,
+      "gold_unit": "text",
       "prediction": {
-        "answer": "Amazon's gross margin in fiscal 2024 was 44.6% [1].",
+        "answer": "Yes, Amazon's gross margin increased in fiscal 2024 [1].",
         "refused": false,
-        "answer_value": 0.446,
-        "answer_unit": "percent",
+        "answer_value": null,
+        "answer_unit": null,
         "citations": [
           {
             "chunk_id": "AMZN-10K-2024FY:section:00261",
@@ -1499,21 +1564,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 7497,
-          "completion_tokens": 499,
+          "prompt_tokens": 7538,
+          "completion_tokens": 313,
           "llm_calls": 5,
-          "cost_usd": 0.0021,
-          "latency_ms": 10083
+          "cost_usd": 0.0042,
+          "latency_ms": 6511
         }
       },
-      "wall_ms": 10483,
+      "wall_ms": 6911,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
-        "citation_precision": 1,
+        "numeric_correct": null,
+        "judge_correct": null,
+        "refusal_correct": 1,
+        "citation_precision": null,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -1527,13 +1595,13 @@
       "answerable": true,
       "ticker": "AAPL",
       "fiscal_year": 2021,
-      "gold": "$47.3 billion",
-      "gold_value": 47300000000,
+      "gold": "$76.8 billion",
+      "gold_value": 76800000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Apple's total revenue in fiscal 2021 was $47.3 billion [1].",
+        "answer": "Apple's total revenue in fiscal 2021 was $76.8 billion [1].",
         "refused": false,
-        "answer_value": 47300000000,
+        "answer_value": 76800000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1558,21 +1626,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 9452,
-          "completion_tokens": 428,
+          "prompt_tokens": 8168,
+          "completion_tokens": 480,
           "llm_calls": 3,
-          "cost_usd": 0.0021,
-          "latency_ms": 6353
+          "cost_usd": 0.0031,
+          "latency_ms": 9909
         }
       },
-      "wall_ms": 6753,
+      "wall_ms": 10309,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 0.5,
+        "ndcg_at_10": 0.6309
       },
       "error": null,
       "failure_category": null,
@@ -1586,13 +1656,13 @@
       "answerable": true,
       "ticker": "MSFT",
       "fiscal_year": 2022,
-      "gold": "$13.3 billion",
-      "gold_value": 13300000000,
+      "gold": "$83.6 billion",
+      "gold_value": 83600000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "Microsoft's net income in fiscal 2022 was $13.3 billion [1].",
+        "answer": "Microsoft's net income in fiscal 2022 was $83.6 billion [1].",
         "refused": false,
-        "answer_value": 13300000000,
+        "answer_value": 83600000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1617,21 +1687,24 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 6843,
-          "completion_tokens": 243,
+          "prompt_tokens": 10491,
+          "completion_tokens": 436,
           "llm_calls": 4,
-          "cost_usd": 0.003,
-          "latency_ms": 5477
+          "cost_usd": 0.0031,
+          "latency_ms": 4530
         }
       },
-      "wall_ms": 5877,
+      "wall_ms": 4930,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "judge_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -1645,13 +1718,13 @@
       "answerable": true,
       "ticker": "JPM",
       "fiscal_year": 2023,
-      "gold": "$56.6 billion",
-      "gold_value": 56600000000,
+      "gold": "$46.1 billion",
+      "gold_value": 46100000000,
       "gold_unit": "USD",
       "prediction": {
-        "answer": "JPMorgan's operating income in fiscal 2023 was $56.6 billion [1].",
+        "answer": "JPMorgan's operating income in fiscal 2023 was $46.1 billion [1].",
         "refused": false,
-        "answer_value": 56600000000,
+        "answer_value": 46100000000,
         "answer_unit": "USD",
         "citations": [
           {
@@ -1676,21 +1749,23 @@
           "self_check"
         ],
         "usage": {
-          "prompt_tokens": 11849,
-          "completion_tokens": 467,
+          "prompt_tokens": 8648,
+          "completion_tokens": 511,
           "llm_calls": 5,
-          "cost_usd": 0.0044,
-          "latency_ms": 6030
+          "cost_usd": 0.0046,
+          "latency_ms": 9291
         }
       },
-      "wall_ms": 6430,
+      "wall_ms": 9691,
       "scores": {
-        "numeric_accuracy": 1,
-        "judge_accuracy": 1,
+        "numeric_correct": 1,
+        "refusal_correct": 1,
         "citation_precision": 1,
         "citation_recall": 1,
-        "refusal_accuracy": null,
-        "recall@10": 1
+        "recall_at_5": 1,
+        "recall_at_10": 1,
+        "mrr": 1,
+        "ndcg_at_10": 1
       },
       "error": null,
       "failure_category": null,
@@ -1708,20 +1783,11 @@
       "gold_value": null,
       "gold_unit": null,
       "prediction": {
-        "answer": "Coca-Cola's capital expenditures in fiscal 2024 was $38.6 billion [1].",
-        "refused": false,
-        "answer_value": 38600000000,
-        "answer_unit": "USD",
-        "citations": [
-          {
-            "chunk_id": "KO-10K-2024FY:section:00289",
-            "filing_id": "KO-10K-2024FY",
-            "section": "Item 8. Financial Statements > Consolidated Statements of Operations",
-            "page": 61,
-            "page_end": null,
-            "quote": "capital expenditures"
-          }
-        ],
+        "answer": "I could not find support for a forward-looking figure in the filings, so I am not answering.",
+        "refused": true,
+        "answer_value": null,
+        "answer_unit": null,
+        "citations": [],
         "retrieved_chunk_ids": [
           "KO-10K-2024FY:section:00289",
           "KO-10K-2024FY:section:00037"
@@ -1729,31 +1795,26 @@
         "steps": [
           "plan",
           "search_filings",
-          "get_company_facts",
           "verify",
-          "answer",
-          "self_check"
+          "answer"
         ],
         "usage": {
-          "prompt_tokens": 11293,
-          "completion_tokens": 422,
+          "prompt_tokens": 10383,
+          "completion_tokens": 409,
           "llm_calls": 3,
-          "cost_usd": 0.0046,
-          "latency_ms": 8740
+          "cost_usd": 0.005,
+          "latency_ms": 8291
         }
       },
-      "wall_ms": 9140,
+      "wall_ms": 8691,
       "scores": {
-        "numeric_accuracy": null,
-        "judge_accuracy": null,
-        "citation_precision": 1,
-        "citation_recall": null,
-        "refusal_accuracy": 0,
-        "recall@10": null
+        "refusal_correct": 1,
+        "citation_precision": null,
+        "citation_recall": null
       },
       "error": null,
-      "failure_category": "bad_refusal",
-      "failure_note": "Sample note: see the failure taxonomy for the full description."
+      "failure_category": null,
+      "failure_note": null
     }
   ]
 }

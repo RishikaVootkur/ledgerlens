@@ -61,7 +61,7 @@ export function QuestionDetail({ result }: { result: QuestionResult }) {
             />
           </div>
         ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">No prediction.</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">No answer was generated for this question (for example, a retrieval-only run).</p>
         )}
       </Field>
 

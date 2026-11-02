@@ -9,14 +9,15 @@ export interface MetricSpec {
   help?: string;
 }
 
+// Keys match the eval runner's run files (QuestionResult.scores and RunFile.summary).
 export const METRICS: Record<string, MetricSpec> = {
-  numeric_accuracy: {
+  numeric_correct: {
     label: "Numeric accuracy",
     format: "percent",
     higherIsBetter: true,
     help: "Answer number within tolerance of the gold value",
   },
-  judge_accuracy: {
+  judge_correct: {
     label: "Judge accuracy",
     format: "percent",
     higherIsBetter: true,
@@ -34,28 +35,67 @@ export const METRICS: Record<string, MetricSpec> = {
     higherIsBetter: true,
     help: "Share of gold evidence that was cited",
   },
-  refusal_accuracy: {
+  refusal_correct: {
     label: "Refusal accuracy",
     format: "percent",
     higherIsBetter: true,
     help: "Refuses unanswerable questions and answers the rest",
   },
-  "recall@5": { label: "Recall@5", format: "percent", higherIsBetter: true },
-  "recall@10": { label: "Recall@10", format: "percent", higherIsBetter: true },
+  recall_at_1: { label: "Recall@1", format: "percent", higherIsBetter: true },
+  recall_at_5: { label: "Recall@5", format: "percent", higherIsBetter: true },
+  recall_at_10: { label: "Recall@10", format: "percent", higherIsBetter: true },
   mrr: { label: "MRR", format: "ratio", higherIsBetter: true, help: "Mean reciprocal rank" },
-  "ndcg@10": { label: "nDCG@10", format: "ratio", higherIsBetter: true },
-  latency_p50_ms: { label: "Latency p50", format: "ms", higherIsBetter: false },
-  latency_p95_ms: { label: "Latency p95", format: "ms", higherIsBetter: false },
-  tokens_per_question: { label: "Tokens / question", format: "count", higherIsBetter: false },
-  cost_per_question_usd: {
+  ndcg_at_10: { label: "nDCG@10", format: "ratio", higherIsBetter: true },
+  model_latency_p50_ms: {
+    label: "Model latency p50",
+    format: "ms",
+    higherIsBetter: false,
+    help: "Time spent in model calls per question",
+  },
+  model_latency_p95_ms: {
+    label: "Model latency p95",
+    format: "ms",
+    higherIsBetter: false,
+    help: "Time spent in model calls per question",
+  },
+  latency_p50_ms: {
+    label: "Wall latency p50",
+    format: "ms",
+    higherIsBetter: false,
+    help: "End-to-end wall clock, including rate-limit waits",
+  },
+  latency_p95_ms: {
+    label: "Wall latency p95",
+    format: "ms",
+    higherIsBetter: false,
+    help: "End-to-end wall clock, including rate-limit waits",
+  },
+  tokens_mean: { label: "Tokens / question", format: "count", higherIsBetter: false },
+  cost_usd_mean: {
     label: "Cost / question",
     short: "Cost / q",
     format: "usd",
     higherIsBetter: false,
     help: "List-price equivalent, even when the provider was free",
   },
-  kappa: { label: "Cohen's kappa", format: "ratio", higherIsBetter: true },
+  error_rate: {
+    label: "Error rate",
+    format: "percent",
+    higherIsBetter: false,
+    help: "Questions where the run crashed",
+  },
+  kappa: { label: "Judge agreement (κ)", format: "ratio", higherIsBetter: true },
 };
+
+/** Metrics that describe speed or spend; kept out of per-dataset quality tables. */
+export function isCostMetric(name: string): boolean {
+  return /latency|^tokens_|^cost_|^error_rate$/.test(name);
+}
+
+/** Retrieval-only metrics: present even when a run generated no answers. */
+export function isRetrievalMetric(name: string): boolean {
+  return /^recall_at_\d+$|^mrr$|^ndcg_at_\d+$/.test(name);
+}
 
 /** Axis domain for a value and its interval: 0..1 for rates, padded around the data otherwise. */
 export function metricDomain(name: string, values: number[]): [number, number] {
