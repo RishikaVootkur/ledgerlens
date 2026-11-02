@@ -102,13 +102,15 @@ def _fetch_companyfacts(cik: str) -> dict[str, Any]:
         timeout=60,
     )
     resp.raise_for_status()
+    data = resp.json()  # parse before caching so a bad response is never stored
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(resp.text)
-    data = resp.json()
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(resp.text)
+    tmp.replace(path)
     return data
 
 
-@lru_cache(maxsize=64)
+@lru_cache(maxsize=8)
 def _companyfacts(ticker: str) -> dict[str, Any]:
     company = BY_TICKER.get(ticker.upper())
     if company is None:
@@ -152,8 +154,9 @@ def facts_for_concept(ticker: str, concept: str, data: dict[str, Any]) -> list[F
             fy, fp = row.get("fy"), row.get("fp")
             filing_id = make_filing_id(ticker, form, fy, fp) if fy and fp else None
             duration = _duration(start, end)
+            period = f"{start.isoformat()}_{end.isoformat()}" if start else end.isoformat()
             fact = Fact(
-                fact_id=f"xbrl:{ticker}:{name}:{end.isoformat()}:{duration}",
+                fact_id=f"xbrl:{ticker}:{name}:{period}:{unit}",
                 ticker=ticker,
                 concept=f"{taxonomy}:{name}",
                 label=node.get("label") or name,
@@ -169,10 +172,14 @@ def facts_for_concept(ticker: str, concept: str, data: dict[str, Any]) -> list[F
                 accession=row["accn"],
                 filed=date.fromisoformat(row["filed"]),
             )
-            # Same value can be re-reported in later filings; keep the earliest report
-            # (the filing where it was the current period) for each period and unit.
+            # A value is re-reported in later filings. Keep the earliest report (the filing
+            # where it was the current period), except per-share and share counts, where
+            # later filings restate for stock splits (Apple FY2019 diluted EPS: 11.89 as
+            # first reported, 2.97 split-adjusted), so the latest report wins.
             key = (unit, start, end)
-            if key not in out or fact.filed < out[key].filed:
+            current = out.get(key)
+            newer = current is not None and fact.filed > current.filed
+            if current is None or newer == ("shares" in unit.lower()):
                 out[key] = fact
     return list(out.values())
 
