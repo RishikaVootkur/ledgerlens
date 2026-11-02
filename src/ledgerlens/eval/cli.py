@@ -138,3 +138,26 @@ def judge_calibrate(
     typer.echo(f"  confusion (rows human, cols judge, {report.labels}): {report.confusion}")
     if record_cache:
         typer.echo(f"recorded {do_record()} cache entries into eval/cache")
+
+
+@eval_app.command("dashboard")
+def dashboard(
+    spec: Path = typer.Option(Path("eval/reports/experiments.yaml"), help="Experiments manifest"),
+    out: Path | None = typer.Option(None, help="Output (default eval/reports/dashboard.json)"),
+    publish_dir: Path | None = typer.Option(None, help="Also copy dashboard + runs here"),
+) -> None:
+    """Build dashboard.json from the experiments manifest (and optionally a static bundle)."""
+    import shutil
+
+    from ledgerlens.config import get_settings
+    from ledgerlens.eval.dashboard import write_dashboard
+
+    path, run_ids = write_dashboard(spec, out)
+    typer.echo(f"wrote {path} ({len(run_ids)} runs)")
+    if publish_dir is not None:
+        (publish_dir / "runs").mkdir(parents=True, exist_ok=True)
+        shutil.copy(path, publish_dir / "dashboard.json")
+        for run_id in run_ids:
+            src = get_settings().eval_dir / "runs" / f"{run_id}.json"
+            shutil.copy(src, publish_dir / "runs" / f"{run_id}.json")
+        typer.echo(f"published to {publish_dir}")
