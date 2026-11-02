@@ -136,3 +136,123 @@ def test_retry_skips_auth_errors_even_if_subclass_of_api_error():
     api_error = type("APIError", (Exception,), {})
     auth = type("AuthenticationError", (api_error,), {})
     assert provider._is_retryable(auth()) is False
+
+
+def test_retry_classification_with_real_litellm_classes():
+    import litellm.exceptions as ex
+
+    def make(cls):
+        return cls.__new__(cls)  # constructors differ; only the type matters here
+
+    for cls in (
+        ex.RateLimitError,
+        ex.ServiceUnavailableError,
+        ex.InternalServerError,
+        ex.APIConnectionError,
+        ex.Timeout,
+        ex.BadGatewayError,
+    ):
+        assert provider._is_retryable(make(cls)), cls.__name__
+    for cls in (
+        ex.AuthenticationError,
+        ex.PermissionDeniedError,
+        ex.BadRequestError,
+        ex.NotFoundError,
+        ex.UnprocessableEntityError,
+        ex.ContextWindowExceededError,
+        ex.APIResponseValidationError,
+        ex.JSONSchemaValidationError,
+        ex.APIError,
+    ):
+        assert not provider._is_retryable(make(cls)), cls.__name__
+    assert not provider._is_retryable(provider.QuotaExhaustedError("day"))
+
+
+def test_retry_after_header_is_honored():
+    exc = Exception("slow down")
+    exc.headers = {"retry-after": "7"}
+    assert provider._retry_after(exc) == 7.0
+    assert provider._retry_after(Exception("no headers")) is None
+
+
+def test_daily_quota_stops_immediately(isolated, monkeypatch):
+    import litellm
+    import litellm.exceptions as ex
+
+    def boom(**_):
+        raise ex.RateLimitError("Rate limit reached: tokens per day (TPD) exceeded", "groq", "m")
+
+    monkeypatch.setattr(litellm, "completion", boom)
+    monkeypatch.setattr(provider._pacer, "wait", lambda *a, **k: None)
+    with pytest.raises(provider.QuotaExhaustedError):
+        provider.complete("groq-gpt-oss-120b", [{"role": "user", "content": "x"}])
+
+
+def test_pacer_respects_token_budget(monkeypatch):
+    sleeps = []
+    clock = [1000.0]
+    monkeypatch.setattr(provider.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(provider.time, "sleep", lambda s: sleeps.append(s))
+    pacer = provider._Pacer()
+    spec = get_model("groq-gpt-oss-120b")  # 30 rpm, 8000 tpm
+    pacer.wait(spec, 5000)
+    pacer.wait(spec, 5000)  # would exceed 8000 in the window -> wait until the first ages out
+    assert sleeps[-1] == pytest.approx(60.0)
+    pacer2 = provider._Pacer()
+    sleeps.clear()
+    pacer2.wait(spec, 100)
+    pacer2.wait(spec, 100)  # only the request spacing applies: 60/30 = 2 s
+    assert sleeps == [pytest.approx(2.0)]
+
+
+def test_concurrent_cache_writes_do_not_collide(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+
+    cache = ResponseCache(tmp_path)
+    with ThreadPoolExecutor(8) as pool:
+        list(pool.map(lambda i: cache.put("llm", "samekey", {"i": i}), range(200)))
+    assert cache.get("llm", "samekey") is not None
+    assert not list(tmp_path.rglob("*.tmp"))
+
+
+def test_empty_answers_are_not_cached(isolated, monkeypatch):
+    calls = []
+
+    def fake(spec, request):
+        calls.append(1)
+        return _fake_raw(content="", completion=0), 1.0
+
+    monkeypatch.setattr(provider, "_call_provider", fake)
+    provider.complete("gemini-3.8-flash", [{"role": "user", "content": "x"}])
+    provider.complete("gemini-3.8-flash", [{"role": "user", "content": "x"}])
+    assert len(calls) == 2
+
+
+def test_replay_reads_only_committed_cache(isolated, monkeypatch):
+    monkeypatch.setattr(provider, "_call_provider", lambda s, r: (_fake_raw(content="live"), 9.0))
+    msgs = [{"role": "user", "content": "q"}]
+    provider.complete("gemini-3.8-flash", msgs)  # recorded into the local .cache only
+    monkeypatch.setenv("LLM_MODE", "replay")
+    get_settings.cache_clear()
+    with pytest.raises(CacheMissError):
+        provider.complete("gemini-3.8-flash", msgs)
+    # Promote the entry into the committed cache: now replay serves it.
+    local = next((isolated / "cache" / "llm").rglob("*.json"))
+    dest = isolated / "eval" / "cache" / "llm" / local.parent.name / local.name
+    dest.parent.mkdir(parents=True)
+    dest.write_text(local.read_text())
+    assert provider.complete("gemini-3.8-flash", msgs).content == "live"
+
+
+def test_temperature_int_and_float_share_a_key(isolated, monkeypatch):
+    calls = []
+    monkeypatch.setattr(
+        provider, "_call_provider", lambda s, r: (calls.append(1), (_fake_raw(), 1.0))[1]
+    )
+    provider.complete("gemini-3.8-flash", [{"role": "user", "content": "t"}], temperature=0)
+    provider.complete("gemini-3.8-flash", [{"role": "user", "content": "t"}], temperature=0.0)
+    assert len(calls) == 1
+
+
+def test_unclosed_think_block_is_stripped():
+    assert provider._THINK_RE.sub("", "<think>never closed").strip() == ""
