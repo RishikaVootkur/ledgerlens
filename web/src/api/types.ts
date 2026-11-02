@@ -223,13 +223,31 @@ export interface FailureExample {
   explanation?: string | null;
 }
 
+/** Agreement of the LLM judge with human labels on a held-out split. */
 export interface JudgeCalibration {
+  judge_model: string;
+  prompt_version: string;
+  split: string;
+  n: number;
+  /** Three-way agreement over `labels`. */
   accuracy: MetricValue;
   kappa: MetricValue;
-  n: number;
-  judge_model: string;
-  /** Rows are the human label, columns the judge label: [correct, incorrect]. */
+  error_rate: MetricValue;
+  /** Agreement after collapsing to correct vs not correct. */
+  binary_accuracy: MetricValue;
+  binary_kappa: MetricValue;
+  /** e.g. ["CORRECT", "INCORRECT", "REFUSAL"] */
+  labels: string[];
+  /** Rows are the human label, columns the judge label, both in `labels` order. */
   confusion: number[][];
+  per_label_recall: Record<string, number>;
+  /** Labels the judge output could not be parsed for. */
+  parse_errors?: number | null;
+  created_at?: string | null;
+  /** The subset of examples never seen while tuning the judge prompt. */
+  clean_n?: number | null;
+  clean_accuracy?: MetricValue | null;
+  clean_kappa?: MetricValue | null;
 }
 
 export interface Dashboard {
