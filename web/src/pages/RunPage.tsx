@@ -8,9 +8,16 @@ import { QuestionDetail } from "../components/run/QuestionDetail";
 import { Badge, Card, ErrorNote, LoadingBlock, SectionHeader } from "../components/ui";
 import { formatDate, inputClass } from "../lib/style";
 import { failureLabel } from "../lib/failures";
-import { formatMetric, formatUSD, metricLabel, orderMetrics } from "../lib/metrics";
+import { formatMetric, formatUSD, isCostMetric, metricLabel, orderMetrics } from "../lib/metrics";
 import { href, replaceHash } from "../lib/router";
-import { filterResults, primaryScore, questionOutcome, type ResultFilters } from "../lib/runs";
+import {
+  filterResults,
+  isRetrievalOnlyRun,
+  primaryScore,
+  questionOutcome,
+  retrievalScoreNames,
+  type ResultFilters,
+} from "../lib/runs";
 import { useAsync } from "../lib/useAsync";
 
 export function RunPage({ runId, qid }: { runId: string; qid: string | null }) {
@@ -53,7 +60,14 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
   const datasets = Object.keys(run.summary_by_dataset ?? {});
   const datasetMetrics = orderMetrics([
     ...new Set(datasets.flatMap((d) => Object.keys(run.summary_by_dataset[d] ?? {}))),
-  ]).filter((m) => !m.startsWith("latency") && !m.startsWith("tokens") && !m.startsWith("cost"));
+  ]).filter((m) => !isCostMetric(m));
+  // Retrieval-only runs have no predictions: show retrieval scores instead of outcomes.
+  const retrievalOnly = useMemo(() => isRetrievalOnlyRun(run.results), [run.results]);
+  const retrievalColumns = useMemo(
+    () => (retrievalOnly ? retrievalScoreNames(run.results) : []),
+    [retrievalOnly, run.results],
+  );
+  const columnCount = 2 + (retrievalOnly ? retrievalColumns.length : 3);
 
   const open = (id: string) => replaceHash(href.run(run.run_id, id));
   const close = useCallback(() => replaceHash(href.run(run.run_id)), [run.run_id]);
@@ -77,12 +91,19 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
           <span>{formatDate(run.created_at)}</span>
           {run.git_sha ? <span className="font-mono">git {run.git_sha.slice(0, 7)}</span> : null}
           <span>{run.datasets.join(", ")}</span>
-          <span>
-            {run.results.length} questions · {counts.correct} correct · {counts.incorrect} incorrect
-            {counts.error ? ` · ${counts.error} errored` : ""}
-            {counts.unscored ? ` · ${counts.unscored} unscored` : ""}
-          </span>
-          {run.usage_total ? (
+          {retrievalOnly ? (
+            <span>
+              {run.results.length} questions · retrieval only
+              {counts.error ? ` · ${counts.error} errored` : ""}
+            </span>
+          ) : (
+            <span>
+              {run.results.length} questions · {counts.correct} correct · {counts.incorrect} incorrect
+              {counts.error ? ` · ${counts.error} errored` : ""}
+              {counts.unscored ? ` · ${counts.unscored} unscored` : ""}
+            </span>
+          )}
+          {run.usage_total && run.usage_total.llm_calls > 0 ? (
             <span title="List-price equivalent">
               {formatUSD(run.usage_total.cost_usd)} total · {run.usage_total.llm_calls} LLM calls
             </span>
@@ -170,7 +191,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                 ))}
               </select>
             </div>
-            <div>
+            <div className={retrievalOnly ? "hidden" : undefined}>
               <label htmlFor={ids.out} className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">
                 Outcome
               </label>
@@ -208,21 +229,31 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
           <table className="w-full text-sm">
             <thead className="bg-zinc-50 text-xs text-zinc-500 dark:bg-zinc-900/60 dark:text-zinc-400">
               <tr>
-                <th scope="col" className="px-4 py-2 text-left font-medium sm:pl-5">
+                <th scope="col" className="px-4 py-2 text-left font-medium sm:w-2/5 sm:pl-5">
                   Question
                 </th>
                 <th scope="col" className="hidden px-4 py-2 text-left font-medium md:table-cell">
                   Dataset
                 </th>
-                <th scope="col" className="px-4 py-2 text-left font-medium">
-                  Outcome
-                </th>
-                <th scope="col" className="hidden px-4 py-2 text-right font-medium sm:table-cell">
-                  Score
-                </th>
-                <th scope="col" className="hidden px-4 py-2 text-left font-medium lg:table-cell">
-                  Failure
-                </th>
+                {retrievalOnly ? (
+                  retrievalColumns.map((m) => (
+                    <th key={m} scope="col" className="px-4 py-2 text-right font-medium whitespace-nowrap">
+                      {metricLabel(m)}
+                    </th>
+                  ))
+                ) : (
+                  <>
+                    <th scope="col" className="px-4 py-2 text-left font-medium">
+                      Outcome
+                    </th>
+                    <th scope="col" className="hidden px-4 py-2 text-right font-medium sm:table-cell">
+                      Score
+                    </th>
+                    <th scope="col" className="hidden px-4 py-2 text-left font-medium lg:table-cell">
+                      Failure
+                    </th>
+                  </>
+                )}
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -242,25 +273,39 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                       <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{r.qid}</span>
                     </td>
                     <td className="hidden px-4 py-2.5 text-zinc-600 md:table-cell dark:text-zinc-400">{r.dataset}</td>
-                    <td className="px-4 py-2.5">
-                      <OutcomeBadge outcome={questionOutcome(r)} />
-                    </td>
-                    <td className="hidden px-4 py-2.5 text-right whitespace-nowrap tabular-nums sm:table-cell">
-                      {score ? (
-                        <span title={metricLabel(score.name)}>{formatMetric(score.name, score.value)}</span>
-                      ) : (
-                        <span className="text-zinc-500 dark:text-zinc-400">n/a</span>
-                      )}
-                    </td>
-                    <td className="hidden px-4 py-2.5 text-zinc-600 lg:table-cell dark:text-zinc-400">
-                      {r.failure_category ? failureLabel(r.failure_category) : ""}
-                    </td>
+                    {retrievalOnly ? (
+                      retrievalColumns.map((m) => (
+                        <td key={m} className="px-4 py-2.5 text-right whitespace-nowrap tabular-nums">
+                          {r.scores[m] != null ? (
+                            formatMetric(m, r.scores[m])
+                          ) : (
+                            <span className="text-zinc-500 dark:text-zinc-400">n/a</span>
+                          )}
+                        </td>
+                      ))
+                    ) : (
+                      <>
+                        <td className="px-4 py-2.5">
+                          <OutcomeBadge outcome={questionOutcome(r)} />
+                        </td>
+                        <td className="hidden px-4 py-2.5 text-right whitespace-nowrap tabular-nums sm:table-cell">
+                          {score ? (
+                            <span title={metricLabel(score.name)}>{formatMetric(score.name, score.value)}</span>
+                          ) : (
+                            <span className="text-zinc-500 dark:text-zinc-400">n/a</span>
+                          )}
+                        </td>
+                        <td className="hidden px-4 py-2.5 text-zinc-600 lg:table-cell dark:text-zinc-400">
+                          {r.failure_category ? failureLabel(r.failure_category) : ""}
+                        </td>
+                      </>
+                    )}
                   </tr>
                 );
               })}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
+                  <td colSpan={columnCount}className="px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
                     No questions match these filters.
                   </td>
                 </tr>

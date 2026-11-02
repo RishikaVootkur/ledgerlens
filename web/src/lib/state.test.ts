@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { QuestionResult } from "../api/types";
 import { STREAM_ENDED_EARLY, chatReducer, initialChatState } from "./chatState";
 import { parseHash } from "./router";
-import { filterResults, questionOutcome } from "./runs";
+import { filterResults, isRetrievalOnlyRun, questionOutcome, retrievalScoreNames } from "./runs";
 
 describe("chatReducer", () => {
   it("tracks steps, tokens and the final answer", () => {
@@ -76,17 +76,34 @@ const result = (over: Partial<QuestionResult>): QuestionResult => ({
 
 describe("run results", () => {
   it("derives outcomes from the primary score", () => {
-    expect(questionOutcome(result({ scores: { numeric_accuracy: 1 } }))).toBe("correct");
-    expect(questionOutcome(result({ scores: { numeric_accuracy: null, judge_accuracy: 0 } }))).toBe("incorrect");
-    expect(questionOutcome(result({ scores: { refusal_accuracy: 1 } }))).toBe("correct");
+    expect(questionOutcome(result({ scores: { numeric_correct: 1 } }))).toBe("correct");
+    expect(questionOutcome(result({ scores: { numeric_correct: null, judge_correct: 0 } }))).toBe("incorrect");
+    expect(questionOutcome(result({ scores: { refusal_correct: 1 } }))).toBe("correct");
     expect(questionOutcome(result({ error: "Timeout" }))).toBe("error");
     expect(questionOutcome(result({}))).toBe("unscored");
   });
 
+  it("prefers numeric over judge over refusal correctness", () => {
+    expect(questionOutcome(result({ scores: { numeric_correct: 0, refusal_correct: 1 } }))).toBe("incorrect");
+    expect(questionOutcome(result({ scores: { judge_correct: 1, refusal_correct: 0 } }))).toBe("correct");
+  });
+
+  it("detects retrieval-only runs and their score columns", () => {
+    const retrieval = [
+      result({ qid: "a", scores: { recall_at_5: 1, recall_at_10: 1, mrr: 0.5 } }),
+      result({ qid: "b", scores: { recall_at_5: 0, recall_at_10: 1, mrr: 0.2, ndcg_at_10: 0.3 } }),
+      result({ qid: "c", error: "boom" }),
+    ];
+    expect(isRetrievalOnlyRun(retrieval)).toBe(true);
+    expect(retrievalScoreNames(retrieval)).toEqual(["recall_at_5", "recall_at_10", "mrr", "ndcg_at_10"]);
+    expect(isRetrievalOnlyRun([result({ scores: { numeric_correct: 1 } })])).toBe(false);
+    expect(isRetrievalOnlyRun([])).toBe(false);
+  });
+
   it("filters by dataset, outcome and search text", () => {
     const rows = [
-      result({ qid: "a", dataset: "xbrl", scores: { numeric_accuracy: 1 }, ticker: "AAPL" }),
-      result({ qid: "b", dataset: "financebench", scores: { numeric_accuracy: 0 } }),
+      result({ qid: "a", dataset: "xbrl", scores: { numeric_correct: 1 }, ticker: "AAPL" }),
+      result({ qid: "b", dataset: "financebench", scores: { numeric_correct: 0 } }),
       result({ qid: "c", dataset: "financebench", scores: { citation_precision: 1 } }),
     ];
     expect(filterResults(rows, { dataset: "all", outcome: "unscored", search: "" }).map((r) => r.qid)).toEqual(["c"]);
