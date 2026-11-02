@@ -36,7 +36,7 @@ export function JudgeCalibrationCard({ calibration }: { calibration: JudgeCalibr
         <Stat name="judge_accuracy" label="Agreement" metric={calibration.accuracy} />
         <Stat name="kappa" label="Cohen's kappa" metric={calibration.kappa} />
       </dl>
-      <div className="mt-5 overflow-x-auto">
+      <div className="relative mt-5 overflow-x-auto">
         <table className="text-sm tabular-nums">
           <caption className="mb-2 text-left text-xs text-zinc-500 dark:text-zinc-400">
             Confusion matrix: rows are the human label, columns the judge label

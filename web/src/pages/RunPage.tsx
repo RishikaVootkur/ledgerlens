@@ -101,7 +101,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
           <div className="p-4 sm:p-5">
             <SectionHeader id="by-dataset" title="By dataset" />
           </div>
-          <div className="overflow-x-auto border-t border-zinc-200 dark:border-zinc-800">
+          <div className="relative overflow-x-auto border-t border-zinc-200 dark:border-zinc-800">
             <table className="w-full text-sm tabular-nums">
               <thead className="bg-zinc-50 text-xs text-zinc-500 dark:bg-zinc-900/60 dark:text-zinc-400">
                 <tr>
@@ -204,7 +204,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
             </div>
           </div>
         </div>
-        <div className="overflow-x-auto border-t border-zinc-200 dark:border-zinc-800">
+        <div className="relative overflow-x-auto border-t border-zinc-200 dark:border-zinc-800">
           <table className="w-full text-sm">
             <thead className="bg-zinc-50 text-xs text-zinc-500 dark:bg-zinc-900/60 dark:text-zinc-400">
               <tr>
