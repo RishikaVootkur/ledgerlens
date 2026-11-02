@@ -231,6 +231,21 @@ def test_xbrl_fact_from_the_right_filing_counts_as_retrieved():
     )
 
 
+def test_merge_runs_combines_disjoint_parts(isolated):
+    cfg = runner.EvalConfig(name="t", datasets=["smoke"])
+    a = runner.run_eval(cfg.model_copy(update={"qids": ["s1"]}), "dev", run_id="a")
+    b = runner.run_eval(cfg.model_copy(update={"qids": ["s2", "s3"]}), "dev", run_id="b")
+    merged = runner.merge_runs([a, b], "ab")
+    assert [r.qid for r in merged.results] == ["s1", "s2", "s3"]
+    assert merged.summary["numeric_correct"].n == 3
+    assert merged.config["merged_from"] == ["a", "b"]
+    with pytest.raises(ValueError):
+        runner.merge_runs([a, a], "dup")
+    other = runner.run_eval(cfg.model_copy(update={"qids": ["s2"], "k": 9}), "dev", run_id="c")
+    with pytest.raises(ValueError):
+        runner.merge_runs([a, other], "mixed")
+
+
 def test_derived_answers_are_supported_by_cited_inputs():
     reg = EvidenceRegistry()
     reg.add(
@@ -275,3 +290,16 @@ def test_derived_answers_are_supported_by_cited_inputs():
     )
     s = runner.score(q(value=23.29), a, reg)
     assert s["citation_precision"] == pytest.approx(2 / 3)
+
+
+def test_merge_rejects_other_splits_and_commits(isolated):
+    cfg = runner.EvalConfig(name="t", datasets=["smoke"])
+    a = runner.run_eval(cfg.model_copy(update={"qids": ["s1"]}), "dev", run_id="a")
+    b = runner.run_eval(cfg.model_copy(update={"qids": ["s2"]}), "dev", run_id="b")
+    with pytest.raises(ValueError, match="split"):
+        runner.merge_runs([a, b.model_copy(update={"split": "test"})], "x")
+    with pytest.raises(ValueError, match="commit"):
+        runner.merge_runs([a, b.model_copy(update={"git_sha": "other"})], "x")
+    merged = runner.merge_runs([a, b], "ab")
+    c = runner.run_eval(cfg.model_copy(update={"qids": ["s3"]}), "dev", run_id="c")
+    assert len(runner.merge_runs([merged, c], "abc").results) == 3

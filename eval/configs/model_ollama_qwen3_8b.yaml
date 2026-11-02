@@ -9,7 +9,8 @@ max_rounds: 3
 xbrl_tool: true
 verify_numbers: true
 self_check: true
-datasets: [xbrl, financebench, unanswerable]
-qids_file: eval/slices/ablation_dev.txt
+datasets: [smoke]
 scope: document
 concurrency: 1
+dedupe_tool_calls: false  # match the Groq Qwen smoke run, recorded before the dedupe fix
+citation_support: false

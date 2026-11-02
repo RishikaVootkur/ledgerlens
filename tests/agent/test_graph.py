@@ -133,7 +133,7 @@ def test_explicit_refusal_passes_through(scripted):
 def test_max_rounds_stops_tool_loop(scripted):
     queue, _ = scripted
     queue += [_resp(tool_calls=[search_call()]) for _ in range(2)] + [_resp(answer_json())]
-    result = run_agent("q", AgentConfig(max_rounds=2))
+    result = run_agent("q", AgentConfig(max_rounds=2, dedupe_tool_calls=False))
     assert result.steps.count("search_filings") == 2
 
 
@@ -313,6 +313,26 @@ def test_string_values_from_the_model_are_parsed():
         assert out.answer_value == (pytest.approx(expected) if expected is not None else None)
 
 
+def test_repeated_tool_calls_are_skipped_and_end_gathering(scripted):
+    queue, seen = scripted
+    # The model asks for the same search three rounds in a row; dedupe stops after round 2.
+    queue += [
+        _resp(tool_calls=[search_call()]),
+        _resp(tool_calls=[search_call()]),
+        _resp(answer_json()),
+    ]
+    result = run_agent("q", AgentConfig(max_rounds=3))
+    assert result.steps.count("search_filings") == 1
+    assert [s["purpose"] for s in seen] == ["gather", "gather", "answer"]
+
+
+def test_dedupe_off_reproduces_repeats(scripted):
+    queue, _ = scripted
+    queue += [_resp(tool_calls=[search_call()]) for _ in range(3)] + [_resp(answer_json())]
+    result = run_agent("q", AgentConfig(max_rounds=3, dedupe_tool_calls=False))
+    assert result.steps.count("search_filings") == 3
+
+
 def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
     reg = EvidenceRegistry()
     reg.add(EvidenceItem("", "fact", "f1", "F", "S", None, None, "t", "h"))
@@ -334,6 +354,67 @@ def test_full_number_with_a_redundant_scale_is_not_scaled_twice():
     assert finalize(draft, reg, []).answer_value == pytest.approx(359.2e9)
 
 
+def test_derived_numbers_need_stated_grounded_inputs():
+    from ledgerlens.agent.graph import derivable, stated_precision
+
+    assert derivable(6.43, [416_161e6, 391_035e6], 0.005 / 6.43)  # percent change
+    assert derivable(807_196e6, [416_161e6, 391_035e6], 1e-6)  # sum
+    assert derivable(50.56, [25.28e6, 50.0e6], 0.005 / 50.56)  # smaller over larger
+    assert derivable(1.46, [31_044e6, 21_281e6], 0.005 / 1.46)  # current ratio
+    assert not derivable(777.7, [31_044e6, 21_281e6], 0.05 / 777.7)
+    assert stated_precision("grew 6.43% to $7,110.5 million") == {
+        6.43: pytest.approx(0.005 / 6.43),
+        7_110.5e6: pytest.approx(0.05 / 7_110.5),
+    }
+
+
+def test_invented_values_are_rarely_derivable_from_stated_inputs():
+    import random
+
+    from ledgerlens.agent.graph import derivable
+
+    random.seed(0)
+    accepted = 0
+    for _ in range(2000):
+        inputs = [random.uniform(100, 99_999) * 1e6 for _ in range(3)]
+        invented = round(random.uniform(1, 100), 2)
+        accepted += derivable(invented, inputs, 0.005 / invented)
+    assert accepted / 2000 < 0.01
+
+
+def test_verify_accepts_a_derived_percentage(scripted):
+    queue, _ = scripted
+    derived = answer_json(
+        answer="Net sales grew 6.43%, from $391,035 million to $416,161 million [E1].",
+        value=6.43,
+        scale="one",
+        unit="percent",
+    )
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(derived)]
+    result = run_agent("q", AgentConfig())
+    assert not result.refused and result.answer_value == pytest.approx(6.43)
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(derived), _resp(derived)]
+    assert run_agent("q2", AgentConfig(derive_numbers=False)).refused
+
+
+def test_grouped_citation_markers_are_split():
+    from ledgerlens.agent.graph import split_grouped_refs
+
+    assert (
+        split_grouped_refs("Cash was $21,846 million [E1, E4].")
+        == "Cash was $21,846 million [E1][E4]."
+    )
+    assert split_grouped_refs("x [E2;E3] y [E5]") == "x [E2][E3] y [E5]"
+
+
+def test_grouped_markers_no_longer_force_a_refusal(scripted):
+    queue, _ = scripted
+    grouped = answer_json(answer="Total net sales were $416,161 million in 2025 [E1, E1].")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped)]
+    result = run_agent("q", AgentConfig())
+    assert not result.refused and "[1]" in result.answer
+
+
 def test_tool_order_is_stable_and_search_can_be_disabled(scripted):
     queue, seen = scripted
     queue += [_resp("READY"), _resp(json.dumps({"answer": "x", "refused": True}))]
@@ -348,3 +429,26 @@ def test_tool_order_is_stable_and_search_can_be_disabled(scripted):
     run_agent("q2", AgentConfig(search_tool=False))
     assert [t["function"]["name"] for t in seen[2]["tools"]] == ["get_company_facts", "calculate"]
     assert "search_filings" not in seen[2]["messages"][0]["content"]
+
+
+def test_more_grouped_marker_forms():
+    from ledgerlens.agent.graph import split_grouped_refs
+
+    assert split_grouped_refs("[E1, E2, and E4]") == "[E1][E2][E4]"
+    assert split_grouped_refs("[E1 and E4]") == "[E1][E4]"
+    assert split_grouped_refs("[e1, e2]") == "[E1][E2]"
+
+
+def test_dedupe_uses_arguments_after_user_filters(scripted):
+    queue, _ = scripted
+    a = ToolCall(
+        id="1", name="search_filings", arguments=json.dumps({"query": "sales", "ticker": "MSFT"})
+    )
+    b = ToolCall(
+        id="2", name="search_filings", arguments=json.dumps({"query": "sales", "ticker": "AAPL"})
+    )
+    queue += [_resp(tool_calls=[a, b]), _resp(answer_json())]
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    result = run_agent("q", AgentConfig(max_rounds=1), filters=SearchFilters(ticker="AAPL"))
+    assert result.steps.count("search_filings") == 1

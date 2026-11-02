@@ -64,6 +64,8 @@ class EvalConfig(BaseModel):
     search_tool: bool = True
     verify_numbers: bool = True
     self_check: bool = True
+    dedupe_tool_calls: bool = True
+    derive_numbers: bool = True
     datasets: list[DatasetName] = ["smoke"]
     # document: FinanceBench questions are searched within their own document, the
     # FinanceBench "single document" setting. open: no filter, the agent must find it.
@@ -77,6 +79,9 @@ class EvalConfig(BaseModel):
     # answer models; calibrated in eval/reports/judge_calibration_*.json.
     judge: bool = True
     judge_model: str = DEFAULT_JUDGE_MODEL
+    # LLM check that each cited passage supports a text answer (one judge call per
+    # citation). Off saves judge budget; text-answer citation precision is then unscored.
+    citation_support: bool = True
 
     def agent_config(self) -> AgentConfig:
         return AgentConfig(
@@ -92,6 +97,8 @@ class EvalConfig(BaseModel):
             search_tool=self.search_tool,
             verify_numbers=self.verify_numbers,
             self_check=self.self_check,
+            dedupe_tool_calls=self.dedupe_tool_calls,
+            derive_numbers=self.derive_numbers,
         )
 
     @classmethod
@@ -217,7 +224,8 @@ def run_one(question: Question, config: EvalConfig) -> QuestionResult:
             return judge_support(claim, passage, model=config.judge_model)
 
         try:
-            scores = score(question, answer, registry, support if use_judge else None)
+            check = support if use_judge and config.citation_support else None
+            scores = score(question, answer, registry, check)
         except Exception as exc:  # a judge outage must not discard the agent's answer
             scores = score(question, answer, registry, None)
             log.warning("eval.support_check_failed", qid=question.qid, error=str(exc)[:200])
@@ -334,3 +342,39 @@ def record_cache() -> int:
             dest.write_text(src.read_text())
             copied += 1
     return copied
+
+
+def merge_runs(parts: list[RunFile], run_id: str) -> RunFile:
+    """One run from parts that used the same config on disjoint questions."""
+
+    ignored = ("datasets", "limit", "qids", "merged_from")
+
+    def comparable(run: RunFile) -> dict[str, object]:
+        return {k: v for k, v in run.config.items() if k not in ignored}
+
+    first = parts[0]
+    if any(comparable(p) != comparable(first) for p in parts[1:]):
+        raise ValueError("can only merge runs made with the same config")
+    if any(p.split != first.split for p in parts[1:]):
+        raise ValueError("can only merge runs of the same split")
+    if any(p.git_sha != first.git_sha for p in parts[1:]):
+        raise ValueError("can only merge runs made from the same commit")
+    results = [r for p in parts for r in p.results]
+    qids = [r.qid for r in results]
+    if len(qids) != len(set(qids)):
+        raise ValueError("runs to merge share questions")
+    datasets: list[DatasetName] = []
+    for p in parts:
+        datasets.extend(d for d in p.datasets if d not in datasets)
+    config = {**first.config, "datasets": list(datasets), "merged_from": [p.run_id for p in parts]}
+    return first.model_copy(
+        update={
+            "run_id": run_id,
+            "datasets": datasets,
+            "config": config,
+            "results": results,
+            "summary": summarize_scores(results),
+            "summary_by_dataset": summarize_by_dataset(results),
+            "usage_total": sum((p.usage_total for p in parts), start=Usage()),
+        }
+    )

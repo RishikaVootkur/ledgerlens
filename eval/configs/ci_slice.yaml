@@ -15,3 +15,7 @@ self_check: true
 datasets: [smoke]
 scope: document
 concurrency: 3
+# Pinned to the prompt-affecting setting the replay cache was recorded with. Fixes that only
+# change post-processing (derived-number verification, grouped citation markers) are on.
+# Re-record the slice to drop this pin (tracked in PROGRESS.md).
+dedupe_tool_calls: false

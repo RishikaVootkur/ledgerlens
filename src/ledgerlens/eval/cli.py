@@ -34,6 +34,7 @@ def run(
     out: Path | None = typer.Option(None, help="Run file path (default eval/runs/<id>.json)"),
     run_id: str | None = typer.Option(None, help="Run id (default timestamp-config-split)"),
     record_cache: bool = typer.Option(False, help="Copy touched responses into eval/cache"),
+    datasets: str | None = typer.Option(None, help="Override the config's datasets (comma list)"),
 ) -> None:
     """Run the agent over a split and write a run file."""
     from ledgerlens.eval.runner import EvalConfig, run_eval, write_run
@@ -42,6 +43,10 @@ def run(
     cfg = EvalConfig.from_yaml(config)
     if limit is not None:
         cfg = cfg.model_copy(update={"limit": limit})
+    if datasets:
+        cfg = EvalConfig.model_validate(
+            {**cfg.model_dump(), "datasets": [d.strip() for d in datasets.split(",")]}
+        )
 
     def progress(done: int, total: int, result: object) -> None:
         r = result
@@ -182,3 +187,15 @@ def analyze_run(run: str = typer.Argument(..., help="Run id or path")) -> None:
     for r in run_file.results:
         if r.failure_category:
             typer.echo(f"- {r.qid}: {r.failure_category}: {r.failure_note}")
+
+
+@eval_app.command("merge")
+def merge(
+    parts: list[str] = typer.Argument(..., help="Run ids or paths with disjoint questions"),
+    run_id: str = typer.Option(..., help="Id of the merged run"),
+) -> None:
+    """Merge runs of one config over disjoint questions into one run, recomputing summaries."""
+    from ledgerlens.eval.runner import merge_runs, write_run
+
+    merged = merge_runs([_load_run(p) for p in parts], run_id)
+    typer.echo(f"wrote {write_run(merged)} ({len(merged.results)} questions)")

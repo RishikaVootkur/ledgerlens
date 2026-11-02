@@ -55,6 +55,14 @@ class AgentConfig:
     verify_numbers: bool = True
     self_check: bool = True
     max_repairs: int = 1
+    # Skip tool calls identical to one already executed for this question; if a planning
+    # round proposes nothing new, go straight to answering. Off reproduces the original
+    # behavior (models often re-issue the same XBRL lookup every round).
+    dedupe_tool_calls: bool = True
+    # Accept a number the model computed itself when it follows from two evidence numbers
+    # by one arithmetic step (sum, difference, ratio, percent, percent change). Off
+    # reproduces the original verifier, which refused such answers.
+    derive_numbers: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -79,9 +87,34 @@ class _Run:
     config: AgentConfig
     registry: EvidenceRegistry
     on_step: StepCallback
+    executed: set[str] = field(default_factory=set)
 
 
 # ------------------------------------------------------------------ helpers
+
+
+def effective_args(name: str, raw: str, filters: SearchFilters) -> dict[str, Any]:
+    """The arguments a tool call actually runs with: user-selected filters override what
+    the model asked for, and a year the user chose is never relaxed."""
+    args = parse_arguments(raw)
+    if name == "search_filings":
+        for key, value in filters.model_dump().items():
+            if value is not None:
+                args[key] = value
+        if filters.fiscal_year is not None:
+            args["strict_year"] = True
+    elif name == "get_company_facts":
+        if filters.ticker:
+            args["ticker"] = filters.ticker
+        if filters.fiscal_year is not None:
+            args["fiscal_year"] = filters.fiscal_year
+    return args
+
+
+def _call_key(name: str, args: dict[str, Any]) -> str:
+    """Tool name plus effective arguments, with key order and blank values normalized."""
+    kept = {k: v for k, v in args.items() if v not in (None, "")}
+    return f"{name}:{json.dumps(kept, sort_keys=True)}"
 
 
 def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int = 18) -> str:
@@ -114,6 +147,20 @@ def _evidence_full(registry: EvidenceRegistry, budget: int) -> str:
 def _filters_line(filters: SearchFilters) -> str:
     active = {k: v for k, v in filters.model_dump().items() if v is not None}
     return f"Filters set by the user: {active}" if active else ""
+
+
+_GROUPED_REFS = re.compile(r"\[\s*([Ee]\d+(?:\s*(?:,|;|and|&|,\s*and)\s*[Ee]\d+)+)\s*\]")
+
+
+def split_grouped_refs(text: str) -> str:
+    """Models often group citations as [E1, E4]; rewrite them as [E1][E4] so every marker
+    is seen (a grouped marker used to look like no citation at all and forced a refusal)."""
+    return _GROUPED_REFS.sub(
+        lambda m: "".join(
+            f"[{r.strip().upper()}]" for r in re.split(r",|;|&|\band\b", m.group(1)) if r.strip()
+        ),
+        text,
+    )
 
 
 def parse_json_answer(text: str) -> dict[str, Any]:
@@ -189,6 +236,53 @@ def grounding_sources(registry: EvidenceRegistry) -> list[float]:
         if all(v in _CALC_CONSTANTS or _matches(v, base) for v in inputs):
             sources.extend(numbers_in(result))
     return sources
+
+
+def stated_precision(text: str) -> dict[float, float]:
+    """Each number in `text` (scale words applied) mapped to half a unit of its last written
+    digit, relative to the value: "6.43%" -> 0.005 / 6.43; "$7,110.5 million" -> 0.05 / 7110.5."""
+    out: dict[float, float] = {}
+    for m in _NUM.finditer(re.sub(r"\[E\d+\]", " ", text)):
+        raw = m.group(2).replace(",", "")
+        value = float(raw)
+        if not value:
+            continue
+        decimals = len(raw.split(".")[1]) if "." in raw else 0
+        out[value * _MULT.get((m.group(3) or "").lower(), 1.0)] = 0.5 * 10**-decimals / value
+    return out
+
+
+def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
+    """True if `value` is one arithmetic step from two of `operands` (sum, difference,
+    either ratio, either ratio as a percent, or a percent change), equal within `rel_tol`
+    (half a unit of the last digit the answer wrote).
+
+    Operands are the other numbers the answer itself states that are grounded in the
+    evidence, so a derived value must be traceable to inputs shown in the answer. Over a
+    whole evidence set, one-step combinations match almost any invented value.
+    """
+    nums = sorted({abs(x) for x in operands if x})
+    target = abs(value)
+    if target == 0:
+        return False
+    tol = max(rel_tol, 1e-6) * target
+    for i, a in enumerate(nums):
+        for b in nums[i + 1 :]:
+            ops = (
+                a + b,
+                b - a,
+                b / a,
+                a / b,
+                b / a * 100,
+                a / b * 100,
+                (b - a) / a * 100,
+                (a - b) / b * 100,
+            )
+            for c in ops:
+                for unit in (1.0, 1e3, 1e6, 1e9):  # inputs may be stated in thousands/millions
+                    if abs(abs(c) * unit - target) <= tol:
+                        return True
+    return False
 
 
 def ungrounded_numbers(answer: str, sources: list[float]) -> list[float]:
@@ -300,26 +394,23 @@ def build_graph(run: _Run) -> Any:
             purpose="gather",
         )
         allowed = set(tool_names)
-        pending = [tc for tc in resp.tool_calls if tc.name in allowed][:8]
+        pending = [tc for tc in resp.tool_calls if tc.name in allowed]
+        if cfg.dedupe_tool_calls:
+            fresh = []
+            for tc in pending:
+                key = _call_key(tc.name, effective_args(tc.name, tc.arguments, state["filters"]))
+                if key not in run.executed:
+                    run.executed.add(key)
+                    fresh.append(tc)
+            pending = fresh
+        pending = pending[:8]  # cap after dedupe so repeats cannot crowd out new calls
         return {"round": rnd, "pending": pending, "steps": [*state.get("steps", []), "plan"]}
 
     def call_tools(state: State) -> State:
         steps = list(state.get("steps", []))
         filters = state["filters"]
         for tc in state.get("pending", []):
-            args = parse_arguments(tc.arguments)
-            # User-selected filters always override what the model asked for.
-            if tc.name == "search_filings":
-                for key, value in filters.model_dump().items():
-                    if value is not None:
-                        args[key] = value
-                if filters.fiscal_year is not None:
-                    args["strict_year"] = True  # never relax a year the user chose
-            elif tc.name == "get_company_facts":
-                if filters.ticker:
-                    args["ticker"] = filters.ticker
-                if filters.fiscal_year is not None:
-                    args["fiscal_year"] = filters.fiscal_year
+            args = effective_args(tc.name, tc.arguments, filters)
             result = run_tool(tc.name, args, run.registry, cfg.retrieval)
             run.on_step(tc.name, json.dumps(args)[:200])
             steps.append(tc.name)
@@ -358,6 +449,7 @@ def build_graph(run: _Run) -> Any:
             purpose="answer" if not problems else "repair",
         )
         draft = parse_json_answer(resp.content)
+        draft["answer"] = split_grouped_refs(str(draft.get("answer") or ""))
         return {"draft": draft, "problems": [], "steps": [*state.get("steps", []), "answer"]}
 
     def verify(state: State) -> State:
@@ -365,7 +457,21 @@ def build_graph(run: _Run) -> Any:
         if not cfg.verify_numbers or draft.get("refused"):
             return {}
         run.on_step("verify", "checking every number against the evidence")
-        bad = ungrounded_numbers(str(draft.get("answer", "")), grounding_sources(run.registry))
+        sources = grounding_sources(run.registry)
+        bad = ungrounded_numbers(str(draft.get("answer", "")), sources)
+        if cfg.derive_numbers and bad:
+            text = str(draft.get("answer", ""))
+            precision = stated_precision(text)
+            inputs = [v for v in numbers_in(text) if v not in bad and _matches(v, sources)]
+            # Cited XBRL facts state exactly one value each, so they are safe operands too
+            # (unlike table passages, whose dozens of numbers would match almost anything).
+            for ref in set(re.findall(r"\[(E\d+)\]", text)):
+                item = run.registry.items.get(ref)
+                if item is not None and item.kind == "fact":
+                    values = numbers_in(item.text.split(" for ")[0])
+                    if values:
+                        inputs.append(max(values, key=abs))
+            bad = [v for v in bad if not derivable(v, inputs, precision.get(v, 1e-4))]
         problems = list(state.get("problems") or [])
         if bad:
             shown = ", ".join(f"{v:,.6g}" for v in bad[:5])
