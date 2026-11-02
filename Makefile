@@ -3,7 +3,7 @@
 setup:  ## Install Python and web dependencies, pull the embedding model
 	uv sync --all-extras
 	uv run pre-commit install
-	cd web && npm ci
+	if [ -d web ]; then cd web && npm ci; fi
 	ollama pull nomic-embed-text
 
 ingest:  ## Download filings from EDGAR, parse, chunk and index them
@@ -21,7 +21,8 @@ test:  ## Lint, type-check and unit tests
 
 dev:  ## Start Qdrant and Phoenix in Docker, then the API and web dev servers
 	docker compose up -d qdrant phoenix
-	uv run uvicorn ledgerlens.api.app:app --reload --port 8000 & cd web && npm run dev
+	trap 'kill 0' EXIT; uv run uvicorn ledgerlens.api.app:app --reload --port 8000 & \
+	cd web && npm run dev
 
 up:  ## Full stack in Docker
 	docker compose up -d --build
