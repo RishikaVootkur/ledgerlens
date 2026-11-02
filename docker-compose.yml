@@ -1,0 +1,23 @@
+# Lean stack for a 16 GB laptop that also runs Ollama on the host.
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    ports: ["6333:6333"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    mem_limit: 2g
+    restart: unless-stopped
+
+  phoenix:
+    image: arizephoenix/phoenix:version-21.0.0
+    ports: ["6006:6006", "4317:4317"]
+    volumes: ["phoenix_data:/mnt/data"]
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+    mem_limit: 1g
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+  phoenix_data:
