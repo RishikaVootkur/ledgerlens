@@ -21,29 +21,43 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      ok: ${{ steps.check.outputs.ok }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10.3.3
+      - name: Skip until results are published
+        id: check
+        run: |
+          if [ -f eval/reports/experiments.yaml ]; then echo "ok=true" >> "$GITHUB_OUTPUT"
+          else echo "ok=false" >> "$GITHUB_OUTPUT"; echo "No eval/reports/experiments.yaml yet; skipping." >> "$GITHUB_STEP_SUMMARY"; fi
+      - if: steps.check.outputs.ok == 'true'
+        uses: astral-sh/setup-uv@v10.3.3
         with:
           python-version: "3.12"
           enable-cache: true
-      - uses: actions/setup-node@v7
+      - if: steps.check.outputs.ok == 'true'
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - run: uv sync --frozen
+      - if: steps.check.outputs.ok == 'true'
+        run: uv sync --frozen
       - name: Build the static web app
+        if: steps.check.outputs.ok == 'true'
         working-directory: web
         run: npm ci && npm run build:static
       - name: Bundle dashboard data
+        if: steps.check.outputs.ok == 'true'
         run: uv run ledgerlens eval dashboard --publish-dir web/dist/data
-      - uses: actions/upload-pages-artifact@v5
+      - if: steps.check.outputs.ok == 'true'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: web/dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.ok == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
