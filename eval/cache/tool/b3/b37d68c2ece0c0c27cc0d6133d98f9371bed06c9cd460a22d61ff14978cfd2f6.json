@@ -1,0 +1,124 @@
+{
+ "args": {
+  "form": "10-Q",
+  "query": "total revenue three months ended July 3 2026",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00143",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 38,
+   "page_end": 38,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Net Operating Revenues",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Net Operating Revenues | p.38]\nThree Months Ended July 3, 2026 versus Three Months Ended June 27, 2025\n\nDuring the three months ended July 3, 2026, net operating revenues were $13,380 million, compared to $12,535 million during the three months ended June 27, 2025, an increase of $845 million, or 7%.\n\nThe following table illustrates, on a percentage basis, the estimated impact of the factors resulting in the increase (decrease) in net operating revenues on a consolidated basis and for each of our operating segments:",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00048",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 13,
+   "page_end": 13,
+   "section": "Part I > Item 1. Financial Statements > Debt Securities",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0021"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Debt Securities | p.13]\n|  | Three Months Ended July 3, 2026 | June 27, 2025 | Six Months Ended July 3, 2026 | June 27, 2025 |\n|---|---|---|---|---|\n| Gross gains | $1 | $2 | $2 | $3 |\n| Gross losses | (2) | (2) | (3) | (4) |\n| Proceeds | 374 | 70 | 571 | 207 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00151",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 40,
+   "page_end": 40,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Selling, General and Administrative Expenses",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Selling, General and Administrative Expenses | p.40]\nDuring the three months ended July 3, 2026, selling, general and administrative expenses were $3,720 million, compared to $3,470 million during the three months ended June 27, 2025, an increase of $250 million, or 7%. During the six months ended July 3, 2026, selling, general and administrative expenses were $7,192 million, compared to $6,704 million during the six months ended June 27, 2025, an increase of $488 million, or 7%. These increases were primarily due to increased marketing spending partly due to timing. Additionally, during the three and six months ended July 3, 2026, foreign currency exchange rate fluctuations increased selling, general and administrative expenses by 1% and 2%, respectively. These increases were partially offset by lower annual incentive expense and the impact of the sale of our finished product operations in Nigeria.\n\nAdvertising expenses for the three months ended July 3, 2026 and June 27, 2025 were $1,565 million and $1,328 million, respectively. Advertising expenses for the six months ended July 3, 2026 and June 27, 2025 were $2,942 million and $2,417 million, respectively.",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00153",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 40,
+   "page_end": 40,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other Operating Charges",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0053"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other Operating Charges | p.40]\n| EMEA | Three Months Ended July 3, 2026 $— | June 27, 2025 $— | Six Months Ended July 3, 2026 $— | June 27, 2025 $— |\n|---|---|---|---|---|\n| Latin America | — | 31 | — | 31 |\n| North America | 6 | — | 10 | — |\n| Asia Pacific | — | — | — | — |\n| Bottling Investments | — | — | — | — |\n| Corporate | 17 | 40 | 34 | 113 |\n| Total | $23 | $71 | $44 | $144 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00033",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0013"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale | p.11]\n|  | United States | International | Total |\n|---|---|---|---|\n| Three Months Ended July 3, 2026 |  |  |  |\n| Concentrate operations | $2,426 | $5,720 | $8,146 |\n| Finished product operations | 2,834 | 2,400 | 5,234 |\n| Total | $5,260 | $8,120 | $13,380 |\n| Three Months Ended June 27, 2025 |  |  |  |\n| Concentrate operations | $2,322 | $5,296 | $7,618 |\n| Finished product operations | 2,613 | 2,304 | 4,917 |\n| Total | $4,935 | $7,600 | $12,535 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00161",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 42,
+   "page_end": 42,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Income and Operating Margin",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Income and Operating Margin | p.42]\nOperating income for North America for the three months ended July 3, 2026 and June 27, 2025 was $1,695 million and $1,621 million, respectively. The increase in operating income was primarily driven by an increase in concentrate sales volume of 3%, favorable price/mix, lower operating expenses and a favorable foreign currency exchange rate impact of 1%, partially offset by higher commodity costs, higher other operating charges and increased marketing spending.\n\nAsia Pacific’s operating income for the three months ended July 3, 2026 and June 27, 2025 was $656 million and $647 million, respectively. The increase in operating income was primarily driven by an increase in concentrate sales volume of 11%, lower commodity costs, lower operating expenses and a favorable foreign currency exchange rate impact of 1%, partially offset by unfavorable price/mix and increased marketing spending.\n\nBottling Investments’ operating income for the three months ended July 3, 2026 and June 27, 2025 was $91 million and $59 million, respectively. The increase in operating income was primarily driven by an increase in unit case volume of 8%, favorable price/mix and lower commodity costs, partially offset by higher operating expenses, the impact of refranchising certain territories of our bottling operations in India and an unfavorable foreign currency exchange rate impact of 24%.\n\nCorporate’s operating loss for the three months ended July 3, 2026 and June 27, 2025 was $256 million and $329 million, respectively. This decrease is primarily a result of lower annual incentive expense and lower other operating charges.\n\nSix Months Ended July 3, 2026 versus Six Months Ended June 27, 2025\n\nDuring the six months ended July 3, 2026, operating income was $9,031 million, compared to $7,939 million during the six months ended June 27, 2025, an increase of $1,092 million, or 14%. The increase was primarily driven by an increase in concentrate sales volume of 6%, favorable price/mix, lower operating expenses, lower other operating charges and a favorable foreign currency exchange rate impact of 4%, partially offset by higher commodity costs and increased marketing spending partly due to timing.",
+   "ticker": "KO"
+  }
+ ],
+ "tool": "search_filings"
+}

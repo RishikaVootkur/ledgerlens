@@ -1,0 +1,128 @@
+{
+ "args": {
+  "form": "10-Q",
+  "query": "net income three months ended June 27 2026",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00012",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 4,
+   "page_end": 4,
+   "section": "Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0006"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME (Unaudited) | p.4]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|---|---|\n| Net income | $29,789 | $23,434 | $101,464 | $84,544 |\n| Other comprehensive income/(loss): |  |  |  |  |\n| Change in foreign currency translation, net of tax | (24) | 449 | (116) | (86) |\n| Change in unrealized gains/losses on derivative instruments, net of tax: |  |  |  |  |\n| Change in fair value of derivative instruments | 356 | (523) | 729 | 810 |\n| Adjustment for net (gains)/losses realized and included in net income | 67 | (571) | 348 | (415) |\n| Total change in unrealized gains/losses on derivative instruments | 423 | (1,094) | 1,077 | 395 |\n| Change in unrealized gains/losses on marketable debt securities, net of tax: |  |  |  |  |\n| Change in fair value of marketable debt securities | 441 | 640 | 57 | 90 |\n| Adjustment for net (gains)/losses realized and included in net income | 27 | (1) | 45 | 404 |\n| Total change in unrealized gains/losses on marketable debt securities | 468 | 639 | 102 | 494 |\n| Total other comprehensive income/(loss) | 867 | (6) | 1,063 | 803 |\n| Total comprehensive income | $30,656 | $23,428 | $102,527 | $85,347 |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00024",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 9,
+   "page_end": 9,
+   "section": "Part I > Item 1. Financial Statements > Note 3 – Earnings Per Share",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0011"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Note 3 – Earnings Per Share | p.9]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|---|---|\n| Numerator: |  |  |  |  |\n| Net income | $29,789 | $23,434 | $101,464 | $84,544 |\n| Denominator: |  |  |  |  |\n| Weighted-average basic shares outstanding | 14,656,110 | 14,902,886 | 14,692,515 | 14,992,898 |\n| Effect of dilutive share-based awards | 58,566 | 45,293 | 57,787 | 58,828 |\n| Weighted-average diluted shares | 14,714,676 | 14,948,179 | 14,750,302 | 15,051,726 |\n| Basic earnings per share | $2.03 | $1.57 | $6.91 | $5.64 |\n| Diluted earnings per share | $2.02 | $1.57 | $6.88 | $5.62 |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00072",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 19,
+   "page_end": 19,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Provision for Income Taxes",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0029"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Provision for Income Taxes | p.19]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|---|---|\n| Provision for income taxes | $6,478 | $4,597 | $21,638 | $15,381 |\n| Effective tax rate | 17.9% | 16.4% | 17.6% | 15.4% |\n| Statutory federal income tax rate | 21% | 21% | 21% | 21% |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00023",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 9,
+   "page_end": 9,
+   "section": "Part I > Item 1. Financial Statements > Note 3 – Earnings Per Share",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Note 3 – Earnings Per Share | p.9]\nThe following table shows the computation of basic and diluted earnings per share for the three- and nine-month periods ended June 27, 2026 and June 28, 2025 (net income in millions and shares in thousands):",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00069",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 19,
+   "page_end": 19,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Expenses",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0028"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Expenses | p.19]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Change | Nine Months Ended June 27, 2026 | June 28, 2025 | Change |\n|---|---|---|---|---|---|---|\n| Research and development | $11,729 | $8,866 | 32% | $34,035 | $25,684 | 33% |\n| Percentage of total net sales | 11% | 9% |  | 9% | 8% |  |\n| Selling, general and administrative | $7,346 | $6,650 | 10% | $22,315 | $20,553 | 9% |\n| Percentage of total net sales | 7% | 7% |  | 6% | 7% |  |\n| Total operating expenses | $19,075 | $15,516 | 23% | $56,350 | $46,237 | 22% |\n| Percentage of total net sales | 17% | 17% |  | 15% | 15% |  |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00045",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 13,
+   "page_end": 13,
+   "section": "Part I > Item 1. Financial Statements > Share-Based Compensation",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0020"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Share-Based Compensation | p.13]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|---|---|\n| Share-based compensation expense | $3,401 | $3,168 | $10,523 | $9,680 |\n| Income tax benefit related to share-based compensation expense | $(1,122) | $(795) | $(3,217) | $(2,870) |",
+   "ticker": "AAPL"
+  }
+ ],
+ "tool": "search_filings"
+}

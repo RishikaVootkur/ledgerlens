@@ -1,0 +1,128 @@
+{
+ "args": {
+  "form": "10-Q",
+  "query": "total assets as of July 3, 2026",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00033",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0013"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale | p.11]\n|  | United States | International | Total |\n|---|---|---|---|\n| Three Months Ended July 3, 2026 |  |  |  |\n| Concentrate operations | $2,426 | $5,720 | $8,146 |\n| Finished product operations | 2,834 | 2,400 | 5,234 |\n| Total | $5,260 | $8,120 | $13,380 |\n| Three Months Ended June 27, 2025 |  |  |  |\n| Concentrate operations | $2,322 | $5,296 | $7,618 |\n| Finished product operations | 2,613 | 2,304 | 4,917 |\n| Total | $4,935 | $7,600 | $12,535 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00034",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0014"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Assets and Liabilities Held for Sale | p.11]\n|  | United States | International | Total |\n|---|---|---|---|\n| Six Months Ended July 3, 2026 |  |  |  |\n| Concentrate operations | $4,614 | $10,917 | $15,531 |\n| Finished product operations | 5,391 | 4,930 | 10,321 |\n| Total | $10,005 | $15,847 | $25,852 |\n| Six Months Ended June 27, 2025 |  |  |  |\n| Concentrate operations | $4,297 | $9,915 | $14,212 |\n| Finished product operations | 4,891 | 4,561 | 9,452 |\n| Total | $9,188 | $14,476 | $23,664 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00181",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 47,
+   "page_end": 47,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Cash Flows from Investing Activities",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Cash Flows from Investing Activities | p.47]\nPurchases of property, plant and equipment during the six months ended July 3, 2026 and June 27, 2025 were $684 million and $751 million, respectively.\n\nOther Investing Activities\n\nDuring the six months ended July 3, 2026 and June 27, 2025, the total cash inflow was $241 million and $124 million, respectively. The activity during the six months ended July 3, 2026 included the return of an advance payment of $184 million to acquire additional shares in an equity method investee in Japan. The activity during the six months ended June 27, 2025 included $98 million related to the reimbursement of advance payments made to finance the construction of leased assets.",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00122",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 31,
+   "page_end": 31,
+   "section": "Part I > Item 1. Financial Statements > Nonrecurring Fair Value Measurements",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0047"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Nonrecurring Fair Value Measurements | p.31]\n|  | Gains (Losses) Three Months Ended July 3, 2026 | June 27, 2025 |  |  | Six Months Ended July 3, 2026 | June 27, 2025 |  |  |\n|---|---|---|---|---|---|---|---|---|\n| Assets held for sale | $66 | 1 | $(28) | 2 | $56 | 1 | $(28) | 2 |\n| Other-than-temporary impairment charges | — | (40) |  | 3 | — | (65) |  | 3,5 |\n| Impairment of intangible assets | — | (31) |  | 4 | — | (31) |  | 4 |\n| Total | $66 |  | $(99) |  | $56 |  | $(124) |  |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00037",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 12,
+   "page_end": 12,
+   "section": "Part I > Item 1. Financial Statements > Equity Securities",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0015"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Equity Securities | p.12]\n|  | Fair Value with Changes Recognized in Income | Measurement Alternative — No Readily Determinable Fair Value |\n|---|---|---|\n| July 3, 2026 |  |  |\n| Marketable securities | $547 | $— |\n| Other noncurrent assets | 2,738 | 293 |\n| Total equity securities | $3,285 | $293 |\n| December 31, 2025 |  |  |\n| Marketable securities | $489 | $— |\n| Other noncurrent assets | 2,100 | 44 |\n| Total equity securities | $2,589 | $44 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00048",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 13,
+   "page_end": 13,
+   "section": "Part I > Item 1. Financial Statements > Debt Securities",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0021"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Debt Securities | p.13]\n|  | Three Months Ended July 3, 2026 | June 27, 2025 | Six Months Ended July 3, 2026 | June 27, 2025 |\n|---|---|---|---|---|\n| Gross gains | $1 | $2 | $2 | $3 |\n| Gross losses | (2) | (2) | (3) | (4) |\n| Proceeds | 374 | 70 | 571 | 207 |",
+   "ticker": "KO"
+  }
+ ],
+ "tool": "search_filings"
+}

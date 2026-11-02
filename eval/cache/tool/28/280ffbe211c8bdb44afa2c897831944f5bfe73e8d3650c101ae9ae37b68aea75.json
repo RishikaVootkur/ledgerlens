@@ -1,0 +1,34 @@
+{
+ "args": {
+  "duration": "FY",
+  "fiscal_year": 2025,
+  "metric": "net_income",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0001628280-26-010047",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "FY",
+   "end": "2025-12-31",
+   "fact_id": "xbrl:KO:NetIncomeLoss:2025-01-01_2025-12-31:USD",
+   "filed": "2026-02-20",
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2025-01-01",
+   "ticker": "KO",
+   "unit": "USD",
+   "value": 13107000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}
