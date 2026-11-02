@@ -14,7 +14,7 @@ from typing import Any
 
 import numpy as np
 import numpy.typing as npt
-from scipy import stats as sps  # type: ignore[import-untyped]
+from scipy import stats as sps
 
 from ledgerlens.schemas import MetricValue
 

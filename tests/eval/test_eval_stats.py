@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from scipy.stats import binom  # type: ignore[import-untyped]
+from scipy.stats import binom
 
 from ledgerlens.eval.stats import (
     agreement_accuracy,
