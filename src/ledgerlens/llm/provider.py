@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import contextlib
 import json
+import logging
 import re
 import threading
 import time
@@ -277,6 +278,7 @@ def _call_provider(spec: ModelSpec, request: dict[str, Any]) -> tuple[Any, float
     import litellm
 
     litellm.suppress_debug_info = True
+    logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 
     _pacer.wait(spec, estimate_tokens(request))
     started = time.perf_counter()
