@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -51,8 +51,11 @@ class ResponseCache:
     def put(self, namespace: str, key: str, record: dict[str, Any]) -> Path:
         path = self._path(self.root, namespace, key)
         path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = path.with_suffix(f".{os.getpid()}.tmp")
-        tmp.write_text(json.dumps(record, indent=1, sort_keys=True, ensure_ascii=False))
+        # Unique temp name per write: concurrent writers (threads or processes) never collide.
+        tmp = path.with_suffix(f".{uuid.uuid4().hex}.tmp")
+        tmp.write_text(
+            json.dumps(record, indent=1, sort_keys=True, ensure_ascii=False, default=str)
+        )
         tmp.replace(path)  # atomic, so a crash never leaves a half-written entry
         return path
 
