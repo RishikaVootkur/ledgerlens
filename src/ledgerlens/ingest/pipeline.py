@@ -8,6 +8,8 @@ done per filing with content hashes:
 - `chunk:{strategy}`: sha256 of the parsed input, chunker version, sha256 of
   `chunks/{strategy}/{id}.jsonl`.
 
+`filings.json` lists the FilingRefs ingested successfully by the latest run.
+
 A step is skipped when its recorded input hash, version and output hash all still
 match what is on disk, so a second run makes no requests and parses nothing. The
 manifest is saved after every filing, so an interrupted run resumes where it stopped.
@@ -31,6 +33,7 @@ from ledgerlens.ingest.chunk import CHUNKER_VERSION, CHUNKERS
 from ledgerlens.ingest.edgar import (
     FetchError,
     HttpCache,
+    fetch_companyfacts,
     fetch_submissions,
     select_from_submissions,
 )
@@ -83,6 +86,10 @@ class DataPaths:
     @property
     def manifest(self) -> Path:
         return self.root / "manifest.json"
+
+    @property
+    def filings(self) -> Path:
+        return self.root / "filings.json"
 
     @property
     def reports(self) -> Path:
@@ -164,7 +171,8 @@ def select_all(
     for c in companies:
         try:
             sub = fetch_submissions(c.cik, http, refresh=refresh)
-            refs.extend(select_from_submissions(sub, ticker=c.ticker, company=c.name))
+            facts = fetch_companyfacts(c.cik, http, refresh=refresh)
+            refs.extend(select_from_submissions(sub, facts, ticker=c.ticker, company=c.name))
         except FetchError as exc:
             log.error("selection_failed", ticker=c.ticker, error=str(exc))
             summary.failed[f"{c.ticker}-submissions"] = str(exc)
@@ -372,6 +380,10 @@ def run(
             http.close()
 
     ok = [r for r in summary.filings if r.filing_id not in summary.failed]
+    _write_atomic(
+        paths.filings,
+        json.dumps([r.model_dump(mode="json") for r in ok], indent=2) + "\n",
+    )
     summary.report = build_report(ok, paths, strategies)
     _, md_path = quality.write_reports(summary.report, paths.reports)
     if docs_report is not None:

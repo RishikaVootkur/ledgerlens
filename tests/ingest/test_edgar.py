@@ -17,6 +17,7 @@ from ledgerlens.ingest.edgar import (
 
 UA = "Test Agent test@ledgerlens.dev"
 SUB_URL = "https://data.sec.gov/submissions/CIK0000320193.json"
+FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
 
 
 @pytest.mark.parametrize(
@@ -44,11 +45,11 @@ def test_selection_rule_on_canned_submissions(fixtures):
     sub = json.loads((fixtures / "submissions_aapl.json").read_text())
     refs = select_from_submissions(sub)
     assert [r.filing_id for r in refs] == [
+        "AAPL-10K-2025FY",
         "AAPL-10Q-2026Q3",
         "AAPL-10Q-2026Q2",
-        "AAPL-10K-2025FY",
     ]
-    k = refs[2]
+    k = refs[0]
     assert k.accession == "0000320193-25-000079"
     assert k.source_url == (
         "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
@@ -60,16 +61,59 @@ def test_selection_rule_on_canned_submissions(fixtures):
     assert all(r.source_format == "html" for r in refs)
 
 
+def _facts(*entries: tuple[str, int, str]) -> dict[str, object]:
+    units = [
+        {"end": "2026-06-27", "val": 1, "accn": accn, "fy": fy, "fp": fp, "form": "10-Q"}
+        for accn, fy, fp in entries
+    ]
+    return {"facts": {"us-gaap": {"Revenues": {"units": {"USD": units}}}}}
+
+
+def test_companyfacts_labels_win_and_fallback_fills_gaps(fixtures):
+    sub = json.loads((fixtures / "submissions_aapl.json").read_text())
+    facts = _facts(
+        ("0000320193-26-000020", 2026, "Q3"),
+        ("0000320193-26-000020", 2026, "Q3"),
+        ("0000320193-26-000020", 2025, "Q3"),  # minority label is ignored
+        ("0000320193-25-000079", 2025, "FY"),
+        ("0000320193-26-000013", 2030, "Q1"),  # deliberately odd: proves facts take precedence
+    )
+    refs = select_from_submissions(sub, facts)
+    assert [r.filing_id for r in refs] == [
+        "AAPL-10K-2025FY",
+        "AAPL-10Q-2026Q3",
+        "AAPL-10Q-2030Q1",
+    ]
+    # Without facts for an accession, reportDate + fiscalYearEnd decide.
+    only_k = select_from_submissions(sub, _facts(("0000320193-25-000079", 2025, "FY")))
+    assert [r.filing_id for r in only_k][1:] == ["AAPL-10Q-2026Q3", "AAPL-10Q-2026Q2"]
+
+
+def test_snapshot_is_read_before_network(fixtures, tmp_path):
+    snap = tmp_path / "sec_api" / "submissions" / "CIK0000320193.json"
+    snap.parent.mkdir(parents=True)
+    snap.write_bytes((fixtures / "submissions_aapl.json").read_bytes())
+    facts = tmp_path / "sec_api" / "api" / "xbrl" / "companyfacts" / "CIK0000320193.json"
+    facts.parent.mkdir(parents=True)
+    facts.write_text(json.dumps(_facts(("0000320193-26-000013", 2026, "Q2"))))
+    http = HttpCache(tmp_path, sec_user_agent=UA, offline=True)
+    refs = select_filings("320193", http)
+    assert len(refs) == 3
+    assert http.requests_made == 0
+
+
 @respx.mock
 def test_select_filings_fetches_once_and_caches(fixtures, tmp_path):
     route = respx.get(SUB_URL).mock(
         return_value=httpx.Response(200, content=(fixtures / "submissions_aapl.json").read_bytes())
     )
+    facts_route = respx.get(FACTS_URL).mock(return_value=httpx.Response(404))
     http = HttpCache(tmp_path, sec_user_agent=UA, sleep=lambda _: None)
     first = select_filings("320193", http)
     second = select_filings("0000320193", http)
     assert first == second
     assert route.call_count == 1
+    assert facts_route.call_count == 1  # the 404 is cached too
     assert route.calls[0].request.headers["User-Agent"] == UA
     assert (tmp_path / "data.sec.gov" / "submissions" / "CIK0000320193.json").exists()
 

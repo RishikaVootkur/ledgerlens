@@ -1,7 +1,10 @@
 """SEC EDGAR client and the filing selection rule.
 
 Every download goes through `HttpCache.fetch`, which stores the raw bytes under
-`DATA_DIR/raw/{host}/{path}` so a rerun makes no requests. Requests to SEC hosts
+`DATA_DIR/raw/{host}/{path}` so a rerun makes no requests. data.sec.gov JSON
+(submissions, companyfacts) is read first from the shared snapshot in
+`DATA_DIR/raw/sec_api/{path}` that the eval dataset builder also uses, so both
+select the same filings even if a company files something new later. Requests to SEC hosts
 carry the configured SEC user agent and are throttled to `SEC_MAX_RPS` (4/s, well
 under SEC's 10/s fair-access limit because other processes share it). 429 and 5xx
 responses and transport errors are retried with exponential backoff.
@@ -9,8 +12,10 @@ responses and transport errors are retried with exponential backoff.
 Selection rule (shared with the XBRL question generator, keep it exact):
 per company, from the submissions `filings.recent` list, take the latest `10-K`
 and the two most recent `10-Q`s by `filingDate` (exact form match, so amendments
-like `10-K/A` are excluded; ties broken by accession number). Use the primary
-document. Fiscal year and period come from `reportDate` and the company's
+like `10-K/A` are excluded; a stable sort keeps the `recent` order on ties). Use
+the primary document. Fiscal year and period are the most common (`fy`, `fp`)
+over companyfacts facts whose `accn` is the filing's accession; when companyfacts
+has no fact for that accession they come from `reportDate` and the company's
 `fiscalYearEnd` (MMDD) via :func:`fiscal_year_and_period`.
 """
 
@@ -21,6 +26,7 @@ import json
 import random
 import threading
 import time
+from collections import Counter
 from collections.abc import Callable
 from datetime import date, timedelta
 from pathlib import Path
@@ -47,6 +53,10 @@ SEC_HOSTS = ("sec.gov",)
 RETRY_STATUS = {429, 500, 502, 503, 504}
 
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
+COMPANYFACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
+SNAPSHOT_DIR = "sec_api"
+SNAPSHOT_HOSTS = ("data.sec.gov",)
+_PERIODS: tuple[FiscalPeriod, ...] = ("FY", "Q1", "Q2", "Q3", "Q4")
 ARCHIVES_URL = "https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_nodash}/{doc}"
 
 
@@ -118,8 +128,16 @@ class HttpCache:
             path = f"{path}__{digest}"
         return self.raw_dir / parts.netloc / path
 
+    def snapshot_path(self, url: str) -> Path | None:
+        """Shared snapshot location for data.sec.gov JSON, mirroring the URL path."""
+        parts = urlsplit(url)
+        if parts.netloc not in SNAPSHOT_HOSTS or parts.query:
+            return None
+        return self.raw_dir / SNAPSHOT_DIR / parts.path.lstrip("/")
+
     def is_cached(self, url: str) -> bool:
-        return self.cache_path(url).exists()
+        snap = self.snapshot_path(url)
+        return (snap is not None and snap.exists()) or self.cache_path(url).exists()
 
     # ------------------------------------------------------------ http
 
@@ -141,10 +159,17 @@ class HttpCache:
         return {"User-Agent": GENERIC_USER_AGENT}
 
     def fetch(self, url: str, *, refresh: bool = False) -> bytes:
-        """Return the bytes at `url`, from the raw cache when present."""
+        """Return the bytes at `url`, from the snapshot or raw cache when present.
+
+        `refresh` skips both and re-downloads into the raw cache (never the snapshot).
+        """
         path = self.cache_path(url)
-        if path.exists() and not refresh:
-            return path.read_bytes()
+        snap = self.snapshot_path(url)
+        if not refresh:
+            if snap is not None and snap.exists():
+                return snap.read_bytes()
+            if path.exists():
+                return path.read_bytes()
         if self.offline:
             raise FetchError(url, None, "offline and not cached")
         data = self._get(url)
@@ -241,31 +266,65 @@ def _company_for(cik: str, submissions: dict[str, Any]) -> tuple[str, str]:
     return str(ticker).upper(), str(submissions.get("name", ticker))
 
 
+def fiscal_labels(companyfacts: dict[str, Any] | None, accession: str) -> tuple[int, str] | None:
+    """Most common (fy, fp) over companyfacts facts filed with `accession`, if any."""
+    if not companyfacts:
+        return None
+    counts: Counter[tuple[int, str]] = Counter()
+    for concepts in companyfacts.get("facts", {}).values():
+        for cdata in concepts.values():
+            for facts in cdata.get("units", {}).values():
+                for f in facts:
+                    if f.get("accn") == accession and f.get("fy") and f.get("fp"):
+                        counts[(int(f["fy"]), str(f["fp"]))] += 1
+    if not counts:
+        return None
+    return counts.most_common(1)[0][0]
+
+
+def _fiscal(
+    companyfacts: dict[str, Any] | None,
+    accession: str,
+    report: date,
+    fiscal_year_end: str | None,
+    form: str,
+) -> tuple[int, FiscalPeriod]:
+    labels = fiscal_labels(companyfacts, accession)
+    if labels is not None:
+        fy, fp = labels
+        if form == "10-K":
+            return fy, "FY"
+        if fp in _PERIODS and fp != "FY":
+            return fy, fp  # type: ignore[return-value]
+    return fiscal_year_and_period(report, fiscal_year_end, form)
+
+
 def select_from_submissions(
-    submissions: dict[str, Any], *, ticker: str | None = None, company: str | None = None
+    submissions: dict[str, Any],
+    companyfacts: dict[str, Any] | None = None,
+    *,
+    ticker: str | None = None,
+    company: str | None = None,
 ) -> list[FilingRef]:
-    """Apply the selection rule to a submissions JSON (pure, no network)."""
+    """Apply the selection rule to submissions (+ companyfacts) JSON. Pure, no network."""
     cik = str(submissions["cik"]).zfill(10)
     default_ticker, default_name = _company_for(cik, submissions)
     ticker = ticker or default_ticker
     company = company or default_name
     fye = submissions.get("fiscalYearEnd")
     recent = submissions["filings"]["recent"]
-    rows = [
-        {key: recent[key][i] for key in recent}
-        for i in range(len(recent["accessionNumber"]))
-        if recent["form"][i] in ("10-K", "10-Q")
-    ]
-    rows.sort(key=lambda r: (r["filingDate"], r["accessionNumber"]), reverse=True)
-    picked = [r for r in rows if r["form"] == "10-K"][:1] + [
-        r for r in rows if r["form"] == "10-Q"
-    ][:2]
-    picked.sort(key=lambda r: (r["filingDate"], r["accessionNumber"]), reverse=True)
+    rows = [{key: recent[key][i] for key in recent} for i in range(len(recent["accessionNumber"]))]
+    picked: list[dict[str, Any]] = []
+    for form, keep in (("10-K", 1), ("10-Q", 2)):
+        same = sorted(
+            (r for r in rows if r["form"] == form), key=lambda r: r["filingDate"], reverse=True
+        )
+        picked.extend(same[:keep])
     refs = []
     for r in picked:
         report = date.fromisoformat(r["reportDate"])
-        fy, fp = fiscal_year_and_period(report, fye, r["form"])
         acc = r["accessionNumber"]
+        fy, fp = _fiscal(companyfacts, acc, report, fye, r["form"])
         refs.append(
             FilingRef(
                 filing_id=make_filing_id(ticker, r["form"], fy, fp, acc),
@@ -294,6 +353,26 @@ def fetch_submissions(cik: str, http: HttpCache, *, refresh: bool = False) -> di
     return data
 
 
+def fetch_companyfacts(
+    cik: str, http: HttpCache, *, refresh: bool = False
+) -> dict[str, Any] | None:
+    """Companyfacts JSON, or None when SEC has none for this CIK.
+
+    A 404 is cached as `{}` so reruns do not ask again.
+    """
+    url = COMPANYFACTS_URL.format(cik=str(cik).zfill(10))
+    try:
+        data: dict[str, Any] = http.fetch_json(url, refresh=refresh)
+    except FetchError as exc:
+        if exc.status != 404:
+            raise
+        path = http.cache_path(url)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}", encoding="utf-8")
+        return None
+    return data or None
+
+
 def select_filings(
     cik: str, http: HttpCache | None = None, *, refresh: bool = False
 ) -> list[FilingRef]:
@@ -302,7 +381,10 @@ def select_filings(
     if http is None:
         http = HttpCache(get_settings().data_dir / "raw")
     try:
-        return select_from_submissions(fetch_submissions(cik, http, refresh=refresh))
+        return select_from_submissions(
+            fetch_submissions(cik, http, refresh=refresh),
+            fetch_companyfacts(cik, http, refresh=refresh),
+        )
     finally:
         if own:
             http.close()

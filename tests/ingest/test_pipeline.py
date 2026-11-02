@@ -9,6 +9,7 @@ from ledgerlens.ingest.pipeline import DataPaths, Manifest, run
 
 UA = "Test Agent test@ledgerlens.dev"
 SUB_URL = "https://data.sec.gov/submissions/CIK0000320193.json"
+FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
 DOC_PREFIX = "https://www.sec.gov/Archives/edgar/data/320193/"
 
 
@@ -21,6 +22,7 @@ def sec(fixtures):
                 200, content=(fixtures / "submissions_aapl.json").read_bytes()
             )
         )
+        mock.get(FACTS_URL).mock(return_value=httpx.Response(404))
         docs = mock.get(url__startswith=DOC_PREFIX).mock(
             return_value=httpx.Response(200, content=html)
         )
@@ -44,7 +46,7 @@ def test_second_run_does_no_network_or_parse_work(sec, tmp_path):
     first = _run(tmp_path)
     assert len(first.filings) == 3
     assert (first.downloaded, first.parsed, first.chunked, first.failed) == (3, 3, 3, {})
-    assert first.requests == 4
+    assert first.requests == 5  # submissions, companyfacts, three documents
     paths = DataPaths(tmp_path)
     for ref in first.filings:
         assert paths.parsed(ref.filing_id).exists()
@@ -56,6 +58,8 @@ def test_second_run_does_no_network_or_parse_work(sec, tmp_path):
     assert len(steps["parse"]["output_sha256"]) == 64
     assert (tmp_path / "reports" / "quality.json").exists()
     assert (tmp_path / "docs" / "data-quality.md").exists()
+    listed = json.loads(paths.filings.read_text())
+    assert [f["filing_id"] for f in listed] == [r.filing_id for r in first.filings]
     calls = (sub.call_count, docs.call_count)
 
     second = _run(tmp_path)
