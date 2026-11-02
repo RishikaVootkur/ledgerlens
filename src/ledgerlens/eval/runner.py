@@ -61,6 +61,7 @@ class EvalConfig(BaseModel):
     index_version: str = "auto"
     max_rounds: int = 3
     xbrl_tool: bool = True
+    search_tool: bool = True
     verify_numbers: bool = True
     self_check: bool = True
     datasets: list[DatasetName] = ["smoke"]
@@ -88,6 +89,7 @@ class EvalConfig(BaseModel):
             ),
             max_rounds=self.max_rounds,
             xbrl_tool=self.xbrl_tool,
+            search_tool=self.search_tool,
             verify_numbers=self.verify_numbers,
             self_check=self.self_check,
         )

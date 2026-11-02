@@ -1,0 +1,71 @@
+name: live-eval
+
+# A small live eval on a schedule: real Gemini calls (repo secret GEMINI_API_KEY) and
+# live SEC XBRL lookups. It catches provider or API drift that the replayed gate cannot.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"  # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    if: github.repository == 'RishikaVootkur/ledgerlens'
+    env:
+      CACHE_DIR: /tmp/ledgerlens-cache
+      DATA_DIR: /tmp/ledgerlens-data
+    steps:
+      - name: Check the secrets are configured
+        id: check
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ] || [ -z "$SEC_USER_AGENT" ]; then
+            echo "GEMINI_API_KEY or SEC_USER_AGENT secret is not set; skipping the live eval." >> "$GITHUB_STEP_SUMMARY"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.check.outputs.ok == 'true'
+        uses: actions/checkout@v7
+      - if: steps.check.outputs.ok == 'true'
+        uses: astral-sh/setup-uv@v10.3.3
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - if: steps.check.outputs.ok == 'true'
+        run: uv sync --frozen
+      - name: Live eval
+        if: steps.check.outputs.ok == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          uv run ledgerlens eval run --config eval/configs/live_ci.yaml --split dev \
+            --run-id live-ci --out "$RUNNER_TEMP/live.json"
+      - name: Summarize and check
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          uv run python - <<'PY'
+          import json, os
+          run = json.load(open(os.path.join(os.environ["RUNNER_TEMP"], "live.json")))
+          s = run["summary"]
+          lines = ["| Metric | Value | n |", "|---|---|---|"]
+          lines += [f"| {k} | {v['value']:.4g} | {v['n']} |" for k, v in s.items()]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as fh:
+              fh.write("## LedgerLens live eval\n\n" + "\n".join(lines) + "\n")
+          quota = any("QuotaExhausted" in (r.get("error") or "") for r in run["results"])
+          if quota:
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as fh:
+                  fh.write("\nSkipped: the free-tier daily quota was already used today.\n")
+              raise SystemExit(0)
+          errors = s.get("error_rate", {}).get("value", 0)
+          acc = s.get("numeric_correct", {}).get("value", 0)
+          print(f"error_rate={errors} numeric_correct={acc}")
+          raise SystemExit(1 if errors > 0.5 or acc < 0.5 else 0)
+          PY
