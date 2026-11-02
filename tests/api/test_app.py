@@ -1,5 +1,6 @@
 import asyncio
 import json
+import re
 import threading
 from pathlib import Path
 
@@ -394,10 +395,36 @@ def test_cors_allows_vite_dev_origin(client):
 
 
 def test_request_id_header(client):
-    assert (
-        client.get("/api/models", headers={"x-request-id": "abc123"}).headers["x-request-id"]
-        == "abc123"
-    )
+    resp = client.get("/api/models", headers={"x-request-id": "abc-123.x_y"})
+    assert resp.headers["x-request-id"] == "abc-123.x_y"
+
+
+@pytest.mark.parametrize("raw", ["a" * 65, "has space", "line\\nbreak", "<script>", ""])
+def test_unsafe_request_ids_are_replaced(client, raw):
+    returned = client.get("/api/models", headers={"x-request-id": raw}).headers["x-request-id"]
+    assert returned != raw
+    assert re.fullmatch(r"[0-9a-f]{12}", returned)
+
+
+def test_access_log_times_the_whole_stream(client, monkeypatch, calls):
+    """The chat is logged once, after the last body chunk, so `ms` covers the stream."""
+    logged: list[dict] = []
+    monkeypatch.setattr(api_module, "TOKEN_DELAY_S", 0.05)
+
+    class Spy:
+        def info(self, event, **kw):
+            if event == "http.request":
+                logged.append(kw)
+
+        def __getattr__(self, name):
+            return lambda *a, **k: None
+
+    monkeypatch.setattr(api_module, "log", Spy())
+    post_chat(client, {"question": "q"})
+    (entry,) = [e for e in logged if e["path"] == "/api/chat"]
+    assert entry["status"] == 200
+    pieces = len(api_module._token_pieces(ANSWER.answer))
+    assert entry["ms"] >= pieces * 50 * 0.8
 
 
 # ------------------------------------------------------------------ eval data
