@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from ledgerlens.eval.datasets.common import assign_splits
+from ledgerlens.eval.datasets.smoke import underlying_key
 from ledgerlens.eval.datasets.unanswerable import CATEGORIES, build, load_seeds, to_question
 from ledgerlens.schemas import Question
 from ledgerlens.universe import BY_TICKER, SLICE_TICKERS
@@ -101,3 +102,16 @@ def test_seed_validation():
         to_question({**seed, "category": "not_in_corpus_company", "ticker": "AAPL"})
     with pytest.raises(ValueError, match="unknown seed fields"):
         to_question({**seed, "answer": "42"})
+
+
+def test_smoke_questions_read_distinct_facts(datasets):
+    smoke = datasets["smoke"]
+    assert len({underlying_key(q) for q in smoke}) == len(smoke)
+    yoy = [q for q in smoke if q.question_type == "yoy_change"]
+    assert len({underlying_key(q) for q in yoy}) == 4
+
+
+def test_abs_and_pct_variants_share_an_underlying_key(datasets):
+    xbrl = {q.qid: q for q in datasets["xbrl"]}
+    stem = "xbrl-aapl-10k2025fy-operating_income-yoy"
+    assert underlying_key(xbrl[f"{stem}-abs"]) == underlying_key(xbrl[f"{stem}-pct"])
