@@ -128,3 +128,56 @@ def test_tool_specs_are_valid_openai_functions():
         "calculate",
     ]
     assert all(s["function"]["parameters"]["type"] == "object" for s in specs)
+
+
+def test_per_share_values_use_latest_restated_report(isolated, monkeypatch):
+    cf = {
+        "facts": {
+            "us-gaap": {
+                "EarningsPerShareDiluted": {
+                    "label": "EPS",
+                    "units": {
+                        "USD/shares": [
+                            {
+                                "start": "2018-09-30",
+                                "end": "2019-09-28",
+                                "val": 11.89,
+                                "accn": "a",
+                                "fy": 2019,
+                                "fp": "FY",
+                                "form": "10-K",
+                                "filed": "2019-10-31",
+                            },
+                            {
+                                "start": "2018-09-30",
+                                "end": "2019-09-28",
+                                "val": 2.97,
+                                "accn": "b",
+                                "fy": 2021,
+                                "fp": "FY",
+                                "form": "10-K",
+                                "filed": "2021-10-29",
+                            },
+                        ]
+                    },
+                }
+            }
+        }
+    }
+    xbrl._companyfacts.cache_clear()
+    monkeypatch.setattr(xbrl, "_fetch_companyfacts", lambda cik: cf)
+    facts = xbrl.get_company_facts("AAPL", "eps_diluted")
+    assert [f.value for f in facts] == [2.97]
+    assert facts[0].fact_id == "xbrl:AAPL:EarningsPerShareDiluted:2018-09-30_2019-09-28:USD/shares"
+
+
+def test_index_version_auto_reads_fingerprint(isolated, monkeypatch, tmp_path):
+    from ledgerlens.agent.tools import resolve_index_version
+
+    monkeypatch.setenv("DATA_DIR", str(tmp_path))
+    get_settings.cache_clear()
+    assert resolve_index_version(RetrievalConfig()) == "none"
+    (tmp_path / "index").mkdir()
+    (tmp_path / "index" / "version_section.txt").write_text("abc123\n")
+    assert resolve_index_version(RetrievalConfig()) == "abc123"
+    assert resolve_index_version(RetrievalConfig(index_version="pinned")) == "pinned"

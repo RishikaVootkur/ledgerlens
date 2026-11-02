@@ -191,3 +191,110 @@ def test_finalize_renumbers_and_skips_calc_sources():
     assert out.answer == "A [1] and B [2] via."
     assert [c.chunk_id for c in out.citations] == ["src2", "src0"]
     assert out.answer_value == 5 and out.answer_unit == "percent"
+
+
+# ---- review regressions (PR #8) ------------------------------------------------
+
+
+def test_dropped_citation_marker_cannot_pass_self_check(scripted):
+    queue, _ = scripted
+    fake = answer_json(answer="Net sales doubled to a record [E1].", value=None,
+                       citations=[{"ref": "E1", "quote": "net sales doubled to a record"}])  # fmt: skip
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(fake), _resp(fake)]
+    result = run_agent("Apple sales?", AgentConfig())
+    assert result.refused and result.citations == []
+    assert "[" not in result.answer
+
+
+def test_empty_quote_on_passage_is_rejected(scripted):
+    queue, _ = scripted
+    no_quote = answer_json(citations=[{"ref": "E1", "quote": ""}])
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(no_quote), _resp(no_quote)]
+    assert run_agent("q", AgentConfig()).refused
+
+
+def test_invented_number_after_repair_is_refused(scripted):
+    queue, _ = scripted
+    bad = answer_json(answer="Net sales were $420 billion [E1].", value=420, scale="billion")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(bad), _resp(bad)]
+    result = run_agent("q", AgentConfig())
+    assert result.refused and result.answer_value is None
+
+
+def test_small_percentages_are_checked(scripted):
+    queue, _ = scripted
+    bad = answer_json(answer="Total net sales were $416,161 million in 2025, up 27.4% [E1].")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(bad), _resp(bad)]
+    assert run_agent("q", AgentConfig()).refused
+
+
+def test_calculate_cannot_launder_invented_inputs():
+    from ledgerlens.agent.graph import grounding_sources, ungrounded_numbers
+
+    reg = EvidenceRegistry()
+    reg.add(
+        EvidenceItem("", "chunk", "c1", "F", "S", 1, 1, "Net sales were $416,161 million.", "h")
+    )
+    reg.add(
+        EvidenceItem(
+            "", "calc", "calc:523000 * 1", None, "calc", None, None, "523000 * 1 = 523000", "c"
+        )
+    )
+    reg.add(
+        EvidenceItem(
+            "",
+            "calc",
+            "calc:416161 / 391035 * 100",
+            None,
+            "calc",
+            None,
+            None,
+            "416161 / 391035 * 100 = 106.4",
+            "c",
+        )
+    )
+    reg.add(EvidenceItem("", "chunk", "c2", "F", "S", 1, 1, "compared to $391,035 million", "h"))
+    sources = grounding_sources(reg)
+    assert ungrounded_numbers("Sales were $523,000 million", sources) == [523_000e6]
+    assert ungrounded_numbers("Sales were 106.4% of the prior year", sources) == []
+
+
+def test_user_year_is_not_relaxed(scripted, monkeypatch):
+    queue, _ = scripted
+    captured = []
+    monkeypatch.setattr(tools, "_search", lambda args, config: captured.append(args) or [CHUNK])
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    run_agent("q", AgentConfig(), filters=SearchFilters(fiscal_year=2025))
+    assert captured[0]["strict_year"] is True
+
+
+def test_many_repairs_do_not_hit_recursion_limit(scripted):
+    queue, _ = scripted
+    bad = answer_json(answer="Net sales were $420 billion [E1].", value=420, scale="billion")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY")] + [_resp(bad) for _ in range(5)]
+    assert run_agent("q", AgentConfig(max_repairs=4)).refused
+
+
+def test_quote_with_wrong_number_is_not_supported():
+    text = "Total net sales were $416.2 billion in 2025."
+    assert not quote_supported("net sales were $500 billion", text)
+    assert quote_supported("Total net sales were $416.2 billion in 2025", text)
+    assert quote_supported(
+        "net sales were $416.2 billion in 2025.", "net sales were $416.2 billion in 2025"
+    )
+
+
+def test_dollar_or_comma_years_are_numbers():
+    assert numbers_in("costs of $2,016 and 2,016 units in 2016") == [2016, 2016]
+
+
+def test_refused_answers_carry_no_markers_and_bool_is_not_a_value():
+    reg = EvidenceRegistry()
+    reg.add(EvidenceItem("", "chunk", "c1", "F", "S", 1, 1, "t", "h"))
+    out = finalize({"answer": "Not disclosed [E1].", "refused": True}, reg, [])
+    assert "[" not in out.answer
+    out = finalize({"answer": "x [E1]", "refused": False, "value": True, "unit": "count",
+                    "citations": [{"ref": "E1", "quote": "t"}]}, reg, [])  # fmt: skip
+    assert out.answer_value is None

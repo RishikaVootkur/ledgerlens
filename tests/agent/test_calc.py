@@ -48,3 +48,14 @@ def test_arithmetic(expr, expected):
 def test_rejects_non_arithmetic(expr):
     with pytest.raises(CalcError):
         calculate(expr)
+
+
+@pytest.mark.parametrize("expr", ["1e300 ** 12", "0 ** -1", "1e400", "1" + "0" * 300])
+def test_overflow_and_huge_inputs_raise_calc_error(expr):
+    with pytest.raises(CalcError):
+        calculate(expr)
+
+
+def test_argument_commas_survive():
+    assert calculate("round(2.5678,2)") == pytest.approx(2.57)
+    assert calculate("max(1,234, 5)") == 234
