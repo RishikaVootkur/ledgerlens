@@ -67,6 +67,8 @@ class EvalConfig(BaseModel):
     scope: Literal["open", "document"] = "document"
     limit: int | None = None
     qids: list[str] | None = None
+    # A committed list of qids (one per line), e.g. eval/slices/ablation_dev.txt.
+    qids_file: str | None = None
     concurrency: int = 2
     # LLM judge for FinanceBench answers (judge_correct). Different family from the
     # answer models; calibrated in eval/reports/judge_calibration_*.json.
@@ -97,6 +99,11 @@ class EvalConfig(BaseModel):
 
 
 def select(questions: list[Question], config: EvalConfig) -> list[Question]:
+    if config.qids_file is not None:
+        path = get_settings().eval_dir.parent / config.qids_file
+        wanted_ids = [x.strip() for x in path.read_text().splitlines() if x.strip()]
+        by_id = {q.qid: q for q in questions}
+        questions = [by_id[i] for i in wanted_ids if i in by_id]
     if config.qids is not None:
         wanted = set(config.qids)
         questions = [q for q in questions if q.qid in wanted]
