@@ -42,6 +42,7 @@ from ledgerlens.llm.provider import QuotaExhaustedError
 from ledgerlens.logging import configure_logging, get_logger
 from ledgerlens.retrieval.filters import SearchFilters
 from ledgerlens.schemas import AgentAnswer, Chunk
+from ledgerlens.tracing import setup_tracing, shutdown_tracing
 from ledgerlens.universe import BY_TICKER, UNIVERSE
 
 log = get_logger(__name__)
@@ -239,11 +240,20 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         max_workers=max(1, s.max_concurrent_chats), thread_name_prefix="agent"
     )
     app.state.slots = asyncio.Semaphore(max(1, s.max_concurrent_chats))
-    log.info("api.start", version=__version__, data_dir=str(s.data_dir), llm_mode=s.llm_mode)
+    traced = setup_tracing()
+    log.info(
+        "api.start",
+        version=__version__,
+        data_dir=str(s.data_dir),
+        llm_mode=s.llm_mode,
+        tracing=traced,
+    )
     try:
         yield
     finally:
         app.state.executor.shutdown(wait=False, cancel_futures=True)
+        if traced:
+            shutdown_tracing()
 
 
 def create_app() -> FastAPI:

@@ -18,18 +18,25 @@ def ask(
     """Ask the agent a question and print a cited answer."""
     from ledgerlens.agent.graph import AgentConfig, run_agent
     from ledgerlens.agent.tools import RetrievalConfig
+    from ledgerlens.tracing import setup_tracing, shutdown_tracing
+
+    traced = setup_tracing()  # no-op unless PHOENIX_ENDPOINT is set
 
     config = AgentConfig(
         model=model,
         retrieval=RetrievalConfig(method=method),  # type: ignore[arg-type]
         xbrl_tool=not no_xbrl,
     )
-    result = run_agent(
-        question,
-        config,
-        SearchFilters(ticker=ticker, fiscal_year=year),
-        on_step=lambda name, detail: typer.secho(f"  · {name} {detail}", fg="bright_black"),
-    )
+    try:
+        result = run_agent(
+            question,
+            config,
+            SearchFilters(ticker=ticker, fiscal_year=year),
+            on_step=lambda name, detail: typer.secho(f"  · {name} {detail}", fg="bright_black"),
+        )
+    finally:
+        if traced:
+            shutdown_tracing()  # flush spans before the process exits
     typer.echo("\n" + result.answer + "\n")
     for i, c in enumerate(result.citations, start=1):
         typer.echo(f"[{i}] {c.filing_id} | {c.section[:70]} | p.{c.page} | {c.quote[:90]}")

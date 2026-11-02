@@ -19,6 +19,12 @@ app.command("ask")(ask)
 def main() -> None:
     s = get_settings()
     configure_logging(s.log_level, s.log_json)
+    if s.phoenix_endpoint:
+        # Every command (ask, and eval runs once they land) traces into Phoenix when
+        # PHOENIX_ENDPOINT is set. The SDK flushes pending spans at interpreter exit.
+        from ledgerlens.tracing import setup_tracing
+
+        setup_tracing()
 
 
 @app.command()
