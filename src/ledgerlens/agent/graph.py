@@ -219,13 +219,35 @@ def quote_supported(quote: str, text: str) -> bool:
 # ------------------------------------------------------------------ graph
 
 
+def _step_input(state: State) -> dict[str, Any]:
+    """Small summary of what a step starts from, for the span's input.value."""
+    summary: dict[str, Any] = {
+        "question": state.get("question", "")[:300],
+        "round": state.get("round", 0),
+    }
+    if state.get("pending"):
+        summary["tool_calls"] = [
+            {"name": tc.name, "arguments": tc.arguments[:300]} for tc in state["pending"]
+        ]
+    if state.get("problems"):
+        summary["problems"] = state["problems"]
+    if state.get("repairs"):
+        summary["repairs"] = state["repairs"]
+    return summary
+
+
 def _traced(step: str, fn: Callable[[State], State]) -> Any:
     """Wrap a graph node in a CHAIN span named after the step (no-op when tracing is off)."""
 
     def node(state: State) -> State:
         if not tracing.enabled():
             return fn(state)
-        attributes = {"ledgerlens.step": step, "ledgerlens.round": state.get("round", 0)}
+        attributes = {
+            "ledgerlens.step": step,
+            "ledgerlens.round": state.get("round", 0),
+            tracing.INPUT_VALUE: tracing.to_json(_step_input(state)),
+            tracing.INPUT_MIME: "application/json",
+        }
         with tracing.span(step, "CHAIN", attributes) as span:
             out = fn(state)
             span.set_attribute(tracing.OUTPUT_VALUE, tracing.to_json(out))

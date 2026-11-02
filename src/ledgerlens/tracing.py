@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import contextlib
 import json
+import threading
 from collections.abc import Iterator, Mapping, Sequence
 from typing import TYPE_CHECKING, Any, Literal, Protocol
 
@@ -98,6 +99,8 @@ def setup_tracing(endpoint: str | None = None, *, provider: TracerProvider | Non
                 set_global_tracer_provider=False,
                 verbose=False,
                 api_key=api_key.get_secret_value() if api_key else None,
+                # Exit-time flushing goes through shutdown_tracing, which is time-bounded.
+                shutdown_on_exit=False,
             )
         except Exception as exc:  # tracing must never stop the app from starting
             log.warning("tracing.setup_failed", error=type(exc).__name__, detail=str(exc)[:200])
@@ -108,13 +111,33 @@ def setup_tracing(endpoint: str | None = None, *, provider: TracerProvider | Non
     return True
 
 
-def shutdown_tracing() -> None:
-    """Flush pending spans and turn tracing off (CLI exit, API shutdown, tests)."""
+SHUTDOWN_TIMEOUT_S = 2.0
+
+
+def shutdown_tracing(timeout_s: float = SHUTDOWN_TIMEOUT_S) -> None:
+    """Flush pending spans and turn tracing off (CLI exit, API shutdown, tests).
+
+    Bounded by `timeout_s`: when the collector is down or slow, the OTLP exporter retries
+    for much longer, so the flush runs in a daemon thread and is abandoned after the
+    timeout instead of holding up process exit (Docker stops containers after a grace
+    period)."""
     global _tracer, _provider
     provider, _provider, _tracer = _provider, None, None
-    if provider is not None:
-        provider.force_flush()
-        provider.shutdown()
+    if provider is None:
+        return
+
+    def close() -> None:
+        try:
+            provider.force_flush(timeout_millis=int(timeout_s * 1000))
+            provider.shutdown()
+        except Exception as exc:
+            log.warning("tracing.shutdown_failed", error=type(exc).__name__)
+
+    worker = threading.Thread(target=close, name="tracing-shutdown", daemon=True)
+    worker.start()
+    worker.join(timeout_s)
+    if worker.is_alive():
+        log.warning("tracing.shutdown_timeout", timeout_s=timeout_s)
 
 
 @contextlib.contextmanager

@@ -21,18 +21,19 @@ import re
 import threading
 import time
 import uuid
-from collections.abc import AsyncIterator, Awaitable, Callable
+from collections.abc import AsyncIterator, Callable
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Any, Literal
 
 import httpx
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sse_starlette import EventSourceResponse, ServerSentEvent
+from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from ledgerlens import __version__
 from ledgerlens.api.facts import fact_chunk, parse_fact_id
@@ -50,6 +51,7 @@ log = get_logger(__name__)
 MAX_QUESTION_CHARS = 1000
 TOKEN_CHUNK_WORDS = 3
 TOKEN_DELAY_S = 0.012
+_REQUEST_ID = re.compile(r"^[A-Za-z0-9._-]{1,64}$")
 _RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 
 
@@ -174,7 +176,7 @@ async def chat_events(
         try:
             push("result", runner(req.question, config, filters, on_step))
         except ChatCancelledError:
-            push("cancelled", None)
+            pass  # the client is gone and nothing reads the queue any more
         except BaseException as exc:
             push("error", exc)
 
@@ -187,6 +189,9 @@ async def chat_events(
         filters=filters.model_dump(exclude_none=True),
     )
     try:
+        if slots.locked():
+            # All agent slots are busy: tell the UI instead of sending only pings.
+            yield _sse("step", {"name": "queued", "detail": "waiting for a free agent slot"})
         async with slots:
             # copy_context: usage tracking and tracing live in contextvars.
             ctx = contextvars.copy_context()
@@ -232,6 +237,63 @@ async def chat_events(
 # ------------------------------------------------------------------ app
 
 
+def request_id_from(raw: str | None) -> str:
+    """The client's x-request-id if it is short and safe to log, otherwise a new one."""
+    if raw and _REQUEST_ID.match(raw):
+        return raw
+    return uuid.uuid4().hex[:12]
+
+
+class AccessLogMiddleware:
+    """Pure ASGI access log. Logs when the last body chunk is sent, so a streamed chat is
+    timed end to end (BaseHTTPMiddleware would log when the headers go out). Also assigns
+    the request id, exposes it as `request.state.request_id` and echoes it back."""
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+        headers = dict(scope.get("headers") or [])
+        raw = headers.get(b"x-request-id", b"").decode("latin-1")
+        request_id = request_id_from(raw)
+        scope.setdefault("state", {})["request_id"] = request_id
+        started = time.perf_counter()
+        status = 500
+        logged = False
+
+        def emit() -> None:
+            nonlocal logged
+            if logged:
+                return
+            logged = True
+            log.info(
+                "http.request",
+                request_id=request_id,
+                method=scope.get("method"),
+                path=scope.get("path"),
+                status=status,
+                ms=round((time.perf_counter() - started) * 1000, 1),
+            )
+
+        async def send_wrapper(message: Message) -> None:
+            nonlocal status
+            if message["type"] == "http.response.start":
+                status = int(message["status"])
+                extra = (b"x-request-id", request_id.encode())
+                message = {**message, "headers": [*message.get("headers", []), extra]}
+            await send(message)
+            if message["type"] == "http.response.body" and not message.get("more_body", False):
+                emit()
+
+        try:
+            await self.app(scope, receive, send_wrapper)
+        finally:
+            emit()  # client disconnects and errors are logged too
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     s = get_settings()
@@ -253,7 +315,8 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     finally:
         app.state.executor.shutdown(wait=False, cancel_futures=True)
         if traced:
-            shutdown_tracing()
+            # Off the event loop: flushing waits on the network (bounded to ~2 s).
+            await asyncio.to_thread(shutdown_tracing)
 
 
 def create_app() -> FastAPI:
@@ -266,24 +329,7 @@ def create_app() -> FastAPI:
         allow_headers=["Content-Type", "Accept"],
     )
 
-    @app.middleware("http")
-    async def access_log(
-        request: Request, call_next: Callable[[Request], Awaitable[Response]]
-    ) -> Response:
-        request_id = request.headers.get("x-request-id") or uuid.uuid4().hex[:12]
-        request.state.request_id = request_id
-        started = time.perf_counter()
-        response = await call_next(request)
-        response.headers["x-request-id"] = request_id
-        log.info(
-            "http.request",
-            request_id=request_id,
-            method=request.method,
-            path=request.url.path,
-            status=response.status_code,
-            ms=round((time.perf_counter() - started) * 1000, 1),
-        )
-        return response
+    app.add_middleware(AccessLogMiddleware)
 
     @app.post("/api/chat")
     async def chat(req: ChatRequest, request: Request) -> EventSourceResponse:
