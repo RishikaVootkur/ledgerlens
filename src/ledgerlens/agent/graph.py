@@ -53,7 +53,9 @@ class AgentConfig:
     verify_numbers: bool = True
     self_check: bool = True
     max_repairs: int = 1
-    answer_evidence_chars: int = 14000
+    # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
+    # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
+    answer_evidence_chars: int = 10000
     temperature: float = 0.0
 
 
@@ -469,6 +471,23 @@ def _to_citation(item: EvidenceItem, quote: str) -> Citation:
     )
 
 
+def _as_number(value: object) -> float | None:
+    """Models often return the value as a string ("21,155", "$34.5", "6.4%")."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int | float):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = re.sub(r"[,$%\s]", "", value)
+        if cleaned.startswith("(") and cleaned.endswith(")"):
+            cleaned = "-" + cleaned[1:-1]
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
+    return None
+
+
 def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[str]) -> AgentAnswer:
     """Renumber [E#] markers to [1], [2] in order of first use and build Citation objects.
 
@@ -507,12 +526,21 @@ def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[s
 
     value: float | None = None
     unit = draft.get("unit") if draft.get("unit") in _UNITS else None
-    raw_value = draft.get("value")
+    raw_value = _as_number(draft.get("value"))
     if refused:
         text = re.sub(r"\s*\[E?\d+\]", "", text).strip()
-    if not refused and isinstance(raw_value, int | float) and not isinstance(raw_value, bool):
+    if not refused and raw_value is not None:
         scale = _SCALES.get(str(draft.get("scale") or "one").lower(), 1.0)
-        value = float(draft["value"]) * (scale if unit in ("USD", "shares", "count") else 1.0)
+        value = raw_value * (scale if unit in ("USD", "shares", "count") else 1.0)
+        # Models sometimes write the full number and also name a scale ("359,241,000,000"
+        # with "billion"). Prefer whichever reading the answer text itself states.
+        stated = numbers_in(text)
+
+        def said(x: float) -> bool:  # stated as-is, with no rescaling
+            return any(abs(x - v) <= 0.005 * abs(v) for v in stated if v)
+
+        if value != raw_value and not said(value) and said(raw_value):
+            value = raw_value
     answer_unit: AnswerUnit | None = unit if value is not None else None  # type: ignore[assignment]
     return AgentAnswer(
         answer=text if not refused or text else REFUSAL_TEXT,

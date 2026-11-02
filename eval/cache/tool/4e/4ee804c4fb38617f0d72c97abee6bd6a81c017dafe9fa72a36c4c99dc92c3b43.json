@@ -1,0 +1,68 @@
+{
+ "args": {
+  "duration": "Q",
+  "fiscal_year": 2026,
+  "metric": "net_income",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0000320193-26-000020",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "Q",
+   "end": "2026-06-27",
+   "fact_id": "xbrl:AAPL:NetIncomeLoss:2026-03-29_2026-06-27:USD",
+   "filed": "2026-07-31",
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2026-03-29",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 29789000000.0
+  },
+  {
+   "accession": "0000320193-26-000013",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "Q",
+   "end": "2026-03-28",
+   "fact_id": "xbrl:AAPL:NetIncomeLoss:2025-12-28_2026-03-28:USD",
+   "filed": "2026-05-01",
+   "filing_id": "AAPL-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2025-12-28",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 29578000000.0
+  },
+  {
+   "accession": "0000320193-26-000006",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "Q",
+   "end": "2025-12-27",
+   "fact_id": "xbrl:AAPL:NetIncomeLoss:2025-09-28_2025-12-27:USD",
+   "filed": "2026-01-30",
+   "filing_id": "AAPL-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2025-09-28",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 42097000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

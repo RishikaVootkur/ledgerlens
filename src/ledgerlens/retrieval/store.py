@@ -156,12 +156,14 @@ class ChunkStore:
             )
 
     def fingerprint(self, strategy: ChunkStrategy) -> str:
-        """Hash of every chunk id and text hash for a strategy: changes on any reindex."""
+        """Hash of every chunk id and text hash, plus the embedded count: changes on any reindex."""
         digest = hashlib.sha256()
         query = "SELECT chunk_id, body_hash FROM chunks WHERE strategy = ? ORDER BY chunk_id"
         for chunk_id, body_hash in self._db.execute(query, (strategy,)):
             digest.update(f"{chunk_id}:{body_hash};".encode())
-        return digest.hexdigest()[:12]
+        # Include how many chunks have vectors, so a partly embedded index (usable for BM25
+        # and for filings already embedded) never shares cached results with the full one.
+        return f"{digest.hexdigest()[:12]}-{self.embedded_count(strategy)}"
 
     def count(self, strategy: ChunkStrategy | None = None) -> int:
         if strategy is None:

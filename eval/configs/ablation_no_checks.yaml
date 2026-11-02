@@ -1,0 +1,15 @@
+# Ablation: number verification and citation self-check off
+name: ablation_no_checks
+description: "Ablation: number verification and citation self-check off"
+model: groq-qwen3.8-27b
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: false
+self_check: false
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 3

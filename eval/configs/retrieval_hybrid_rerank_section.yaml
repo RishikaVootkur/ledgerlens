@@ -1,0 +1,7 @@
+# LLM-free retrieval ablation on FinanceBench dev (page-level evidence).
+name: retrieval_hybrid_rerank_section
+description: "Retrieval only, hybrid_rerank over section chunks, document scope"
+strategy: section
+method: hybrid_rerank
+datasets: [financebench]
+scope: document

@@ -1,0 +1,34 @@
+{
+ "args": {
+  "duration": "FY",
+  "fiscal_year": 2024,
+  "metric": "net_income",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0000019617-25-000270",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "FY",
+   "end": "2024-12-31",
+   "fact_id": "xbrl:JPM:NetIncomeLoss:2024-01-01_2024-12-31:USD",
+   "filed": "2025-02-14",
+   "filing_id": "JPM-10K-2024FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2024,
+   "form": "10-K",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2024-01-01",
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 58471000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

@@ -1,0 +1,15 @@
+# Model comparison: local Qwen3 8B on Ollama
+name: model_ollama_qwen3_8b
+description: "Model comparison: local Qwen3 8B on Ollama"
+model: ollama-qwen3-8b
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 1

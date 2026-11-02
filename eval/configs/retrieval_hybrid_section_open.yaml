@@ -1,0 +1,7 @@
+# LLM-free retrieval ablation on FinanceBench dev (page-level evidence).
+name: retrieval_hybrid_section_open
+description: "Retrieval only, hybrid over section chunks, open scope"
+strategy: section
+method: hybrid
+datasets: [financebench]
+scope: open

@@ -1,0 +1,33 @@
+{
+ "args": {
+  "chunk_id": "JPM-10Q-2026Q1:section:00050"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10Q-2026Q1:section:00050",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 16,
+   "page_end": 16,
+   "section": "Financing activities",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q1:table:0019"
+   ],
+   "text": "[JPM 10-Q Q1 FY2026 | Financing activities | p.16]\n| (in millions, except rates) 2026 | Three months ended March 31, 2025 | Change |  |\n|---|---|---|---|\n| Net interest income – reported (a) | $25,366 | $23,273 | 9% |\n| Fully taxable-equivalent adjustments | 113 | 102 | 11 |\n| Net interest income – managed basis | $25,479 | $23,375 | 9 |\n| Less: Markets net interest income (b) | 2,199 | 785 | 180 |\n| Net interest income excluding Markets | $23,280 | $22,590 | 3 |\n| Average interest-earning assets (a) | $4,135,737 | $3,668,384 | 13 |\n| Less: Average Markets interest-earning assets (b) | 1,599,089 | 1,255,149 | 27 |\n| Average interest-earning assets excluding Markets | $2,536,648 | $2,413,235 | 5 |\n| Net yield on average interest-earning assets – managed basis | 2.50% | 2.58% |  |\n| Net yield on average Markets interest-earning assets (b) | 0.56 | 0.25 |  |\n| Net yield on average interest-earning assets excluding Markets | 3.72% | 3.80% |  |\n| Noninterest revenue – reported | $24,470 | $22,037 | 11 |\n| Fully taxable-equivalent adjustments | 587 | 602 | (2) |\n| Noninterest revenue – managed basis | $25,057 | $22,639 | 11 |\n| Less: Markets noninterest revenue (b) | 9,360 | 8,878 | 5 |\n| Noninterest revenue excluding Markets | $15,697 | $13,761 | 14 |\n| Memo: Total Markets net revenue (b) | $11,559 | $9,663 | 20% |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "get_table"
+}

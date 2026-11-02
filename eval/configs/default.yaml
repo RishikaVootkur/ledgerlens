@@ -1,0 +1,15 @@
+# Default agent configuration: hybrid retrieval over section-aware chunks, XBRL facts
+# tool on, number verification and citation self-check on.
+name: default
+description: Qwen3.8 27B (Groq), hybrid retrieval, section chunks, XBRL tool, verify + self-check
+model: groq-qwen3.8-27b
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+scope: document
+concurrency: 3

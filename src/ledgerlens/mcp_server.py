@@ -369,9 +369,7 @@ mcp_app = typer.Typer(help="Serve the LedgerLens tools over the Model Context Pr
 
 @mcp_app.command("serve")
 def serve(
-    transport: Transport = typer.Option(  # noqa: B008
-        Transport.stdio, help="stdio, or http (streamable HTTP)"
-    ),
+    transport: Transport = typer.Option(Transport.stdio, help="stdio, or http (streamable HTTP)"),
     host: str = typer.Option("127.0.0.1", help="HTTP bind address"),
     port: int = typer.Option(8765, help="HTTP port"),
     ask: bool | None = typer.Option(
@@ -383,7 +381,7 @@ def serve(
     allow_remote: bool = typer.Option(
         False, "--allow-remote", help="Allow a non-loopback --host (the server has no auth)"
     ),
-    allowed_hosts: list[str] = typer.Option(  # noqa: B008
+    allowed_hosts: list[str] = typer.Option(
         [], "--allowed-host", help="Accepted Host header for a remote bind (repeatable)"
     ),
 ) -> None:

@@ -1,0 +1,33 @@
+{
+ "args": {
+  "chunk_id": "AAPL-10Q-2026Q3:section:00010"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00010",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 3,
+   "page_end": 3,
+   "section": "Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0005"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS (Unaudited) | p.3]\n|  | Three Months Ended June 27, 2026 | June 28, 2025 | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|---|---|\n| Net sales: |  |  |  |  |\n| Products | $78,678 | $66,613 | $272,629 | $233,287 |\n| Services | 30,739 | 27,423 | 91,728 | 80,408 |\n| Total net sales | 109,417 | 94,036 | 364,357 | 313,695 |\n| Cost of sales: |  |  |  |  |\n| Products | 47,153 | 43,620 | 163,810 | 147,097 |\n| Services | 7,494 | 6,698 | 21,765 | 19,738 |\n| Total cost of sales | 54,647 | 50,318 | 185,575 | 166,835 |\n| Gross margin | 54,770 | 43,718 | 178,782 | 146,860 |\n| Operating expenses: |  |  |  |  |\n| Research and development | 11,729 | 8,866 | 34,035 | 25,684 |\n| Selling, general and administrative | 7,346 | 6,650 | 22,315 | 20,553 |\n| Total operating expenses | 19,075 | 15,516 | 56,350 | 46,237 |\n| Operating income | 35,695 | 28,202 | 122,432 | 100,623 |\n| Other income/(expense), net | 572 | (171) | 670 | (698) |\n| Income before provision for income taxes | 36,267 | 28,031 | 123,102 | 99,925 |\n| Provision for income taxes | 6,478 | 4,597 | 21,638 | 15,381 |\n| Net income | $29,789 | $23,434 | $101,464 | $84,544 |\n| Earnings per share: |  |  |  |  |\n| Basic | $2.03 | $1.57 | $6.91 | $5.64 |\n| Diluted | $2.02 | $1.57 | $6.88 | $5.62 |\n| Shares used in computing earnings per share: |  |  |  |  |\n| Basic | 14,656,110 | 14,902,886 | 14,692,515 | 14,992,898 |\n| Diluted | 14,714,676 | 14,948,179 | 14,750,302 | 15,051,726 |",
+   "ticker": "AAPL"
+  }
+ ],
+ "tool": "get_table"
+}

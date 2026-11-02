@@ -1,0 +1,15 @@
+# Ablation: BM25-only retrieval inside the agent
+name: ablation_bm25
+description: "Ablation: BM25-only retrieval inside the agent"
+model: groq-qwen3.8-27b
+strategy: section
+method: bm25
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 3

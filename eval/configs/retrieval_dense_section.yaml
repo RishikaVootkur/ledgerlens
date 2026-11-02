@@ -1,0 +1,7 @@
+# LLM-free retrieval ablation on FinanceBench dev (page-level evidence).
+name: retrieval_dense_section
+description: "Retrieval only, dense over section chunks, document scope"
+strategy: section
+method: dense
+datasets: [financebench]
+scope: document

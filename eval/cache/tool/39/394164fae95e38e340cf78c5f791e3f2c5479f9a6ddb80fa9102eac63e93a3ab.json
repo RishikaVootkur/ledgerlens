@@ -1,0 +1,130 @@
+{
+ "args": {
+  "form": "10-Q",
+  "query": "total net revenue three months ended June 30 2026",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "d94fbac6be01",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00095",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 33,
+   "page_end": 33,
+   "section": "Markets revenue",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0036"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Markets revenue | p.33]\n| (in millions) | Three months ended June 30, 2026 Fixed Income Markets | Equity Markets | Total Markets | Three months ended June 30, 2025 Fixed Income Markets | Equity Markets | Total Markets |\n|---|---|---|---|---|---|---|\n| Principal transactions | $2,858 | $5,925 | $8,783 | $3,205 | $3,865 | $7,070 |\n| Lending- and deposit-related fees | 120 | 65 | 185 | 133 | 41 | 174 |\n| Commissions and other fees | 127 | 754 | 881 | 170 | 590 | 760 |\n| All other income | 369 | (85) | 284 | 399 | (28) | 371 |\n| Noninterest revenue | 3,474 | 6,659 | 10,133 | 3,907 | 4,468 | 8,375 |\n| Net interest income | 2,579 | (634) | 1,945 | 1,783 | (1,222) | 561 |\n| Total net revenue | $6,053 | $6,025 | $12,078 | $5,690 | $3,246 | $8,936 |\n|  | Six months ended June 30, |  |  | Six months ended June 30, |  |  |\n|  | 2026 |  |  | 2025 |  |  |\n| (in millions) | Fixed Income Markets | Equity Markets | Total Markets | Fixed Income Markets | Equity Markets | Total Markets |\n| Principal transactions | $6,666 | $9,960 | $16,626 | $6,627 | $8,039 | $14,666 |\n| Lending- and deposit-related fees | 220 | 118 | 338 | 243 | 74 | 317 |\n| Commissions and other fees | 296 | 1,561 | 1,857 | 331 | 1,196 | 1,527 |\n| All other income | 802 | (130) | 672 | 782 | (39) | 743 |\n| Noninterest revenue | 7,984 | 11,509 | 19,493 | 7,983 | 9,270 | 17,253 |\n| Net interest income | 5,147 | (1,003) | 4,144 | 3,556 | (2,210) | 1,346 |\n| Total net revenue | $13,131 | $10,506 | $23,637 | $11,539 | $7,060 | $18,599 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00027",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 9,
+   "page_end": 9,
+   "section": "Full-year 2026",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0011"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Full-year 2026 | p.9]\n| Revenue (in millions) | Three months ended June 30, 2026 |  | 2025 | Six months ended June 30, Change | 2026 |  | 2025 | Change |\n|---|---|---|---|---|---|---|---|---|\n| Investment banking fees | $3,208 |  | $2,499 | 28% | $6,066 |  | $4,677 | 30% |\n| Principal transactions | 9,007 |  | 7,149 | 26 | 16,994 |  | 14,763 | 15 |\n| Lending- and deposit-related fees | 2,511 |  | 2,248 | 12 | 4,905 |  | 4,380 | 12 |\n| Asset management fees | 5,658 |  | 4,806 | 18 | 11,173 |  | 9,506 | 18 |\n| Commissions and other fees | 2,614 |  | 2,194 | 19 | 5,096 |  | 4,227 | 21 |\n| Investment securities losses | (395) |  | (54) | NM | (331) |  | (91) | (264) |\n| Mortgage fees and related income | 336 |  | 363 | (7) | 645 |  | 641 | 1 |\n| Card income | 1,348 |  | 1,344 | — | 2,538 |  | 2,560 | (1) |\n| Other income (a) | 7,549 | (b) | 1,154 | NM | 9,220 | (b) | 3,077 | 200 |\n| Noninterest revenue | 31,836 |  | 21,703 | 47 | 56,306 |  | 43,740 | 29 |\n| Net interest income | 25,511 |  | 23,209 | 10 | 50,877 |  | 46,482 | 9 |\n| Total net revenue | $57,347 |  | $44,912 | 28% | $107,183 |  | $90,222 | 19% |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00063",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 21,
+   "page_end": 21,
+   "section": "Segment & Corporate Results – Managed basis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0022"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Segment & Corporate Results – Managed basis | p.21]\n| Three months ended June 30, (in millions, except ratios) | Corporate 2026 | 2025 | Total | Change | 2026 | 2025 | Change |\n|---|---|---|---|---|---|---|---|\n| Total net revenue | $6,046 | (a) | $1,538 | 293% | $58,022 | $45,680 | 27% |\n| Total noninterest expense | 611 | 547 |  | 12 | 27,316 | 23,779 | 15 |\n| Pre-provision profit | 5,435 | 991 |  | 448 | 30,706 | 21,901 | 40 |\n| Provision for credit losses | (10) | 25 |  | NM | 2,515 | 2,849 | (12) |\n| Net income | 4,209 | 1,695 |  | 148 | 21,155 | 14,987 | 41 |\n| ROE | NM | NM |  |  | 24% | 18% |  |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00079",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 28,
+   "page_end": 28,
+   "section": "Year-to-date results",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0030"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Year-to-date results | p.28]\n| Selected income statement data (in millions) | Three months ended June 30, 2026 | 2025 | Change | Six months ended June 30, 2026 | 2025 | Change |\n|---|---|---|---|---|---|---|\n| Revenue by business |  |  |  |  |  |  |\n| Investment Banking | $3,902 | $2,684 | 45% | $7,038 | $4,952 | 42% |\n| Payments | 5,296 | 4,735 | 12 | 10,419 | 9,300 | 12 |\n| Lending | 1,964 | 1,829 | 7 | 4,130 | 3,744 | 10 |\n| Other | — | — | — | — | 6 | NM |\n| Total Banking & Payments | 11,162 | 9,248 | 21 | 21,587 | 18,002 | 20 |\n| Fixed Income Markets | 6,053 | 5,690 | 6 | 13,131 | 11,539 | 14 |\n| Equity Markets | 6,025 | 3,246 | 86 | 10,506 | 7,060 | 49 |\n| Securities Services | 1,657 | 1,418 | 17 | 3,156 | 2,687 | 17 |\n| Credit Adjustments & Other (a) | (44) | (67) | 34 | (148) | (87) | (70) |\n| Total Markets & Securities Services | 13,691 | 10,287 | 33 | 26,645 | 21,199 | 26 |\n| Total net revenue | $24,853 | $19,535 | 27% | $48,232 | $39,201 | 23% |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00100",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 35,
+   "page_end": 35,
+   "section": "Markets revenue",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0039"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Markets revenue | p.35]\n| Selected income statement data (in millions, except ratios) 2026 | Three months ended June 30, 2025 |  | Change | 2026 | Six months ended June 30, 2025 |  | Change |  |\n|---|---|---|---|---|---|---|---|---|\n| Revenue |  |  |  |  |  |  |  |  |\n| Asset management fees | $4,227 | $3,642 |  | 16% | $8,352 | $7,237 |  | 15% |\n| Commissions and other fees | 445 | 314 |  | 42 | 814 | 587 |  | 39 |\n| All other income | 370 | 117 |  | 216 | 524 | 242 |  | 117 |\n| Noninterest revenue | 5,042 | 4,073 |  | 24 | 9,690 | 8,066 |  | 20 |\n| Net interest income | 1,809 | 1,687 |  | 7 | 3,535 | 3,425 |  | 3 |\n| Total net revenue | 6,851 | 5,760 |  | 19 | 13,225 | 11,491 |  | 15 |\n| Provision for credit losses | 13 | 46 |  | (72) | (11) | 36 |  | NM |\n| Noninterest expense |  |  |  |  |  |  |  |  |\n| Compensation expense | 2,322 | 2,083 | (b) | 11 | 4,661 | 4,150 | (b) | 12 |\n| Noncompensation expense (a) | 1,885 | 1,650 | (b) | 14 | 3,713 | 3,296 | (b) | 13 |\n| Total noninterest expense | 4,207 | 3,733 |  | 13 | 8,374 | 7,446 |  | 12 |\n| Income before income tax expense | 2,631 | 1,981 |  | 33 | 4,862 | 4,009 |  | 21 |\n| Income tax expense | 674 | 508 |  | 33 | 1,130 | 953 |  | 19 |\n| Net income | $1,957 | $1,473 |  | 33 | $3,732 | $3,056 |  | 22 |\n| Revenue by line of business |  |  |  |  |  |  |  |  |\n| Asset Management | $3,320 | $2,705 |  | 23 | $6,392 | $5,376 |  | 19 |\n| Global Private Bank | 3,531 | 3,055 |  | 16 | 6,833 | 6,115 |  | 12 |\n| Total net revenue | $6,851 | $5,760 |  | 19% | $13,225 | $11,491 |  | 15% |\n| Financial ratios |  |  |  |  |  |  |  |  |\n| Return on equity | 48% | 36% |  |  | 46% | 38% |  |  |\n| Overhead ratio | 61 | 65 |  |  | 63 | 65 |  |  |\n| Pre-tax margin ratio: |  |  |  |  |  |  |  |  |\n| Asset Management | 36 | 33 |  |  | 35 | 33 |  |  |\n| Global Private Bank | 40 | 36 |  |  | 38 | 37 |  |  |\n| Asset & Wealth Management | 38 | 34 |  |  | 37 | 35 |  |  |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00098",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 34,
+   "page_end": 34,
+   "section": "Markets revenue",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0038"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Markets revenue | p.34]\n| International metrics (in millions, except where otherwise noted) 2026 | As of or for the three months ended June 30, 2025 | Change | 2026 | As of or for the six months ended June 30, 2025 | Change |  |\n|---|---|---|---|---|---|---|\n| Total net revenue (a) |  |  |  |  |  |  |\n| Europe/Middle East/Africa | $5,559 | $4,516 | 23% | $10,813 | $9,058 | 19% |\n| Asia-Pacific | 4,389 | 2,667 | 65 | 8,054 | 5,286 | 52 |\n| Latin America/Caribbean | 743 | 716 | 4 | 1,579 | 1,261 | 25 |\n| Total international net revenue | 10,691 | 7,899 | 35 | 20,446 | 15,605 | 31 |\n| North America | 14,162 | 11,636 | 22 | 27,786 | 23,596 | 18 |\n| Total net revenue | $24,853 | $19,535 | 27 | $48,232 | $39,201 | 23 |\n| Loans retained (period-end) (a) |  |  |  |  |  |  |\n| Europe/Middle East/Africa | $66,762 | $55,165 | 21 | $66,762 | $55,165 | 21 |\n| Asia-Pacific | 24,586 | 17,355 | 42 | 24,586 | 17,355 | 42 |\n| Latin America/Caribbean | 13,679 | 11,238 | 22 | 13,679 | 11,238 | 22 |\n| Total international loans | 105,027 | 83,758 | 25 | 105,027 | 83,758 | 25 |\n| North America | 481,780 | 442,416 | 9 | 481,780 | 442,416 | 9 |\n| Total loans retained | $586,807 | $526,174 | 12 | $586,807 | $526,174 | 12 |\n| Client deposits and other third-party liabilities (average) (b) |  |  |  |  |  |  |\n| Europe/Middle East/Africa | $318,712 | $304,737 | 5 | $312,366 | $292,993 | 7 |\n| Asia-Pacific | 174,204 | 157,242 | 11 | 169,758 | 154,938 | 10 |\n| Latin America/Caribbean | 55,050 | 46,504 | 18 | 54,301 | 45,278 | 20 |\n| Total international | $547,966 | $508,483 | 8 | $536,425 | $493,209 | 9 |\n| North America | 657,190 | 581,298 | 13 | 649,822 | 569,026 | 14 |\n| Total client deposits and other third-party liabilities | $1,205,156 | $1,089,781 | 11 | $1,186,247 | $1,062,235 | 12 |\n| AUC (period-end) (b) (in billions) |  |  |  |  |  |  |\n| North America | $30,566 | $25,298 | 21 | $30,566 | $25,298 | 21 |\n| All other regions | 14,303 | 12,730 | 12 | 14,303 | 12,730 | 12 |\n| Total AUC | $44,869 | $38,028 | 18% | $44,869 | $38,028 | 18% |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

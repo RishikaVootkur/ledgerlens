@@ -1,0 +1,824 @@
+{
+ "created_at": "2026-11-02T02:10:34.187907Z",
+ "judge_model": "groq-gpt-oss-120b",
+ "prompt_version": "v2",
+ "split": "dev",
+ "n": 93,
+ "accuracy": {
+  "value": 0.9032258064516129,
+  "ci_low": 0.8262133606698858,
+  "ci_high": 0.9482483307722633,
+  "n": 93
+ },
+ "kappa": {
+  "value": 0.8545359749739311,
+  "ci_low": 0.7573480488210531,
+  "ci_high": 0.9351464435146444,
+  "n": 93
+ },
+ "error_rate": {
+  "value": 0.0967741935483871,
+  "ci_low": 0.051751669227736746,
+  "ci_high": 0.17378663933011418,
+  "n": 93
+ },
+ "binary_accuracy": {
+  "value": 0.9354838709677419,
+  "ci_low": 0.8663200583761685,
+  "ci_high": 0.9700985683813523,
+  "n": 93
+ },
+ "binary_kappa": {
+  "value": 0.8591620393740534,
+  "ci_low": 0.7473262480122586,
+  "ci_high": 0.9542214642341945,
+  "n": 93
+ },
+ "labels": [
+  "CORRECT",
+  "INCORRECT",
+  "REFUSAL"
+ ],
+ "confusion": [
+  [
+   30,
+   4,
+   0
+  ],
+  [
+   1,
+   24,
+   3
+  ],
+  [
+   1,
+   0,
+   30
+  ]
+ ],
+ "per_label_recall": {
+  "CORRECT": 0.8823529411764706,
+  "INCORRECT": 0.8571428571428571,
+  "REFUSAL": 0.967741935483871
+ },
+ "parse_errors": 0,
+ "clean_n": 35,
+ "clean_accuracy": {
+  "value": 0.8857142857142857,
+  "ci_low": 0.7404853135378618,
+  "ci_high": 0.9546482066690264,
+  "n": 35
+ },
+ "clean_kappa": {
+  "value": 0.8263027295285359,
+  "ci_low": 0.6530251736511481,
+  "ci_high": 0.9566294919454772,
+  "n": 35
+ },
+ "results": [
+  {
+   "cid": "cal-claude-2_inContext-00206",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The response does not address the relevance of gross margin and provides unrelated capital ratio information instead of stating that gross margin is not a relevant metric.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00216",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the quick ratio or liquidity assessment, instead discusses pension details, failing to address the question.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00566",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate states debt decreased but gives a different amount ($300M vs $229M) than the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00651",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that growth is expected to decelerate slightly, matching the gold answer's figures.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00839",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states Mary Dillon was former CEO of Ulta Beauty, a similar retail company, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01484",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states US sales grew 3.0% and international sales declined 0.6%, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01488",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies the Consumer Health business segment as the discontinued operation.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-04417",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states the FY2019 inventories as $5,409 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-06272",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the dividend payout ratio and is unrelated to the question",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00476",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00685",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The response does not answer the question about gross margin consistency and provides unrelated filing text",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00757",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate did not answer the question about AMD's FY22 customer concentration",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01009",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly lists PepsiCo's primary operating geographies for FY2022, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01198",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate does not provide the requested information and effectively declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01275",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The response does not answer the question and only provides filing text",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01482",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states the proposal was defeated, matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-02987",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The response does not provide the fixed asset turnover ratio, only unrelated filing text",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04254",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the requested figure.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04412",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the metric, stating lack of access to data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04660",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04784",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating lack of access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00720",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that gross margin is not a useful metric for American Express and explains why",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00757",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states that one customer accounted for 16% of AMD's FY22 consolidated net revenue, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00839",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states that Mary N. Dillon was CEO of Ulta Beauty, a similar retail company, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-01198",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly identifies EPYC server sales, higher semi‑custom product sales, and Xilinx embedded product sales as drivers of AMD FY22 revenue change",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-02987",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer provides the correct calculation and result (24.25, effectively matching the gold 24.26)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-04103",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated CCC (-2.68) does not match the gold answer (-3.7)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-04171",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate provides accounts payable as $302.578 million, which rounds to the gold answer of 303 million USD",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-04417",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the FY2019 inventories as $5,409 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-07507",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate reports a 65.4% change, which does not match the gold answer of 0.654%",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00070",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the information, stating lack of access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00464",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states that Boeing's business is subject to cyclicality, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00476",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of access to information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00566",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of data access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00720",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that gross margin is not a useful metric for American Express and explains why, aligning with the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00757",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01009",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the specific list and says it lacks data",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01077",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the acquisitions information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01484",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of data access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-02981",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate states the information is not provided and declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-07507",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating they lack access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00206",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that gross margin is not a relevant metric for JPMorgan Chase, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00407",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly identifies corporate bonds as the largest short-term investment",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00476",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states that there are no debt securities registered to trade on a national exchange under American Express' name in 2022",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00563",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies Data Center as the segment with the greatest proportional sales increase, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00705",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the $400,000,000 increase.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-01928",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the Adjusted Non GAAP EBITDA as $2,018 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-02119",
+   "source_model": "gpt-4_oracle",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating insufficient information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-04254",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly calculates unadjusted EBITDA as $1,196M + $636M = $1,832M, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-04660",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate provides the correct working capital ratio of 1.73, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-04672",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate provides the net PP&E as $8.738 billion, matching the gold answer of 8.7 billion (acceptable rounding).",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-06247",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated DPO (42.89) does not match the gold answer (42.69)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-06741",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate's computed 3‑year average matches the gold answer of 6.2%",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00299",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says it cannot answer due to lack of data",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00407",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00476",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-03882",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate states the information is not available and declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-04103",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declined to answer, stating the data was not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-10420",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ROA calculation, stating insufficient information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00070",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculation gives negative working capital, contradicting the gold answer of a positive $124 million",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00216",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the quick ratio and states insufficient information, despite the gold answer containing the ratio.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00566",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states Verizon increased its debt, contradicting the gold answer that debt decreased by $229 million",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00651",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states growth will not accelerate, citing a 3.5% rate matching gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01474",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that PepsiCo raised guidance due to a strong start to FY2023, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01488",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies the Consumer Health business segment as the discontinued operation.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01936",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-02119",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the amount cannot be determined, declining to provide the specific per-share figure given in the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-02987",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ratio, stating the needed data is unavailable",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-03882",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the net AR figure, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-06247",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the information is not available and does not provide the DPO value.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-06272",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ratio, stating the needed data is not available",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-06655",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate states it cannot answer due to missing information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00407",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states senior credit facility term loans were the largest, contradicting the gold answer that corporate bonds were the biggest short‑term investment.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00601",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer cites COVID-19 cost savings and litigation charges, not the gold answer's lower marketing expenses and incentive compensation leverage",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00685",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate claims margins fluctuated up to 3.2%, contradicting the gold answer that margins were consistent with only a 1.1% decline.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00705",
+   "source_model": "llama2_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states the $400,000,000 increase",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00807",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer claims 3M has a reasonably healthy liquidity profile, contradicting the gold answer that the quick ratio was 0.96 and not healthy",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01163",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate incorrectly states investing activities brought the most cash flow, contradicting the gold answer that operations had the highest cash flow.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01482",
+   "source_model": "llama2_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating they do not know the information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00070",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states working capital is negative, contradicting the gold answer that it is positive $124 million.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00288",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states the cash decline and its magnitude aligns with the ~42% drop.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00566",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states Verizon's debt increased, contradicting the gold answer that it decreased by $229 million.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00651",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate provides incorrect growth rates that do not match the gold answer's specific figures",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00941",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer lists different securities and amounts, not the specific NYSE‑listed notes cited in the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00956",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate gives a different sales growth figure (1.9% vs 1.3%) and thus does not match the gold answer's key fact.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00995",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate lists all major product categories matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-01936",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the information is not disclosed, refusing to provide the answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-02987",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated ratio (19.50) does not match the gold answer of 24.26",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-03718",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate's CAGR of 4.5% does not match the gold answer of 0.004 (0.4%)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-03882",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's figure (3,140.7 million) does not match the gold answer of 1,616 million",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-04080",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated ratio (0.62) does not match the gold answer of 3.46",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-04672",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate gave $542 million instead of the correct $8.7 billion net PP&E for FY2018",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-10420",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's ROA (0.10%) does not match the gold answer of -0.02",
+   "parse_error": false
+  }
+ ]
+}
