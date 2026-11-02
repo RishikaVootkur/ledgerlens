@@ -94,6 +94,13 @@ def test_unanswerable_committed_file_matches_seeds(datasets):
     assert [q.model_dump() for q in build()] == [q.model_dump() for q in datasets["unanswerable"]]
 
 
+def test_retired_unanswerable_ids_stay_retired(datasets):
+    # -05 (Microsoft revenue from OpenAI) is disclosed in the MSFT FY2026 10-K.
+    qids = {q.qid for q in datasets["unanswerable"]}
+    assert "unans-undisclosed-05" not in qids
+    assert "unans-undisclosed-11" in qids
+
+
 def test_seed_validation():
     seed = dict(load_seeds()[0])
     with pytest.raises(ValueError, match="unknown category"):

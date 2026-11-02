@@ -169,12 +169,8 @@
   fiscal_year: 2025
   question: How much did Alphabet pay Apple specifically for default search placement in 2025, according to its 10-K?
   why: Traffic acquisition costs are reported in aggregate, never per partner.
-- id: unans-undisclosed-05
-  category: not_disclosed
-  ticker: MSFT
-  fiscal_year: 2026
-  question: How much revenue did Microsoft earn from OpenAI as a single customer in fiscal 2026?
-  why: Per-customer revenue for that relationship is not disclosed in the filings.
+# unans-undisclosed-05 is retired: it asked for Microsoft's revenue from OpenAI, which the
+# FY2026 10-K discloses as a related-party amount ($24.1 billion). Replaced by -11.
 - id: unans-undisclosed-06
   category: not_disclosed
   ticker: NFLX
@@ -203,6 +199,12 @@
   fiscal_year: 2025
   question: What was AWS's revenue from Netflix as a customer in 2025?
   why: AWS does not report revenue by customer.
+- id: unans-undisclosed-11
+  category: not_disclosed
+  ticker: MSFT
+  fiscal_year: 2026
+  question: How many Xbox consoles did Microsoft sell in fiscal year 2026?
+  why: The filings give Xbox hardware revenue changes and mention lower console volume, never unit counts.
 
 - id: unans-oldperiod-01
   category: wrong_form_or_period
@@ -349,8 +351,8 @@
 - id: unans-trivia-03
   category: nonfinancial_trivia
   ticker: KO
-  question: Which pharmacist invented the original Coca-Cola recipe, and in what year?
-  why: Company origin trivia that the corpus filings do not cover.
+  question: What was the name of the pharmacist who invented the original Coca-Cola recipe?
+  why: Company origin trivia; the 10-K gives only the year sales began (1886), never the inventor.
 - id: unans-trivia-04
   category: nonfinancial_trivia
   ticker: JPM
