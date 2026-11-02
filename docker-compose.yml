@@ -39,7 +39,7 @@ services:
       CORS_ORIGINS: http://localhost:8080,http://127.0.0.1:8080
     volumes:
       # Index and filings (LEDGERLENS_DATA_DIR points elsewhere, e.g. from a worktree).
-      # Must be writable by uid 10001 (SQLite WAL); on Linux see docs/decisions.md D14.
+      # Must be writable by uid 10001 (SQLite WAL); on Linux see docs/decisions.md D17.
       - ${LEDGERLENS_DATA_DIR:-./data}:/app/data
       - ./eval:/app/eval:ro
       - api_cache:/app/.cache
