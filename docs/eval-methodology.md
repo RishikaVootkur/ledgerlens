@@ -29,12 +29,17 @@ Per question (keys in the run file match `eval/gate.yaml`):
 
 - `numeric_correct`: the answer's number is within the question's tolerance of the gold (relative 1% for reported facts, 2% for derived ratios, plus an absolute tolerance for values near zero). Scale errors (millions vs billions) are never forgiven.
 - `refusal_correct`: the agent refused exactly when the question is unanswerable. On answerable questions this measures false refusals; on the unanswerable set it measures hallucinations.
-- `citation_precision`: share of an answer's citations that support it. For numeric answers a citation supports the answer when its source states the headline number at some reporting scale; for text answers when its quote appears in the source. The LLM judge adds a semantic support check for text answers.
+- `citation_precision`: share of an answer's citations that support it. For numeric answers a citation supports the answer when its source states the headline number at some reporting scale. For text answers (FinanceBench) the judge model reads the answer and each cited passage and decides whether the passage supports it; a quote-match test would score 1.0 by construction because the agent's self-check already drops quotes that are not in their source. Without the judge, text-answer citation precision is left unscored.
 - `citation_recall`: share of the labeled evidence (FinanceBench pages, or the XBRL fact's filing) that the answer cites.
 - Retrieval, scored against labeled evidence: `recall_at_k`, `mrr`, `ndcg_at_10`. FinanceBench evidence is page-level; XBRL evidence is filing-level, so XBRL retrieval scores are coarse and the retrieval ablation uses FinanceBench.
-- Operations: end-to-end latency p50 and p95, tokens and list-price-equivalent cost per question.
+- `judge_correct` (FinanceBench only): the calibrated LLM judge labels the answer CORRECT, INCORRECT or REFUSAL against the gold answer; a judge failure leaves the score empty instead of discarding the question.
+- Operations: wall-clock latency p50 and p95 (includes waiting on free-tier rate limits), model latency p50 and p95 (summed LLM call time, the fair number for comparing models), tokens and list-price-equivalent cost per question.
 
 Every metric function is unit-tested against hand-computed values (`tests/eval/`).
+
+## Judge calibration
+
+The judge (GPT-OSS 120B on Groq, a different model family from every answer model) is calibrated against FinanceBench's published human labels on answers from GPT-4, GPT-4 Turbo, Claude 2 and Llama 2 (`eval/datasets/judge_calibration.*`). The set is split by FinanceBench question, so no question has answers in both dev and test. The prompt was tuned once (v1 to v2) on dev; because that tuning read answers under the earlier answer-level split, the report also gives agreement on the test items whose questions were never read during tuning (`clean_*` fields). The set is balanced across labels; the judge is strict, so its recall on human-correct answers is lower than on incorrect answers and refusals, and judge-scored accuracy should be read as conservative.
 
 ## Statistics
 
