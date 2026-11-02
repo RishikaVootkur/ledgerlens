@@ -50,6 +50,8 @@ class Settings(BaseSettings):
 
     qdrant_url: str = "http://localhost:6333"
     phoenix_endpoint: str | None = None
+    # Phoenix 21 enables auth by default; a system API key from its UI lets spans in.
+    phoenix_api_key: SecretStr | None = None
 
     # Comma-separated browser origins allowed to call the API (the Vite dev server).
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
