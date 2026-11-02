@@ -1,0 +1,1219 @@
+{
+ "created_at": "2026-11-02T01:54:59.427870Z",
+ "judge_model": "groq-gpt-oss-120b",
+ "prompt_version": "v2",
+ "split": "test",
+ "n": 144,
+ "accuracy": {
+  "value": 0.8958333333333334,
+  "ci_low": 0.8352443317565577,
+  "ci_high": 0.935851955505205,
+  "n": 144
+ },
+ "kappa": {
+  "value": 0.8437499999999999,
+  "ci_low": 0.7688805575325173,
+  "ci_high": 0.9066861818791812,
+  "n": 144
+ },
+ "error_rate": {
+  "value": 0.10416666666666667,
+  "ci_low": 0.06414804449479507,
+  "ci_high": 0.16475566824344234,
+  "n": 144
+ },
+ "binary_accuracy": {
+  "value": 0.9166666666666666,
+  "ci_low": 0.8599917639995038,
+  "ci_high": 0.9516885383812987,
+  "n": 144
+ },
+ "binary_kappa": {
+  "value": 0.8021978021978021,
+  "ci_low": 0.6872586872586872,
+  "ci_high": 0.8924030997871445,
+  "n": 144
+ },
+ "labels": [
+  "CORRECT",
+  "INCORRECT",
+  "REFUSAL"
+ ],
+ "confusion": [
+  [
+   37,
+   11,
+   0
+  ],
+  [
+   1,
+   44,
+   3
+  ],
+  [
+   0,
+   0,
+   48
+  ]
+ ],
+ "per_label_recall": {
+  "CORRECT": 0.7708333333333334,
+  "INCORRECT": 0.9166666666666666,
+  "REFUSAL": 1.0
+ },
+ "parse_errors": 0,
+ "results": [
+  {
+   "cid": "cal-claude-2_inContext-00216",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the quick ratio or liquidity assessment, instead discusses pension details, failing to address the question.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00394",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not address which segment had the highest net income and provides unrelated fair value information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00603",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly identifies the opening of 47 new stores as the primary driver, matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00724",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate did not provide an answer and instead asked a generic question.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00799",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not address the quick ratio question and provides unrelated information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-00839",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states Mary Dillon was former CEO of Ulta Beauty, a similar retail company, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01091",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not address the question about Boeing's ongoing legal battles and provides unrelated plan details.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01351",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the effective tax rate change and gives unrelated borrowing information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01484",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states US sales grew 3.0% and international sales declined 0.6%, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01488",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies the Consumer Health business segment as the discontinued operation.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-01902",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's answer conflicts with the gold answer about which segment performed best",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-02416",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer discusses tax rates instead of naming the three acquired companies, failing to provide the required information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-03282",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the FY2017 total current liabilities figure of 5466 million as required.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-03473",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the requested ROA value and is unrelated to the question",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-04417",
+   "source_model": "claude-2_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states the FY2019 inventories as $5,409 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-05718",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the cash dividend amount and is unrelated to the question.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-claude-2_inContext-06272",
+   "source_model": "claude-2_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the dividend payout ratio and is unrelated to the question",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00222",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate provides no answer, failing to state the quick ratio or liquidity assessment.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00476",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-00591",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate provides no answer, failing to state the required information about Adobe's free cashflow conversion.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01148",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly identifies Amcor's primary industry as packaging, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01254",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate incorrectly states no dividend was paid, contradicting the gold answer that a $0.01 per share dividend was paid in FY2022.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01351",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating lack of access to the information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01482",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states the proposal was defeated, matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01858",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate does not answer the question and provides no information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01911",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of access to data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-01935",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly describes the substitution of the issuer and related supplemental indentures as in the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-02049",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not address whether JPM's VaR risk decreased, providing unrelated information instead.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-02608",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate answer does not provide the requested net profit margin figure",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-03473",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04412",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the metric, stating lack of access to data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-04784",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating lack of access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-05718",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not provide the cash dividend amount and is unrelated to the question.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_inContext-05915",
+   "source_model": "gpt-4-1106-preview_inContext",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating insufficient information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00005",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's working capital figure ($2,278 million) does not match the gold answer's $831 million, indicating a key numerical error.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00494",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states Boeing forecasts increased production rates for the 737, 777X, and 787 in FY2023",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00678",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states Boeing's gross margin improved in FY2022 with matching figures and acknowledges metric limits",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00720",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that gross margin is not a useful metric for American Express and explains why",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00757",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states that one customer accounted for 16% of AMD's FY22 consolidated net revenue, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-00790",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states CVS Health is capital-intensive, aligning with gold answer's conclusion",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-01028",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer lists United States, EMEA, APAC, and LACC, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-01902",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate claims Services was top-performing, contradicting gold answer that Entertainment had the highest growth",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-02987",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer provides the correct calculation and result (24.25, effectively matching the gold 24.26)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-03473",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's ROA of 1.42% (0.0142) does not match the gold answer of 0.01",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-04171",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate provides accounts payable as $302.578 million, which rounds to the gold answer of 303 million USD",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-04417",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the FY2019 inventories as $5,409 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4-1106-preview_oracle-07507",
+   "source_model": "gpt-4-1106-preview_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate reports a 65.4% change, which does not match the gold answer of 0.654%",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00070",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the information, stating lack of access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00382",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating they cannot provide the information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00476",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of access to information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00517",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the information, stating it cannot access the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00552",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00566",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of data access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00684",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the specific gross margin information, stating it cannot access the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00702",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of data",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00757",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-00859",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating lack of access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01244",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01484",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating lack of data access.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01487",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declined to provide the answer, stating inability to access the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-01858",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate answer declines to provide the specific information, stating it cannot answer directly.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-02981",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate states the information is not provided and declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-03620",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating they cannot access the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-04735",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating lack of access to data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-07507",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating they lack access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-08135",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating they lack access to the data.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_closedBook-08286",
+   "source_model": "gpt-4_closedBook",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate states the information is not provided, refusing to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00206",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that gross margin is not a relevant metric for JPMorgan Chase, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00302",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states that PPNE grew year over year, matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00394",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies Corporate & Investment Bank as the segment with the highest net income and provides the correct amount of $3,725 million.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00460",
+   "source_model": "gpt-4_oracle",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's store counts (907 and 930) do not match the gold answer's figures (969 and 982)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00476",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states that there are no debt securities registered to trade on a national exchange under American Express' name in 2022",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00563",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies Data Center as the segment with the greatest proportional sales increase, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-00669",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly lists the same drivers of FY2022 gross margin change as the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-01928",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the Adjusted Non GAAP EBITDA as $2,018 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-02119",
+   "source_model": "gpt-4_oracle",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating insufficient information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-02419",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate contradicts the gold answer, incorrectly stating Pfizer is not spinning off any large segment despite mentioning Upjohn separation",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-04254",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly calculates unadjusted EBITDA as $1,196M + $636M = $1,832M, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-06247",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated DPO (42.89) does not match the gold answer (42.69)",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-06741",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate's computed 3‑year average matches the gold answer of 6.2%",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-07661",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate's figure of $381.603 million rounds to the gold answer of 382 million USD",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_oracle-08135",
+   "source_model": "gpt-4_oracle",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate reports a 30.8% change, but the gold answer indicates the correct change is 0.308%",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00299",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says it cannot answer due to lack of data",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00382",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate answer incorrectly identifies the region and provides a different figure, not matching the gold answer that Las Vegas resorts contributed ~90% of EBITDAR.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00476",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00540",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the information is not available and declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00684",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00799",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the information is not available and declines to answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-00859",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate gave a different instrument and a much lower notional value than the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-01911",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-04103",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declined to answer, stating the data was not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-04458",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating the information is not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-04700",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the COGS figure, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-07661",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the cash flow figure, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-08286",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states Amazon's FY2019 net income as $11,588 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-09724",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated COGS % margin (64.03%) does not match the gold answer of 0.397",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_sharedStore-10420",
+   "source_model": "gpt-4_sharedStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ROA calculation, stating insufficient information",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00070",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculation gives negative working capital, contradicting the gold answer of a positive $124 million",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00215",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating insufficient data, whereas the gold answer provides a definitive response",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00566",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states Verizon increased its debt, contradicting the gold answer that debt decreased by $229 million",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00651",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states growth will not accelerate, citing a 3.5% rate matching gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-00882",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states the total borrowing capacity of $8,400,000,000, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01091",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states Boeing has ongoing legal battles related to the Lion Air and Ethiopian crashes, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01107",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer omits the usual and customary pricing and PBM litigation areas noted in the gold answer, providing only partial information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01319",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states restructuring costs are 0, matching the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01474",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly states that PepsiCo raised guidance due to a strong start to FY2023, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01488",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The answer correctly identifies the Consumer Health business segment as the discontinued operation.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01865",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate incorrectly identifies the segment as Transportation and Electronics, whereas the gold answer states the consumer segment shrank organically",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-01936",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to answer, stating the information is not provided.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-02024",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the answer, stating the information is not provided",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-03282",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states Netflix's FY2017 total current liabilities as approximately $5,466 million, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-03856",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ratio, stating missing data",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-03882",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the net AR figure, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-04700",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the COGS figure, stating the information is not available.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-04735",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ratio, stating needed data is missing",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-gpt-4_singleStore-06272",
+   "source_model": "gpt-4_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the ratio, stating the needed data is not available",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00603",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not state that the increase was driven by opening 47 new stores, providing incorrect reasons.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00678",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer provides unrelated historical segment margins and does not state the FY2022 gross profit and margin improvement as in the gold answer",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00685",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate claims margins fluctuated up to 3.2%, contradicting the gold answer that margins were consistent with only a 1.1% decline.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-00807",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer claims 3M has a reasonably healthy liquidity profile, contradicting the gold answer that the quick ratio was 0.96 and not healthy",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01079",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate claims no acquisitions, contradicting the gold answer that lists several FY2023 acquisitions",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01163",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate incorrectly states investing activities brought the most cash flow, contradicting the gold answer that operations had the highest cash flow.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01244",
+   "source_model": "llama2_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states CVS paid a $0.55 dividend per share each quarter, confirming a dividend in Q2 FY2022",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01279",
+   "source_model": "llama2_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer cites 2020 cash flow figures, not FY22, and thus does not correctly state the FY22 cash flow information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01351",
+   "source_model": "llama2_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate gave an incorrect FY2022 tax rate (21.9% vs correct 21.6%).",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01865",
+   "source_model": "llama2_sharedStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate identified the wrong segment, stating Transportation and Electronics instead of the consumer segment which shrank organically.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_sharedStore-01930",
+   "source_model": "llama2_sharedStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate states a 1% increase, contradicting the gold answer that growth was flat",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00005",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate gives an incorrect working capital amount ($2.4 billion) that does not match the gold answer ($831 million).",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00070",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states working capital is negative, contradicting the gold answer that it is positive $124 million.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00288",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "Candidate correctly states the cash decline and its magnitude aligns with the ~42% drop.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00494",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate provides unsupported specific rate and claims lack of info, contradicting gold answer that Boeing forecasts increases for multiple models",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00566",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate states Verizon's debt increased, contradicting the gold answer that it decreased by $229 million.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00651",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate provides incorrect growth rates that do not match the gold answer's specific figures",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00669",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer does not mention the specific FY2022 gross margin drivers listed in the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00678",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate provides incorrect gross margin percentages and figures that do not match the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00711",
+   "source_model": "llama2_singleStore",
+   "human_label": "REFUSAL",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate declines to provide the inventory turnover figure, stating insufficient information.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00941",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The answer lists different securities and amounts, not the specific NYSE‑listed notes cited in the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-00956",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "Candidate gives a different sales growth figure (1.9% vs 1.3%) and thus does not match the gold answer's key fact.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-01351",
+   "source_model": "llama2_singleStore",
+   "human_label": "CORRECT",
+   "judge_label": "CORRECT",
+   "reason": "The candidate correctly states the tax rate dropped from 24.6% in FY2021 to 21.6% in FY2022, matching the gold answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-01936",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "REFUSAL",
+   "reason": "The candidate says the information is not disclosed, refusing to provide the answer.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-02416",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate lists Wyeth, Hospira, and Allergan, which do not match the gold answer of Trillium, Array, and Therachon",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-04980",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's capital expenditure figure (0.176 billion) does not match the gold answer of 4.6 billion.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-07966",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's calculated percentage (7.26%) does not match the gold answer of 0.019%.",
+   "parse_error": false
+  },
+  {
+   "cid": "cal-llama2_singleStore-10420",
+   "source_model": "llama2_singleStore",
+   "human_label": "INCORRECT",
+   "judge_label": "INCORRECT",
+   "reason": "The candidate's ROA (0.10%) does not match the gold answer of -0.02",
+   "parse_error": false
+  }
+ ]
+}
