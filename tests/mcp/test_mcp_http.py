@@ -9,8 +9,7 @@ from mcp.server.transport_security import TransportSecuritySettings
 from starlette.testclient import TestClient
 from typer.testing import CliRunner
 
-from ledgerlens import mcp_server
-from ledgerlens.cli import app
+from ledgerlens import cli, mcp_server
 
 INIT = {
     "jsonrpc": "2.0",
@@ -75,5 +74,7 @@ def test_http_settings_defaults():
 )
 def test_cli_refuses_unsafe_or_unknown_settings_before_serving(args, monkeypatch):
     monkeypatch.setattr(mcp_server, "build_server", lambda **kw: pytest.fail("server built"))
-    result = CliRunner().invoke(app, ["mcp", "serve", *args])
+    # The CLI callback would point structlog at CliRunner's stream, closed after the test.
+    monkeypatch.setattr(cli, "configure_logging", lambda *args: None)
+    result = CliRunner().invoke(cli.app, ["mcp", "serve", *args])
     assert result.exit_code == 2, result.output
