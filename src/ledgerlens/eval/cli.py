@@ -138,3 +138,24 @@ def judge_calibrate(
     typer.echo(f"  confusion (rows human, cols judge, {report.labels}): {report.confusion}")
     if record_cache:
         typer.echo(f"recorded {do_record()} cache entries into eval/cache")
+
+
+@eval_app.command("analyze")
+def analyze_run(run: str = typer.Argument(..., help="Run id or path")) -> None:
+    """Classify every failed question into the failure taxonomy (written into the run file)."""
+    from ledgerlens.config import get_settings
+    from ledgerlens.eval.analysis import analyze
+
+    path = Path(run)
+    if not path.exists():
+        path = get_settings().eval_dir / "runs" / f"{run}.json"
+    run_file = RunFile.model_validate_json(path.read_text())
+    counts = analyze(run_file)
+    path.write_text(run_file.model_dump_json(indent=1))
+    total = sum(counts.values())
+    typer.echo(f"{total} failures in {path.name}")
+    for category, n in counts.most_common():
+        typer.echo(f"  {category:<22} {n:>3}  ({n / max(1, total):.0%})")
+    for r in run_file.results:
+        if r.failure_category:
+            typer.echo(f"- {r.qid}: {r.failure_category}: {r.failure_note}")
