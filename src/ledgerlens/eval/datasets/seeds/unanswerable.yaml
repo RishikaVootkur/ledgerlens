@@ -1,0 +1,388 @@
+# Handwritten unanswerable questions. The corpus is, per universe company, the latest 10-K
+# and two latest 10-Qs (filed up to 2026-11-01), plus the FinanceBench source documents.
+# Every question below must stay unanswerable from that corpus. `why` explains the reason
+# and is copied to metadata. Keep ids stable: append new entries, never renumber.
+#
+# Categories (question_type):
+#   future_period          period after the newest filing in the corpus
+#   not_in_corpus_company  real company outside the universe and outside FinanceBench
+#   not_disclosed          something SEC filings never contain
+#   wrong_form_or_period   a period older than any ingested filing for that company
+#   false_premise          a segment, product or event the company does not have
+#   nonfinancial_trivia    company-adjacent trivia that filings do not cover
+
+- id: unans-future-01
+  category: future_period
+  ticker: AAPL
+  fiscal_year: 2030
+  question: What was Apple's total net sales for fiscal year 2030, in US dollars?
+  why: FY2030 has not happened; the newest Apple filing covers fiscal 2026 Q3.
+- id: unans-future-02
+  category: future_period
+  ticker: KO
+  fiscal_year: 2026
+  fiscal_period: Q4
+  question: What was Coca-Cola's net operating revenue for the fourth quarter of 2026?
+  why: Q4 2026 is reported in the FY2026 10-K, filed after the corpus cutoff.
+- id: unans-future-03
+  category: future_period
+  ticker: NVDA
+  fiscal_year: 2028
+  question: What was NVIDIA's Data Center revenue for fiscal year 2028?
+  why: NVIDIA's fiscal 2028 ends in January 2028.
+- id: unans-future-04
+  category: future_period
+  ticker: MSFT
+  fiscal_year: 2027
+  fiscal_period: Q2
+  question: What was Microsoft's diluted EPS for the quarter ended December 31, 2026 (fiscal 2027 Q2)?
+  why: The quarter ends after the corpus cutoff.
+- id: unans-future-05
+  category: future_period
+  ticker: JPM
+  fiscal_year: 2027
+  question: What was JPMorgan Chase's return on tangible common equity for full-year 2027?
+  why: 2027 results do not exist yet.
+- id: unans-future-06
+  category: future_period
+  ticker: WMT
+  fiscal_year: 2028
+  question: How many Walmart U.S. stores were open at the end of fiscal year 2028?
+  why: Walmart's fiscal 2028 ends in January 2028.
+- id: unans-future-07
+  category: future_period
+  ticker: AMZN
+  fiscal_year: 2027
+  fiscal_period: Q1
+  question: What was AWS segment operating income in the first quarter of 2027?
+  why: Q1 2027 has not been reported.
+- id: unans-future-08
+  category: future_period
+  ticker: XOM
+  fiscal_year: 2029
+  question: What were ExxonMobil's total capital and exploration expenditures in 2029?
+  why: 2029 actuals do not exist; plans are not results.
+- id: unans-future-09
+  category: future_period
+  ticker: NFLX
+  fiscal_year: 2027
+  question: How many paid memberships did Netflix report at the end of 2027?
+  why: 2027 results do not exist yet.
+- id: unans-future-10
+  category: future_period
+  ticker: BA
+  fiscal_year: 2028
+  question: How many 737 airplanes did Boeing deliver in 2028?
+  why: 2028 deliveries have not happened.
+
+- id: unans-company-01
+  category: not_in_corpus_company
+  company: Tesla, Inc.
+  ticker: TSLA
+  fiscal_year: 2025
+  question: What was Tesla's total automotive revenue for fiscal year 2025?
+  why: Tesla is not in the universe or FinanceBench.
+- id: unans-company-02
+  category: not_in_corpus_company
+  company: Oracle Corporation
+  ticker: ORCL
+  fiscal_year: 2026
+  question: What were Oracle's remaining performance obligations at the end of fiscal 2026?
+  why: Oracle is not in the corpus.
+- id: unans-company-03
+  category: not_in_corpus_company
+  company: The Home Depot, Inc.
+  ticker: HD
+  fiscal_year: 2025
+  question: What was Home Depot's comparable sales growth for fiscal 2025?
+  why: Home Depot is not in the corpus.
+- id: unans-company-04
+  category: not_in_corpus_company
+  company: The Goldman Sachs Group, Inc.
+  ticker: GS
+  fiscal_year: 2025
+  question: What was Goldman Sachs' net revenue from Global Banking & Markets in 2025?
+  why: Goldman Sachs is not in the corpus.
+- id: unans-company-05
+  category: not_in_corpus_company
+  company: Merck & Co., Inc.
+  ticker: MRK
+  fiscal_year: 2025
+  question: What were Keytruda worldwide sales in 2025 according to Merck's 10-K?
+  why: Merck is not in the corpus.
+- id: unans-company-06
+  category: not_in_corpus_company
+  company: The Walt Disney Company
+  ticker: DIS
+  fiscal_year: 2025
+  question: What was operating income of Disney's Experiences segment in fiscal 2025?
+  why: Disney is not in the corpus.
+- id: unans-company-07
+  category: not_in_corpus_company
+  company: Starbucks Corporation
+  ticker: SBUX
+  fiscal_year: 2025
+  question: How many company-operated Starbucks stores were open in the U.S. at the end of fiscal 2025?
+  why: Starbucks is not in the corpus.
+- id: unans-company-08
+  category: not_in_corpus_company
+  company: Salesforce, Inc.
+  ticker: CRM
+  fiscal_year: 2026
+  question: What was Salesforce's subscription and support revenue for fiscal 2026?
+  why: Salesforce is not in the corpus.
+- id: unans-company-09
+  category: not_in_corpus_company
+  company: United Parcel Service, Inc.
+  ticker: UPS
+  fiscal_year: 2025
+  question: What was UPS's average daily package volume in 2025?
+  why: UPS is not in the corpus.
+- id: unans-company-10
+  category: not_in_corpus_company
+  company: Cisco Systems, Inc.
+  ticker: CSCO
+  fiscal_year: 2026
+  question: What was Cisco's product revenue in fiscal year 2026?
+  why: Cisco is not in the corpus.
+
+- id: unans-undisclosed-01
+  category: not_disclosed
+  ticker: AAPL
+  fiscal_year: 2026
+  fiscal_period: Q3
+  question: How many iPhone units did Apple sell in the quarter ended June 27, 2026?
+  why: Apple stopped disclosing unit sales in fiscal 2019.
+- id: unans-undisclosed-02
+  category: not_disclosed
+  ticker: JPM
+  question: What is the home address of JPMorgan Chase's chief executive officer?
+  why: Filings do not contain executives' home addresses.
+- id: unans-undisclosed-03
+  category: not_disclosed
+  ticker: KO
+  question: What will Coca-Cola's closing stock price be on the last trading day of 2026?
+  why: Future stock prices are not in any filing.
+- id: unans-undisclosed-04
+  category: not_disclosed
+  ticker: GOOGL
+  fiscal_year: 2025
+  question: How much did Alphabet pay Apple specifically for default search placement in 2025, according to its 10-K?
+  why: Traffic acquisition costs are reported in aggregate, never per partner.
+- id: unans-undisclosed-05
+  category: not_disclosed
+  ticker: MSFT
+  fiscal_year: 2026
+  question: How much revenue did Microsoft earn from OpenAI as a single customer in fiscal 2026?
+  why: Per-customer revenue for that relationship is not disclosed in the filings.
+- id: unans-undisclosed-06
+  category: not_disclosed
+  ticker: NFLX
+  fiscal_year: 2025
+  question: How much revenue did the series Stranger Things generate for Netflix in 2025?
+  why: Netflix does not report revenue by title.
+- id: unans-undisclosed-07
+  category: not_disclosed
+  ticker: COST
+  fiscal_year: 2026
+  question: How many Costco paid members lived in the state of Texas at the end of fiscal 2026?
+  why: Membership is not broken out by state.
+- id: unans-undisclosed-08
+  category: not_disclosed
+  ticker: WMT
+  question: What is the annual salary of the store manager of Walmart's Bentonville Supercenter?
+  why: Individual non-executive pay is never disclosed.
+- id: unans-undisclosed-09
+  category: not_disclosed
+  ticker: PFE
+  question: What is Pfizer's internal target price for its next unapproved drug candidate in 2028?
+  why: Internal pricing plans for unapproved products are not in filings.
+- id: unans-undisclosed-10
+  category: not_disclosed
+  ticker: AMZN
+  fiscal_year: 2025
+  question: What was AWS's revenue from Netflix as a customer in 2025?
+  why: AWS does not report revenue by customer.
+
+- id: unans-oldperiod-01
+  category: wrong_form_or_period
+  ticker: AAPL
+  fiscal_year: 2011
+  fiscal_period: Q2
+  question: What were Apple's net sales for the quarter ended March 26, 2011 (fiscal 2011 Q2)?
+  why: The oldest ingested Apple filing is the fiscal 2025 10-K.
+- id: unans-oldperiod-02
+  category: wrong_form_or_period
+  ticker: KO
+  fiscal_year: 2010
+  fiscal_period: Q3
+  question: What was Coca-Cola's operating income for the third quarter of 2010?
+  why: Older than any ingested Coca-Cola filing (the earliest FinanceBench one is FY2017).
+- id: unans-oldperiod-03
+  category: wrong_form_or_period
+  ticker: MSFT
+  fiscal_year: 2009
+  fiscal_period: Q1
+  question: What was Microsoft's revenue in the quarter ended September 30, 2008 (fiscal 2009 Q1)?
+  why: Older than any ingested Microsoft filing (the earliest is the FY2016 10-K).
+- id: unans-oldperiod-04
+  category: wrong_form_or_period
+  ticker: JPM
+  fiscal_year: 2011
+  fiscal_period: Q1
+  question: What was JPMorgan Chase's net income for the first quarter of 2011?
+  why: Older than any ingested JPMorgan filing (the earliest is the 2021 Q1 10-Q).
+- id: unans-oldperiod-05
+  category: wrong_form_or_period
+  ticker: WMT
+  fiscal_year: 2011
+  fiscal_period: Q2
+  question: What were Walmart's consolidated net sales for the second quarter of fiscal 2011?
+  why: Older than any ingested Walmart filing (the earliest is the FY2018 10-K).
+- id: unans-oldperiod-06
+  category: wrong_form_or_period
+  ticker: PEP
+  fiscal_year: 2012
+  fiscal_period: Q3
+  question: What was PepsiCo's Frito-Lay North America operating profit in the third quarter of 2012?
+  why: Older than any ingested PepsiCo filing (the earliest is the FY2021 10-K).
+- id: unans-oldperiod-07
+  category: wrong_form_or_period
+  ticker: INTC
+  fiscal_year: 2010
+  fiscal_period: Q4
+  question: What was Intel's gross margin percentage in the fourth quarter of 2010?
+  why: The oldest ingested Intel filing is the FY2025 10-K.
+- id: unans-oldperiod-08
+  category: wrong_form_or_period
+  ticker: CVX
+  fiscal_year: 2012
+  fiscal_period: Q2
+  question: What were Chevron's upstream earnings in the second quarter of 2012?
+  why: The oldest ingested Chevron filing is the FY2025 10-K.
+- id: unans-oldperiod-09
+  category: wrong_form_or_period
+  ticker: NEE
+  fiscal_year: 2011
+  fiscal_period: Q1
+  question: What was NextEra Energy's net income in the first quarter of 2011?
+  why: The oldest ingested NextEra filing is the FY2025 10-K.
+- id: unans-oldperiod-10
+  category: wrong_form_or_period
+  ticker: UNH
+  fiscal_year: 2009
+  fiscal_period: Q3
+  question: What was UnitedHealth Group's medical care ratio in the third quarter of 2009?
+  why: The oldest ingested UnitedHealth filing is the FY2025 10-K.
+
+- id: unans-premise-01
+  category: false_premise
+  ticker: JNJ
+  fiscal_year: 2025
+  question: What were sales of Johnson & Johnson's Consumer Health segment in fiscal 2025?
+  why: J&J separated Consumer Health (Kenvue) in 2023; it has no such segment in 2025.
+- id: unans-premise-02
+  category: false_premise
+  ticker: MMM
+  fiscal_year: 2025
+  question: What was operating income of 3M's Health Care segment in 2025?
+  why: 3M spun off its health care business (Solventum) in April 2024.
+- id: unans-premise-03
+  category: false_premise
+  ticker: PFE
+  fiscal_year: 2025
+  question: What was revenue of Pfizer's Consumer Healthcare segment in 2025?
+  why: Pfizer contributed Consumer Healthcare to the GSK joint venture in 2019.
+- id: unans-premise-04
+  category: false_premise
+  ticker: VZ
+  fiscal_year: 2025
+  question: What was revenue of Verizon's Media segment (Yahoo and AOL) in 2025?
+  why: Verizon sold Verizon Media in 2021.
+- id: unans-premise-05
+  category: false_premise
+  ticker: KO
+  fiscal_year: 2025
+  question: How much revenue did Coca-Cola's Beer and Spirits segment generate in 2025?
+  why: Coca-Cola has no beer and spirits operating segment.
+- id: unans-premise-06
+  category: false_premise
+  ticker: COST
+  fiscal_year: 2026
+  question: What were total deposits at Costco's banking subsidiary at the end of fiscal 2026?
+  why: Costco has no banking subsidiary.
+- id: unans-premise-07
+  category: false_premise
+  ticker: LMT
+  fiscal_year: 2025
+  question: How many commercial passenger jets did Lockheed Martin deliver to airlines in 2025?
+  why: Lockheed Martin does not build commercial passenger jets.
+- id: unans-premise-08
+  category: false_premise
+  ticker: NFLX
+  fiscal_year: 2025
+  question: What was attendance at Netflix's theme parks segment in 2025?
+  why: Netflix has a single operating segment and no theme parks segment.
+- id: unans-premise-09
+  category: false_premise
+  ticker: AAPL
+  fiscal_year: 2025
+  question: What was net interest income of Apple's banking segment in fiscal 2025?
+  why: Apple has no banking segment; Apple Card is issued by a partner bank.
+- id: unans-premise-10
+  category: false_premise
+  ticker: XOM
+  fiscal_year: 2025
+  question: What was revenue of ExxonMobil's cloud computing segment in 2025?
+  why: ExxonMobil has no cloud computing segment.
+
+- id: unans-trivia-01
+  category: nonfinancial_trivia
+  ticker: NKE
+  question: How much was the designer of Nike's Swoosh logo originally paid for it?
+  why: Brand history trivia that 10-K and 10-Q filings do not cover.
+- id: unans-trivia-02
+  category: nonfinancial_trivia
+  ticker: AAPL
+  question: What is Tim Cook's favorite Apple product?
+  why: Personal preference, not in filings.
+- id: unans-trivia-03
+  category: nonfinancial_trivia
+  ticker: KO
+  question: Which pharmacist invented the original Coca-Cola recipe, and in what year?
+  why: Company origin trivia that the corpus filings do not cover.
+- id: unans-trivia-04
+  category: nonfinancial_trivia
+  ticker: JPM
+  question: Which architecture firm designed JPMorgan Chase's new headquarters at 270 Park Avenue?
+  why: Building facts are not in the financial filings.
+- id: unans-trivia-05
+  category: nonfinancial_trivia
+  ticker: BA
+  question: What was the name of the first airplane William Boeing built?
+  why: Company history trivia not in the corpus filings.
+- id: unans-trivia-06
+  category: nonfinancial_trivia
+  ticker: META
+  question: What programming language was the first version of Facebook written in?
+  why: Technical history trivia not in filings.
+- id: unans-trivia-07
+  category: nonfinancial_trivia
+  ticker: AMZN
+  question: What was the original name Jeff Bezos considered for Amazon before choosing Amazon?
+  why: Founding trivia not in filings.
+- id: unans-trivia-08
+  category: nonfinancial_trivia
+  ticker: WMT
+  question: In which town did Sam Walton open his first Walton's Five and Dime store?
+  why: Company history trivia not in the corpus filings.
+- id: unans-trivia-09
+  category: nonfinancial_trivia
+  ticker: PEP
+  question: What was Pepsi-Cola's original name when it was created in 1893?
+  why: Brand history trivia not in filings.
+- id: unans-trivia-10
+  category: nonfinancial_trivia
+  ticker: NVDA
+  question: What is the name of the restaurant where NVIDIA's founders met to plan the company?
+  why: Founding trivia not in filings.
