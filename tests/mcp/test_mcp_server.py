@@ -1,6 +1,6 @@
 """Drive the MCP server through a real MCP client session, with no network.
 
-`Client(server)` connects in process; `Client(InMemoryTransport(server))` sends every
+`Client(server)` connects in process; `Client(jsonrpc_transport(server))` sends every
 message as JSON-RPC over in-memory streams, so both the direct and the wire path are
 covered. Retrieval and SEC companyfacts are replaced with fakes.
 """
@@ -13,9 +13,9 @@ from typing import Any, ClassVar
 
 import httpx
 import pytest
-from mcp.client._memory import InMemoryTransport
 from mcp.client.client import Client
 from mcp.client.stdio import StdioServerParameters
+from mcp.server.mcpserver import MCPServer
 from mcp.types.version import LATEST_HANDSHAKE_VERSION, is_version_at_least
 
 from ledgerlens import mcp_server
@@ -111,9 +111,21 @@ def offline(tmp_path, monkeypatch):
     xbrl._companyfacts.cache_clear()
 
 
+def jsonrpc_transport(server: MCPServer) -> Any:
+    """JSON-RPC over in-memory streams with the default (2026-07-28) negotiation.
+
+    The SDK has no public export for this transport (`Client(server)` skips JSON-RPC and
+    only `mode="legacy"` uses the streams), so this is the one place that imports the
+    private `mcp.client._memory`. Check it on every `mcp` upgrade.
+    """
+    from mcp.client._memory import InMemoryTransport
+
+    return InMemoryTransport(server)
+
+
 TARGETS: dict[str, Callable[[], Any]] = {
     "direct": mcp_server.build_server,
-    "jsonrpc": lambda: InMemoryTransport(mcp_server.build_server()),
+    "jsonrpc": lambda: jsonrpc_transport(mcp_server.build_server()),
 }
 
 
@@ -409,7 +421,7 @@ async def test_stdio_cli_serves_over_a_subprocess(tmp_path):
 async def test_legacy_handshake_clients_still_connect():
     """Clients that predate 2026-07-28 negotiate through `initialize` and still work."""
     server = mcp_server.build_server(include_ask=False)
-    async with Client(InMemoryTransport(server), mode="legacy") as c:
+    async with Client(server, mode="legacy") as c:
         assert c.protocol_version == LATEST_HANDSHAKE_VERSION
         result = await c.call_tool("calculate", {"expression": "1 + 1"})
         assert result.structured_content == {"expression": "1 + 1", "value": 2.0}
