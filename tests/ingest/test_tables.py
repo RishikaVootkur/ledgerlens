@@ -64,3 +64,29 @@ def test_pipe_escaping_round_trips():
     md = rows_to_markdown([["Name", "Value"], ["a|b", "1"]])
     assert md is not None
     assert markdown_table_rows(md) == [["Name", "Value"], ["a|b", "1"]]
+
+
+def test_packed_value_columns_are_split():
+    md = rows_to_markdown(
+        [
+            ["", "Employees", "Capital spending"],
+            ["", "2018 2017", "2018 2017"],
+            ["United States", "37,412 36,958", "$ 994 $ 852"],
+            ["Asia Pacific", "18,971 18,283", "(5) —"],
+        ]
+    )
+    assert md is not None
+    lines = md.splitlines()
+    assert lines[2] == "| United States | 37,412 | 36,958 | $994 | $852 |"
+    assert lines[3] == "| Asia Pacific | 18,971 | 18,283 | (5) | — |"
+
+
+def test_ranges_and_irregular_columns_are_not_split():
+    from ledgerlens.ingest.tables import packed_cell, split_packed_columns
+
+    assert not packed_cell("2025 – 2062")
+    assert packed_cell("1,624 1,672")
+    rows = [["Notes", "2025 – 2062"], ["Bonds", "2028 – 2035"]]
+    assert split_packed_columns([r[:] for r in rows]) == rows
+    mixed = [["a", "1 2"], ["b", "3"]]  # one cell has a single value: ambiguous
+    assert split_packed_columns([r[:] for r in mixed]) == mixed

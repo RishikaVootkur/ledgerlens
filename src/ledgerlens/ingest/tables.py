@@ -110,6 +110,76 @@ def normalize_rows(raw_rows: Sequence[Sequence[str | None]]) -> list[list[str]]:
     return rows
 
 
+_AMOUNT = re.compile(r"^\(?[$€£¥]?\(?-?\d[\d,]*(\.\d+)?\)?%?\)?$|^[—–-]$")
+
+
+def number_tokens(cell: str) -> list[str] | None:
+    """Split a cell holding only numbers ("$4,915 $4,891") into tokens, else None.
+
+    A lone currency sign is glued to the number after it. An em dash counts as a
+    missing value; an en dash or hyphen between numbers marks a range (None).
+    """
+    out: list[str] = []
+    pending = ""
+    for tok in cell.split():
+        if tok in _PREFIX_CELLS:
+            pending += tok
+            continue
+        tok = pending + tok
+        pending = ""
+        if not _AMOUNT.match(tok):
+            return None
+        out.append(tok)
+    if pending:
+        return None
+    # "2025 – 2062" is a range, not two values: en dashes and hyphens between numbers.
+    if any(t in ("–", "-") for t in out[1:-1]):
+        return None
+    return out
+
+
+def packed_cell(cell: str) -> bool:
+    """True for a cell that holds two or more numbers side by side."""
+    toks = number_tokens(cell)
+    return toks is not None and len(toks) > 1
+
+
+def split_packed_columns(rows: list[list[str]]) -> list[list[str]]:
+    """Split columns where PDF extraction put several value columns into one cell.
+
+    A column is split into k columns only when every non-empty cell in it either
+    holds exactly k numbers (k >= 2, at least two such cells) or is plain text
+    (a spanning label, kept in the first new column). Anything less regular is
+    left alone, because the year-to-value mapping would be a guess.
+    """
+    j = 1
+    while rows and j < len(rows[0]):
+        counts = []
+        regular = True
+        for r in rows:
+            cell = r[j]
+            if not cell:
+                continue
+            toks = number_tokens(cell)
+            if toks is None:
+                continue  # text label
+            if len(toks) < 2:
+                regular = False
+                break
+            counts.append(len(toks))
+        k = counts[0] if counts else 0
+        if regular and len(counts) >= 2 and all(c == k for c in counts):
+            for r in rows:
+                cell = r[j]
+                toks = number_tokens(cell) if cell else None
+                parts = toks if toks is not None else [cell] + [""] * (k - 1)
+                r[j : j + 1] = parts
+            j += k
+        else:
+            j += 1
+    return rows
+
+
 def rows_to_text(rows: list[list[str]]) -> list[str]:
     """Flatten a layout table into one line of text per row."""
     lines = [" ".join(c for c in r if c) for r in rows]
@@ -122,7 +192,7 @@ def rows_to_markdown(raw_rows: Sequence[Sequence[str | None]]) -> str | None:
     Layout tables (one column, one row, or a bullet column next to text) should be
     treated as prose by the caller; use :func:`rows_to_text` for that.
     """
-    rows = normalize_rows(raw_rows)
+    rows = split_packed_columns(normalize_rows(raw_rows))
     if len(rows) < 2 or len(rows[0]) < 2:
         return None
     if all(r[0] in _BULLETS for r in rows if r[0]):
