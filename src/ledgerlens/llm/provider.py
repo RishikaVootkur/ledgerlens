@@ -163,6 +163,10 @@ class QuotaExhaustedError(RuntimeError):
     """A per-day free-tier quota is used up. Retrying within minutes cannot help."""
 
 
+class RequestTooLargeError(RuntimeError):
+    """One request is larger than the provider's per-minute token cap."""
+
+
 _RETRYABLE = frozenset(
     {
         "RateLimitError",
@@ -186,6 +190,7 @@ _NEVER_RETRY = frozenset(
         "JSONSchemaValidationError",
         "UnsupportedParamsError",
         "QuotaExhaustedError",
+        "RequestTooLargeError",
     }
 )
 _DAILY_QUOTA = re.compile(r"per[ _-]?day|PerDay|RPD|TPD|daily", re.IGNORECASE)
@@ -289,6 +294,9 @@ def _call_provider(spec: ModelSpec, request: dict[str, Any]) -> tuple[Any, float
     except Exception as exc:
         if type(exc).__name__ == "RateLimitError" and _DAILY_QUOTA.search(str(exc)):
             raise QuotaExhaustedError(f"{spec.alias}: daily free-tier quota exhausted") from exc
+        if type(exc).__name__ == "RateLimitError" and "Request too large" in str(exc):
+            # A single request above the per-minute cap can never succeed by waiting.
+            raise RequestTooLargeError(f"{spec.alias}: request exceeds the per-minute cap") from exc
         raise
     return raw, (time.perf_counter() - started) * 1000
 
