@@ -10,11 +10,28 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 import uuid
 from pathlib import Path
 from typing import Any
 
 CACHE_VERSION = 1
+
+
+_touched: set[tuple[str, str]] = set()
+_touched_lock = threading.Lock()
+
+
+def touched_entries() -> set[tuple[str, str]]:
+    """(namespace, key) of every entry read or written in this process. The eval runner
+    uses it to copy exactly the responses a run needed into the committed replay cache."""
+    with _touched_lock:
+        return set(_touched)
+
+
+def _touch(namespace: str, key: str) -> None:
+    with _touched_lock:
+        _touched.add((namespace, key))
 
 
 class CacheMissError(LookupError):
@@ -45,6 +62,7 @@ class ResponseCache:
             path = self._path(base, namespace, key)
             if path.exists():
                 data: dict[str, Any] = json.loads(path.read_text())
+                _touch(namespace, key)
                 return data
         return None
 
@@ -57,6 +75,7 @@ class ResponseCache:
             json.dumps(record, indent=1, sort_keys=True, ensure_ascii=False, default=str)
         )
         tmp.replace(path)  # atomic, so a crash never leaves a half-written entry
+        _touch(namespace, key)
         return path
 
     def path_for(self, namespace: str, key: str) -> Path | None:

@@ -155,6 +155,14 @@ class ChunkStore:
                 [(cid,) for cid in chunk_ids],
             )
 
+    def fingerprint(self, strategy: ChunkStrategy) -> str:
+        """Hash of every chunk id and text hash for a strategy: changes on any reindex."""
+        digest = hashlib.sha256()
+        query = "SELECT chunk_id, body_hash FROM chunks WHERE strategy = ? ORDER BY chunk_id"
+        for chunk_id, body_hash in self._db.execute(query, (strategy,)):
+            digest.update(f"{chunk_id}:{body_hash};".encode())
+        return digest.hexdigest()[:12]
+
     def count(self, strategy: ChunkStrategy | None = None) -> int:
         if strategy is None:
             return int(self._db.execute("SELECT COUNT(*) FROM chunks").fetchone()[0])
