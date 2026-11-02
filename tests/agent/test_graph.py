@@ -429,3 +429,26 @@ def test_tool_order_is_stable_and_search_can_be_disabled(scripted):
     run_agent("q2", AgentConfig(search_tool=False))
     assert [t["function"]["name"] for t in seen[2]["tools"]] == ["get_company_facts", "calculate"]
     assert "search_filings" not in seen[2]["messages"][0]["content"]
+
+
+def test_more_grouped_marker_forms():
+    from ledgerlens.agent.graph import split_grouped_refs
+
+    assert split_grouped_refs("[E1, E2, and E4]") == "[E1][E2][E4]"
+    assert split_grouped_refs("[E1 and E4]") == "[E1][E4]"
+    assert split_grouped_refs("[e1, e2]") == "[E1][E2]"
+
+
+def test_dedupe_uses_arguments_after_user_filters(scripted):
+    queue, _ = scripted
+    a = ToolCall(
+        id="1", name="search_filings", arguments=json.dumps({"query": "sales", "ticker": "MSFT"})
+    )
+    b = ToolCall(
+        id="2", name="search_filings", arguments=json.dumps({"query": "sales", "ticker": "AAPL"})
+    )
+    queue += [_resp(tool_calls=[a, b]), _resp(answer_json())]
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    result = run_agent("q", AgentConfig(max_rounds=1), filters=SearchFilters(ticker="AAPL"))
+    assert result.steps.count("search_filings") == 1

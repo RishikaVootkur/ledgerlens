@@ -17,14 +17,12 @@ rule fired so a reader can audit it.
 
 from __future__ import annotations
 
-import re
 from collections import Counter
 
 from ledgerlens.agent.graph import _matches, numbers_in
 from ledgerlens.retrieval.retriever import get_store
 from ledgerlens.schemas import Chunk, FailureCategory, QuestionResult, RunFile
 
-_YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
 _COMPUTED = {"yoy_change", "multi_step"}
 
 
@@ -51,7 +49,8 @@ def _fact_values(r: QuestionResult) -> list[tuple[str, float]]:
     out = []
     for cit in r.prediction.citations if r.prediction else []:
         if cit.chunk_id.startswith("xbrl:"):
-            period = cit.chunk_id.split(":")[3]
+            parts = cit.chunk_id.split(":")
+            period = parts[3] if len(parts) > 3 else "unknown period"
             for v in numbers_in(cit.quote):
                 out.append((period, v))
     return out
@@ -83,12 +82,15 @@ def classify(r: QuestionResult) -> tuple[FailureCategory, str]:
                 if _matches(pred_value, [value]) and not _matches(gold, [value]):
                     return "wrong_period", f"used the reported value for {period}"
             for chunk in chunks:
-                if _matches(pred_value, numbers_in(chunk.text)) and gold_found:
-                    years = set(_YEAR.findall(chunk.text))
-                    if chunk.has_table:
-                        if len(years) > 1:
-                            return "wrong_period", "picked a cell from another period column"
-                        return "table_misread", "picked another cell of a gathered table"
+                if chunk.has_table and gold_found and _matches(pred_value, numbers_in(chunk.text)):
+                    # Most statement tables show several years, so a wrong cell is only
+                    # a period error when the chosen value sits in the same row as the
+                    # gold value (same line item, other column).
+                    for line in chunk.text.splitlines():
+                        row = numbers_in(line)
+                        if _matches(pred_value, row) and gold_found and _matches(gold, row):
+                            return "wrong_period", "picked the same line for another period"
+                    return "table_misread", "picked another cell of a gathered table"
             if r.question_type in _COMPUTED:
                 return "arithmetic", "computed from the wrong gathered inputs"
             return "wrong_period" if gold_found else "retrieval_miss", (

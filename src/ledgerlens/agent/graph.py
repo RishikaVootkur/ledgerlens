@@ -93,10 +93,28 @@ class _Run:
 # ------------------------------------------------------------------ helpers
 
 
-def _call_key(tc: ToolCall) -> str:
-    """Tool name plus arguments with key order and blank values normalized away."""
-    args = {k: v for k, v in parse_arguments(tc.arguments).items() if v not in (None, "")}
-    return f"{tc.name}:{json.dumps(args, sort_keys=True)}"
+def effective_args(name: str, raw: str, filters: SearchFilters) -> dict[str, Any]:
+    """The arguments a tool call actually runs with: user-selected filters override what
+    the model asked for, and a year the user chose is never relaxed."""
+    args = parse_arguments(raw)
+    if name == "search_filings":
+        for key, value in filters.model_dump().items():
+            if value is not None:
+                args[key] = value
+        if filters.fiscal_year is not None:
+            args["strict_year"] = True
+    elif name == "get_company_facts":
+        if filters.ticker:
+            args["ticker"] = filters.ticker
+        if filters.fiscal_year is not None:
+            args["fiscal_year"] = filters.fiscal_year
+    return args
+
+
+def _call_key(name: str, args: dict[str, Any]) -> str:
+    """Tool name plus effective arguments, with key order and blank values normalized."""
+    kept = {k: v for k, v in args.items() if v not in (None, "")}
+    return f"{name}:{json.dumps(kept, sort_keys=True)}"
 
 
 def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int = 18) -> str:
@@ -131,14 +149,17 @@ def _filters_line(filters: SearchFilters) -> str:
     return f"Filters set by the user: {active}" if active else ""
 
 
-_GROUPED_REFS = re.compile(r"\[\s*(E\d+(?:\s*[,;]\s*E\d+)+)\s*\]")
+_GROUPED_REFS = re.compile(r"\[\s*([Ee]\d+(?:\s*(?:,|;|and|&|,\s*and)\s*[Ee]\d+)+)\s*\]")
 
 
 def split_grouped_refs(text: str) -> str:
     """Models often group citations as [E1, E4]; rewrite them as [E1][E4] so every marker
     is seen (a grouped marker used to look like no citation at all and forced a refusal)."""
     return _GROUPED_REFS.sub(
-        lambda m: "".join(f"[{r.strip()}]" for r in re.split(r"[,;]", m.group(1))), text
+        lambda m: "".join(
+            f"[{r.strip().upper()}]" for r in re.split(r",|;|&|\band\b", m.group(1)) if r.strip()
+        ),
+        text,
     )
 
 
@@ -373,34 +394,23 @@ def build_graph(run: _Run) -> Any:
             purpose="gather",
         )
         allowed = set(tool_names)
-        pending = [tc for tc in resp.tool_calls if tc.name in allowed][:8]
+        pending = [tc for tc in resp.tool_calls if tc.name in allowed]
         if cfg.dedupe_tool_calls:
             fresh = []
             for tc in pending:
-                key = _call_key(tc)
+                key = _call_key(tc.name, effective_args(tc.name, tc.arguments, state["filters"]))
                 if key not in run.executed:
                     run.executed.add(key)
                     fresh.append(tc)
             pending = fresh
+        pending = pending[:8]  # cap after dedupe so repeats cannot crowd out new calls
         return {"round": rnd, "pending": pending, "steps": [*state.get("steps", []), "plan"]}
 
     def call_tools(state: State) -> State:
         steps = list(state.get("steps", []))
         filters = state["filters"]
         for tc in state.get("pending", []):
-            args = parse_arguments(tc.arguments)
-            # User-selected filters always override what the model asked for.
-            if tc.name == "search_filings":
-                for key, value in filters.model_dump().items():
-                    if value is not None:
-                        args[key] = value
-                if filters.fiscal_year is not None:
-                    args["strict_year"] = True  # never relax a year the user chose
-            elif tc.name == "get_company_facts":
-                if filters.ticker:
-                    args["ticker"] = filters.ticker
-                if filters.fiscal_year is not None:
-                    args["fiscal_year"] = filters.fiscal_year
+            args = effective_args(tc.name, tc.arguments, filters)
             result = run_tool(tc.name, args, run.registry, cfg.retrieval)
             run.on_step(tc.name, json.dumps(args)[:200])
             steps.append(tc.name)

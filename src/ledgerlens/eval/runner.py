@@ -347,12 +347,18 @@ def record_cache() -> int:
 def merge_runs(parts: list[RunFile], run_id: str) -> RunFile:
     """One run from parts that used the same config on disjoint questions."""
 
+    ignored = ("datasets", "limit", "qids", "merged_from")
+
     def comparable(run: RunFile) -> dict[str, object]:
-        return {k: v for k, v in run.config.items() if k not in ("datasets", "limit", "qids")}
+        return {k: v for k, v in run.config.items() if k not in ignored}
 
     first = parts[0]
     if any(comparable(p) != comparable(first) for p in parts[1:]):
         raise ValueError("can only merge runs made with the same config")
+    if any(p.split != first.split for p in parts[1:]):
+        raise ValueError("can only merge runs of the same split")
+    if any(p.git_sha != first.git_sha for p in parts[1:]):
+        raise ValueError("can only merge runs made from the same commit")
     results = [r for p in parts for r in p.results]
     qids = [r.qid for r in results]
     if len(qids) != len(set(qids)):

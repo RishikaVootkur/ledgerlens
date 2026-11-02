@@ -290,3 +290,16 @@ def test_derived_answers_are_supported_by_cited_inputs():
     )
     s = runner.score(q(value=23.29), a, reg)
     assert s["citation_precision"] == pytest.approx(2 / 3)
+
+
+def test_merge_rejects_other_splits_and_commits(isolated):
+    cfg = runner.EvalConfig(name="t", datasets=["smoke"])
+    a = runner.run_eval(cfg.model_copy(update={"qids": ["s1"]}), "dev", run_id="a")
+    b = runner.run_eval(cfg.model_copy(update={"qids": ["s2"]}), "dev", run_id="b")
+    with pytest.raises(ValueError, match="split"):
+        runner.merge_runs([a, b.model_copy(update={"split": "test"})], "x")
+    with pytest.raises(ValueError, match="commit"):
+        runner.merge_runs([a, b.model_copy(update={"git_sha": "other"})], "x")
+    merged = runner.merge_runs([a, b], "ab")
+    c = runner.run_eval(cfg.model_copy(update={"qids": ["s3"]}), "dev", run_id="c")
+    assert len(runner.merge_runs([merged, c], "abc").results) == 3
