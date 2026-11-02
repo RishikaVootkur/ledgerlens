@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { QuestionResult } from "../api/types";
-import { chatReducer, initialChatState } from "./chatState";
+import { STREAM_ENDED_EARLY, chatReducer, initialChatState } from "./chatState";
 import { parseHash } from "./router";
 import { filterResults, questionOutcome } from "./runs";
 
@@ -13,11 +13,33 @@ describe("chatReducer", () => {
     s = chatReducer(s, { type: "event", event: { type: "token", data: { text: "Hel" } } });
     s = chatReducer(s, { type: "event", event: { type: "token", data: { text: "lo" } } });
     expect(s.text).toBe("Hello");
+    s = chatReducer(s, {
+      type: "event",
+      event: {
+        type: "answer",
+        data: {
+          answer: "Hello [1]",
+          refused: false,
+          citations: [],
+          retrieved_chunk_ids: [],
+          steps: [],
+          usage: { prompt_tokens: 1, completion_tokens: 1, llm_calls: 1, cost_usd: 0, latency_ms: 1 },
+        },
+      },
+    });
+    expect(s.text).toBe("Hello [1]");
     s = chatReducer(s, { type: "event", event: { type: "done", data: {} } });
     expect(s.status).toBe("done");
     expect(s.steps.every((x) => x.status === "done")).toBe(true);
     // Events after completion are ignored.
     expect(chatReducer(s, { type: "event", event: { type: "token", data: { text: "!" } } })).toBe(s);
+  });
+
+  it("treats a stream that ends without an answer as an error", () => {
+    let s = chatReducer(initialChatState, { type: "start", question: "q" });
+    s = chatReducer(s, { type: "event", event: { type: "token", data: { text: "Partial" } } });
+    s = chatReducer(s, { type: "event", event: { type: "done", data: {} } });
+    expect(s).toMatchObject({ status: "error", error: STREAM_ENDED_EARLY, answer: null, text: "Partial" });
   });
 
   it("records server errors", () => {

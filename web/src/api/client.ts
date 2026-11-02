@@ -79,7 +79,16 @@ export async function streamChat(
     } catch {
       // keep statusText
     }
-    throw new ApiError(`Chat request failed (${res.status}): ${detail}`, res.status);
+    throw new ApiError(`Chat request failed (${res.status}): ${detail.slice(0, 300)}`, res.status);
+  }
+  // A static host or proxy may answer with a 200 HTML page; never parse that as a stream.
+  const contentType = res.headers.get("content-type") ?? "";
+  if (!contentType.toLowerCase().startsWith("text/event-stream")) {
+    await res.body.cancel().catch(() => undefined);
+    throw new ApiError(
+      `Chat endpoint returned ${contentType || "no content type"} instead of text/event-stream. Is the API running?`,
+      res.status,
+    );
   }
   const parser = createSSEParser((raw) => {
     const event = toChatEvent(raw);

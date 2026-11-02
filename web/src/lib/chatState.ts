@@ -22,6 +22,9 @@ export type ChatAction =
   | { type: "fail"; message: string }
   | { type: "cancel" };
 
+export const STREAM_ENDED_EARLY =
+  "The answer stream ended before the final answer arrived. Try again.";
+
 export const initialChatState: ChatState = {
   status: "idle",
   question: "",
@@ -64,6 +67,16 @@ function applyEvent(state: ChatState, event: ChatEvent): ChatState {
     case "error":
       return { ...state, status: "error", error: event.data.message, steps: finishSteps(state.steps) };
     case "done":
+      // A stream that closes before the final answer (crash, proxy cut) is a failure,
+      // even if some tokens arrived.
+      if (!state.answer) {
+        return {
+          ...state,
+          status: "error",
+          error: STREAM_ENDED_EARLY,
+          steps: finishSteps(state.steps),
+        };
+      }
       return { ...state, status: "done", steps: finishSteps(state.steps) };
   }
 }
