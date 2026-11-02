@@ -14,3 +14,4 @@ scope: document
 concurrency: 1
 dedupe_tool_calls: false  # match the Groq Qwen smoke run, recorded before the dedupe fix
 citation_support: false
+derive_numbers: false

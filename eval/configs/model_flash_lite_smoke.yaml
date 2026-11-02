@@ -1,0 +1,17 @@
+# Model comparison on the 20-question smoke slice, original agent settings (as recorded for Groq Qwen).
+name: model_flash_lite_smoke
+description: "Model comparison: Gemini 3.5 Flash-Lite with the original agent settings on the smoke slice"
+model: gemini-3.5-flash-lite
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [smoke]
+scope: document
+concurrency: 2
+citation_support: false
+dedupe_tool_calls: false
+derive_numbers: false
