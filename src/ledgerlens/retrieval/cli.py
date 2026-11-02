@@ -41,7 +41,8 @@ def search(
     if method not in METHODS:
         raise typer.BadParameter(f"method must be one of {METHODS}")
     retriever = Retriever(_strategy(strategy), method)  # type: ignore[arg-type]
-    hits = retriever.search(query, k, SearchFilters(ticker=ticker, fiscal_year=year, form=form))
+    filters = SearchFilters.model_validate({"ticker": ticker, "fiscal_year": year, "form": form})
+    hits = retriever.search(query, k, filters)
     for hit in hits:
         c = hit.chunk
         typer.echo(f"{hit.rank:>2}. {hit.score:8.4f}  {c.chunk_id}  p.{c.page}  {c.section[:60]}")

@@ -2,26 +2,25 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
-from ledgerlens.schemas import Chunk
+from ledgerlens.schemas import FormType
 
 
 class SearchFilters(BaseModel):
     ticker: str | None = None
     fiscal_year: int | None = None
-    form: str | None = None
+    form: FormType | None = None
     filing_id: str | None = None
     doc_name: str | None = None
 
-    def is_empty(self) -> bool:
-        return not any(self.model_dump().values())
+    @field_validator("ticker", "form", "filing_id", "doc_name", mode="before")
+    @classmethod
+    def _blank_is_none(cls, v: object) -> object:
+        """Models often send "" for unused arguments; treat it as no filter everywhere."""
+        if isinstance(v, str) and not v.strip():
+            return None
+        return v
 
-    def matches(self, chunk: Chunk) -> bool:
-        return (
-            (self.ticker is None or chunk.ticker == self.ticker.upper())
-            and (self.fiscal_year is None or chunk.fiscal_year == self.fiscal_year)
-            and (self.form is None or chunk.form == self.form)
-            and (self.filing_id is None or chunk.filing_id == self.filing_id)
-            and (self.doc_name is None or chunk.doc_name == self.doc_name)
-        )
+    def is_empty(self) -> bool:
+        return not any(v is not None for v in self.model_dump().values())

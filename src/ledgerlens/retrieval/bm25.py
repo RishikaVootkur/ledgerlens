@@ -33,13 +33,18 @@ def tokenize(text: str) -> list[str]:
 
 
 class BM25Index:
-    def __init__(self, retriever: bm25s.BM25, chunk_ids: list[str], meta: dict[str, list[object]]):
+    def __init__(
+        self, retriever: bm25s.BM25 | None, chunk_ids: list[str], meta: dict[str, list[object]]
+    ):
         self.retriever = retriever
         self.chunk_ids = chunk_ids
         self.meta = {k: np.asarray(v, dtype=object) for k, v in meta.items()}
 
     @classmethod
     def build(cls, chunks: list[Chunk]) -> BM25Index:
+        meta = {k: [getattr(c, k) for c in chunks] for k in _META_KEYS}
+        if not chunks:  # bm25s cannot index an empty corpus; search returns nothing
+            return cls(None, [], meta)
         retriever = bm25s.BM25(k1=1.2, b=0.75)
         retriever.index([tokenize(c.text) for c in chunks], show_progress=False)
         meta = {k: [getattr(c, k) for c in chunks] for k in _META_KEYS}
@@ -47,14 +52,15 @@ class BM25Index:
 
     def save(self, path: Path) -> None:
         path.mkdir(parents=True, exist_ok=True)
-        self.retriever.save(str(path / "bm25"))
+        if self.retriever is not None:
+            self.retriever.save(str(path / "bm25"))
         meta = {k: v.tolist() for k, v in self.meta.items()}
         (path / "ids.json").write_text(json.dumps({"chunk_ids": self.chunk_ids, "meta": meta}))
 
     @classmethod
     def load(cls, path: Path) -> BM25Index:
-        retriever = bm25s.BM25.load(str(path / "bm25"))
         data = json.loads((path / "ids.json").read_text())
+        retriever = bm25s.BM25.load(str(path / "bm25")) if data["chunk_ids"] else None
         return cls(retriever, data["chunk_ids"], data["meta"])
 
     def _mask(self, filters: SearchFilters) -> np.ndarray | None:
@@ -71,7 +77,7 @@ class BM25Index:
         self, query: str, k: int, filters: SearchFilters | None = None
     ) -> list[tuple[str, float]]:
         tokens = tokenize(query)
-        if not tokens or not self.chunk_ids:
+        if not tokens or self.retriever is None:
             return []
         scores = np.asarray(self.retriever.get_scores(tokens), dtype=float)
         mask = self._mask(filters or SearchFilters())
