@@ -8,9 +8,13 @@ LedgerLens exposes the agent's tools over the [Model Context Protocol](https://m
 uv run ledgerlens mcp serve                                  # stdio (default)
 uv run ledgerlens mcp serve --transport http --port 8765     # streamable HTTP at http://127.0.0.1:8765/mcp
 uv run ledgerlens mcp serve --no-ask                         # hide the LLM-backed ask tool
+uv run ledgerlens mcp serve --transport http --host 0.0.0.0 --allow-remote \
+    --allowed-host mcp.example.com:8765                      # remote bind, see below
 ```
 
-Search needs the local index (`data/index`), Qdrant on `localhost:6333` and Ollama on `localhost:11434` for query embeddings; point `DATA_DIR` at another data folder if needed. `get_company_facts` reads SEC companyfacts from `data/raw/sec_api/` and fetches it once from SEC on a miss (needs `SEC_USER_AGENT`). `ask` needs the answer model's API key. HTTP binds to `127.0.0.1` by default; pass `--host` to change it.
+Search needs the local index (`data/index`), Qdrant on `localhost:6333` and Ollama on `localhost:11434` for query embeddings; point `DATA_DIR` at another data folder if needed. `get_company_facts` reads SEC companyfacts from `data/raw/sec_api/` and fetches it once from SEC on a miss (needs `SEC_USER_AGENT`). `ask` needs the answer model's API key.
+
+HTTP binds to `127.0.0.1` by default, where the SDK rejects requests whose `Host` or `Origin` header is not a loopback address (DNS rebinding protection). The server has no auth, so any other `--host` is refused unless you pass `--allow-remote` and list the `Host` values clients will use with `--allowed-host` (repeatable); requests with any other `Host` get 421 and foreign `Origin`s get 403. In that mode `ask` is off unless you also pass `--ask`, because every call spends LLM quota on the server's key (and a cancelled `ask` keeps running in its worker thread until it finishes). Put an authenticating reverse proxy in front of a remote bind.
 
 ## Client configuration (stdio)
 
@@ -34,13 +38,13 @@ For the HTTP transport, point the client at `http://127.0.0.1:8765/mcp`.
 
 ## Tools
 
-All tools are annotated `readOnlyHint: true` and return structured content with an output schema. Bad input (unknown ticker, unknown metric, invalid form, `k` out of range, a non-arithmetic expression) comes back as a tool error (`isError: true`) with a message the model can act on.
+All tools are annotated `readOnlyHint: true` and return structured content with an output schema. Bad input (unknown ticker, unknown metric, invalid form, `k` or `limit` out of range, a non-arithmetic expression) comes back as a tool error (`isError: true`) with a message the model can act on. Backend failures never expose raw exception text, which can carry file paths, hostnames or provider account details: expected ones (index not built, Qdrant or Ollama down, SEC unavailable or `SEC_USER_AGENT` unset, LLM quota, rate limit, rejected credentials, replay-mode miss) get a fixed message and are logged on the server with the traceback; anything else returns the SDK's generic `Error executing tool <name>`.
 
 | Tool | Arguments | Returns |
 | --- | --- | --- |
 | `search_filings` | `query`, `ticker?`, `fiscal_year?`, `form?` (10-K or 10-Q), `doc_name?`, `k?` (1 to 20, default 6) | `results`: passages with `chunk_id`, `filing_id`, `ticker`, `company`, `form`, `fiscal_year`, `fiscal_period`, `section`, `page`, `page_end`, `has_table`, `text` |
 | `get_table` | `chunk_id` | every passage holding the table(s) in that chunk |
-| `get_company_facts` | `ticker`, `metric` (friendly name such as `revenue` or a concept such as `us-gaap:Assets`), `fiscal_year?`, `duration?` (FY, Q, YTD-6M, YTD-9M, instant) | `facts`: XBRL values with period dates, unit and the filing that first reported them |
+| `get_company_facts` | `ticker`, `metric` (friendly name such as `revenue` or a concept such as `us-gaap:Assets`), `fiscal_year?`, `duration?` (FY, Q, YTD-6M, YTD-9M, instant), `limit?` (1 to 40, default 8) | `facts`: up to `limit` XBRL values, newest period first, with period dates, unit and the filing that first reported them |
 | `calculate` | `expression` | `value`; only numbers, `+ - * / ** ( )`, `%` and `abs round min max sqrt` are accepted |
 | `ask` | `question`, `ticker?`, `fiscal_year?` | the full agent's cited `AgentAnswer` (several LLM calls) |
 
@@ -117,7 +121,7 @@ The same call over `--transport http` negotiates 2026-07-28 and returns the same
 
 ## Tests
 
-`tests/mcp/test_mcp_server.py` drives the server through the SDK `Client`, both in process and as JSON-RPC over in-memory streams, plus one real stdio subprocess of `ledgerlens mcp serve` and one legacy-handshake client. Retrieval, the chunk store and companyfacts are faked, so the suite needs no network. `tests/mcp/test_mcp_integration.py` runs the search above against the real index:
+`tests/mcp/test_mcp_server.py` drives the server through the SDK `Client`, both in process and as JSON-RPC over in-memory streams, plus one real stdio subprocess of `ledgerlens mcp serve` and one legacy-handshake client. Retrieval, the chunk store and companyfacts are faked, so the suite needs no network. `tests/mcp/test_mcp_http.py` checks the Host and Origin rejection and the remote-bind guard on the streamable HTTP app. `tests/mcp/test_mcp_integration.py` runs the search above against the real index:
 
 ```bash
 uv run pytest -m integration tests/mcp
