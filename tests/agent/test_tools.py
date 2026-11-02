@@ -45,6 +45,7 @@ CF = {
 def isolated(tmp_path, monkeypatch):
     monkeypatch.setenv("CACHE_DIR", str(tmp_path / "cache"))
     monkeypatch.setenv("EVAL_DIR", str(tmp_path / "eval"))
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "data"))
     monkeypatch.setenv("LLM_MODE", "live")
     get_settings.cache_clear()
     xbrl._companyfacts.cache_clear()

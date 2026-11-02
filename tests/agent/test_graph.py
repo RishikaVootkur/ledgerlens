@@ -44,6 +44,7 @@ def _resp(content="", tool_calls=None):
 def scripted(monkeypatch, tmp_path):
     monkeypatch.setenv("CACHE_DIR", str(tmp_path / "cache"))
     monkeypatch.setenv("EVAL_DIR", str(tmp_path / "eval"))
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "data"))
     get_settings.cache_clear()
     monkeypatch.setattr(tools, "_search", lambda args, config: [CHUNK])
     queue: list[LLMResponse] = []
