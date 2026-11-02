@@ -32,10 +32,14 @@ services:
       LEDGERLENS_HOME: /app
       QDRANT_URL: http://qdrant:6333
       OLLAMA_BASE_URL: http://host.docker.internal:11434
-      PHOENIX_ENDPOINT: http://phoenix:6006/v1/traces
+      # Tracing is opt-in: set PHOENIX_ENDPOINT and PHOENIX_API_KEY in .env (see
+      # docs/observability.md). Inside the compose network Phoenix is reached by its
+      # service name, so any non-empty PHOENIX_ENDPOINT maps to http://phoenix:6006.
+      PHOENIX_ENDPOINT: ${PHOENIX_ENDPOINT:+http://phoenix:6006/v1/traces}
       CORS_ORIGINS: http://localhost:8080,http://127.0.0.1:8080
     volumes:
       # Index and filings (LEDGERLENS_DATA_DIR points elsewhere, e.g. from a worktree).
+      # Must be writable by uid 10001 (SQLite WAL); on Linux see docs/decisions.md D14.
       - ${LEDGERLENS_DATA_DIR:-./data}:/app/data
       - ./eval:/app/eval:ro
       - api_cache:/app/.cache
@@ -44,6 +48,8 @@ services:
       qdrant: { condition: service_started }
       phoenix: { condition: service_started }
     mem_limit: 1536m
+    # Lets a chat that is mid LLM call or in a 429 backoff finish before SIGKILL.
+    stop_grace_period: 30s
     restart: unless-stopped
 
   web:
