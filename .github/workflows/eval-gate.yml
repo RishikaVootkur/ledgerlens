@@ -1,0 +1,52 @@
+name: eval-gate
+
+# Replays the CI slice of the eval from the committed response cache (eval/cache):
+# deterministic, free and keyless. Fails when any gated metric drops past its
+# threshold in eval/gate.yaml, and posts the metric diff as a PR comment.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    env:
+      LLM_MODE: replay
+      CACHE_DIR: ${{ runner.temp }}/empty-cache
+      SEC_USER_AGENT: "LedgerLens CI ci@ledgerlens.invalid"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --frozen
+
+      - name: Replay the CI slice
+        run: |
+          uv run ledgerlens eval run --config eval/configs/ci_slice.yaml --split dev \
+            --run-id ci-slice-candidate --out "$RUNNER_TEMP/candidate.json"
+
+      - name: Gate against the committed baseline
+        id: gate
+        run: |
+          set +e
+          uv run ledgerlens eval gate --baseline eval/baselines/ci_slice.json \
+            --candidate "$RUNNER_TEMP/candidate.json" --markdown-out "$RUNNER_TEMP/gate.md"
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Post the metric diff on the PR
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" \
+            --body-file "$RUNNER_TEMP/gate.md" --edit-last --create-if-none
+
+      - name: Fail if the gate failed
+        if: steps.gate.outputs.exit != '0'
+        run: exit 1
