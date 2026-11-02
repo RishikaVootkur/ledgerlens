@@ -1,0 +1,15 @@
+# Ablation: fixed-size chunks (FinanceBench questions only)
+name: ablation_fixed_chunks
+description: "Ablation: fixed-size chunks (FinanceBench questions only)"
+model: groq-qwen3.8-27b
+strategy: fixed
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [financebench]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 3

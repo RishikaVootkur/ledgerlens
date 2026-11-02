@@ -1,0 +1,15 @@
+# Ablation baseline: Qwen3.8 27B (Groq), hybrid retrieval, section chunks, XBRL tool, verify + self-check
+name: ablation_default
+description: "Ablation baseline: Qwen3.8 27B (Groq), hybrid retrieval, section chunks, XBRL tool, verify + self-check"
+model: groq-qwen3.8-27b
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/ablation_dev.txt
+scope: document
+concurrency: 3
