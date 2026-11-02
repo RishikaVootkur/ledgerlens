@@ -32,3 +32,6 @@ web/dist/
 .DS_Store
 .idea/
 .vscode/
+
+# Local agent worktrees and settings
+.claude/
