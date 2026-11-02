@@ -44,6 +44,10 @@ class Settings(BaseSettings):
     cache_dir: Path = Field(default=ROOT / ".cache")
     eval_dir: Path = Field(default=ROOT / "eval")
 
+    # live: call providers and record responses. replay: answer only from the cache
+    # (CI uses this with the committed eval/cache, so it needs no keys or network).
+    llm_mode: Literal["live", "replay"] = "live"
+
     qdrant_url: str = "http://localhost:6333"
     phoenix_endpoint: str | None = None
 
