@@ -54,6 +54,9 @@ export function EvalPage() {
           {headlineNames.map((name) => (
             <MetricCard key={name} name={name} metric={d.headline.metrics[name]!} />
           ))}
+          {d.judge_calibration && !("kappa" in d.headline.metrics) ? (
+            <MetricCard name="kappa" metric={d.judge_calibration.kappa} />
+          ) : null}
         </div>
       </section>
 

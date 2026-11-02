@@ -164,3 +164,114 @@ def test_cli_run_compare_and_gate(isolated, tmp_path):
         json.loads((get_settings().eval_dir / "runs" / "a.json").read_text())["config"]["name"]
         == "t"
     )
+
+
+def test_small_numeric_values_can_be_supported():
+    reg = EvidenceRegistry()
+    reg.add(
+        EvidenceItem(
+            "",
+            "chunk",
+            "c1",
+            "AAPL-10K-2025FY",
+            "s",
+            1,
+            1,
+            "Diluted EPS was $6.75; gross margin 46.9%.",
+            "h",
+        )
+    )
+    for value in (6.75, 46.9):
+        a = answer(value=value, cite="c1")
+        assert runner.score(q(value=value), a, reg)["citation_precision"] == 1.0
+
+
+def test_text_answers_use_the_support_check_and_judge_failures_are_isolated(monkeypatch, isolated):
+    fb = q("fb1", dataset="financebench")
+    fb.answer_value, fb.answer_unit, fb.answer = None, None, "Yes, it improved."
+    text_answer = answer(cite="AAPL-10K-2025FY:section:00001").model_copy(
+        update={"answer_value": None, "answer_unit": None}
+    )
+    reg = registry()
+    assert runner.score(fb, text_answer, reg)["citation_precision"] is None
+    assert runner.score(fb, text_answer, reg, lambda c, p: True)["citation_precision"] == 1.0
+    assert runner.score(fb, text_answer, reg, lambda c, p: False)["citation_precision"] == 0.0
+
+    monkeypatch.setattr(runner, "run_agent", lambda *a, **k: text_answer)
+    monkeypatch.setattr(
+        runner, "judge_support", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("judge down"))
+    )
+    monkeypatch.setattr(
+        runner, "run_judge", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("judge down"))
+    )
+    result = runner.run_one(fb, runner.EvalConfig(name="t", datasets=["financebench"]))
+    assert result.error is None
+    assert result.scores["judge_correct"] is None
+    assert result.scores["refusal_correct"] == 1.0
+
+
+def test_xbrl_fact_from_the_right_filing_counts_as_retrieved():
+    reg = EvidenceRegistry()
+    reg.add(
+        EvidenceItem(
+            "",
+            "fact",
+            "xbrl:AAPL:Revenues:2024-09-29_2025-09-27:USD",
+            "AAPL-10K-2025FY",
+            "XBRL companyfacts",
+            None,
+            None,
+            "Revenue 416,161,000,000 USD",
+            "x",
+        )
+    )
+    s = runner.score(q(), answer(cite="xbrl:AAPL:Revenues:2024-09-29_2025-09-27:USD"), reg)
+    assert (
+        s["recall_at_5"] == 1.0 and s["citation_recall"] == 1.0 and s["citation_precision"] == 1.0
+    )
+
+
+def test_derived_answers_are_supported_by_cited_inputs():
+    reg = EvidenceRegistry()
+    reg.add(
+        EvidenceItem(
+            "",
+            "fact",
+            "f24",
+            "KO-10K-2025FY",
+            "XBRL",
+            None,
+            None,
+            "10,631,000,000 USD for 2024",
+            "x",
+        )
+    )
+    reg.add(
+        EvidenceItem(
+            "",
+            "fact",
+            "f25",
+            "KO-10K-2025FY",
+            "XBRL",
+            None,
+            None,
+            "13,107,000,000 USD for 2025",
+            "x",
+        )
+    )
+    reg.add(
+        EvidenceItem(
+            "", "chunk", "c9", "KO-10K-2025FY", "s", 1, 1, "Unrelated text about bottlers.", "h"
+        )
+    )
+    a = AgentAnswer(
+        answer="Net income rose 23.29%, from $10,631 million [1] to $13,107 million [2].",
+        answer_value=23.29,
+        answer_unit="percent",
+        citations=[
+            Citation(chunk_id=c, filing_id="KO-10K-2025FY", section="s")
+            for c in ("f24", "f25", "c9")
+        ],
+    )
+    s = runner.score(q(value=23.29), a, reg)
+    assert s["citation_precision"] == pytest.approx(2 / 3)

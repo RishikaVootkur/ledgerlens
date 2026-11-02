@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import contextvars
 import subprocess
+import threading
 import time
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
@@ -19,12 +20,13 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, ConfigDict
 
-from ledgerlens.agent.graph import AgentConfig, quote_supported, run_agent
+from ledgerlens.agent.graph import AgentConfig, numbers_in, run_agent
 from ledgerlens.agent.tools import EvidenceItem, EvidenceRegistry, RetrievalConfig
 from ledgerlens.config import get_settings
 from ledgerlens.eval import metrics
 from ledgerlens.eval.datasets.loader import load_questions
 from ledgerlens.eval.judge import judge as run_judge
+from ledgerlens.eval.judge import judge_support
 from ledgerlens.eval.summary import summarize_by_dataset, summarize_scores
 from ledgerlens.llm import DEFAULT_ANSWER_MODEL, DEFAULT_JUDGE_MODEL
 from ledgerlens.llm.cache import touched_entries
@@ -128,20 +130,26 @@ def item_keys(item: EvidenceItem) -> set[str]:
 
 
 def _contains_value(text: str, value: float) -> bool:
-    from ledgerlens.agent.graph import _grounded, numbers_in
+    """The source states this number, at any reporting scale (small values included)."""
+    from ledgerlens.agent.graph import _matches, numbers_in
 
-    return _grounded(value, numbers_in(text)) if abs(value) > 31 else False
+    return _matches(value, numbers_in(text))
 
 
 def score(
-    question: Question, answer: AgentAnswer, registry: EvidenceRegistry
+    question: Question,
+    answer: AgentAnswer,
+    registry: EvidenceRegistry,
+    support_check: Callable[[str, str], bool] | None = None,
 ) -> dict[str, float | None]:
     """Per-question scores. Keys match eval/gate.yaml.
 
-    citation_precision here is deterministic: a citation supports a numeric answer
-    when its source states the headline number (at any reporting scale), and a text
-    answer when its quote appears verbatim in the source. The LLM judge adds a
-    semantic support check for text answers.
+    citation_precision: a citation supports a numeric answer when its source states the
+    headline number (at any reporting scale). For text answers the agent's self-check
+    already guarantees each quote appears in its source, so a quote match would score 1.0
+    by construction; instead `support_check(answer, passage)` (the LLM judge) decides
+    whether the passage supports the answer. Without a support check, text-answer
+    citation precision is not scored (None).
     """
     scores: dict[str, float | None] = {
         "numeric_correct": metrics.numeric_correct(answer, question),
@@ -157,12 +165,18 @@ def score(
             continue
         cited |= item_keys(item)
         if answer.answer_value is not None:
-            supported.append(_contains_value(item.text, answer.answer_value))
-        else:
-            supported.append(bool(cit.quote) and quote_supported(cit.quote, item.text))
+            # A numeric citation supports the answer when its source states a number the
+            # answer relies on: the headline value, or an input it quotes (derived answers
+            # such as growth rates cite their inputs, which never contain the result).
+            stated = [answer.answer_value, *numbers_in(answer.answer)]
+            supported.append(any(_contains_value(item.text, v) for v in stated if v))
+        elif support_check is not None:
+            supported.append(support_check(answer.answer, item.text))
     relevant = metrics.evidence_keys(question)
     answered = question.answerable and not answer.refused
-    scores["citation_precision"] = metrics.citation_precision(supported) if answered else None
+    scores["citation_precision"] = (
+        metrics.citation_precision(supported) if answered and supported else None
+    )
     scores["citation_recall"] = metrics.citation_recall(cited, relevant) if answered else None
     # Retrieved evidence in the order the agent gathered it: passages and XBRL facts (a
     # fact from the right filing is relevant evidence for a filing-level XBRL label).
@@ -197,12 +211,25 @@ def run_one(question: Question, config: EvalConfig) -> QuestionResult:
             _filters(question, config),
             registry=registry,
         )
-        scores = score(question, answer, registry)
-        if config.judge and question.dataset == "financebench" and question.answer:
-            verdict = run_judge(
-                question.question, question.answer, answer.answer, model=config.judge_model
-            )
-            scores["judge_correct"] = 1.0 if verdict.label == "CORRECT" else 0.0
+        use_judge = config.judge and question.dataset == "financebench"
+
+        def support(claim: str, passage: str) -> bool:
+            return judge_support(claim, passage, model=config.judge_model)
+
+        try:
+            scores = score(question, answer, registry, support if use_judge else None)
+        except Exception as exc:  # a judge outage must not discard the agent's answer
+            scores = score(question, answer, registry, None)
+            log.warning("eval.support_check_failed", qid=question.qid, error=str(exc)[:200])
+        if use_judge and question.answer:
+            try:
+                verdict = run_judge(
+                    question.question, question.answer, answer.answer, model=config.judge_model
+                )
+                scores["judge_correct"] = 1.0 if verdict.label == "CORRECT" else 0.0
+            except Exception as exc:
+                scores["judge_correct"] = None
+                log.warning("eval.judge_failed", qid=question.qid, error=str(exc)[:200])
     except Exception as exc:  # recorded per question; the run continues
         error = f"{type(exc).__name__}: {str(exc)[:500]}"
         log.warning("eval.question_failed", qid=question.qid, error=error)
@@ -248,13 +275,17 @@ def run_eval(
     questions = select(load_questions(list(config.datasets), split), config)
     results: list[QuestionResult | None] = [None] * len(questions)
     done = 0
+    lock = threading.Lock()
 
     def task(i: int) -> None:
         nonlocal done
-        results[i] = run_one(questions[i], config)
-        done += 1
+        result = run_one(questions[i], config)
+        results[i] = result
+        with lock:
+            done += 1
+            count = done
         if progress:
-            progress(done, len(questions), results[i])  # type: ignore[arg-type]
+            progress(count, len(questions), result)
 
     # Each worker gets a copy of the caller's context so usage tracking works per call.
     with ThreadPoolExecutor(max_workers=max(1, config.concurrency)) as pool:

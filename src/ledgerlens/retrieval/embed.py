@@ -15,7 +15,10 @@ from ledgerlens.llm.cache import ResponseCache, cache_key
 
 EMBED_MODEL = "nomic-embed-text"
 EMBED_DIM = 768
-MAX_CHARS = 6000  # ~1.5k tokens; longer passages are truncated to protect the context window
+# ~500 tokens. Longer passages are truncated for embedding only (BM25 and the answer step
+# see the full text): the chunk header and opening carry most of the signal, and it keeps
+# local embedding of ~94k chunks to a few hours.
+MAX_CHARS = 2000
 
 
 def _transient(exc: BaseException) -> bool:

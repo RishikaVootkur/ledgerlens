@@ -4,13 +4,13 @@
     "run_id": "2026-10-28T1402-full-gemini-flash",
     "title": "Headline: full pipeline on the dev split (sample data)",
     "metrics": {
-      "numeric_accuracy": {
+      "numeric_correct": {
         "value": 0.712,
         "ci_low": 0.666,
         "ci_high": 0.758,
         "n": 360
       },
-      "judge_accuracy": {
+      "judge_correct": {
         "value": 0.748,
         "ci_low": 0.704,
         "ci_high": 0.792,
@@ -28,28 +28,22 @@
         "ci_high": 0.833,
         "n": 360
       },
-      "refusal_accuracy": {
+      "refusal_correct": {
         "value": 0.9,
         "ci_low": 0.81,
         "ci_high": 0.99,
         "n": 40
       },
-      "recall@10": {
+      "recall_at_10": {
         "value": 0.833,
         "ci_low": 0.795,
         "ci_high": 0.871,
         "n": 360
       },
-      "latency_p50_ms": {
-        "value": 6420,
-        "ci_low": null,
-        "ci_high": null,
-        "n": 360
-      },
-      "cost_per_question_usd": {
+      "cost_usd_mean": {
         "value": 0.0041,
-        "ci_low": null,
-        "ci_high": null,
+        "ci_low": 0.0038,
+        "ci_high": 0.0044,
         "n": 360
       }
     }
@@ -66,13 +60,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.712,
           "ci_low": 0.666,
           "ci_high": 0.758,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.748,
           "ci_low": 0.704,
           "ci_high": 0.792,
@@ -90,13 +84,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -108,28 +114,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 6420,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 6040,
+          "ci_high": 6800,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 14810,
+          "ci_low": 12710,
+          "ci_high": 16910,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 9440,
+          "ci_high": 10260,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0038,
+          "ci_high": 0.0044,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -145,37 +175,19 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
-          "value": 0.631,
-          "ci_low": 0.585,
-          "ci_high": 0.677,
+        "recall_at_1": {
+          "value": 0.363,
+          "ci_low": 0.313,
+          "ci_high": 0.413,
           "n": 360
         },
-        "judge_accuracy": {
-          "value": 0.748,
-          "ci_low": 0.704,
-          "ci_high": 0.792,
+        "recall_at_5": {
+          "value": 0.629,
+          "ci_low": 0.587,
+          "ci_high": 0.671,
           "n": 360
         },
-        "citation_precision": {
-          "value": 0.827,
-          "ci_low": 0.796,
-          "ci_high": 0.858,
-          "n": 360
-        },
-        "citation_recall": {
-          "value": 0.794,
-          "ci_low": 0.755,
-          "ci_high": 0.833,
-          "n": 360
-        },
-        "refusal_accuracy": {
-          "value": 0.9,
-          "ci_low": 0.81,
-          "ci_high": 0.99,
-          "n": 40
-        },
-        "recall@10": {
+        "recall_at_10": {
           "value": 0.691,
           "ci_low": 0.653,
           "ci_high": 0.729,
@@ -187,28 +199,28 @@
           "ci_high": 0.532,
           "n": 360
         },
+        "ndcg_at_10": {
+          "value": 0.551,
+          "ci_low": 0.512,
+          "ci_high": 0.59,
+          "n": 360
+        },
         "latency_p50_ms": {
-          "value": 5320,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 228.75,
+          "ci_low": 206.25,
+          "ci_high": 251.25,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 1030,
+          "ci_low": 785,
+          "ci_high": 1275,
           "n": 360
         },
-        "tokens_per_question": {
-          "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
-          "n": 360
-        },
-        "cost_per_question_usd": {
-          "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -224,37 +236,19 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
-          "value": 0.66,
-          "ci_low": 0.614,
-          "ci_high": 0.706,
+        "recall_at_1": {
+          "value": 0.43,
+          "ci_low": 0.38,
+          "ci_high": 0.48,
           "n": 360
         },
-        "judge_accuracy": {
-          "value": 0.748,
-          "ci_low": 0.704,
-          "ci_high": 0.792,
+        "recall_at_5": {
+          "value": 0.69,
+          "ci_low": 0.648,
+          "ci_high": 0.732,
           "n": 360
         },
-        "citation_precision": {
-          "value": 0.84,
-          "ci_low": 0.809,
-          "ci_high": 0.871,
-          "n": 360
-        },
-        "citation_recall": {
-          "value": 0.794,
-          "ci_low": 0.755,
-          "ci_high": 0.833,
-          "n": 360
-        },
-        "refusal_accuracy": {
-          "value": 0.9,
-          "ci_low": 0.81,
-          "ci_high": 0.99,
-          "n": 40
-        },
-        "recall@10": {
+        "recall_at_10": {
           "value": 0.746,
           "ci_low": 0.708,
           "ci_high": 0.784,
@@ -266,28 +260,28 @@
           "ci_high": 0.57,
           "n": 360
         },
+        "ndcg_at_10": {
+          "value": 0.605,
+          "ci_low": 0.566,
+          "ci_high": 0.644,
+          "n": 360
+        },
         "latency_p50_ms": {
-          "value": 5520,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 228.75,
+          "ci_low": 206.25,
+          "ci_high": 251.25,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 1030,
+          "ci_low": 785,
+          "ci_high": 1275,
           "n": 360
         },
-        "tokens_per_question": {
-          "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
-          "n": 360
-        },
-        "cost_per_question_usd": {
-          "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -303,37 +297,19 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
-          "value": 0.693,
-          "ci_low": 0.647,
-          "ci_high": 0.739,
+        "recall_at_1": {
+          "value": 0.436,
+          "ci_low": 0.386,
+          "ci_high": 0.486,
           "n": 360
         },
-        "judge_accuracy": {
-          "value": 0.748,
-          "ci_low": 0.704,
-          "ci_high": 0.792,
+        "recall_at_5": {
+          "value": 0.737,
+          "ci_low": 0.695,
+          "ci_high": 0.779,
           "n": 360
         },
-        "citation_precision": {
-          "value": 0.861,
-          "ci_low": 0.83,
-          "ci_high": 0.892,
-          "n": 360
-        },
-        "citation_recall": {
-          "value": 0.794,
-          "ci_low": 0.755,
-          "ci_high": 0.833,
-          "n": 360
-        },
-        "refusal_accuracy": {
-          "value": 0.9,
-          "ci_low": 0.81,
-          "ci_high": 0.99,
-          "n": 40
-        },
-        "recall@10": {
+        "recall_at_10": {
           "value": 0.802,
           "ci_low": 0.764,
           "ci_high": 0.84,
@@ -345,28 +321,28 @@
           "ci_high": 0.589,
           "n": 360
         },
+        "ndcg_at_10": {
+          "value": 0.633,
+          "ci_low": 0.594,
+          "ci_high": 0.672,
+          "n": 360
+        },
         "latency_p50_ms": {
-          "value": 5700,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 228.75,
+          "ci_low": 206.25,
+          "ci_high": 251.25,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 1030,
+          "ci_low": 785,
+          "ci_high": 1275,
           "n": 360
         },
-        "tokens_per_question": {
-          "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
-          "n": 360
-        },
-        "cost_per_question_usd": {
-          "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -382,13 +358,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.668,
           "ci_low": 0.622,
           "ci_high": 0.714,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.748,
           "ci_low": 0.704,
           "ci_high": 0.792,
@@ -406,13 +382,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.775,
           "ci_low": 0.737,
           "ci_high": 0.813,
@@ -424,28 +412,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 6420,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 6040,
+          "ci_high": 6800,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 14810,
+          "ci_low": 12710,
+          "ci_high": 16910,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 9440,
+          "ci_high": 10260,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0038,
+          "ci_high": 0.0044,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -461,13 +473,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.649,
           "ci_low": 0.603,
           "ci_high": 0.695,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.748,
           "ci_low": 0.704,
           "ci_high": 0.792,
@@ -485,13 +497,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -503,28 +527,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 5040,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 4660,
+          "ci_high": 5420,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 14810,
+          "ci_low": 12710,
+          "ci_high": 16910,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 9440,
+          "ci_high": 10260,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0034,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0031,
+          "ci_high": 0.0037,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -540,13 +588,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.684,
           "ci_low": 0.638,
           "ci_high": 0.73,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.727,
           "ci_low": 0.683,
           "ci_high": 0.771,
@@ -564,13 +612,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -582,28 +642,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 3270,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 2890,
+          "ci_high": 3650,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 7610,
+          "ci_low": 5510,
+          "ci_high": 9710,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 7610,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 10490,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 10080,
+          "ci_high": 10900,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0062,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0059,
+          "ci_high": 0.0065,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -619,13 +703,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.548,
           "ci_low": 0.502,
           "ci_high": 0.594,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.577,
           "ci_low": 0.533,
           "ci_high": 0.621,
@@ -643,13 +727,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -661,28 +757,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 18220,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 17840,
+          "ci_high": 18600,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 41210,
+          "ci_low": 39110,
+          "ci_high": 43310,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 41210,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 11760,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 11350,
+          "ci_high": 12170,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0,
+          "ci_high": 0.0003,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -698,13 +818,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.615,
           "ci_low": 0.569,
           "ci_high": 0.661,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.667,
           "ci_low": 0.623,
           "ci_high": 0.711,
@@ -722,13 +842,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -740,28 +872,52 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 6420,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 6040,
+          "ci_high": 6800,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 14810,
+          "ci_low": 12710,
+          "ci_high": 16910,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 9440,
+          "ci_high": 10260,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0038,
+          "ci_high": 0.0044,
+          "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
           "n": 360
         }
       }
@@ -777,13 +933,13 @@
         "unanswerable"
       ],
       "summary": {
-        "numeric_accuracy": {
+        "numeric_correct": {
           "value": 0.671,
           "ci_low": 0.625,
           "ci_high": 0.717,
           "n": 360
         },
-        "judge_accuracy": {
+        "judge_correct": {
           "value": 0.712,
           "ci_low": 0.668,
           "ci_high": 0.756,
@@ -801,13 +957,25 @@
           "ci_high": 0.833,
           "n": 360
         },
-        "refusal_accuracy": {
+        "refusal_correct": {
           "value": 0.9,
           "ci_low": 0.81,
           "ci_high": 0.99,
           "n": 40
         },
-        "recall@10": {
+        "recall_at_1": {
+          "value": 0.524,
+          "ci_low": 0.474,
+          "ci_high": 0.574,
+          "n": 360
+        },
+        "recall_at_5": {
+          "value": 0.781,
+          "ci_low": 0.739,
+          "ci_high": 0.823,
+          "n": 360
+        },
+        "recall_at_10": {
           "value": 0.833,
           "ci_low": 0.795,
           "ci_high": 0.871,
@@ -819,29 +987,154 @@
           "ci_high": 0.653,
           "n": 360
         },
-        "latency_p50_ms": {
+        "ndcg_at_10": {
+          "value": 0.684,
+          "ci_low": 0.645,
+          "ci_high": 0.723,
+          "n": 360
+        },
+        "model_latency_p50_ms": {
           "value": 6420,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 6040,
+          "ci_high": 6800,
+          "n": 360
+        },
+        "model_latency_p95_ms": {
+          "value": 14810,
+          "ci_low": 12710,
+          "ci_high": 16910,
+          "n": 360
+        },
+        "latency_p50_ms": {
+          "value": 9150,
+          "ci_low": 8250,
+          "ci_high": 10050,
           "n": 360
         },
         "latency_p95_ms": {
-          "value": 14810,
-          "ci_low": null,
-          "ci_high": null,
+          "value": 41200,
+          "ci_low": 31400,
+          "ci_high": 51000,
           "n": 360
         },
-        "tokens_per_question": {
+        "tokens_mean": {
           "value": 9850,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 9440,
+          "ci_high": 10260,
           "n": 360
         },
-        "cost_per_question_usd": {
+        "cost_usd_mean": {
           "value": 0.0041,
-          "ci_low": null,
-          "ci_high": null,
+          "ci_low": 0.0038,
+          "ci_high": 0.0044,
           "n": 360
+        },
+        "error_rate": {
+          "value": 0.008,
+          "ci_low": 0,
+          "ci_high": 0.017,
+          "n": 360
+        }
+      }
+    },
+    {
+      "run_id": "ci-slice-baseline",
+      "config_name": "ci_slice",
+      "split": "dev",
+      "created_at": "2026-11-02T01:57:43.121706Z",
+      "datasets": [
+        "smoke"
+      ],
+      "summary": {
+        "citation_precision": {
+          "value": 1,
+          "ci_low": 0.8318207759473837,
+          "ci_high": 1,
+          "n": 19
+        },
+        "citation_recall": {
+          "value": 1,
+          "ci_low": 0.8318207759473837,
+          "ci_high": 1,
+          "n": 19
+        },
+        "cost_usd_mean": {
+          "value": 0.00802308,
+          "ci_low": 0.007330681,
+          "ci_high": 0.008747251000000001,
+          "n": 20
+        },
+        "error_rate": {
+          "value": 0,
+          "ci_low": 0,
+          "ci_high": 0.16112515805281938,
+          "n": 20
+        },
+        "latency_p50_ms": {
+          "value": 16.3,
+          "ci_low": 12.399999999999999,
+          "ci_high": 34.65,
+          "n": 20
+        },
+        "latency_p95_ms": {
+          "value": 130468.83000000005,
+          "ci_low": 3370.5300000000475,
+          "ci_high": 179559.7,
+          "n": 20
+        },
+        "model_latency_p50_ms": {
+          "value": 3329.5,
+          "ci_low": 2760.25,
+          "ci_high": 3868.5499999999997,
+          "n": 20
+        },
+        "model_latency_p95_ms": {
+          "value": 5786.9000000000015,
+          "ci_low": 4009,
+          "ci_high": 9218.3,
+          "n": 20
+        },
+        "mrr": {
+          "value": 0.875,
+          "ci_low": 0.775,
+          "ci_high": 0.9506249999999965,
+          "n": 20
+        },
+        "ndcg_at_10": {
+          "value": 0.9077324383928644,
+          "ci_low": 0.833918389107156,
+          "ci_high": 0.9635543131651789,
+          "n": 20
+        },
+        "numeric_correct": {
+          "value": 0.8,
+          "ci_low": 0.5839825677481064,
+          "ci_high": 0.919342337420202,
+          "n": 20
+        },
+        "recall_at_10": {
+          "value": 1,
+          "ci_low": 0.8388748419471806,
+          "ci_high": 1,
+          "n": 20
+        },
+        "recall_at_5": {
+          "value": 1,
+          "ci_low": 0.8388748419471806,
+          "ci_high": 1,
+          "n": 20
+        },
+        "refusal_correct": {
+          "value": 0.95,
+          "ci_low": 0.763868806553258,
+          "ci_high": 0.9911185511992047,
+          "n": 20
+        },
+        "tokens_mean": {
+          "value": 8089.65,
+          "ci_low": 7198.514999999999,
+          "ci_high": 9035.842499999999,
+          "n": 20
         }
       }
     }
@@ -850,19 +1143,27 @@
     {
       "id": "ablation-retrieval",
       "title": "Retrieval method",
-      "description": "Same agent and model, only the retriever changes. Paired bootstrap against hybrid + rerank.",
+      "description": "Retrieval-only runs: only the retriever changes. Paired bootstrap against hybrid + rerank.",
       "baseline": "Hybrid + rerank",
       "columns": [
-        "recall@10",
+        "recall_at_5",
+        "recall_at_10",
         "mrr",
-        "numeric_accuracy"
+        "ndcg_at_10"
       ],
       "rows": [
         {
           "name": "BM25",
           "run_id": "2026-10-27T0910-bm25",
           "metrics": {
-            "recall@10": {
+            "recall_at_5": {
+              "value": 0.629,
+              "ci_low": 0.587,
+              "ci_high": 0.671,
+              "delta": -0.152,
+              "p_value": 0.0001
+            },
+            "recall_at_10": {
               "value": 0.691,
               "ci_low": 0.653,
               "ci_high": 0.729,
@@ -876,12 +1177,12 @@
               "delta": -0.121,
               "p_value": 0.0001
             },
-            "numeric_accuracy": {
-              "value": 0.631,
-              "ci_low": 0.585,
-              "ci_high": 0.677,
-              "delta": -0.081,
-              "p_value": 0.0008
+            "ndcg_at_10": {
+              "value": 0.551,
+              "ci_low": 0.512,
+              "ci_high": 0.59,
+              "delta": -0.133,
+              "p_value": 0.0001
             }
           }
         },
@@ -889,7 +1190,14 @@
           "name": "Dense",
           "run_id": "2026-10-27T1022-dense",
           "metrics": {
-            "recall@10": {
+            "recall_at_5": {
+              "value": 0.69,
+              "ci_low": 0.648,
+              "ci_high": 0.732,
+              "delta": -0.091,
+              "p_value": 0.0009
+            },
+            "recall_at_10": {
               "value": 0.746,
               "ci_low": 0.708,
               "ci_high": 0.784,
@@ -903,12 +1211,12 @@
               "delta": -0.083,
               "p_value": 0.0004
             },
-            "numeric_accuracy": {
-              "value": 0.66,
-              "ci_low": 0.614,
-              "ci_high": 0.706,
-              "delta": -0.052,
-              "p_value": 0.012
+            "ndcg_at_10": {
+              "value": 0.605,
+              "ci_low": 0.566,
+              "ci_high": 0.644,
+              "delta": -0.079,
+              "p_value": 0.002
             }
           }
         },
@@ -916,7 +1224,14 @@
           "name": "Hybrid (RRF)",
           "run_id": "2026-10-27T1135-hybrid-norerank",
           "metrics": {
-            "recall@10": {
+            "recall_at_5": {
+              "value": 0.737,
+              "ci_low": 0.695,
+              "ci_high": 0.779,
+              "delta": -0.044,
+              "p_value": 0.041
+            },
+            "recall_at_10": {
               "value": 0.802,
               "ci_low": 0.764,
               "ci_high": 0.84,
@@ -930,12 +1245,12 @@
               "delta": -0.064,
               "p_value": 0.003
             },
-            "numeric_accuracy": {
-              "value": 0.693,
-              "ci_low": 0.647,
-              "ci_high": 0.739,
-              "delta": -0.019,
-              "p_value": 0.29
+            "ndcg_at_10": {
+              "value": 0.633,
+              "ci_low": 0.594,
+              "ci_high": 0.672,
+              "delta": -0.051,
+              "p_value": 0.011
             }
           }
         },
@@ -943,7 +1258,12 @@
           "name": "Hybrid + rerank",
           "run_id": "2026-10-28T1402-full-gemini-flash",
           "metrics": {
-            "recall@10": {
+            "recall_at_5": {
+              "value": 0.781,
+              "ci_low": 0.739,
+              "ci_high": 0.823
+            },
+            "recall_at_10": {
               "value": 0.833,
               "ci_low": 0.795,
               "ci_high": 0.871
@@ -953,10 +1273,10 @@
               "ci_low": 0.571,
               "ci_high": 0.653
             },
-            "numeric_accuracy": {
-              "value": 0.712,
-              "ci_low": 0.666,
-              "ci_high": 0.758
+            "ndcg_at_10": {
+              "value": 0.684,
+              "ci_low": 0.645,
+              "ci_high": 0.723
             }
           }
         }
@@ -968,8 +1288,8 @@
       "description": "Section-aware chunks keep tables whole; fixed windows split them.",
       "baseline": "Section-aware",
       "columns": [
-        "numeric_accuracy",
-        "recall@10",
+        "numeric_correct",
+        "recall_at_10",
         "citation_precision"
       ],
       "rows": [
@@ -977,14 +1297,14 @@
           "name": "Fixed 512 tokens",
           "run_id": "2026-10-26T1650-fixed-chunks",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.668,
               "ci_low": 0.622,
               "ci_high": 0.714,
               "delta": -0.044,
               "p_value": 0.006
             },
-            "recall@10": {
+            "recall_at_10": {
               "value": 0.775,
               "ci_low": 0.737,
               "ci_high": 0.813,
@@ -1004,12 +1324,12 @@
           "name": "Section-aware",
           "run_id": "2026-10-28T1402-full-gemini-flash",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.712,
               "ci_low": 0.666,
               "ci_high": 0.758
             },
-            "recall@10": {
+            "recall_at_10": {
               "value": 0.833,
               "ci_low": 0.795,
               "ci_high": 0.871
@@ -1029,17 +1349,17 @@
       "description": "Cross-checking extracted numbers against SEC company facts before answering.",
       "baseline": "Verify on",
       "columns": [
-        "numeric_accuracy",
+        "numeric_correct",
         "citation_precision",
-        "latency_p50_ms",
-        "cost_per_question_usd"
+        "model_latency_p50_ms",
+        "cost_usd_mean"
       ],
       "rows": [
         {
           "name": "Verify off",
           "run_id": "2026-10-26T1812-no-xbrl",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.649,
               "ci_low": 0.603,
               "ci_high": 0.695,
@@ -1053,19 +1373,16 @@
               "delta": -0.012,
               "p_value": 0.41
             },
-            "latency_p50_ms": {
+            "model_latency_p50_ms": {
               "value": 5040,
-              "ci_low": null,
-              "ci_high": null,
+              "ci_low": 4660,
+              "ci_high": 5420,
               "delta": -1380,
               "p_value": 0.0001
             },
-            "cost_per_question_usd": {
+            "cost_usd_mean": {
               "value": 0.0034,
-              "ci_low": null,
-              "ci_high": null,
-              "delta": -0.0007,
-              "p_value": 0.0001
+              "delta": -0.0007
             }
           }
         },
@@ -1073,7 +1390,7 @@
           "name": "Verify on",
           "run_id": "2026-10-28T1402-full-gemini-flash",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.712,
               "ci_low": 0.666,
               "ci_high": 0.758
@@ -1083,15 +1400,13 @@
               "ci_low": 0.83,
               "ci_high": 0.892
             },
-            "latency_p50_ms": {
+            "model_latency_p50_ms": {
               "value": 6420,
-              "ci_low": null,
-              "ci_high": null
+              "ci_low": 6040,
+              "ci_high": 6800
             },
-            "cost_per_question_usd": {
-              "value": 0.0041,
-              "ci_low": null,
-              "ci_high": null
+            "cost_usd_mean": {
+              "value": 0.0041
             }
           }
         }
@@ -1103,24 +1418,24 @@
       "description": "Same pipeline with three models. Cost is the list-price equivalent, even for free tiers and local inference.",
       "baseline": "Gemini 2.5 Flash",
       "columns": [
-        "numeric_accuracy",
-        "judge_accuracy",
+        "numeric_correct",
+        "judge_correct",
         "citation_precision",
-        "latency_p50_ms",
-        "tokens_per_question",
-        "cost_per_question_usd"
+        "model_latency_p50_ms",
+        "tokens_mean",
+        "cost_usd_mean"
       ],
       "rows": [
         {
           "name": "Gemini 2.5 Flash",
           "run_id": "2026-10-28T1402-full-gemini-flash",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.712,
               "ci_low": 0.666,
               "ci_high": 0.758
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.748,
               "ci_low": 0.704,
               "ci_high": 0.792
@@ -1130,20 +1445,16 @@
               "ci_low": 0.83,
               "ci_high": 0.892
             },
-            "latency_p50_ms": {
+            "model_latency_p50_ms": {
               "value": 6420,
-              "ci_low": null,
-              "ci_high": null
+              "ci_low": 6040,
+              "ci_high": 6800
             },
-            "tokens_per_question": {
-              "value": 9850,
-              "ci_low": null,
-              "ci_high": null
+            "tokens_mean": {
+              "value": 9850
             },
-            "cost_per_question_usd": {
-              "value": 0.0041,
-              "ci_low": null,
-              "ci_high": null
+            "cost_usd_mean": {
+              "value": 0.0041
             }
           }
         },
@@ -1151,14 +1462,14 @@
           "name": "Llama 3.3 70B (Groq)",
           "run_id": "2026-10-29T0830-groq-llama",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.684,
               "ci_low": 0.638,
               "ci_high": 0.73,
               "delta": -0.028,
               "p_value": 0.21
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.727,
               "ci_low": 0.683,
               "ci_high": 0.771,
@@ -1172,26 +1483,20 @@
               "delta": -0.039,
               "p_value": 0.03
             },
-            "latency_p50_ms": {
+            "model_latency_p50_ms": {
               "value": 3270,
-              "ci_low": null,
-              "ci_high": null,
+              "ci_low": 2890,
+              "ci_high": 3650,
               "delta": -3150,
               "p_value": 0.0001
             },
-            "tokens_per_question": {
+            "tokens_mean": {
               "value": 10490,
-              "ci_low": null,
-              "ci_high": null,
-              "delta": 640,
-              "p_value": 0.002
+              "delta": 640
             },
-            "cost_per_question_usd": {
+            "cost_usd_mean": {
               "value": 0.0062,
-              "ci_low": null,
-              "ci_high": null,
-              "delta": 0.0021,
-              "p_value": 0.0001
+              "delta": 0.0021
             }
           }
         },
@@ -1199,14 +1504,14 @@
           "name": "Qwen3 8B (local)",
           "run_id": "2026-10-29T1115-qwen3-local",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.548,
               "ci_low": 0.502,
               "ci_high": 0.594,
               "delta": -0.164,
               "p_value": 0.0001
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.577,
               "ci_low": 0.533,
               "ci_high": 0.621,
@@ -1220,26 +1525,20 @@
               "delta": -0.118,
               "p_value": 0.0001
             },
-            "latency_p50_ms": {
+            "model_latency_p50_ms": {
               "value": 18220,
-              "ci_low": null,
-              "ci_high": null,
+              "ci_low": 17840,
+              "ci_high": 18600,
               "delta": 11800,
               "p_value": 0.0001
             },
-            "tokens_per_question": {
+            "tokens_mean": {
               "value": 11760,
-              "ci_low": null,
-              "ci_high": null,
-              "delta": 1910,
-              "p_value": 0.0001
+              "delta": 1910
             },
-            "cost_per_question_usd": {
+            "cost_usd_mean": {
               "value": 0,
-              "ci_low": null,
-              "ci_high": null,
-              "delta": -0.0041,
-              "p_value": 0.0001
+              "delta": -0.0041
             }
           }
         }
@@ -1251,8 +1550,8 @@
       "description": "Fixes chosen from the failure taxonomy, measured on the same dev questions.",
       "baseline": "Before fixes",
       "columns": [
-        "numeric_accuracy",
-        "judge_accuracy",
+        "numeric_correct",
+        "judge_correct",
         "citation_precision"
       ],
       "rows": [
@@ -1260,12 +1559,12 @@
           "name": "Before fixes",
           "run_id": "2026-10-24T1340-before-fixes",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.615,
               "ci_low": 0.569,
               "ci_high": 0.661
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.667,
               "ci_low": 0.623,
               "ci_high": 0.711
@@ -1281,14 +1580,14 @@
           "name": "+ table parser fix",
           "run_id": "2026-10-25T1005-fix-tables",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.671,
               "ci_low": 0.625,
               "ci_high": 0.717,
               "delta": 0.056,
               "p_value": 0.002
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.712,
               "ci_low": 0.668,
               "ci_high": 0.756,
@@ -1308,14 +1607,14 @@
           "name": "+ fiscal period fix",
           "run_id": "2026-10-28T1402-full-gemini-flash",
           "metrics": {
-            "numeric_accuracy": {
+            "numeric_correct": {
               "value": 0.712,
               "ci_low": 0.666,
               "ci_high": 0.758,
               "delta": 0.097,
               "p_value": 0.0001
             },
-            "judge_accuracy": {
+            "judge_correct": {
               "value": 0.748,
               "ci_low": 0.704,
               "ci_high": 0.792,
@@ -1426,29 +1725,80 @@
     }
   ],
   "judge_calibration": {
+    "judge_model": "groq-gpt-oss-120b",
+    "prompt_version": "judge-v3",
+    "split": "test",
+    "n": 150,
     "accuracy": {
+      "value": 0.887,
+      "ci_low": 0.837,
+      "ci_high": 0.937,
+      "n": 150
+    },
+    "kappa": {
+      "value": 0.802,
+      "ci_low": 0.721,
+      "ci_high": 0.883,
+      "n": 150
+    },
+    "error_rate": {
+      "value": 0.113,
+      "ci_low": 0.063,
+      "ci_high": 0.163,
+      "n": 150
+    },
+    "binary_accuracy": {
       "value": 0.913,
       "ci_low": 0.868,
       "ci_high": 0.958,
       "n": 150
     },
-    "kappa": {
-      "value": 0.792,
-      "ci_low": 0.698,
-      "ci_high": 0.886,
+    "binary_kappa": {
+      "value": 0.818,
+      "ci_low": 0.73,
+      "ci_high": 0.906,
       "n": 150
     },
-    "n": 150,
-    "judge_model": "gemini-2.5-pro",
+    "labels": [
+      "CORRECT",
+      "INCORRECT",
+      "REFUSAL"
+    ],
     "confusion": [
       [
-        88,
-        6
+        78,
+        5,
+        1
       ],
       [
-        7,
-        49
+        6,
+        38,
+        2
+      ],
+      [
+        0,
+        3,
+        17
       ]
-    ]
+    ],
+    "per_label_recall": {
+      "CORRECT": 0.9286,
+      "INCORRECT": 0.8261,
+      "REFUSAL": 0.85
+    },
+    "parse_errors": 0,
+    "clean_n": 60,
+    "clean_accuracy": {
+      "value": 0.867,
+      "ci_low": 0.784,
+      "ci_high": 0.95,
+      "n": 60
+    },
+    "clean_kappa": {
+      "value": 0.771,
+      "ci_low": 0.651,
+      "ci_high": 0.891,
+      "n": 60
+    }
   }
 }

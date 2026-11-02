@@ -71,6 +71,34 @@ def parse_verdict(text: str) -> Verdict:
     )
 
 
+SUPPORT_SYSTEM = """You check citations in answers about company filings. Given a claim
+from an answer and a cited passage, decide whether the passage supports the claim: the
+passage must state the facts or numbers the claim relies on (rounding and unit wording
+differences are fine). Return JSON only: {"supported": true|false, "reason": "one sentence"}"""
+
+
+def judge_support(claim: str, passage: str, model: str = DEFAULT_JUDGE_MODEL) -> bool:
+    """Whether a cited passage supports an answer's claim (semantic citation precision)."""
+    resp = complete(
+        model,
+        [
+            {"role": "system", "content": SUPPORT_SYSTEM},
+            {"role": "user", "content": f"Claim: {claim[:1200]}\n\nPassage: {passage[:2500]}"},
+        ],
+        temperature=0.0,
+        max_tokens=300,
+        response_format={"type": "json_object"},
+        purpose="citation_support",
+    )
+    match = re.search(r"\{.*\}", resp.content, re.DOTALL)
+    if match:
+        try:
+            return bool(json.loads(match.group(0)).get("supported") is True)
+        except json.JSONDecodeError:
+            pass
+    return bool(re.search(r'"?supported"?\s*:\s*true', resp.content, re.IGNORECASE))
+
+
 def judge(question: str, gold: str, answer: str, model: str = DEFAULT_JUDGE_MODEL) -> Verdict:
     resp = complete(
         model,

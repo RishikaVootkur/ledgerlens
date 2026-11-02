@@ -8,7 +8,7 @@ from datetime import UTC, datetime
 
 from ledgerlens.eval import metrics
 from ledgerlens.eval.datasets.loader import load_questions
-from ledgerlens.eval.runner import EvalConfig, select
+from ledgerlens.eval.runner import EvalConfig, _git_sha, select
 from ledgerlens.eval.summary import summarize_by_dataset, summarize_scores
 from ledgerlens.retrieval.filters import SearchFilters
 from ledgerlens.retrieval.retriever import Retriever
@@ -20,8 +20,6 @@ K_VALUES = (1, 5, 10)
 def retrieval_filters(question: Question, config: EvalConfig) -> SearchFilters:
     if config.scope == "document" and question.doc_name:
         return SearchFilters(doc_name=question.doc_name)
-    if config.scope == "document" and question.ticker:
-        return SearchFilters(ticker=question.ticker)
     return SearchFilters()
 
 
@@ -63,6 +61,7 @@ def run_retrieval_eval(config: EvalConfig, split: Split, run_id: str | None = No
     return RunFile(
         run_id=run_id or f"{created:%Y%m%d-%H%M%S}-{config.name}-{split}",
         created_at=created,
+        git_sha=_git_sha(),
         config_name=config.name,
         config={**config.model_dump(mode="json"), "kind": "retrieval"},
         split=split,

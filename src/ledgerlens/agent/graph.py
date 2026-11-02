@@ -23,6 +23,7 @@ from typing import Any, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
+from ledgerlens import tracing
 from ledgerlens.agent import prompts
 from ledgerlens.agent.tools import (
     EvidenceItem,
@@ -222,6 +223,45 @@ def quote_supported(quote: str, text: str) -> bool:
 # ------------------------------------------------------------------ graph
 
 
+def _step_input(state: State) -> dict[str, Any]:
+    """Small summary of what a step starts from, for the span's input.value."""
+    summary: dict[str, Any] = {
+        "question": state.get("question", "")[:300],
+        "round": state.get("round", 0),
+    }
+    if state.get("pending"):
+        summary["tool_calls"] = [
+            {"name": tc.name, "arguments": tc.arguments[:300]} for tc in state["pending"]
+        ]
+    if state.get("problems"):
+        summary["problems"] = state["problems"]
+    if state.get("repairs"):
+        summary["repairs"] = state["repairs"]
+    return summary
+
+
+def _traced(step: str, fn: Callable[[State], State]) -> Any:
+    """Wrap a graph node in a CHAIN span named after the step (no-op when tracing is off)."""
+
+    def node(state: State) -> State:
+        if not tracing.enabled():
+            return fn(state)
+        attributes = {
+            "ledgerlens.step": step,
+            "ledgerlens.round": state.get("round", 0),
+            tracing.INPUT_VALUE: tracing.to_json(_step_input(state)),
+            tracing.INPUT_MIME: "application/json",
+        }
+        with tracing.span(step, "CHAIN", attributes) as span:
+            out = fn(state)
+            span.set_attribute(tracing.OUTPUT_VALUE, tracing.to_json(out))
+            span.set_attribute(tracing.OUTPUT_MIME, "application/json")
+            return out
+
+    node.__name__ = fn.__name__
+    return node
+
+
 def build_graph(run: _Run) -> Any:
     cfg = run.config
     tool_names = ["search_filings", "get_table", "calculate"] if cfg.search_tool else ["calculate"]
@@ -351,12 +391,12 @@ def build_graph(run: _Run) -> Any:
         return {"repairs": state.get("repairs", 0) + 1}
 
     graph = StateGraph(State)
-    graph.add_node("gather", gather)
-    graph.add_node("tools", call_tools)
-    graph.add_node("answer", answer)
-    graph.add_node("verify", verify)
-    graph.add_node("self_check", self_check)
-    graph.add_node("repair", repair)
+    graph.add_node("gather", _traced("plan", gather))
+    graph.add_node("tools", _traced("tools", call_tools))
+    graph.add_node("answer", _traced("answer", answer))
+    graph.add_node("verify", _traced("verify", verify))
+    graph.add_node("self_check", _traced("self_check", self_check))
+    graph.add_node("repair", _traced("repair", repair))
     graph.add_edge(START, "gather")
     graph.add_conditional_edges("gather", after_gather, {"tools": "tools", "answer": "answer"})
     graph.add_conditional_edges("tools", after_tools, {"gather": "gather", "answer": "answer"})
@@ -433,6 +473,23 @@ def _to_citation(item: EvidenceItem, quote: str) -> Citation:
     )
 
 
+def _as_number(value: object) -> float | None:
+    """Models often return the value as a string ("21,155", "$34.5", "6.4%")."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int | float):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = re.sub(r"[,$%\s]", "", value)
+        if cleaned.startswith("(") and cleaned.endswith(")"):
+            cleaned = "-" + cleaned[1:-1]
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
+    return None
+
+
 def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[str]) -> AgentAnswer:
     """Renumber [E#] markers to [1], [2] in order of first use and build Citation objects.
 
@@ -471,12 +528,21 @@ def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[s
 
     value: float | None = None
     unit = draft.get("unit") if draft.get("unit") in _UNITS else None
-    raw_value = draft.get("value")
+    raw_value = _as_number(draft.get("value"))
     if refused:
         text = re.sub(r"\s*\[E?\d+\]", "", text).strip()
-    if not refused and isinstance(raw_value, int | float) and not isinstance(raw_value, bool):
+    if not refused and raw_value is not None:
         scale = _SCALES.get(str(draft.get("scale") or "one").lower(), 1.0)
-        value = float(draft["value"]) * (scale if unit in ("USD", "shares", "count") else 1.0)
+        value = raw_value * (scale if unit in ("USD", "shares", "count") else 1.0)
+        # Models sometimes write the full number and also name a scale ("359,241,000,000"
+        # with "billion"). Prefer whichever reading the answer text itself states.
+        stated = numbers_in(text)
+
+        def said(x: float) -> bool:  # stated as-is, with no rescaling
+            return any(abs(x - v) <= 0.005 * abs(v) for v in stated if v)
+
+        if value != raw_value and not said(value) and said(raw_value):
+            value = raw_value
     answer_unit: AnswerUnit | None = unit if value is not None else None  # type: ignore[assignment]
     return AgentAnswer(
         answer=text if not refused or text else REFUSAL_TEXT,
@@ -502,12 +568,35 @@ def run_agent(
     registry = registry if registry is not None else EvidenceRegistry()
     run = _Run(config=config, registry=registry, on_step=on_step or (lambda name, detail: None))
     graph = build_graph(run)
-    with track_usage() as usage:
+    filters = filters or SearchFilters()
+    attributes = {
+        tracing.INPUT_VALUE: question,
+        "ledgerlens.model_alias": config.model,
+        "ledgerlens.filters": tracing.to_json(filters.model_dump(exclude_none=True)),
+        "ledgerlens.retrieval.method": config.retrieval.method,
+        "ledgerlens.xbrl_tool": config.xbrl_tool,
+    }
+    with tracing.span("agent", "AGENT", attributes) as span, track_usage() as usage:
         state = graph.invoke(
-            {"question": question, "filters": filters or SearchFilters(), "steps": []},
+            {"question": question, "filters": filters, "steps": []},
             {"recursion_limit": 4 * config.max_rounds + 6 * (config.max_repairs + 1) + 10},
         )
-    result = finalize(state["draft"], registry, state.get("problems") or [])
-    result.steps = [*state.get("steps", []), *result.steps]
-    result.usage = usage.total
+        result = finalize(state["draft"], registry, state.get("problems") or [])
+        result.steps = [*state.get("steps", []), *result.steps]
+        result.usage = usage.total
+        span.set_attributes(
+            tracing.clean(
+                {
+                    tracing.OUTPUT_VALUE: result.answer,
+                    "ledgerlens.refused": result.refused,
+                    "ledgerlens.citations": [c.chunk_id for c in result.citations],
+                    "ledgerlens.steps": result.steps,
+                    "ledgerlens.usage.llm_calls": result.usage.llm_calls,
+                    "ledgerlens.usage.prompt_tokens": result.usage.prompt_tokens,
+                    "ledgerlens.usage.completion_tokens": result.usage.completion_tokens,
+                    "ledgerlens.usage.cost_usd": result.usage.cost_usd,
+                    "ledgerlens.cost_label": tracing.COST_LABEL,
+                }
+            )
+        )
     return result
