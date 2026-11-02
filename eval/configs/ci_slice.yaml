@@ -15,3 +15,5 @@ self_check: true
 datasets: [smoke]
 scope: document
 concurrency: 3
+# Pinned to the agent settings the replay cache was recorded with; re-record to change.
+dedupe_tool_calls: false

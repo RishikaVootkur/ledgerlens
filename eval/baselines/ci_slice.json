@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
  "run_id": "ci-slice-baseline",
- "created_at": "2026-11-02T02:50:05.507812Z",
- "git_sha": "2e0ad3a",
+ "created_at": "2026-11-02T03:36:56.237650Z",
+ "git_sha": "3f2d89e",
  "config_name": "ci_slice",
  "config": {
   "name": "ci_slice",
@@ -14,8 +14,11 @@
   "index_version": "d94fbac6be01",
   "max_rounds": 3,
   "xbrl_tool": true,
+  "search_tool": true,
   "verify_numbers": true,
   "self_check": true,
+  "dedupe_tool_calls": false,
+  "derive_numbers": true,
   "datasets": [
    "smoke"
   ],
@@ -25,7 +28,8 @@
   "qids_file": null,
   "concurrency": 3,
   "judge": true,
-  "judge_model": "groq-gpt-oss-120b"
+  "judge_model": "groq-gpt-oss-120b",
+  "citation_support": true
  },
  "split": "dev",
  "datasets": [
@@ -33,21 +37,21 @@
  ],
  "summary": {
   "citation_precision": {
-   "value": 0.9736842105263158,
-   "ci_low": 0.9210526315789473,
+   "value": 0.95,
+   "ci_low": 0.875,
    "ci_high": 1.0,
-   "n": 19
+   "n": 20
   },
   "citation_recall": {
    "value": 1.0,
-   "ci_low": 0.8318207759473837,
+   "ci_low": 0.8388748419471806,
    "ci_high": 1.0,
-   "n": 19
+   "n": 20
   },
   "cost_usd_mean": {
-   "value": 0.00802308,
-   "ci_low": 0.007330681,
-   "ci_high": 0.008747251000000001,
+   "value": 0.00793984,
+   "ci_low": 0.007222901,
+   "ci_high": 0.008700598,
    "n": 20
   },
   "error_rate": {
@@ -57,21 +61,21 @@
    "n": 20
   },
   "latency_p50_ms": {
-   "value": 20.0,
+   "value": 20.75,
    "ci_low": 19.5,
-   "ci_high": 21.35,
+   "ci_high": 22.75,
    "n": 20
   },
   "latency_p95_ms": {
-   "value": 23.315000000000005,
-   "ci_low": 21.525,
-   "ci_high": 29.3,
+   "value": 28.080000000000002,
+   "ci_low": 23.51,
+   "ci_high": 29.6,
    "n": 20
   },
   "model_latency_p50_ms": {
-   "value": 3329.5,
+   "value": 3105.8,
    "ci_low": 2760.25,
-   "ci_high": 3868.5499999999997,
+   "ci_high": 3743.1499999999996,
    "n": 20
   },
   "model_latency_p95_ms": {
@@ -93,9 +97,9 @@
    "n": 20
   },
   "numeric_correct": {
-   "value": 0.9,
-   "ci_low": 0.6989663547715128,
-   "ci_high": 0.9721335187862319,
+   "value": 0.95,
+   "ci_low": 0.763868806553258,
+   "ci_high": 0.9911185511992047,
    "n": 20
   },
   "recall_at_10": {
@@ -111,36 +115,36 @@
    "n": 20
   },
   "refusal_correct": {
-   "value": 0.95,
-   "ci_low": 0.763868806553258,
-   "ci_high": 0.9911185511992047,
+   "value": 1.0,
+   "ci_low": 0.8388748419471806,
+   "ci_high": 1.0,
    "n": 20
   },
   "tokens_mean": {
-   "value": 8089.65,
-   "ci_low": 7198.514999999999,
-   "ci_high": 9035.842499999999,
+   "value": 8045.4,
+   "ci_low": 7118.53625,
+   "ci_high": 9031.8025,
    "n": 20
   }
  },
  "summary_by_dataset": {
   "smoke": {
    "citation_precision": {
-    "value": 0.9736842105263158,
-    "ci_low": 0.9210526315789473,
+    "value": 0.95,
+    "ci_low": 0.875,
     "ci_high": 1.0,
-    "n": 19
+    "n": 20
    },
    "citation_recall": {
     "value": 1.0,
-    "ci_low": 0.8318207759473837,
+    "ci_low": 0.8388748419471806,
     "ci_high": 1.0,
-    "n": 19
+    "n": 20
    },
    "cost_usd_mean": {
-    "value": 0.00802308,
-    "ci_low": 0.007330681,
-    "ci_high": 0.008747251000000001,
+    "value": 0.00793984,
+    "ci_low": 0.007222901,
+    "ci_high": 0.008700598,
     "n": 20
    },
    "error_rate": {
@@ -150,21 +154,21 @@
     "n": 20
    },
    "latency_p50_ms": {
-    "value": 20.0,
+    "value": 20.75,
     "ci_low": 19.5,
-    "ci_high": 21.35,
+    "ci_high": 22.75,
     "n": 20
    },
    "latency_p95_ms": {
-    "value": 23.315000000000005,
-    "ci_low": 21.525,
-    "ci_high": 29.3,
+    "value": 28.080000000000002,
+    "ci_low": 23.51,
+    "ci_high": 29.6,
     "n": 20
    },
    "model_latency_p50_ms": {
-    "value": 3329.5,
+    "value": 3105.8,
     "ci_low": 2760.25,
-    "ci_high": 3868.5499999999997,
+    "ci_high": 3743.1499999999996,
     "n": 20
    },
    "model_latency_p95_ms": {
@@ -186,9 +190,9 @@
     "n": 20
    },
    "numeric_correct": {
-    "value": 0.9,
-    "ci_low": 0.6989663547715128,
-    "ci_high": 0.9721335187862319,
+    "value": 0.95,
+    "ci_low": 0.763868806553258,
+    "ci_high": 0.9911185511992047,
     "n": 20
    },
    "recall_at_10": {
@@ -204,25 +208,25 @@
     "n": 20
    },
    "refusal_correct": {
-    "value": 0.95,
-    "ci_low": 0.763868806553258,
-    "ci_high": 0.9911185511992047,
+    "value": 1.0,
+    "ci_low": 0.8388748419471806,
+    "ci_high": 1.0,
     "n": 20
    },
    "tokens_mean": {
-    "value": 8089.65,
-    "ci_low": 7198.514999999999,
-    "ci_high": 9035.842499999999,
+    "value": 8045.4,
+    "ci_low": 7118.53625,
+    "ci_high": 9031.8025,
     "n": 20
    }
   }
  },
  "usage_total": {
-  "prompt_tokens": 152097,
-  "completion_tokens": 9696,
-  "llm_calls": 84,
-  "cost_usd": 0.1604616,
-  "latency_ms": 74070.59999999999
+  "prompt_tokens": 151511,
+  "completion_tokens": 9397,
+  "llm_calls": 83,
+  "cost_usd": 0.15879680000000002,
+  "latency_ms": 73058.2
  },
  "results": [
   {
@@ -253,7 +257,7 @@
      {
       "chunk_id": "AAPL-10K-2025FY:section:00086",
       "filing_id": "AAPL-10K-2025FY",
-      "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Expenses",
+      "section": "Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Operating Expenses",
       "page": 26,
       "page_end": 26,
       "quote": "Research and development | $34,550"
@@ -287,7 +291,7 @@
      "latency_ms": 3542.5
     }
    },
-   "wall_ms": 21.5,
+   "wall_ms": 29.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -356,7 +360,7 @@
      "latency_ms": 3860.3999999999996
     }
    },
-   "wall_ms": 29.3,
+   "wall_ms": 28.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -433,7 +437,7 @@
      "latency_ms": 4009.0
     }
    },
-   "wall_ms": 21.5,
+   "wall_ms": 18.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -494,7 +498,7 @@
      "latency_ms": 2833.3
     }
    },
-   "wall_ms": 19.9,
+   "wall_ms": 17.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -563,7 +567,7 @@
      "latency_ms": 2298.0
     }
    },
-   "wall_ms": 19.5,
+   "wall_ms": 21.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -598,7 +602,7 @@
      {
       "chunk_id": "KO-10Q-2026Q2:section:00143",
       "filing_id": "KO-10Q-2026Q2",
-      "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Net Operating Revenues",
+      "section": "Part I > Item 2. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Net Operating Revenues",
       "page": 38,
       "page_end": 38,
       "quote": "net operating revenues were $13,380 million"
@@ -635,7 +639,7 @@
      "latency_ms": 4172.8
     }
    },
-   "wall_ms": 19.4,
+   "wall_ms": 23.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -704,7 +708,7 @@
      "latency_ms": 2571.2
     }
    },
-   "wall_ms": 20.3,
+   "wall_ms": 23.4,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -765,7 +769,7 @@
      "latency_ms": 2540.7
     }
    },
-   "wall_ms": 20.1,
+   "wall_ms": 19.4,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -800,7 +804,7 @@
      {
       "chunk_id": "KO-10Q-2026Q3:section:00162",
       "filing_id": "KO-10Q-2026Q3",
-      "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Operating Income and Operating Margin",
+      "section": "Part I > Item 2. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Operating Income and Operating Margin",
       "page": 43,
       "page_end": 44,
       "quote": "operating income was $4,465 million"
@@ -834,7 +838,7 @@
      "latency_ms": 2660.4
     }
    },
-   "wall_ms": 21.2,
+   "wall_ms": 21.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -903,7 +907,7 @@
      "latency_ms": 3095.1000000000004
     }
    },
-   "wall_ms": 21.0,
+   "wall_ms": 19.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -976,7 +980,7 @@
      "latency_ms": 2760.0
     }
    },
-   "wall_ms": 22.6,
+   "wall_ms": 22.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1045,7 +1049,7 @@
      "latency_ms": 2548.8999999999996
     }
    },
-   "wall_ms": 22.0,
+   "wall_ms": 21.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1118,7 +1122,7 @@
      "latency_ms": 3556.6
     }
    },
-   "wall_ms": 19.7,
+   "wall_ms": 20.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1191,7 +1195,7 @@
      "latency_ms": 3116.5
     }
    },
-   "wall_ms": 19.5,
+   "wall_ms": 20.1,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -1264,7 +1268,7 @@
      "latency_ms": 9218.3
     }
    },
-   "wall_ms": 19.7,
+   "wall_ms": 23.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1291,11 +1295,28 @@
    "gold_value": 25126000000.0,
    "gold_unit": "USD",
    "prediction": {
-    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
-    "refused": true,
-    "answer_value": null,
-    "answer_unit": null,
-    "citations": [],
+    "answer": "Apple's total revenue increased by $25,126,000,000 from fiscal year 2024 to fiscal year 2025 [1][2].",
+    "refused": false,
+    "answer_value": 25126000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:RevenueFromContractWithCustomerExcludingAssessedTax:2023-10-01_2024-09-28:USD",
+      "filing_id": "AAPL-10K-2024FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "391,035,000,000 USD for 2023-10-01 to 2024-09-28"
+     },
+     {
+      "chunk_id": "xbrl:AAPL:RevenueFromContractWithCustomerExcludingAssessedTax:2024-09-29_2025-09-27:USD",
+      "filing_id": "AAPL-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "416,161,000,000 USD for 2024-09-29 to 2025-09-27"
+     }
+    ],
     "retrieved_chunk_ids": [],
     "steps": [
      "plan",
@@ -1307,26 +1328,22 @@
      "calculate",
      "answer",
      "verify",
-     "self_check",
-     "answer",
-     "verify",
-     "self_check",
-     "unresolved: numbers: these numbers do not appear in the evidence: 2.5126e+10"
+     "self_check"
     ],
     "usage": {
-     "prompt_tokens": 5470,
-     "completion_tokens": 839,
-     "llm_calls": 5,
-     "cost_usd": 0.007732000000000001,
-     "latency_ms": 3876.7
+     "prompt_tokens": 4884,
+     "completion_tokens": 540,
+     "llm_calls": 4,
+     "cost_usd": 0.006067200000000001,
+     "latency_ms": 2864.2999999999997
     }
    },
-   "wall_ms": 19.4,
+   "wall_ms": 15.4,
    "scores": {
-    "numeric_correct": 0.0,
-    "refusal_correct": 0.0,
-    "citation_precision": null,
-    "citation_recall": null,
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 0.5,
+    "citation_recall": 1.0,
     "recall_at_5": 1.0,
     "recall_at_10": 1.0,
     "mrr": 0.5,
@@ -1391,7 +1408,7 @@
      "latency_ms": 2760.5
     }
    },
-   "wall_ms": 18.3,
+   "wall_ms": 20.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1472,7 +1489,7 @@
      "latency_ms": 5417.5
     }
    },
-   "wall_ms": 23.0,
+   "wall_ms": 23.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1542,7 +1559,7 @@
      "latency_ms": 3625.8999999999996
     }
    },
-   "wall_ms": 17.0,
+   "wall_ms": 13.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1612,7 +1629,7 @@
      "latency_ms": 5606.299999999999
     }
    },
-   "wall_ms": 13.4,
+   "wall_ms": 12.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
