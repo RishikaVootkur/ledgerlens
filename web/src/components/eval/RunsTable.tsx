@@ -5,7 +5,7 @@ import { href } from "../../lib/router";
 import { Badge, Card, SectionHeader } from "../ui";
 import { formatDate } from "../../lib/style";
 
-const SUMMARY_COLUMNS = ["numeric_accuracy", "citation_precision", "latency_p50_ms"];
+const SUMMARY_COLUMNS = ["numeric_correct", "citation_precision", "recall_at_10", "model_latency_p50_ms"];
 
 export function RunsTable({ runs }: { runs: DashboardRun[] }) {
   const [newestFirst, setNewestFirst] = useState(true);
