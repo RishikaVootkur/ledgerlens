@@ -79,11 +79,13 @@ class _Run:
 # ------------------------------------------------------------------ helpers
 
 
-def _evidence_brief(registry: EvidenceRegistry, chars: int = 300) -> str:
+def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int = 18) -> str:
+    """Short view of the evidence for planning rounds, capped so a gather prompt stays well
+    under Groq's 8000 tokens per minute."""
     if not registry.items:
         return "(none yet)"
     lines = []
-    for item in registry.items.values():
+    for item in list(registry.items.values())[:max_items]:
         snippet = re.sub(r"\s+", " ", item.text)[:chars]
         lines.append(f"[{item.ref}] {item.header}: {snippet}")
     return "\n".join(lines)
@@ -124,53 +126,92 @@ def parse_json_answer(text: str) -> dict[str, Any]:
 
 
 _NUM = re.compile(
-    r"(?<![\w.])\(?-?\$?\s?(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)\)?\s*"
+    r"(?<![\w.])\(?-?(\$)?\s?(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)\)?\s*"
     r"(trillion|billion|million|thousand|bn|mn|[BMK](?![a-zA-Z]))?",
 )
+_MULT = {"trillion": 1e12, "billion": 1e9, "bn": 1e9, "b": 1e9, "million": 1e6, "mn": 1e6,
+         "m": 1e6, "thousand": 1e3, "k": 1e3}  # fmt: skip
+# Constants a calculation may use without evidence (percent, scale and period conversions).
+_CALC_CONSTANTS = {1.0, 2.0, 3.0, 4.0, 10.0, 12.0, 52.0, 100.0, 365.0, 1e3, 1e6, 1e9}
 
 
 def numbers_in(text: str) -> list[float]:
-    """Numbers with any scale word applied. Skips citation refs like E3 and bare years."""
+    """Numbers with any scale word applied. Skips citation refs like E3 and bare years
+    (a 4-digit integer from 1900 to 2100 with no $, comma, decimal or scale)."""
     text = re.sub(r"\[E\d+\]", " ", text)
     out = []
     for m in _NUM.finditer(text):
-        raw = m.group(1).replace(",", "")
+        dollar, raw_text, scale = m.group(1), m.group(2), (m.group(3) or "").lower()
+        raw = raw_text.replace(",", "")
         value = float(raw)
-        scale = (m.group(2) or "").lower()
-        if not scale and "." not in raw and 1900 <= value <= 2100:
-            continue  # a year, not a quantity
-        mult = {"trillion": 1e12, "billion": 1e9, "bn": 1e9, "b": 1e9, "million": 1e6,
-                "mn": 1e6, "m": 1e6, "thousand": 1e3, "k": 1e3}.get(scale, 1.0)  # fmt: skip
-        out.append(value * mult)
+        bare = not (dollar or scale or "," in raw_text or "." in raw)
+        if bare and 1900 <= value <= 2100:
+            continue
+        out.append(value * _MULT.get(scale, 1.0))
     return out
 
 
-def _grounded(value: float, sources: list[float]) -> bool:
-    """A number is grounded if some source number, at any reporting scale, matches it
-    after rounding (0.5% relative), or it is a small count like 1-31."""
-    if value == 0 or abs(value) <= 31:
-        return True
+def _matches(value: float, sources: list[float]) -> bool:
+    """True if some source number, at any reporting scale (up or down), equals `value`
+    within 0.5%: answers round, filings report in thousands or millions, and calculator
+    inputs are usually written in the filing's own units."""
     for src in sources:
-        for mult in (1.0, 1e3, 1e6, 1e9):
+        for mult in (1.0, 1e3, 1e6, 1e9, 1e-3, 1e-6, 1e-9):
             ref = src * mult
             if ref and abs(abs(value) - abs(ref)) / abs(ref) <= 0.005:
                 return True
     return False
 
 
+def _is_small_count(value: float) -> bool:
+    return value == int(value) and 0 <= value <= 12
+
+
+def grounding_sources(registry: EvidenceRegistry) -> list[float]:
+    """Numbers an answer may use: everything in passages and XBRL facts, plus the result of
+    each calculation whose inputs are themselves grounded (so `calculate("523000 * 1")`
+    cannot launder an invented number)."""
+    base: list[float] = []
+    for item in registry.items.values():
+        if item.kind != "calc":
+            base.extend(numbers_in(item.text))
+    sources = list(base)
+    for item in registry.items.values():
+        if item.kind != "calc":
+            continue
+        expression, _, result = item.text.rpartition(" = ")
+        inputs = numbers_in(expression)
+        if all(v in _CALC_CONSTANTS or _matches(v, base) for v in inputs):
+            sources.extend(numbers_in(result))
+    return sources
+
+
+def ungrounded_numbers(answer: str, sources: list[float]) -> list[float]:
+    return [v for v in numbers_in(answer) if not _is_small_count(v) and not _matches(v, sources)]
+
+
+def _grounded(value: float, sources: list[float]) -> bool:
+    return _is_small_count(value) or _matches(value, sources)
+
+
 def _norm(text: str) -> str:
-    return re.sub(r"[^a-z0-9.%$]+", " ", text.lower()).strip()
+    text = re.sub(r"(?<=\d),(?=\d{3})", "", text.lower())
+    return re.sub(r"[^a-z0-9.%$]+", " ", text).replace(". ", " ").strip(" .")
 
 
 def quote_supported(quote: str, text: str) -> bool:
-    """Exact (normalized) substring match, or at least 80% of the quote's tokens present."""
+    """A quote supports a source when every number in it appears in the source and its
+    words match: a normalized substring, or at least 80% of its tokens (3+ tokens)."""
     q, t = _norm(quote), _norm(text)
     if not q:
         return False
+    if not all(_matches(v, numbers_in(text)) or _is_small_count(v) for v in numbers_in(quote)):
+        return False
     if q in t:
         return True
-    tokens = q.split()
-    present = sum(1 for tok in tokens if tok in t.split())
+    tokens = [tok.strip(".") for tok in q.split()]
+    vocab = {tok.strip(".") for tok in t.split()}
+    present = sum(1 for tok in tokens if tok in vocab)
     return len(tokens) >= 3 and present / len(tokens) >= 0.8
 
 
@@ -216,11 +257,18 @@ def build_graph(run: _Run) -> Any:
         filters = state["filters"]
         for tc in state.get("pending", []):
             args = parse_arguments(tc.arguments)
+            # User-selected filters always override what the model asked for.
             if tc.name == "search_filings":
-                # User-selected filters always apply on top of what the model asked for.
                 for key, value in filters.model_dump().items():
                     if value is not None:
                         args[key] = value
+                if filters.fiscal_year is not None:
+                    args["strict_year"] = True  # never relax a year the user chose
+            elif tc.name == "get_company_facts":
+                if filters.ticker:
+                    args["ticker"] = filters.ticker
+                if filters.fiscal_year is not None:
+                    args["fiscal_year"] = filters.fiscal_year
             result = run_tool(tc.name, args, run.registry, cfg.retrieval)
             run.on_step(tc.name, json.dumps(args)[:200])
             steps.append(tc.name)
@@ -266,14 +314,11 @@ def build_graph(run: _Run) -> Any:
         if not cfg.verify_numbers or draft.get("refused"):
             return {}
         run.on_step("verify", "checking every number against the evidence")
-        sources: list[float] = []
-        for item in run.registry.items.values():
-            sources.extend(numbers_in(item.text))
-        bad = [v for v in numbers_in(str(draft.get("answer", ""))) if not _grounded(v, sources)]
+        bad = ungrounded_numbers(str(draft.get("answer", "")), grounding_sources(run.registry))
         problems = list(state.get("problems") or [])
         if bad:
             shown = ", ".join(f"{v:,.6g}" for v in bad[:5])
-            problems.append(f"these numbers do not appear in the evidence: {shown}")
+            problems.append(f"{NUMBERS}these numbers do not appear in the evidence: {shown}")
         return {"problems": problems, "steps": [*state.get("steps", []), "verify"]}
 
     def self_check(state: State) -> State:
@@ -283,24 +328,12 @@ def build_graph(run: _Run) -> Any:
         if not cfg.self_check:
             return {"draft": draft}
         run.on_step("self_check", "checking that every claim has a supporting source")
-        valid = []
-        for cit in draft.get("citations") or []:
-            if not isinstance(cit, dict):
-                continue
-            item = run.registry.items.get(str(cit.get("ref", "")).strip("[] "))
-            if item is None:
-                problems.append(f"citation {cit.get('ref')} does not exist")
-                continue
-            quote = str(cit.get("quote", ""))
-            if quote and not quote_supported(quote, item.text):
-                problems.append(f"quote for {item.ref} is not in that source")
-                continue
-            valid.append(cit)
-        cited_refs = set(re.findall(r"\[(E\d+)\]", str(draft.get("answer", ""))))
-        known = {r for r in cited_refs if r in run.registry.items}
-        if not draft.get("refused") and not valid and not known:
-            problems.append("the answer cites no supporting evidence")
-        draft["citations"] = valid
+        valid, invalid = check_citations(draft, run.registry, problems)
+        text = strip_refs(str(draft.get("answer", "")), invalid)
+        draft["answer"], draft["citations"] = text, valid
+        cited = {r for r in re.findall(r"\[(E\d+)\]", text) if r in run.registry.items}
+        if not draft.get("refused") and not (cited - {i for i in cited if _is_calc(run, i)}):
+            problems.append(f"{NOCITE}the answer cites no supporting evidence")
         steps.append("self_check")
         return {"draft": draft, "problems": problems, "steps": steps}
 
@@ -331,6 +364,57 @@ def build_graph(run: _Run) -> Any:
     return graph.compile()
 
 
+# ------------------------------------------------------------------ checks
+
+NUMBERS = "numbers: "
+NOCITE = "no citation: "
+
+
+def _is_calc(run: _Run, ref: str) -> bool:
+    item = run.registry.items.get(ref)
+    return item is not None and item.kind == "calc"
+
+
+def check_citations(
+    draft: dict[str, Any], registry: EvidenceRegistry, problems: list[str]
+) -> tuple[list[dict[str, Any]], set[str]]:
+    """Split the draft's citations into valid ones and refs to strip from the text.
+
+    A passage citation needs a quote found in that passage (numbers included). XBRL facts
+    and calculations may be cited without a quote. A ref used in the text with no valid
+    citation entry is invalid too, so a dropped citation cannot survive as a bare marker.
+    """
+    valid: list[dict[str, Any]] = []
+    invalid: set[str] = set()
+    for cit in draft.get("citations") or []:
+        if not isinstance(cit, dict):
+            continue
+        ref = str(cit.get("ref", "")).strip("[] ")
+        item = registry.items.get(ref)
+        if item is None:
+            problems.append(f"citation {ref} does not exist")
+            invalid.add(ref)
+            continue
+        quote = str(cit.get("quote") or "")
+        if item.kind == "chunk" and not quote_supported(quote, item.text):
+            problems.append(f"quote for {ref} is missing or not in that source")
+            invalid.add(ref)
+            continue
+        valid.append({"ref": ref, "quote": quote})
+    listed = {c["ref"] for c in valid}
+    for ref in set(re.findall(r"\[(E\d+)\]", str(draft.get("answer", "")))):
+        item = registry.items.get(ref)
+        if item is None or (item.kind == "chunk" and ref not in listed):
+            invalid.add(ref)
+    return valid, invalid
+
+
+def strip_refs(text: str, refs: set[str]) -> str:
+    for ref in refs:
+        text = text.replace(f"[{ref}]", "")
+    return re.sub(r"\s+([.,;])", r"\1", text).strip()
+
+
 # ------------------------------------------------------------------ finalize
 
 
@@ -348,11 +432,14 @@ def _to_citation(item: EvidenceItem, quote: str) -> Citation:
 def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[str]) -> AgentAnswer:
     """Renumber [E#] markers to [1], [2] in order of first use and build Citation objects.
 
-    Unresolved problems after the repair budget: an uncited answer becomes a refusal,
-    anything else is kept (the eval scores it) with the problems in `steps`.
+    When problems remain after the repair budget, an answer with ungrounded numbers or no
+    supporting citation becomes a refusal: the agent prefers saying it cannot answer to
+    shipping a number it could not tie to a source. Other leftovers are recorded in steps.
     """
     text = str(draft.get("answer") or "").strip()
-    refused = bool(draft.get("refused"))
+    refused = draft.get("refused") is True
+    if any(p.startswith((NUMBERS, NOCITE)) for p in problems):
+        refused, text = True, REFUSAL_TEXT
     quotes = {str(c.get("ref", "")).strip("[] "): str(c.get("quote", "")) for c in
               draft.get("citations") or [] if isinstance(c, dict)}  # fmt: skip
     order: list[str] = []
@@ -380,7 +467,10 @@ def finalize(draft: dict[str, Any], registry: EvidenceRegistry, problems: list[s
 
     value: float | None = None
     unit = draft.get("unit") if draft.get("unit") in _UNITS else None
-    if not refused and isinstance(draft.get("value"), int | float):
+    raw_value = draft.get("value")
+    if refused:
+        text = re.sub(r"\s*\[E?\d+\]", "", text).strip()
+    if not refused and isinstance(raw_value, int | float) and not isinstance(raw_value, bool):
         scale = _SCALES.get(str(draft.get("scale") or "one").lower(), 1.0)
         value = float(draft["value"]) * (scale if unit in ("USD", "shares", "count") else 1.0)
     answer_unit: AnswerUnit | None = unit if value is not None else None  # type: ignore[assignment]
@@ -411,7 +501,7 @@ def run_agent(
     with track_usage() as usage:
         state = graph.invoke(
             {"question": question, "filters": filters or SearchFilters(), "steps": []},
-            {"recursion_limit": 4 * config.max_rounds + 12},
+            {"recursion_limit": 4 * config.max_rounds + 6 * (config.max_repairs + 1) + 10},
         )
     result = finalize(state["draft"], registry, state.get("problems") or [])
     result.steps = [*state.get("steps", []), *result.steps]
