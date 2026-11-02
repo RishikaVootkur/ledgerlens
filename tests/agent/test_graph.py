@@ -395,3 +395,19 @@ def test_grouped_markers_no_longer_force_a_refusal(scripted):
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped)]
     result = run_agent("q", AgentConfig())
     assert not result.refused and "[1]" in result.answer
+
+
+def test_tool_order_is_stable_and_search_can_be_disabled(scripted):
+    queue, seen = scripted
+    queue += [_resp("READY"), _resp(json.dumps({"answer": "x", "refused": True}))]
+    run_agent("q", AgentConfig())
+    assert [t["function"]["name"] for t in seen[0]["tools"]] == [
+        "search_filings",
+        "get_company_facts",
+        "get_table",
+        "calculate",
+    ]
+    queue += [_resp("READY"), _resp(json.dumps({"answer": "x", "refused": True}))]
+    run_agent("q2", AgentConfig(search_tool=False))
+    assert [t["function"]["name"] for t in seen[2]["tools"]] == ["get_company_facts", "calculate"]
+    assert "search_filings" not in seen[2]["messages"][0]["content"]
