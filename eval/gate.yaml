@@ -1,0 +1,37 @@
+# CI regression gate for the replayed eval slice (read by ledgerlens.eval.gate).
+#
+# CI replays the committed LLM response cache, so the slice is deterministic:
+# the same code gives the same answers and the same scores. Any drop in a
+# quality metric therefore means the code changed behavior, which is why the
+# thresholds below are 0.0. Raise a threshold only for a deliberate trade-off,
+# and say why in the PR. For a live (non-replayed) slice, use something like
+# 0.05 instead, since sampling noise moves the means.
+#
+# Thresholds are the largest allowed fall in the per-question mean
+# (baseline minus candidate), compared over questions both runs scored.
+# Every metric is higher-is-better.
+
+max_drop:
+  numeric_correct: 0.0      # numeric answer within tolerance of the gold
+  refusal_correct: 0.0      # refused exactly when the question is unanswerable
+  judge_correct: 0.0        # LLM judge verdict (cached, so also deterministic in replay)
+  citation_precision: 0.0   # share of citations that support their claim
+  citation_recall: 0.0      # share of labeled evidence pages the answer cites
+  recall_at_5: 0.0
+  mrr: 0.0
+  ndcg_at_10: 0.0
+
+# Metrics not listed above. null reports them without gating.
+default_max_drop: null
+
+# Score keys whose per-question changes are listed in the PR comment.
+correctness_metrics:
+  - numeric_correct
+  - refusal_correct
+  - judge_correct
+
+# A crash on any question fails the gate, even if the means look fine.
+fail_on_error: true
+
+# Every baseline question must still be in the candidate run.
+fail_on_missing: true
