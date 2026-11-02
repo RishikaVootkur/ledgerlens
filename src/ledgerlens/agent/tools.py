@@ -30,7 +30,7 @@ class RetrievalConfig:
     strategy: ChunkStrategy = "section"
     method: Method = "hybrid"
     k: int = 6
-    index_version: str = "v1"
+    index_version: str = "auto"
 
 
 # ------------------------------------------------------------------ tool schemas
@@ -152,7 +152,11 @@ def _cached_tool(
     replay = s.llm_mode == "replay"
     committed = s.eval_dir / "cache"
     cache = ResponseCache(committed) if replay else ResponseCache(s.cache_dir, [committed])
-    payload = {"tool": name, "args": args, "config": config.__dict__}
+    payload = {
+        "tool": name,
+        "args": args,
+        "config": {**config.__dict__, "index_version": resolve_index_version(config)},
+    }
     key = cache_key("tool", payload)
     if (hit := cache.get("tool", key)) is not None:
         return hit["result"]
@@ -163,15 +167,21 @@ def _cached_tool(
     return result
 
 
+def resolve_index_version(config: RetrievalConfig) -> str:
+    """`auto` means the fingerprint the indexer wrote for this strategy, so a reindex
+    invalidates cached search results. Replayed configs pin an explicit version."""
+    if config.index_version != "auto":
+        return config.index_version
+    path = get_settings().data_dir / "index" / f"version_{config.strategy}.txt"
+    return path.read_text().strip() if path.exists() else "none"
+
+
 def _search(args: dict[str, Any], config: RetrievalConfig) -> list[dict[str, Any]]:
-    filters = SearchFilters(
-        ticker=args.get("ticker"),
-        fiscal_year=args.get("fiscal_year"),
-        form=args.get("form"),
-        doc_name=args.get("doc_name"),
+    filters = SearchFilters.model_validate(
+        {k: args.get(k) for k in ("ticker", "fiscal_year", "form", "filing_id", "doc_name")}
     )
     hits = Retriever(config.strategy, config.method).search(args["query"], config.k, filters)
-    if not hits and not filters.is_empty() and args.get("fiscal_year"):
+    if not hits and args.get("fiscal_year") and not args.get("strict_year"):
         # Fiscal years are easy to get off by one; retry once without the year.
         relaxed = filters.model_copy(update={"fiscal_year": None})
         hits = Retriever(config.strategy, config.method).search(args["query"], config.k, relaxed)

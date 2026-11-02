@@ -45,6 +45,7 @@ def build_index(
     all_chunks = list(store.iter_strategy(strategy))
     BM25Index.build(all_chunks).save(index_dir() / f"bm25_{strategy}")
     get_bm25.cache_clear()  # this process must not keep searching the old index
+    (index_dir() / f"version_{strategy}.txt").write_text(store.fingerprint(strategy))
     stats = {"loaded": loaded, "removed": len(removed), "bm25_chunks": len(all_chunks)}
     stats["embedded"] = 0
     log.info("index.bm25", strategy=strategy, chunks=len(all_chunks), removed=len(removed))
