@@ -298,3 +298,15 @@ def test_refused_answers_carry_no_markers_and_bool_is_not_a_value():
     out = finalize({"answer": "x [E1]", "refused": False, "value": True, "unit": "count",
                     "citations": [{"ref": "E1", "quote": "t"}]}, reg, [])  # fmt: skip
     assert out.answer_value is None
+
+
+def test_string_values_from_the_model_are_parsed():
+    reg = EvidenceRegistry()
+    reg.add(EvidenceItem("", "fact", "f1", "F", "S", None, None, "t", "h"))
+    for raw, expected in (("21,155", 21_155e6), ("$1.5", 1.5e6), ("(3.2)", -3.2e6), ("n/a", None)):
+        out = finalize(
+            {"answer": "x [E1]", "refused": False, "value": raw, "scale": "million", "unit": "USD"},
+            reg,
+            [],
+        )
+        assert out.answer_value == (pytest.approx(expected) if expected is not None else None)
