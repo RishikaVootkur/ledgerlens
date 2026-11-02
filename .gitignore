@@ -18,7 +18,7 @@ dist/
 build/
 
 # Data (downloaded at runtime)
-data/
+data/*
 !data/.gitkeep
 
 # Local caches (the CI replay slice lives in eval/cache and is committed)
