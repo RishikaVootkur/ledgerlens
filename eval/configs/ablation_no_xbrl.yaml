@@ -1,7 +1,7 @@
 # Ablation: XBRL facts tool removed
 name: ablation_no_xbrl
 description: "Ablation: XBRL facts tool removed"
-model: groq-qwen3.8-27b
+model: gemini-3.5-flash-lite
 strategy: section
 method: hybrid
 k: 6
@@ -12,4 +12,5 @@ self_check: true
 datasets: [xbrl, financebench, unanswerable]
 qids_file: eval/slices/ablation_dev.txt
 scope: document
-concurrency: 3
+concurrency: 2
+citation_support: false

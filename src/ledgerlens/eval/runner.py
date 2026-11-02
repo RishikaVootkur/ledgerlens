@@ -77,6 +77,9 @@ class EvalConfig(BaseModel):
     # answer models; calibrated in eval/reports/judge_calibration_*.json.
     judge: bool = True
     judge_model: str = DEFAULT_JUDGE_MODEL
+    # LLM check that each cited passage supports a text answer (one judge call per
+    # citation). Off saves judge budget; text-answer citation precision is then unscored.
+    citation_support: bool = True
 
     def agent_config(self) -> AgentConfig:
         return AgentConfig(
@@ -213,7 +216,8 @@ def run_one(question: Question, config: EvalConfig) -> QuestionResult:
             return judge_support(claim, passage, model=config.judge_model)
 
         try:
-            scores = score(question, answer, registry, support if use_judge else None)
+            check = support if use_judge and config.citation_support else None
+            scores = score(question, answer, registry, check)
         except Exception as exc:  # a judge outage must not discard the agent's answer
             scores = score(question, answer, registry, None)
             log.warning("eval.support_check_failed", qid=question.qid, error=str(exc)[:200])

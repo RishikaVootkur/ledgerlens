@@ -13,3 +13,4 @@ datasets: [xbrl, financebench, unanswerable]
 qids_file: eval/slices/ablation_dev.txt
 scope: document
 concurrency: 2
+citation_support: false

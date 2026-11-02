@@ -1,7 +1,7 @@
 # Fix 1 before/after: the original agent re-issued identical tool calls every round.
 name: ablation_no_dedupe
 description: "Before fix 1: repeated identical tool calls allowed (original behavior)"
-model: groq-qwen3.8-27b
+model: gemini-3.5-flash-lite
 strategy: section
 method: hybrid
 k: 6
@@ -12,5 +12,6 @@ self_check: true
 datasets: [xbrl, financebench, unanswerable]
 qids_file: eval/slices/ablation_dev.txt
 scope: document
-concurrency: 3
+concurrency: 2
 dedupe_tool_calls: false
+citation_support: false

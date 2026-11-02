@@ -1,7 +1,7 @@
 # Ablation: fixed-size chunks (FinanceBench questions only)
 name: ablation_fixed_chunks
 description: "Ablation: fixed-size chunks (FinanceBench questions only)"
-model: groq-qwen3.8-27b
+model: gemini-3.5-flash-lite
 strategy: fixed
 method: hybrid
 k: 6
@@ -12,4 +12,5 @@ self_check: true
 datasets: [financebench]
 qids_file: eval/slices/ablation_dev.txt
 scope: document
-concurrency: 3
+concurrency: 2
+citation_support: false
