@@ -172,7 +172,13 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
               </span>
             }
           />
-          <div className="grid gap-3 sm:grid-cols-[10rem_10rem_minmax(0,1fr)]">
+          <div
+            className={
+              retrievalOnly
+                ? "grid gap-3 sm:grid-cols-[10rem_minmax(0,1fr)]"
+                : "grid gap-3 sm:grid-cols-[10rem_10rem_minmax(0,1fr)]"
+            }
+          >
             <div>
               <label htmlFor={ids.ds} className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">
                 Dataset
@@ -191,25 +197,27 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
                 ))}
               </select>
             </div>
-            <div className={retrievalOnly ? "hidden" : undefined}>
-              <label htmlFor={ids.out} className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">
-                Outcome
-              </label>
-              <select
-                id={ids.out}
-                className={inputClass}
-                value={filters.outcome}
-                onChange={(e) =>
-                  setFilters((f) => ({ ...f, outcome: e.target.value as ResultFilters["outcome"] }))
-                }
-              >
-                {OUTCOMES.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {retrievalOnly ? null : (
+              <div>
+                <label htmlFor={ids.out} className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  Outcome
+                </label>
+                <select
+                  id={ids.out}
+                  className={inputClass}
+                  value={filters.outcome}
+                  onChange={(e) =>
+                    setFilters((f) => ({ ...f, outcome: e.target.value as ResultFilters["outcome"] }))
+                  }
+                >
+                  {OUTCOMES.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div>
               <label htmlFor={ids.q} className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">
                 Search
@@ -305,7 +313,7 @@ function RunView({ run, qid }: { run: RunFile; qid: string | null }) {
               })}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={columnCount}className="px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
+                  <td colSpan={columnCount} className="px-5 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
                     No questions match these filters.
                   </td>
                 </tr>
