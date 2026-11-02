@@ -11,12 +11,14 @@ from __future__ import annotations
 import json
 import sqlite3
 from collections.abc import Callable
+from enum import StrEnum
 from typing import Annotated, Any, Literal, NoReturn
 
 import httpx
 import typer
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
+from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
 from pydantic import BaseModel, Field
 
@@ -316,22 +318,75 @@ def build_server(*, include_ask: bool = True) -> MCPServer:
 
 # ------------------------------------------------------------------ CLI
 
+# The SDK turns on Host/Origin checks by itself only for these bind addresses.
+LOOPBACK_HOSTS = ("127.0.0.1", "localhost", "::1")
+
+
+class Transport(StrEnum):
+    stdio = "stdio"
+    http = "http"
+
+
+def http_settings(
+    host: str, allow_remote: bool, allowed_hosts: list[str], ask: bool | None
+) -> tuple[bool, TransportSecuritySettings | None]:
+    """Decide whether to expose `ask` and which Host/Origin values to accept over HTTP.
+
+    Loopback keeps the SDK's own DNS rebinding protection. Any other bind address serves
+    the tools to the network without auth, so it needs --allow-remote and an explicit
+    --allowed-host list, and `ask` (which spends LLM quota) is off unless --ask is passed.
+    """
+    if host in LOOPBACK_HOSTS:
+        return (True if ask is None else ask), None
+    if not allow_remote:
+        raise typer.BadParameter(
+            f"{host} is not a loopback address; the server has no auth. Pass --allow-remote "
+            "to serve it anyway (behind an authenticating proxy).",
+            param_hint="--host",
+        )
+    if not allowed_hosts:
+        raise typer.BadParameter(
+            "list the Host values clients will use, e.g. --allowed-host mcp.example.com:8765",
+            param_hint="--allowed-host",
+        )
+    origins = [f"{scheme}://{h}" for h in allowed_hosts for scheme in ("https", "http")]
+    security = TransportSecuritySettings(
+        enable_dns_rebinding_protection=True,
+        allowed_hosts=list(allowed_hosts),
+        allowed_origins=origins,
+    )
+    return bool(ask), security
+
+
 mcp_app = typer.Typer(help="Serve the LedgerLens tools over the Model Context Protocol.")
 
 
 @mcp_app.command("serve")
 def serve(
-    transport: str = typer.Option("stdio", help="stdio (default) or http (streamable HTTP)"),
+    transport: Transport = typer.Option(  # noqa: B008
+        Transport.stdio, help="stdio, or http (streamable HTTP)"
+    ),
     host: str = typer.Option("127.0.0.1", help="HTTP bind address"),
     port: int = typer.Option(8765, help="HTTP port"),
-    no_ask: bool = typer.Option(False, "--no-ask", help="Do not expose the LLM-backed ask tool"),
+    ask: bool | None = typer.Option(
+        None,
+        "--ask/--no-ask",
+        help="Expose the LLM-backed ask tool (default: on, off for a remote --host)",
+        show_default=False,
+    ),
+    allow_remote: bool = typer.Option(
+        False, "--allow-remote", help="Allow a non-loopback --host (the server has no auth)"
+    ),
+    allowed_hosts: list[str] = typer.Option(  # noqa: B008
+        [], "--allowed-host", help="Accepted Host header for a remote bind (repeatable)"
+    ),
 ) -> None:
     """Run the MCP server. stdio for local clients, http serves streamable HTTP at /mcp."""
-    server = build_server(include_ask=not no_ask)
-    if transport == "stdio":
-        server.run("stdio")
-    elif transport == "http":
-        typer.echo(f"LedgerLens MCP on http://{host}:{port}/mcp", err=True)
-        server.run("streamable-http", host=host, port=port)
-    else:
-        raise typer.BadParameter("transport must be stdio or http", param_hint="--transport")
+    if transport is Transport.stdio:
+        build_server(include_ask=True if ask is None else ask).run("stdio")
+        return
+    include_ask, security = http_settings(host, allow_remote, allowed_hosts, ask)
+    typer.echo(f"LedgerLens MCP on http://{host}:{port}/mcp", err=True)
+    build_server(include_ask=include_ask).run(
+        "streamable-http", host=host, port=port, transport_security=security
+    )
