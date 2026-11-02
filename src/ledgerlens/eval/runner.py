@@ -155,7 +155,9 @@ def score(
     answered = question.answerable and not answer.refused
     scores["citation_precision"] = metrics.citation_precision(supported) if answered else None
     scores["citation_recall"] = metrics.citation_recall(cited, relevant) if answered else None
-    retrieved = [item_keys(i) for i in registry.items.values() if i.kind == "chunk"]
+    # Retrieved evidence in the order the agent gathered it: passages and XBRL facts (a
+    # fact from the right filing is relevant evidence for a filing-level XBRL label).
+    retrieved = [item_keys(i) for i in registry.items.values() if i.kind != "calc"]
     if question.answerable and relevant:
         scores["recall_at_5"] = metrics.recall_at_k(retrieved, relevant, 5)
         scores["recall_at_10"] = metrics.recall_at_k(retrieved, relevant, 10)

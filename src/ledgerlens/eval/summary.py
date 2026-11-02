@@ -69,6 +69,8 @@ def summarize_scores(
       get a percentile bootstrap interval. Keys with no values are left out.
     * `latency_p50_ms`, `latency_p95_ms`: percentiles of one latency source
       (see `latency_source`), with bootstrap intervals.
+    * `model_latency_p50_ms`, `model_latency_p95_ms`: percentiles of summed LLM call
+      latency, which excludes rate-limit waits.
     * `tokens_mean`, `cost_usd_mean`: mean tokens and list-price cost per
       answered question, with bootstrap intervals.
     * `error_rate`: share of questions that crashed, with a Wilson interval.
@@ -88,6 +90,12 @@ def summarize_scores(
     if any(v is not None for v in latencies):
         summary["latency_p50_ms"] = boot(latencies, stat=partial(_pct, q=50))
         summary["latency_p95_ms"] = boot(latencies, stat=partial(_pct, q=95))
+    # Model time alone (summed LLM call latency). Wall time on free tiers is dominated by
+    # rate-limit pacing, so model latency is the fairer number for comparing models.
+    model_ms = [r.prediction.usage.latency_ms if r.prediction else None for r in results]
+    if any(v for v in model_ms):
+        summary["model_latency_p50_ms"] = boot(model_ms, stat=partial(_pct, q=50))
+        summary["model_latency_p95_ms"] = boot(model_ms, stat=partial(_pct, q=95))
     tokens = [total_tokens(r) for r in results]
     if any(v is not None for v in tokens):
         summary["tokens_mean"] = boot([None if t is None else float(t) for t in tokens])
