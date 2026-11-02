@@ -266,7 +266,9 @@ def build_graph(run: _Run) -> Any:
     cfg = run.config
     tool_names = ["search_filings", "get_table", "calculate"] if cfg.search_tool else ["calculate"]
     if cfg.xbrl_tool:
-        tool_names.insert(0, "get_company_facts")
+        # Position 1 when search is on keeps the original tool list (and every cached
+        # request recorded with it) unchanged.
+        tool_names.insert(1 if cfg.search_tool else 0, "get_company_facts")
     tools = openai_tools(tool_names)
 
     def gather(state: State) -> State:
@@ -275,7 +277,12 @@ def build_graph(run: _Run) -> Any:
         resp = complete(
             cfg.model,
             [
-                {"role": "system", "content": prompts.GATHER_SYSTEM},
+                {
+                    "role": "system",
+                    "content": prompts.GATHER_SYSTEM
+                    if cfg.search_tool
+                    else prompts.GATHER_SYSTEM_NO_SEARCH,
+                },
                 {
                     "role": "user",
                     "content": prompts.GATHER_USER.format(
