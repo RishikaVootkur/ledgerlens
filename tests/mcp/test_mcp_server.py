@@ -151,7 +151,7 @@ async def test_lists_tools_with_schemas_and_read_only_annotations(connect):
         assert tools["get_table"].input_schema["required"] == ["chunk_id"]
         facts = tools["get_company_facts"].input_schema
         assert facts["required"] == ["ticker", "metric"]
-        assert set(facts["properties"]) == {"ticker", "metric", "fiscal_year", "duration"}
+        assert set(facts["properties"]) == {"ticker", "metric", "fiscal_year", "duration", "limit"}
         assert tools["calculate"].input_schema["required"] == ["expression"]
 
 
@@ -344,6 +344,9 @@ async def test_get_table_returns_every_chunk_of_the_table(connect):
         data = result.structured_content
         assert data is not None
         assert [c["chunk_id"] for c in data["chunks"]] == [CHUNKS[0].chunk_id, CHUNKS[1].chunk_id]
+        padded = await client.call_tool("get_table", {"chunk_id": f"  {CHUNKS[2].chunk_id}\n"})
+        assert padded.structured_content is not None
+        assert padded.structured_content["chunk_id"] == CHUNKS[2].chunk_id
         missing = await client.call_tool("get_table", {"chunk_id": "nope"})
         assert missing.is_error and "Unknown chunk_id" in missing.content[0].text
 
@@ -410,3 +413,14 @@ async def test_legacy_handshake_clients_still_connect():
         assert c.protocol_version == LATEST_HANDSHAKE_VERSION
         result = await c.call_tool("calculate", {"expression": "1 + 1"})
         assert result.structured_content == {"expression": "1 + 1", "value": 2.0}
+
+
+async def test_get_company_facts_limit(connect):
+    async with connect() as client:
+        one = await client.call_tool(
+            "get_company_facts", {"ticker": "AAPL", "metric": "revenue", "limit": 1}
+        )
+        assert one.structured_content is not None
+        assert [f["value"] for f in one.structured_content["facts"]] == [416161e6]
+        too_many = {"ticker": "AAPL", "metric": "revenue", "limit": mcp_server.MAX_FACTS + 1}
+        assert (await client.call_tool("get_company_facts", too_many)).is_error

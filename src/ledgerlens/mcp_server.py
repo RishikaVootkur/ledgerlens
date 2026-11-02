@@ -35,6 +35,7 @@ log = get_logger(__name__)
 
 COMPANIES_URI = "ledgerlens://companies"
 MAX_K = 20
+MAX_FACTS = 40
 
 INSTRUCTIONS = (
     "LedgerLens searches SEC 10-K and 10-Q filings. Use search_filings for passages (filter "
@@ -82,7 +83,7 @@ class TableResult(BaseModel):
 class FactsResult(BaseModel):
     ticker: str
     metric: str
-    facts: list[Fact] = Field(description="Newest period first")
+    facts: list[Fact] = Field(description="At most `limit` facts, newest period first")
 
 
 class CalcResult(BaseModel):
@@ -206,8 +207,9 @@ def get_table(
 ) -> TableResult:
     """Return the full table(s) contained in a search result, by its chunk_id, when a
     passage shows only part of a table. A passage without a table is returned as is."""
+    chunk_id = chunk_id.strip()
     try:
-        chunks = agent_tools._table(chunk_id.strip())
+        chunks = agent_tools._table(chunk_id)
     except Exception as exc:
         _reraise_safely("get_table", exc, _search_failure)
     if not chunks:
@@ -231,9 +233,13 @@ def get_company_facts(
         Duration | None,
         Field(description="FY, Q (single quarter), YTD-6M, YTD-9M or instant (balance sheet)"),
     ] = None,
+    limit: Annotated[
+        int, Field(ge=1, le=MAX_FACTS, description="Maximum facts, newest period first")
+    ] = 8,
 ) -> FactsResult:
     """Exact values the company reported in XBRL (SEC companyfacts). Each fact carries its
-    own period dates and the filing that first reported it."""
+    own period dates and the filing that first reported it. Returns up to `limit` facts
+    (default 8), newest period first, so filter by fiscal_year or duration for older ones."""
     symbol = _ticker(ticker)
     name = metric.strip()
     if name.lower() not in METRICS and ":" not in name:
@@ -242,7 +248,7 @@ def get_company_facts(
             "or a concept like us-gaap:GrossProfit."
         )
     try:
-        facts = xbrl.get_company_facts(symbol, name, fiscal_year, duration)
+        facts = xbrl.get_company_facts(symbol, name, fiscal_year, duration, limit)
     except Exception as exc:
         _reraise_safely("get_company_facts", exc, _sec_failure)
     return FactsResult(ticker=symbol, metric=name, facts=facts)
