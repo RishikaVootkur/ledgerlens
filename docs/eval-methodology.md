@@ -13,6 +13,12 @@ How LedgerLens is measured, and why the numbers can be trusted. Every number in 
 
 Each dataset has a datasheet in `eval/datasets/`. Splits are fixed by a hash of the question id within each question type (about 40% dev, 60% test). The test split is held out: it is run once, at the end, and only reported.
 
+Free-tier quotas (Groq: 200,000 tokens per model per day; Gemini 3.8 Flash: 20 requests per day) bound how many agent questions fit in a day, so experiments use fixed, committed slices:
+
+- `eval/slices/ablation_dev.txt`: 62 dev questions (24 XBRL across single-fact, year-over-year and multi-step; 20 FinanceBench across its three question types; 18 unanswerable, three per category), chosen by a hash of the question id within each type. Every agent ablation and fix comparison runs on exactly these questions.
+- `eval/slices/final_test.txt`: 120 held-out test questions (60 XBRL, 36 FinanceBench, 24 unanswerable), stratified the same way and run once with the final configuration.
+- The full FinanceBench dev split (60 questions) is used for the LLM-free retrieval ablation.
+
 ## Running an experiment
 
 ```bash
@@ -50,6 +56,6 @@ The judge (GPT-OSS 120B on Groq, a different model family from every answer mode
 
 Every LLM response and every tool result (search hits, XBRL facts, tables) is cached on disk, keyed on a SHA-256 of the full request, including the retrieval configuration and an index fingerprint. Reruns are free and identical.
 
-`--record-cache` copies every cache entry a run touched into `eval/cache/`, which is committed. In CI the gate (`.github/workflows/eval-gate.yml`) sets `LLM_MODE=replay`, so the agent can only read the committed cache: no keys, no network, no Qdrant. It replays the 20-question slice (`eval/configs/ci_slice.yaml`), compares it with the committed baseline (`eval/baselines/ci_slice.json`) and fails if any gated metric drops past its threshold, a question errors, or a metric is scored on fewer questions than before. The metric diff is posted as a PR comment.
+`--record-cache` copies every cache entry a run touched into `eval/cache/`, which is committed. In CI the gate (`.github/workflows/eval-gate.yml`) sets `LLM_MODE=replay`, so the agent can only read the committed cache: no keys, no network, no Qdrant. It replays the 20-question smoke slice (`eval/configs/ci_slice.yaml`; an expanded 30-question slice with 5 FinanceBench and 5 unanswerable questions, listed in `eval/slices/ci_slice.txt`, replaces it once recorded), compares it with the committed baseline (`eval/baselines/ci_slice.json`) and fails if any gated metric drops past its threshold, a question errors, or a metric is scored on fewer questions than before. The metric diff is posted as a PR comment.
 
 A change that alters prompts, tools or retrieval produces new requests, which miss the committed cache and fail the gate loudly. That is intended: the author re-records the slice locally (`eval run --config eval/configs/ci_slice.yaml --record-cache`), reviews the score change, and commits the new baseline and cache with the PR. The slice config pins the index fingerprint it was recorded against (`index_version`), so reindexing the corpus does not silently change replayed search results.
