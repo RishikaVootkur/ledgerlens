@@ -14,20 +14,20 @@ Ask a question about a US public company ("How much did Coca-Cola's net income c
 
 ## Headline results
 
-Final agent on Gemini 3.5 Flash-Lite, run once on a held-out test subsample of 120 questions (60 XBRL, 36 FinanceBench, 24 unanswerable, stratified by question type) after all development was done on dev questions. 95% intervals: Wilson for rates, bootstrap otherwise.
+Final agent (all four fixes) on Gemini 3.5 Flash-Lite, on a held-out test subsample of 120 questions (60 XBRL, 36 FinanceBench, 24 unanswerable, stratified by question type). Development used dev questions only; the test split was run twice, once before fix 4 and once after, and both runs are committed. 95% intervals: Wilson for rates, bootstrap otherwise.
 
 | Metric | Value [95% CI] | n |
 |---|---|---|
 | Numeric accuracy (XBRL + FinanceBench numeric) | 80.6% [70.0%, 88.0%] | 72 |
 | Judge accuracy (FinanceBench, calibrated judge) | 55.6% [39.6%, 70.5%] | 36 |
 | Refusal accuracy on unanswerable questions (no hallucinated answer) | 100.0% [86.2%, 100.0%] | 24 |
-| Refusal accuracy, all questions (also counts false refusals) | 88.3% [81.4%, 92.9%] | 120 |
-| Citation precision (cited source states the answer's numbers) | 100.0% [95.3%, 100.0%] | 78 |
-| Citation recall (labeled evidence cited) | 91.0% [84.3%, 96.4%] | 83 |
+| Refusal accuracy, all questions (also counts false refusals) | 89.2% [82.3%, 93.6%] | 120 |
+| Citation precision (cited source states the answer's numbers) | 100.0% [95.4%, 100.0%] | 79 |
+| Citation recall (labeled evidence cited) | 88.7% [81.5%, 95.2%] | 84 |
 | Model latency p50 | 3.4 s | 120 |
-| Cost per question (list-price equivalent) | $0.0032 | 120 |
+| Cost per question (list-price equivalent) | $0.0033 | 120 |
 
-The main weakness is visible in the second refusal row: the agent never answered an unanswerable question, but it refused 31% of answerable FinanceBench questions (see error analysis).
+The main weakness is visible in the second refusal row: the agent never answered an unanswerable question, but it still refused 28% of answerable FinanceBench questions (31% before fix 4; see error analysis).
 
 | Evaluation-lab check | Result |
 |---|---|
@@ -78,7 +78,7 @@ flowchart LR
 
 ## Ablations
 
-Development numbers on fixed dev questions; the held-out test split was run only once, for the headline above. Deltas are paired comparisons on the same questions (exact McNemar for 0/1 metrics, sign-flip permutation otherwise, Holm-corrected).
+Development numbers on fixed dev questions. These ablations were recorded before fix 4, so their baseline is the agent with fixes 1 to 3. Deltas are paired comparisons on the same questions (exact McNemar for 0/1 metrics, sign-flip permutation otherwise, Holm-corrected).
 
 **Retrieval method** (LLM-free, 60 FinanceBench dev questions, search within the question's document, scored against human-labeled evidence pages):
 
@@ -119,22 +119,23 @@ The local 8B model is significantly worse (−55 points, Holm p = 0.007): it ref
 
 Every failed question is sorted into a taxonomy by `ledgerlens eval analyze` (rule-based, auditable, no model calls; categories are written into the run files and shown on the dashboard):
 
-| Category | Held-out test (23 of 120 failed) | Dev slice (13 of 62 failed) | What it looks like |
+| Category | Held-out test (24 of 120 failed) | Dev slice (13 of 62 failed) | What it looks like |
 |---|---|---|---|
-| Bad refusal | 14 | 8 | mostly refusing answerable FinanceBench questions; on dev, two are unanswerable "old period" questions the agent answered from XBRL history beyond the ingested filings (a dataset/tool scope mismatch, decision D20) |
+| Bad refusal | 13 | 8 | mostly refusing answerable FinanceBench questions; on dev, two are unanswerable "old period" questions the agent answered from XBRL history beyond the ingested filings (a dataset/tool scope mismatch, decision D20) |
 | Retrieval miss | 5 | 1 | the labeled evidence page never reached the agent |
 | Arithmetic | 3 | 2 | year-over-year change computed from the wrong pair of facts |
-| Table misread | 1 | 2 | the right page was retrieved but another cell was used |
+| Table misread | 3 | 2 | the right page was retrieved but another cell was used |
 
-False refusals on FinanceBench are the largest remaining problem: the verifier and self-check refuse when the model's numbers or quotes cannot be matched to the PDF text, which is noisier than EDGAR HTML. Loosening that safely is the next fix.
+False refusals on FinanceBench are the largest remaining problem. Diagnosing them on dev showed most were not caused by the checks: metric questions need two financial statements, the agent's searches found one, and it correctly said it lacked inputs. Fix 4 (below) targets that; the remaining refusals each have a different cause.
 
-Three targeted fixes came out of reading the dev failures. Each sits behind a flag, so its effect is a paired, replayable comparison on the 62-question dev slice (none is individually significant at this size):
+Four targeted fixes came out of reading the dev failures. Each sits behind a flag, so its effect is a paired, replayable comparison on the 62-question dev slice (none is individually significant at this size):
 
 | Fix | What was wrong | Effect when the fix is removed |
 |---|---|---|
 | 1. Skip repeated tool calls | models re-issued the same XBRL lookup every planning round | +0.6% tokens on Flash-Lite, no accuracy change (it mattered more on Groq Qwen, where repeats ate the 8k tokens/minute budget) |
 | 2. Accept derived numbers | the verifier refused correct answers whose ratio the model computed itself | numeric −3.1, FinanceBench judge −5.0, refusal accuracy −3.2 points |
 | 3. Split grouped citation markers | `[E1, E4]` looked like no citation and forced a refusal | numeric −9.4, judge −5.0, refusal accuracy −6.5 points |
+| 4. Statement-aware retrieval | FinanceBench formulas need two statements and the agent found one; formulas say "COGS" where statements say "cost of sales" | dev: FinanceBench numeric 0.50 to 0.625, labeled-page recall@10 +3.4 points; held-out: FinanceBench false refusals 31% to 28%, recall@10 +1.6 points, numeric and judge unchanged (none significant) |
 
 Fix 2 needed a second iteration: the first version accepted any number one arithmetic step away from any evidence number, and a measurement showed it would accept 99% of invented numbers. It now derives only from inputs the answer states (or single-value XBRL facts it cites), with a tolerance set by the digits written: under 1% false acceptance in a 2,000-trial test. On recorded Groq Qwen answers the fixes also lifted the CI slice from 0.90 to 0.95 numeric accuracy.
 
