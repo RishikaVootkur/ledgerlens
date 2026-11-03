@@ -317,7 +317,7 @@ def stated_precision(text: str) -> dict[float, float]:
 
 
 def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
-    """True if `value` is one arithmetic step from two of `operands` (sum, difference,
+    """True if `value` is one arithmetic step from two of `operands` (sum, difference, mean,
     either ratio, either ratio as a percent, or a percent change), equal within `rel_tol`
     (half a unit of the last digit the answer wrote).
 
@@ -335,6 +335,7 @@ def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
             ops = (
                 a + b,
                 b - a,
+                (a + b) / 2,  # averages of two year-end balances
                 b / a,
                 a / b,
                 b / a * 100,
@@ -505,6 +506,9 @@ def build_graph(run: _Run) -> Any:
 
     def answer(state: State) -> State:
         run.on_step("answer", "writing a cited answer")
+        needs_statements = cfg.statement_search and bool(
+            statements_needed(state["question"], state["filters"])
+        )
         problems = state.get("problems") or []
         feedback = prompts.REPAIR_FEEDBACK.format(problems="; ".join(problems)) if problems else ""
         resp = complete(
@@ -517,7 +521,7 @@ def build_graph(run: _Run) -> Any:
                         question=state["question"],
                         evidence=_evidence_full(run.registry, cfg.answer_evidence_chars)
                         or "(no evidence was found)",
-                        feedback=feedback,
+                        feedback=(prompts.STATEMENT_NOTE if needs_statements else "") + feedback,
                     ),
                 },
             ],

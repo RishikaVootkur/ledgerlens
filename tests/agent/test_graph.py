@@ -496,3 +496,9 @@ def test_statement_search_adds_targeted_searches(scripted, monkeypatch):
         q, AgentConfig(statement_search=False), filters=SearchFilters(doc_name="X_2025_10K")
     )
     assert off.steps.count("search_filings") == 1
+
+
+def test_mean_of_two_stated_inputs_is_derivable():
+    from ledgerlens.agent.graph import derivable
+
+    assert derivable(43_762.5e6, [46_092e6, 41_433e6], 0.05 / 43_762.5)
