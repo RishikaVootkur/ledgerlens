@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-11-03T22:33:50.792310+00:00",
+ "generated_at": "2026-11-03T23:22:01.479617+00:00",
  "headline": {
-  "run_id": "final-test",
-  "title": "Held-out test subsample (120 questions): Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes",
+  "run_id": "final-test-v2",
+  "title": "Held-out test subsample (120 questions): Gemini 3.5 Flash-Lite, hybrid retrieval, all four fixes",
   "metrics": {
    "numeric_correct": {
     "value": 0.8055555555555556,
@@ -17,38 +17,365 @@
     "n": 36
    },
    "refusal_correct": {
-    "value": 0.8833333333333333,
-    "ci_low": 0.8136664838239611,
-    "ci_high": 0.9292188219216995,
+    "value": 0.8916666666666667,
+    "ci_low": 0.8234463978470834,
+    "ci_high": 0.9355885884582658,
     "n": 120
    },
    "citation_precision": {
     "value": 1.0,
-    "ci_low": 0.9530621902878059,
+    "ci_low": 0.9536287883460772,
     "ci_high": 1.0,
-    "n": 78
+    "n": 79
    },
    "citation_recall": {
-    "value": 0.9096385542168675,
-    "ci_low": 0.8433734939759037,
-    "ci_high": 0.963855421686747,
-    "n": 83
+    "value": 0.8869047619047619,
+    "ci_low": 0.8154761904761905,
+    "ci_high": 0.9523809523809523,
+    "n": 84
    },
    "model_latency_p50_ms": {
-    "value": 3425.15,
+    "value": 3449.0,
     "ci_low": 3286.5,
-    "ci_high": 3612.7,
+    "ci_high": 3624.6,
     "n": 120
    },
    "cost_usd_mean": {
-    "value": 0.0031712666666666666,
-    "ci_low": 0.003026040958333333,
-    "ci_high": 0.0033228317083333334,
+    "value": 0.0032682566666666665,
+    "ci_low": 0.003096084208333334,
+    "ci_high": 0.0034438194583333325,
     "n": 120
    }
   }
  },
  "runs": [
+  {
+   "run_id": "final-test-v2",
+   "config_name": "final_test",
+   "split": "test",
+   "created_at": "2026-11-03T23:20:07.866692+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9536287883460772,
+     "ci_high": 1.0,
+     "n": 79
+    },
+    "citation_recall": {
+     "value": 0.8869047619047619,
+     "ci_low": 0.8154761904761905,
+     "ci_high": 0.9523809523809523,
+     "n": 84
+    },
+    "cost_usd_mean": {
+     "value": 0.0032682566666666665,
+     "ci_low": 0.003096084208333334,
+     "ci_high": 0.0034438194583333325,
+     "n": 120
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.031019166418703486,
+     "n": 120
+    },
+    "judge_correct": {
+     "value": 0.5555555555555556,
+     "ci_low": 0.395810617556973,
+     "ci_high": 0.7045873125991978,
+     "n": 36
+    },
+    "latency_p50_ms": {
+     "value": 9.6,
+     "ci_low": 8.598749999999999,
+     "ci_high": 10.3,
+     "n": 120
+    },
+    "latency_p95_ms": {
+     "value": 24143.115,
+     "ci_low": 23391.684999999998,
+     "ci_high": 25208.45499999998,
+     "n": 120
+    },
+    "model_latency_p50_ms": {
+     "value": 3449.0,
+     "ci_low": 3286.5,
+     "ci_high": 3624.6,
+     "n": 120
+    },
+    "model_latency_p95_ms": {
+     "value": 19574.114999999983,
+     "ci_low": 7115.600000000001,
+     "ci_high": 34128.3,
+     "n": 120
+    },
+    "mrr": {
+     "value": 0.7325603505291004,
+     "ci_low": 0.6510325727513229,
+     "ci_high": 0.8038085937499999,
+     "n": 96
+    },
+    "ndcg_at_10": {
+     "value": 0.7749091395937144,
+     "ci_low": 0.7038878777080998,
+     "ci_high": 0.8357954554822691,
+     "n": 96
+    },
+    "numeric_correct": {
+     "value": 0.8055555555555556,
+     "ci_low": 0.6996724105411147,
+     "ci_high": 0.8804852062054944,
+     "n": 72
+    },
+    "recall_at_10": {
+     "value": 0.921875,
+     "ci_low": 0.8697916666666666,
+     "ci_high": 0.96875,
+     "n": 96
+    },
+    "recall_at_5": {
+     "value": 0.8541666666666666,
+     "ci_low": 0.78125,
+     "ci_high": 0.921875,
+     "n": 96
+    },
+    "refusal_correct": {
+     "value": 0.8916666666666667,
+     "ci_low": 0.8234463978470834,
+     "ci_high": 0.9355885884582658,
+     "n": 120
+    },
+    "tokens_mean": {
+     "value": 8216.666666666666,
+     "ci_low": 7787.6325,
+     "ci_high": 8667.545833333334,
+     "n": 120
+    }
+   }
+  },
+  {
+   "run_id": "ablation_default-dev",
+   "config_name": "ablation_default",
+   "split": "dev",
+   "created_at": "2026-11-03T23:16:08.238420+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9010990076755959,
+     "ci_high": 1.0,
+     "n": 35
+    },
+    "citation_recall": {
+     "value": 0.8552631578947368,
+     "ci_low": 0.7368421052631579,
+     "ci_high": 0.9473684210526315,
+     "n": 38
+    },
+    "cost_usd_mean": {
+     "value": 0.0032206919354838704,
+     "ci_low": 0.0029981141935483875,
+     "ci_high": 0.003467719072580645,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.55,
+     "ci_low": 0.34208534245034233,
+     "ci_high": 0.7418021417443759,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 10.2,
+     "ci_low": 8.54875,
+     "ci_high": 11.0,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 8275.305,
+     "ci_low": 7038.319999999998,
+     "ci_high": 9111.603999999073,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3308.5000000000005,
+     "ci_low": 3191.15,
+     "ci_high": 3495.2000000000003,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5144.884999999999,
+     "ci_low": 4258.754999999999,
+     "ci_high": 5603.299999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6586368698275812,
+     "ci_low": 0.5519237770491475,
+     "ci_high": 0.7666768582208305,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.7094412901505895,
+     "ci_low": 0.6152729507403348,
+     "ci_high": 0.8056380614671839,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.84375,
+     "ci_low": 0.682458504024696,
+     "ci_high": 0.9313557971749429,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.9204545454545454,
+     "ci_low": 0.8409090909090909,
+     "ci_high": 0.9772727272727273,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8709677419354839,
+     "ci_low": 0.7655067270982637,
+     "ci_high": 0.9331412194071697,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8235.91935483871,
+     "ci_low": 7675.028629032258,
+     "ci_high": 8878.429435483871,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "ablation_no_statement_search-dev",
+   "config_name": "ablation_no_statement_search",
+   "split": "dev",
+   "created_at": "2026-11-03T23:07:48.272554+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9010990076755959,
+     "ci_high": 1.0,
+     "n": 35
+    },
+    "citation_recall": {
+     "value": 0.8421052631578947,
+     "ci_low": 0.6958318822077686,
+     "ci_high": 0.9255613658484106,
+     "n": 38
+    },
+    "cost_usd_mean": {
+     "value": 0.003226488709677419,
+     "ci_low": 0.002992616612903225,
+     "ci_high": 0.003486344193548387,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.55,
+     "ci_low": 0.34208534245034233,
+     "ci_high": 0.7418021417443759,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 11.0,
+     "ci_low": 10.6,
+     "ci_high": 11.45,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 14.589999999999998,
+     "ci_low": 14.0,
+     "ci_high": 16.5,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3307.9000000000005,
+     "ci_low": 3181.7,
+     "ci_high": 3441.0,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5406.320000000001,
+     "ci_low": 4264.4,
+     "ci_high": 5943.599999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6565174614581729,
+     "ci_low": 0.5493594292729669,
+     "ci_high": 0.7661543084715021,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.6988108984256816,
+     "ci_low": 0.6000255172202714,
+     "ci_high": 0.7991039554488802,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.8125,
+     "ci_low": 0.6469084479862404,
+     "ci_high": 0.9111045531043405,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.8863636363636364,
+     "ci_low": 0.7954545454545454,
+     "ci_high": 0.9659090909090909,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8709677419354839,
+     "ci_low": 0.7655067270982637,
+     "ci_high": 0.9331412194071697,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8170.435483870968,
+     "ci_low": 7615.93064516129,
+     "ci_high": 8790.406048387096,
+     "n": 62
+    }
+   }
+  },
   {
    "run_id": "ablation_no_group_split-dev",
    "config_name": "ablation_no_group_split",
@@ -800,115 +1127,6 @@
      "value": 8216.193548387097,
      "ci_low": 7674.243951612903,
      "ci_high": 8811.95443548387,
-     "n": 62
-    }
-   }
-  },
-  {
-   "run_id": "ablation_default-dev",
-   "config_name": "ablation_default",
-   "split": "dev",
-   "created_at": "2026-11-03T04:53:18.603886+00:00",
-   "datasets": [
-    "xbrl",
-    "financebench",
-    "unanswerable"
-   ],
-   "summary": {
-    "citation_precision": {
-     "value": 1.0,
-     "ci_low": 0.9010990076755959,
-     "ci_high": 1.0,
-     "n": 35
-    },
-    "citation_recall": {
-     "value": 0.8421052631578947,
-     "ci_low": 0.6958318822077686,
-     "ci_high": 0.9255613658484106,
-     "n": 38
-    },
-    "cost_usd_mean": {
-     "value": 0.003226488709677419,
-     "ci_low": 0.002992616612903225,
-     "ci_high": 0.003486344193548387,
-     "n": 62
-    },
-    "error_rate": {
-     "value": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.058344072101372484,
-     "n": 62
-    },
-    "judge_correct": {
-     "value": 0.55,
-     "ci_low": 0.34208534245034233,
-     "ci_high": 0.7418021417443759,
-     "n": 20
-    },
-    "latency_p50_ms": {
-     "value": 76.1,
-     "ci_low": 62.080000000000005,
-     "ci_high": 89.3,
-     "n": 62
-    },
-    "latency_p95_ms": {
-     "value": 15780.314999999975,
-     "ci_low": 435.1,
-     "ci_high": 23996.6,
-     "n": 62
-    },
-    "model_latency_p50_ms": {
-     "value": 3307.9000000000005,
-     "ci_low": 3181.7,
-     "ci_high": 3441.0,
-     "n": 62
-    },
-    "model_latency_p95_ms": {
-     "value": 5406.320000000001,
-     "ci_low": 4264.4,
-     "ci_high": 5943.599999999999,
-     "n": 62
-    },
-    "mrr": {
-     "value": 0.6565174614581729,
-     "ci_low": 0.5493594292729669,
-     "ci_high": 0.7661543084715021,
-     "n": 44
-    },
-    "ndcg_at_10": {
-     "value": 0.6988108984256816,
-     "ci_low": 0.6000255172202714,
-     "ci_high": 0.7991039554488802,
-     "n": 44
-    },
-    "numeric_correct": {
-     "value": 0.8125,
-     "ci_low": 0.6469084479862404,
-     "ci_high": 0.9111045531043405,
-     "n": 32
-    },
-    "recall_at_10": {
-     "value": 0.8863636363636364,
-     "ci_low": 0.7954545454545454,
-     "ci_high": 0.9659090909090909,
-     "n": 44
-    },
-    "recall_at_5": {
-     "value": 0.8181818181818182,
-     "ci_low": 0.7045454545454546,
-     "ci_high": 0.9204545454545454,
-     "n": 44
-    },
-    "refusal_correct": {
-     "value": 0.8709677419354839,
-     "ci_low": 0.7655067270982637,
-     "ci_high": 0.9331412194071697,
-     "n": 62
-    },
-    "tokens_mean": {
-     "value": 8170.435483870968,
-     "ci_low": 7615.93064516129,
-     "ci_high": 8790.406048387096,
      "n": 62
     }
    }
@@ -1812,7 +2030,7 @@
    "rows": [
     {
      "name": "Full agent",
-     "run_id": "ablation_default-dev",
+     "run_id": "ablation_no_statement_search-dev",
      "metrics": {
       "numeric_correct": {
        "value": 0.8125,
@@ -1909,8 +2127,8 @@
   {
    "id": "error-fixes",
    "title": "Targeted fixes from error analysis (62-question dev slice)",
-   "description": "Each row turns one fix off. Deltas are the cost of removing that fix.",
-   "baseline": "All fixes",
+   "description": "Each row turns one fix off (these runs predate fix 4). Deltas are the cost of removing that fix.",
+   "baseline": "Fixes 1-3",
    "columns": [
     "numeric_correct",
     "judge_correct",
@@ -1919,8 +2137,8 @@
    ],
    "rows": [
     {
-     "name": "All fixes",
-     "run_id": "ablation_default-dev",
+     "name": "Fixes 1-3",
+     "run_id": "ablation_no_statement_search-dev",
      "metrics": {
       "numeric_correct": {
        "value": 0.8125,
@@ -2043,6 +2261,180 @@
        "ci_high": 9187.542741935486,
        "delta": 337.8709677419356,
        "p_value": null
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "fix4-dev",
+   "title": "Fix 4: statement-aware retrieval (62-question dev slice)",
+   "description": "Built after the first held-out run to address FinanceBench false refusals; developed on dev only.",
+   "baseline": "Before fix 4",
+   "columns": [
+    "numeric_correct",
+    "judge_correct",
+    "refusal_correct",
+    "recall_at_10",
+    "tokens_mean"
+   ],
+   "rows": [
+    {
+     "name": "Before fix 4",
+     "run_id": "ablation_no_statement_search-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8125,
+       "ci_low": 0.6469084479862404,
+       "ci_high": 0.9111045531043405
+      },
+      "judge_correct": {
+       "value": 0.55,
+       "ci_low": 0.34208534245034233,
+       "ci_high": 0.7418021417443759
+      },
+      "refusal_correct": {
+       "value": 0.8709677419354839,
+       "ci_low": 0.7655067270982637,
+       "ci_high": 0.9331412194071697
+      },
+      "recall_at_10": {
+       "value": 0.8863636363636364,
+       "ci_low": 0.7954545454545454,
+       "ci_high": 0.9659090909090909
+      },
+      "tokens_mean": {
+       "value": 8170.435483870968,
+       "ci_low": 7615.93064516129,
+       "ci_high": 8790.406048387096
+      }
+     }
+    },
+    {
+     "name": "With fix 4",
+     "run_id": "ablation_default-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.84375,
+       "ci_low": 0.682458504024696,
+       "ci_high": 0.9313557971749429,
+       "delta": 0.03125,
+       "p_value": 1.0
+      },
+      "judge_correct": {
+       "value": 0.55,
+       "ci_low": 0.34208534245034233,
+       "ci_high": 0.7418021417443759,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.8709677419354839,
+       "ci_low": 0.7655067270982637,
+       "ci_high": 0.9331412194071697,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "recall_at_10": {
+       "value": 0.9204545454545454,
+       "ci_low": 0.8409090909090909,
+       "ci_high": 0.9772727272727273,
+       "delta": 0.03409090909090909,
+       "p_value": 1.0
+      },
+      "tokens_mean": {
+       "value": 8235.91935483871,
+       "ci_low": 7675.028629032258,
+       "ci_high": 8878.429435483871,
+       "delta": 65.4838709677424,
+       "p_value": null
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "fix4-test",
+   "title": "Fix 4 on the held-out test subsample (120 questions)",
+   "description": "The test split was run once before fix 4 and once after; both runs are shown.",
+   "baseline": "Before fix 4",
+   "columns": [
+    "numeric_correct",
+    "judge_correct",
+    "refusal_correct",
+    "recall_at_10",
+    "citation_recall"
+   ],
+   "rows": [
+    {
+     "name": "Before fix 4",
+     "run_id": "final-test",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8055555555555556,
+       "ci_low": 0.6996724105411147,
+       "ci_high": 0.8804852062054944
+      },
+      "judge_correct": {
+       "value": 0.5555555555555556,
+       "ci_low": 0.395810617556973,
+       "ci_high": 0.7045873125991978
+      },
+      "refusal_correct": {
+       "value": 0.8833333333333333,
+       "ci_low": 0.8136664838239611,
+       "ci_high": 0.9292188219216995
+      },
+      "recall_at_10": {
+       "value": 0.90625,
+       "ci_low": 0.84375,
+       "ci_high": 0.9583333333333334
+      },
+      "citation_recall": {
+       "value": 0.9096385542168675,
+       "ci_low": 0.8433734939759037,
+       "ci_high": 0.963855421686747
+      }
+     }
+    },
+    {
+     "name": "With fix 4",
+     "run_id": "final-test-v2",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8055555555555556,
+       "ci_low": 0.6996724105411147,
+       "ci_high": 0.8804852062054944,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "judge_correct": {
+       "value": 0.5555555555555556,
+       "ci_low": 0.395810617556973,
+       "ci_high": 0.7045873125991978,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.8916666666666667,
+       "ci_low": 0.8234463978470834,
+       "ci_high": 0.9355885884582658,
+       "delta": 0.008333333333333333,
+       "p_value": 1.0
+      },
+      "recall_at_10": {
+       "value": 0.921875,
+       "ci_low": 0.8697916666666666,
+       "ci_high": 0.96875,
+       "delta": 0.015625,
+       "p_value": 1.0
+      },
+      "citation_recall": {
+       "value": 0.8869047619047619,
+       "ci_low": 0.8154761904761905,
+       "ci_high": 0.9523809523809523,
+       "delta": -0.024096385542168676,
+       "p_value": 1.0
       }
      }
     }
@@ -2178,10 +2570,10 @@
   }
  ],
  "failure_counts": {
-  "bad_refusal": 14,
+  "bad_refusal": 13,
   "retrieval_miss": 5,
   "arithmetic": 3,
-  "table_misread": 1
+  "table_misread": 3
  },
  "failures": [
   {
@@ -2191,7 +2583,7 @@
    "gold": "-$248,000,000 (about -$248.00 million)",
    "answer": "Intel's total revenue decreased by $248 million from fiscal year 2024 to fiscal year 2025 [1].",
    "failure_category": "arithmetic",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "computed from the wrong gathered inputs"
   },
   {
@@ -2199,9 +2591,9 @@
    "dataset": "financebench",
    "question": "Which region had the Highest EBITDAR Contribution for MGM during FY2022?",
    "gold": "Las Vegas resorts contributed ~90% of company level EBITDAR during FY2022.",
-   "answer": "The provided filings do not disclose which region had the highest EBITDAR contribution for MGM during FY2022.",
+   "answer": "The provided filings do not provide the regional EBITDAR contribution data required to determine which region had the highest EBITDAR contribution for MGM during FY2022.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2211,7 +2603,7 @@
    "gold": "Yes. Boeing has product and service categories that represent more than 20% of Boeing's revenue for FY2022. These categories are Commercial Airplanes which comprises 39% of total revenue, Defence which comprises 35% of total revenue and Services which comprises 26% of total revenue.",
    "answer": "Yes, revenues from the U.S. government represented 40% of consolidated revenues for 2022 [1].",
    "failure_category": "retrieval_miss",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "no labeled evidence page was gathered"
   },
   {
@@ -2221,7 +2613,7 @@
    "gold": "No the operating margins of Adobe have recently declined from 36.8% in FY 2021 to 34.6% in FY2022. A drop by 2.2% in a year.",
    "answer": "Adobe's operating income increased to 6,098,000,000 USD in FY2022 from 5,802,000,000 USD in FY2021 [1][2], and revenue grew to 17,606,000,000 USD from 15,785,000,000 USD [3][4].",
    "failure_category": "table_misread",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "evidence page gathered (with tables) but the answer is wrong"
   },
   {
@@ -2231,7 +2623,7 @@
    "gold": "10.54%",
    "answer": "JPMorgan Chase's total assets changed by 11% (or approximately 10.54%) from the end of fiscal year 2024 to the end of fiscal year 2025 [1]. Total assets were $4,002,814,000,000 at December 31, 2024 [2] and increased to $4,424,900,000,000 at December 31, 2025 [3].",
    "failure_category": "arithmetic",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "computed from the wrong gathered inputs"
   },
   {
@@ -2241,7 +2633,7 @@
    "gold": "36%. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
    "answer": "The provided filings do not contain the specific data for total spend on stock repurchases for Q4 of FY2023 or the full year FY2023 to calculate this percentage.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2251,8 +2643,18 @@
    "gold": "The effective tax rate of Corning has changed from 20% in FY2021 to 23% in FY 2022.",
    "answer": "Corning's effective tax rate was 20.2% for the year ended December 31, 2021, and 22.9% for the year ended December 31, 2022 [1].",
    "failure_category": "retrieval_miss",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "no labeled evidence page was gathered"
+  },
+  {
+   "qid": "fb-01328",
+   "dataset": "financebench",
+   "question": "What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
+   "gold": "Pepsico's restructuring costs in FY2022 amounted to $411 million .",
+   "answer": "Restructuring costs are not explicitly outlined as a standalone line item on Pepsico's Consolidated Statement of Income for FY2022, so the quantity is 0 [1].",
+   "failure_category": "table_misread",
+   "run_id": "final-test-v2",
+   "explanation": "evidence page gathered (with tables) but the answer is wrong"
   },
   {
    "qid": "xbrl-vz-10k2025fy-net_income-yoy-abs",
@@ -2261,7 +2663,7 @@
    "gold": "-$332,000,000 (about -$332.00 million)",
    "answer": "Verizon's net income attributable to Verizon decreased by $332,000,000 from fiscal year 2024 to fiscal year 2025 [1][2]. Net income attributable to Verizon was $17,506,000,000 for fiscal year 2024 [1] and $17,174,000,000 for fiscal year 2025 [2].",
    "failure_category": "arithmetic",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "inputs gathered but the computed result is wrong"
   },
   {
@@ -2271,7 +2673,7 @@
    "gold": "No. The quick ratio for 3M was 0.96 by Jun'23 close, which needs a bit of an improvement to touch the 1x mark",
    "answer": "The filings do not provide the quick ratio for Q2 of FY2023.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2281,8 +2683,18 @@
    "gold": "They could receive $66.56 per share.",
    "answer": "If JPM liquidated all of its assets by the end of 2021 Q1, each shareholder could get approximately 92.73 USD based on the stockholders' equity and common shares outstanding as of March 31, 2021 [1][2].",
    "failure_category": "retrieval_miss",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "no labeled evidence page was gathered"
+  },
+  {
+   "qid": "fb-03473",
+   "dataset": "financebench",
+   "question": "What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
+   "gold": "0.01",
+   "answer": "Coca-Cola's FY2017 return on assets (ROA) is 1.42%. This is calculated using the FY2017 net income attributable to shareowners of $1,248 million [1], and average total assets of $87,583 million [calculated as ($87,896 million [2] + $87,270 million [3]) / 2].",
+   "failure_category": "table_misread",
+   "run_id": "final-test-v2",
+   "explanation": "picked another cell of a gathered table"
   },
   {
    "qid": "fb-01079",
@@ -2291,7 +2703,7 @@
    "gold": "Amcor completed these acquisitions during FY2023:\n-100% equity interest of a flexibles manufacturing company in the Czech Republic\n- 100% equity interest in a medical device packaging manufacturing site in\nShanghai, China.\n-acquisition of a New Zealand-based leading manufacturer of state-of-the-art, automated protein\npackaging machines.",
    "answer": "In FY2023, Amcor completed three major acquisitions: a 100% equity interest in a Czech Republic flexible packaging manufacturing plant for a purchase consideration of $59 million on August 1, 2022 [1], a 100% equity interest in a medical device packaging manufacturing site in Shanghai, China for $60 million on March 17, 2023 [1], and a New Zealand-based manufacturer of automated protein packaging machines for $45 million on May 31, 2023 [2]. The provided evidence does not disclose specific major acquisitions for FY2022 and FY2021.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2301,7 +2713,7 @@
    "gold": "Yes, it's spinning off Upjohn.",
    "answer": "As of Q2 2023, Pfizer is not spinning off any large business segments; discontinued operations relate to post-close adjustments for previously divested businesses [1].",
    "failure_category": "retrieval_miss",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "no labeled evidence page was gathered"
   },
   {
@@ -2309,19 +2721,19 @@
    "dataset": "financebench",
    "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
    "gold": "2.8%",
-   "answer": "The filings do not provide a 3-year average net profit margin for FY2015 - FY2017.",
+   "answer": "The filings I could retrieve do not support a reliable answer to this question.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
-   "qid": "fb-03473",
+   "qid": "fb-06272",
    "dataset": "financebench",
-   "question": "What is the FY2017 return on assets (ROA) for Coca Cola? ROA is defined as: FY2017 net income / (average total assets between FY2016 and FY2017). Round your answer to two decimal places. Give a response to the question by relying on the details shown in the balance sheet and the P&L statement.",
-   "gold": "0.01",
-   "answer": "Coca-Cola's FY2017 return on assets (ROA) is 1.42%, calculated using the FY2017 net income of 1,248,000,000 USD [1] divided by the average total assets of 87,583,000,000 USD between FY2016 (87,270,000,000 USD) [2] and FY2017 (87,896,000,000 USD) [3].",
+   "question": "What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
+   "gold": "0.8",
+   "answer": "Coca-Cola's FY2022 dividend payout ratio was 79.82%, based on total cash dividends paid of $7,616 million [1] and net income attributable to shareowners of $9,542 million [2].",
    "failure_category": "retrieval_miss",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "the gold value was never gathered"
   },
   {
@@ -2329,9 +2741,9 @@
    "dataset": "financebench",
    "question": "Taking into account the information outlined in the income statement, what is the FY2019 - FY2021 3 year average unadjusted operating income % margin for Corning? Answer in units of percents and round to one decimal place.",
    "gold": "10.3%",
-   "answer": "The provided filings do not disclose the unadjusted operating income for Corning for FY2019, FY2020, or FY2021 to calculate the 3-year average operating income % margin.",
+   "answer": "The filings I could retrieve do not support a reliable answer to this question.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2341,7 +2753,7 @@
    "gold": "24.26",
    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2349,19 +2761,9 @@
    "dataset": "financebench",
    "question": "We need to calculate a reasonable approximation (or exact number if possible) of a financial metric. Basing your judgment by information plainly provided in the statement of income, what is Nike's three year average of cost of goods sold as a % of revenue from FY2016 to FY2018? Answer in units of percents and round to one decimal place.",
    "gold": "55.1%",
-   "answer": "The filings do not provide the statement of income with revenues and cost of goods sold for FY2016 to FY2018.",
+   "answer": "The provided evidence does not contain Nike's Consolidated Statements of Income showing total cost of sales and revenues for fiscal years 2016 to 2018; therefore, the filings do not provide it.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
-   "explanation": "refused although the filings answer it"
-  },
-  {
-   "qid": "fb-06272",
-   "dataset": "financebench",
-   "question": "What is Coca Cola's FY2022 dividend payout ratio (using total cash dividends paid and net income attributable to shareholders)? Round answer to two decimal places. Answer the question asked by assuming you only have access to information clearly displayed in the cash flow statement and the income statement.",
-   "gold": "0.8",
-   "answer": "The filings do not provide the income statement or net income attributable to shareholders required to calculate the FY2022 dividend payout ratio.",
-   "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2369,9 +2771,9 @@
    "dataset": "financebench",
    "question": "What is Amazon's FY2017 days payable outstanding (DPO)? DPO is defined as: 365 * (average accounts payable between FY2016 and FY2017) / (FY2017 COGS + change in inventory between FY2016 and FY2017). Round your answer to two decimal places. Address the question by using the line items and information shown within the balance sheet and the P&L statement.",
    "gold": "93.86",
-   "answer": "The provided filings do not disclose the necessary line items such as accounts payable, COGS, or inventory to calculate Amazon's FY2017 days payable outstanding (DPO).",
+   "answer": "The provided financial filings do not contain the necessary line items for accounts payable, inventory, and cost of sales (COGS) to calculate Amazon's FY2017 days payable outstanding (DPO).",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2379,9 +2781,9 @@
    "dataset": "financebench",
    "question": "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard? Answer in units of percents and round to one decimal place. Calculate (or extract) the answer from the statement of income and the cash flow statement.",
    "gold": "1.9%",
-   "answer": "The filings do not provide sufficient revenue and capital expenditure data for all years to calculate the FY2017 - FY2019 3-year average of capex as a % of revenue.",
+   "answer": "The filings do not provide the FY2017 revenue needed to calculate the 3-year average of capex as a % of revenue.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2391,7 +2793,7 @@
    "gold": "-11.72%",
    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2401,7 +2803,7 @@
    "gold": "$24,560,000,000 (about $24.56 billion)",
    "answer": "The filings do not provide total consolidated revenue for Boeing for the three months ended June 30, 2026, as the available segment and revenue tables disclose disaggregated segment revenues (such as total segment revenues of $5,344 million  and $11,751 million ) rather than a single consolidated company-wide total top-line revenue figure.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   },
   {
@@ -2411,7 +2813,7 @@
    "gold": "1.58",
    "answer": "The provided filings do not disclose the total liabilities or total stockholders' equity as of May 10, 2026, so the ratio cannot be determined.",
    "failure_category": "bad_refusal",
-   "run_id": "final-test",
+   "run_id": "final-test-v2",
    "explanation": "refused although the filings answer it"
   }
  ],
