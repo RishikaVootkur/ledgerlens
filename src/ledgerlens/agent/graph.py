@@ -66,6 +66,11 @@ class AgentConfig:
     # Split grouped citation markers like [E1, E4] before the self-check. Off reproduces
     # the original parser, which saw no citation in a grouped marker.
     split_grouped_markers: bool = True
+    # Financial-statement-aware retrieval: when a question needs figures from specific
+    # statements (FinanceBench metric questions often need two), also search each of
+    # those statements in the first round. Off reproduces the original retrieval, where
+    # the model often found one statement and refused for lack of the other.
+    statement_search: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -94,6 +99,54 @@ class _Run:
 
 
 # ------------------------------------------------------------------ helpers
+
+# Statement -> (cue pattern, search query). Line-item cues map a formula's inputs to the
+# statement that reports them (average inventory -> balance sheet, COGS -> income).
+STATEMENTS: dict[str, tuple[re.Pattern[str], str]] = {
+    "balance_sheet": (
+        re.compile(
+            r"balance sheet|statement of financial position|total assets|inventor|"
+            r"accounts payable|receivable|working capital|current (?:assets|liabilities)|"
+            r"total debt|shareholders.? equity|stockholders.? equity",
+            re.IGNORECASE,
+        ),
+        "consolidated balance sheets total assets inventories receivables accounts payable "
+        "total liabilities shareholders equity",
+    ),
+    "income_statement": (
+        re.compile(
+            r"income statement|statement of (?:income|operations|earnings)|p&l|cogs|"
+            r"cost of (?:goods|sales|revenue)|net income|operating income|gross (?:margin|profit)|"
+            r"ebitda|interest expense|revenue|net sales",
+            re.IGNORECASE,
+        ),
+        "consolidated statements of income net sales revenue cost of sales operating income "
+        "net income",
+    ),
+    "cash_flow": (
+        re.compile(
+            r"cash flow|capital expenditure|capex|operating activities|dividends paid|"
+            r"purchases? of property",
+            re.IGNORECASE,
+        ),
+        "consolidated statements of cash flows net cash provided by operating activities "
+        "capital expenditures purchases of property plant and equipment",
+    ),
+}
+_NAMED_STATEMENT = re.compile(
+    r"balance sheet|statement of (?:financial position|income|operations|earnings|cash flows?)|"
+    r"income statement|cash flow statement",
+    re.IGNORECASE,
+)
+
+
+def statements_needed(question: str, filters: SearchFilters) -> list[str]:
+    """Statements to search for this question. Only when searching within one document
+    (FinanceBench's setting) or when the question names a statement outright, so ordinary
+    metric questions answered from XBRL facts are unaffected."""
+    if filters.doc_name is None and not _NAMED_STATEMENT.search(question):
+        return []
+    return [name for name, (cue, _) in STATEMENTS.items() if cue.search(question)]
 
 
 def effective_args(name: str, raw: str, filters: SearchFilters) -> dict[str, Any]:
@@ -418,6 +471,14 @@ def build_graph(run: _Run) -> Any:
             run.on_step(tc.name, json.dumps(args)[:200])
             steps.append(tc.name)
             del result  # evidence is in the registry; the next gather round sees a brief
+        if cfg.statement_search and state.get("round", 0) == 1:
+            for name in statements_needed(state["question"], filters):
+                args = effective_args(
+                    "search_filings", json.dumps({"query": STATEMENTS[name][1]}), filters
+                )
+                run_tool("search_filings", args, run.registry, cfg.retrieval)
+                run.on_step("search_filings", f"statement search: {name.replace('_', ' ')}")
+                steps.append("search_filings")
         return {"pending": [], "steps": steps}
 
     def after_gather(state: State) -> str:

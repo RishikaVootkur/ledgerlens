@@ -459,3 +459,38 @@ def test_group_split_can_be_disabled(scripted):
     grouped = answer_json(answer="Total net sales were $416,161 million in 2025 [E1, E1].")
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped), _resp(grouped)]
     assert run_agent("q", AgentConfig(split_grouped_markers=False)).refused
+
+
+def test_statements_needed_only_in_document_scope_or_when_named():
+    from ledgerlens.agent.graph import statements_needed
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    doc = SearchFilters(doc_name="WALMART_2018_10K")
+    dpo = "DPO is 365 * (average accounts payable) / (FY2018 COGS + change in inventory)"
+    assert statements_needed(dpo, doc) == ["balance_sheet", "income_statement"]
+    assert statements_needed("What was Apple's net income in fiscal 2025?", SearchFilters()) == []
+    assert statements_needed("Using the cash flow statement, what was capex?", SearchFilters()) == [
+        "cash_flow"
+    ]
+    assert statements_needed("Which segments does 3M report?", doc) == []
+
+
+def test_statement_search_adds_targeted_searches(scripted, monkeypatch):
+    queue, _ = scripted
+    captured = []
+    monkeypatch.setattr(
+        tools, "_search", lambda args, config: captured.append(args["query"]) or [CHUNK]
+    )
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    q = "What is FY2025 inventory turnover? Use COGS and average inventory."
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
+    result = run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"))
+    assert result.steps.count("search_filings") == 3
+    assert any("balance sheets" in c for c in captured) and any(
+        "statements of income" in c for c in captured
+    )
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
+    captured.clear()
+    run_agent(q, AgentConfig(statement_search=False), filters=SearchFilters(doc_name="X_2025_10K"))
+    assert len(captured) == 1
