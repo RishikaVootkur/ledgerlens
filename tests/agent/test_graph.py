@@ -491,6 +491,7 @@ def test_statement_search_adds_targeted_searches(scripted, monkeypatch):
         "statements of income" in c for c in captured
     )
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
-    captured.clear()
-    run_agent(q, AgentConfig(statement_search=False), filters=SearchFilters(doc_name="X_2025_10K"))
-    assert len(captured) == 1
+    off = run_agent(
+        q, AgentConfig(statement_search=False), filters=SearchFilters(doc_name="X_2025_10K")
+    )
+    assert off.steps.count("search_filings") == 1
