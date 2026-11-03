@@ -1,0 +1,119 @@
+{
+ "args": {
+  "doc_name": "AES_2022_10K",
+  "query": "\"Net income\" \"Consolidated Statements of Operations\" 2022 2021"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00274",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 111,
+   "page_end": 111,
+   "section": "Item 1A. Risk Factors of this Form 10-K > Operating Activities",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 1A. Risk Factors of this Form 10-K > Operating Activities | p.111]\nFiscal Year 2022 versus 2021\n\nNet cash provided by operating activities increased $813 million for the year ended December 31, 2022, compared to December 31, 2021.\n\nOperating Cash Flows\n\n(in millions)\n\n(1)\n\nThe change in adjusted net income is defined as the variance in net income, net of the total adjustments to net income as shown on the Consolidated Statements of Cash Flows in Item 8.— Financial Statements and Supplementary Data of this Form 10-K.\n\n(2)\n\nThe change in working capital is defined as the variance in total changes in operating assets and liabilities as shown on the Consolidated Statements of Cash Flows in Item 8.—Financial Statements and Supplementary Data of this Form 10-K.\n\n• Adjusted net income decreased $260 million, primarily due to lower margins at our South America and US and Utilities SBUs and an increase in interest expense, partially offset by higher margins at our MCAC and Eurasia SBUs and an increase in interest income.\n\n• Working capital requirements decreased $1.1 billion, primarily due to deferred income at Angamos in the 2021 due to revenue recognized for the early contract terminations with Minera Escondida and Minera Spence, the GSF liability payment at Tietê in 2021, and the change in income tax liabilities, partially offset by an increase in inventory, primarily fuel and other raw materials, at AES Andes, AES Panama, and AES Indiana.\n\nFiscal Year 2021 versus 2020\n\nNet cash provided by operating activities decreased $853 million for the year ended December 31, 2021, compared to December 31, 2020.\n\nOperating Cash Flows\n\n(in millions)\n\n(1)\n\nThe change in adjusted net income is defined as the variance in net income, net of the total adjustments to net income as shown on the Consolidated Statements of Cash Flows in Item 8.— Financial Statements and Supplementary Data of this Form 10-K.\n\nThe change in working capital is defined as the variance in total changes in operating assets and liabilities as shown on the Consolidated Statements of Cash Flows in Item 8.—Financial Statements and Supplementary Data of this Form 10-K.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00636",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 209,
+   "page_end": 209,
+   "section": "Item 15. Exhibits And Financial Statement Schedule",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0133"
+   ],
+   "text": "[AES 10-K FY2022 | Item 15. Exhibits And Financial Statement Schedule | p.209]\n| Financial Statements and Schedules: | Page |\n|---|---|\n| Consolidated Balance Sheets as of December 31, 2022 and 2021 | 128 |\n| Consolidated Statements of Operations for the years ended December 31, 2022, 2021 and 2020 | 129 |\n| Consolidated Statements of Comprehensive Income (Loss) for the years ended December 31, 2022, 2021 and 2020 | 130 |\n| Consolidated Statements of Changes in Equity for the years ended December 31, 2022, 2021 and 2020 | 131 |\n| Consolidated Statements of Cash Flows for the years ended December 31, 2022, 2021 and 2020 | 132 |\n| Notes to Consolidated Financial Statements | 133 |\n| Schedules | S-2-S-7 |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00321",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 132,
+   "page_end": 132,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Operations",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Operations | p.132]\nYears ended December 31, 2022, 2021, and 2020\n\n2022\n\n2021\n\n2020",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00312",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 127,
+   "page_end": 127,
+   "section": "Item 8. Financial Statements And Supplementary Data > Opinion on the Financial Statements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Opinion on the Financial Statements | p.127]\nWe have audited the accompanying consolidated balance sheets of The AES Corporation (the Company) as of December 31, 2022 and 2021, the related consolidated statements of operations, comprehensive income (loss), changes in equity and cash flows for each of the three years in the period ended December 31, 2022, and the related notes and the financial statement schedule listed in the Index at Item 15(a) (collectively referred to as the “consolidated financial statements”). In our opinion, the consolidated financial statements present fairly, in all material respects, the financial position of the Company at December 31, 2022 and 2021, and the results of its operations and its cash flows for each of the three years in the period ended December 31, 2022, in conformity with U.S. generally accepted accounting principles.\n\nWe also have audited, in accordance with the standards of the Public Company Accounting Oversight Board (United States) (PCAOB), the Company’s internal control over financial reporting as of December 31, 2022, based on criteria established in Internal Control — Integrated Framework issued by the Committee of Sponsoring Organizations of the Treadway Commission (2013 framework) and our report dated March 1, 2023, expressed an unqualified opinion thereon.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00541",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 183,
+   "page_end": 183,
+   "section": "Item 8. Financial Statements And Supplementary Data > 18. Segments And Geographic Information",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > 18. Segments And Geographic Information | p.183]\nThe following table presents information, by country, about the Company's consolidated operations for each of the three years ended December 31, 2022, 2021, and 2020, and as of December 31, 2022 and 2021 (in millions). Revenue is recorded in the country in which it is earned and assets are recorded in the country in which they are located.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00567",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 190,
+   "page_end": 190,
+   "section": "Item 8. Financial Statements And Supplementary Data > 23. Income Taxes",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > 23. Income Taxes | p.190]\nIncome Tax Provision — The following table summarizes the expense for income taxes on continuing operations for the periods indicated (in millions):\n\n2022\n\n2021\n\n2020\n\nDecember 31,",
+   "ticker": "AES"
+  }
+ ],
+ "tool": "search_filings"
+}
