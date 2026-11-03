@@ -14,25 +14,27 @@ Ask a question about a US public company ("How much did Coca-Cola's net income c
 
 ## Headline results
 
-Final agent on Gemini 3.5 Flash-Lite, 62-question dev slice (24 XBRL, 20 FinanceBench, 18 unanswerable). 95% intervals: Wilson for rates, bootstrap otherwise. The held-out test run (120 stratified questions) is in progress: Gemini's free daily quota ran out halfway through it, and its numbers replace this table when it completes.
+Final agent on Gemini 3.5 Flash-Lite, run once on a held-out test subsample of 120 questions (60 XBRL, 36 FinanceBench, 24 unanswerable, stratified by question type) after all development was done on dev questions. 95% intervals: Wilson for rates, bootstrap otherwise.
 
 | Metric | Value [95% CI] | n |
 |---|---|---|
-| Numeric accuracy (XBRL + FinanceBench numeric) | 81.2% [64.7%, 91.1%] | 32 |
-| Judge accuracy (FinanceBench, calibrated judge) | 55.0% [34.2%, 74.2%] | 20 |
-| Refusal accuracy, unanswerable questions (no hallucinated answer) | 88.9% [67.2%, 96.9%] | 18 |
-| Refusal accuracy, all questions (also counts false refusals) | 87.1% [76.6%, 93.3%] | 62 |
-| Citation precision (cited source states the answer's numbers) | 100.0% [90.1%, 100.0%] | 35 |
-| Citation recall (labeled evidence cited) | 84.2% [69.6%, 92.6%] | 38 |
-| Model latency p50 | 3.3 s | 62 |
-| Cost per question (list-price equivalent) | $0.0032 | 62 |
+| Numeric accuracy (XBRL + FinanceBench numeric) | 80.6% [70.0%, 88.0%] | 72 |
+| Judge accuracy (FinanceBench, calibrated judge) | 55.6% [39.6%, 70.5%] | 36 |
+| Refusal accuracy on unanswerable questions (no hallucinated answer) | 100.0% [86.2%, 100.0%] | 24 |
+| Refusal accuracy, all questions (also counts false refusals) | 88.3% [81.4%, 92.9%] | 120 |
+| Citation precision (cited source states the answer's numbers) | 100.0% [95.3%, 100.0%] | 78 |
+| Citation recall (labeled evidence cited) | 91.0% [84.3%, 96.4%] | 83 |
+| Model latency p50 | 3.4 s | 120 |
+| Cost per question (list-price equivalent) | $0.0032 | 120 |
+
+The main weakness is visible in the second refusal row: the agent never answered an unanswerable question, but it refused 31% of answerable FinanceBench questions (see error analysis).
 
 | Evaluation-lab check | Result |
 |---|---|
 | LLM judge vs FinanceBench human labels (held-out, n=147, 3 labels) | 89.8% agreement [83.8, 93.7], Cohen's kappa 0.846 [0.771, 0.917], judge error rate 10.2% |
 | Same, on the 52 items never read while tuning the judge prompt | 86.5% agreement [74.7, 93.3], kappa 0.788 [0.631, 0.912] |
 | XBRL golden set gold values re-derived independently from SEC data | 350 of 350 match |
-| CI regression gate | replays a recorded 20-question slice on every PR, no keys or network; fails on any metric drop and comments the diff |
+| CI regression gate | replays a recorded 30-question slice on every PR, no keys or network; fails on any metric drop and comments the diff |
 
 ## Architecture
 
@@ -76,7 +78,7 @@ flowchart LR
 
 ## Ablations
 
-Development numbers on fixed dev questions; the held-out test split was touched only once, for the headline. Deltas are paired comparisons on the same questions (exact McNemar for 0/1 metrics, sign-flip permutation otherwise, Holm-corrected).
+Development numbers on fixed dev questions; the held-out test split was run only once, for the headline above. Deltas are paired comparisons on the same questions (exact McNemar for 0/1 metrics, sign-flip permutation otherwise, Holm-corrected).
 
 **Retrieval method** (LLM-free, 60 FinanceBench dev questions, search within the question's document, scored against human-labeled evidence pages):
 
@@ -87,9 +89,9 @@ Development numbers on fixed dev questions; the held-out test split was touched 
 | **Hybrid, reciprocal rank fusion** | **0.308** | **0.442** | **0.235** | **0.272** |
 | Hybrid + MiniLM cross-encoder rerank | 0.292 | 0.433 | 0.219 | 0.262 |
 
-Hybrid beats BM25 on MRR by +0.068 (95% CI +0.032 to +0.109, Holm p = 0.001) and nDCG@10 by +0.059 (p = 0.001). Hybrid vs dense (+0.04 recall@10, p = 0.44) and the reranker (no gain) are within noise at this sample size.
+Hybrid beats BM25 on MRR by +0.068 (95% CI +0.032 to +0.109, Holm p = 0.001) and nDCG@10 by +0.059 (p = 0.001). Hybrid vs dense (+0.04 recall@10, Holm p = 1.0) and the reranker (no gain) are within noise at this sample size.
 
-**Chunking strategy** (same setup): fixed 512-token chunks score a little higher than section- and table-aware chunks (hybrid recall@10 0.492 vs 0.442, MRR 0.286 vs 0.235), but no difference is significant (Holm p ≥ 0.9). Fixed chunks are about 2.6 times longer, so each hit covers more of a labeled page; section chunks give the answer step cleaner, self-contained tables.
+**Chunking strategy** (same setup): fixed 512-token chunks score a little higher than section- and table-aware chunks (hybrid recall@10 0.492 vs 0.442, MRR 0.286 vs 0.235), but no difference is significant (Holm p ≥ 0.9). Fixed chunks are about twice as long on average (511 vs 248 tokens), so each hit covers more of a labeled page; section chunks give the answer step cleaner, self-contained tables.
 
 **Agent components** (62-question dev slice: 24 XBRL, 20 FinanceBench, 18 unanswerable; Gemini 3.5 Flash-Lite):
 
@@ -99,7 +101,7 @@ Hybrid beats BM25 on MRR by +0.068 (95% CI +0.032 to +0.109, Holm p = 0.001) and
 | Without the XBRL facts tool | 0.656 [0.48, 0.80] | 0.500 | 0.839 | 7,642 |
 | Without number verification and citation self-check | 0.844 [0.68, 0.93] | 0.600 | 0.903 | 8,040 |
 
-Exact XBRL facts are worth 15.6 points of numeric accuracy (95% CI −28.1 to −3.1). The verification layer is a deliberate trade: it guarantees every number in an answer traces to a source, and on this slice that costs one numeric and one FinanceBench answer (3 points) without changing the hallucination rate on unanswerable questions (0.889 either way). With 62 questions, only effects of roughly 15 points or more reach significance.
+Removing the XBRL facts tool cost 15.6 points of numeric accuracy (paired 95% CI for the gain: 3.1 to 28.1 points), the largest effect in the agent ablations, but with 32 numeric questions it is not significant after Holm correction (McNemar p = 0.06 raw, 0.44 adjusted), so treat it as a strong signal rather than an established result. The verification layer is a deliberate trade: it guarantees every number in an answer traces to a source, and on this slice it cost one numeric answer (3.1 points), one FinanceBench answer (5.0 points) and 3.2 points of refusal accuracy, without changing the hallucination rate on unanswerable questions (0.889 either way). None of these agent-level differences is significant at this sample size; the slice is sized to free-tier quotas, not to statistical power.
 
 ## Model comparison
 
@@ -115,23 +117,24 @@ The local 8B model is significantly worse (−55 points, Holm p = 0.007): it ref
 
 ## Error analysis
 
-Every failed dev question is sorted into a taxonomy by `ledgerlens eval analyze` (rule-based, auditable, no model calls). Failures of the full agent on the 62-question slice:
+Every failed question is sorted into a taxonomy by `ledgerlens eval analyze` (rule-based, auditable, no model calls; categories are written into the run files and shown on the dashboard):
 
-| Category | Count | Example |
-|---|---|---|
-| Bad refusal | 6 | refused an answerable FinanceBench question; two are "old period" questions the XBRL tool can answer from history beyond the ingested filings (a dataset/tool scope mismatch, documented in D20) |
-| Arithmetic | 2 | year-over-year change computed from the wrong pair of facts |
-| Table misread | 2 | the right page was retrieved but another cell was used |
-| Wrong period | 1 | used the prior-year column of the right line item |
-| Retrieval miss | 1 | the labeled evidence page never reached the agent |
+| Category | Held-out test (23 of 120 failed) | Dev slice (13 of 62 failed) | What it looks like |
+|---|---|---|---|
+| Bad refusal | 14 | 8 | mostly refusing answerable FinanceBench questions; on dev, two are unanswerable "old period" questions the agent answered from XBRL history beyond the ingested filings (a dataset/tool scope mismatch, decision D20) |
+| Retrieval miss | 5 | 1 | the labeled evidence page never reached the agent |
+| Arithmetic | 3 | 2 | year-over-year change computed from the wrong pair of facts |
+| Table misread | 1 | 2 | the right page was retrieved but another cell was used |
 
-Three targeted fixes came out of reading these failures. Each sits behind a flag, so its effect is a paired, replayable comparison:
+False refusals on FinanceBench are the largest remaining problem: the verifier and self-check refuse when the model's numbers or quotes cannot be matched to the PDF text, which is noisier than EDGAR HTML. Loosening that safely is the next fix.
+
+Three targeted fixes came out of reading the dev failures. Each sits behind a flag, so its effect is a paired, replayable comparison on the 62-question dev slice (none is individually significant at this size):
 
 | Fix | What was wrong | Effect when the fix is removed |
 |---|---|---|
 | 1. Skip repeated tool calls | models re-issued the same XBRL lookup every planning round | +0.6% tokens on Flash-Lite, no accuracy change (it mattered more on Groq Qwen, where repeats ate the 8k tokens/minute budget) |
 | 2. Accept derived numbers | the verifier refused correct answers whose ratio the model computed itself | numeric −3.1, FinanceBench judge −5.0, refusal accuracy −3.2 points |
-| 3. Split grouped citation markers | `[E1, E4]` looked like no citation and forced a refusal | numeric −6.3, judge −5.0, refusal accuracy −4.8 points (measured with the first verifier version; re-measurement with the final verifier is pending quota) |
+| 3. Split grouped citation markers | `[E1, E4]` looked like no citation and forced a refusal | numeric −9.4, judge −5.0, refusal accuracy −6.5 points |
 
 Fix 2 needed a second iteration: the first version accepted any number one arithmetic step away from any evidence number, and a measurement showed it would accept 99% of invented numbers. It now derives only from inputs the answer states (or single-value XBRL facts it cites), with a tolerance set by the digits written: under 1% false acceptance in a 2,000-trial test. On recorded Groq Qwen answers the fixes also lifted the CI slice from 0.90 to 0.95 numeric accuracy.
 
@@ -141,8 +144,8 @@ Fix 2 needed a second iteration: the first version accepted any number one arith
 git clone https://github.com/RishikaVootkur/ledgerlens && cd ledgerlens
 cp .env.example .env            # add free GEMINI_API_KEY, GROQ_API_KEY and your SEC_USER_AGENT
 make setup                      # uv sync, npm ci, ollama pull nomic-embed-text
-uv run ledgerlens ingest run --tickers AAPL,JPM,KO --no-financebench && uv run ledgerlens index build
-make up                         # Qdrant, Phoenix, API and UI; open http://127.0.0.1:8080
+docker compose up -d qdrant phoenix && uv run ledgerlens ingest run --tickers AAPL,JPM,KO --no-financebench && uv run ledgerlens index build
+make up                         # adds the API and UI; open http://127.0.0.1:8080
 ```
 
 `make ingest` builds the full corpus (30 companies plus the FinanceBench documents). Other entry points: `uv run ledgerlens ask "..."`, `uv run ledgerlens eval run --config eval/configs/default.yaml --split dev`, `uv run ledgerlens eval compare <runA> <runB>`, and `uv run ledgerlens mcp serve` for MCP clients ([docs/mcp.md](docs/mcp.md)).

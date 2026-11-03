@@ -5,7 +5,7 @@ Newest entry first. Updated at the end of every PR so the build can resume from 
 ## Status
 
 - Merged (17 PRs, each reviewed by a fresh-context subagent with findings fixed before merge): skeleton, shared contracts, LLM provider, metrics/stats/gate, retrieval, datasets, web UI, agent, API (SSE), MCP server, tracing, Docker stack, ingestion, eval runner + judge + CI gate, web metric names, dashboard + Pages + live eval, targeted fixes.
-- In this PR (results): run files, experiments manifest and dashboard, README, resume bullets, re-recorded 30-question CI slice, held-out test run.
+- Results PR (#18): run files, experiments manifest and dashboard, README, resume bullets, re-recorded 30-question CI slice (Flash-Lite, smoke + FinanceBench + unanswerable), held-out test run.
 - Blockers needing the user:
   1. `SEC_USER_AGENT` repo secret (the live-eval workflow skips until it exists; `GEMINI_API_KEY` is set).
   2. Phoenix 21 has login on: put a Phoenix system API key in `.env` as `PHOENIX_API_KEY` (with `PHOENIX_ENDPOINT`) to see traces. Tracing is verified against a local OTLP receiver.
@@ -26,6 +26,7 @@ Newest entry first. Updated at the end of every PR so the build can resume from 
 - Retrieval (FinanceBench dev, n=60): hybrid MRR 0.235 vs BM25 0.167 (Holm p = 0.001).
 - Agent, 62-question dev slice, Flash-Lite: numeric 0.812, judge 0.550, refusal 0.871; without XBRL tool numeric 0.656.
 - Models on the smoke slice: Groq Qwen3.8 27B 0.95, Flash-Lite 0.95, local Qwen3 8B 0.40.
+- Held-out test (120 questions, run once): numeric 0.806 [0.70, 0.88], judge 0.556, unanswerable refusal 1.00 (24/24), citation precision 1.00, citation recall 0.91, 3.4 s, $0.0032/question. Main weakness: 31% false refusals on FinanceBench.
 
 ## Working agreements
 
