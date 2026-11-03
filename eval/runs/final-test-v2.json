@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
  "run_id": "final-test-v2",
- "created_at": "2026-11-03T23:20:07.866692Z",
- "git_sha": "1adf519",
+ "created_at": "2026-11-03T23:35:11.490035Z",
+ "git_sha": "e26d914",
  "config_name": "final_test",
  "config": {
   "name": "final_test",
@@ -43,8 +43,8 @@
  ],
  "summary": {
   "citation_precision": {
-   "value": 1.0,
-   "ci_low": 0.9536287883460772,
+   "value": 0.9936708860759493,
+   "ci_low": 0.9810126582278481,
    "ci_high": 1.0,
    "n": 79
   },
@@ -55,9 +55,9 @@
    "n": 84
   },
   "cost_usd_mean": {
-   "value": 0.0032682566666666665,
-   "ci_low": 0.003096084208333334,
-   "ci_high": 0.0034438194583333325,
+   "value": 0.003284180833333333,
+   "ci_low": 0.0031071870833333333,
+   "ci_high": 0.0034765416874999997,
    "n": 120
   },
   "error_rate": {
@@ -73,26 +73,26 @@
    "n": 36
   },
   "latency_p50_ms": {
-   "value": 9.6,
-   "ci_low": 8.598749999999999,
-   "ci_high": 10.3,
+   "value": 7.5,
+   "ci_low": 6.7,
+   "ci_high": 8.7,
    "n": 120
   },
   "latency_p95_ms": {
-   "value": 24143.115,
-   "ci_low": 23391.684999999998,
-   "ci_high": 25208.45499999998,
+   "value": 8700.56499999998,
+   "ci_low": 16.264999999999997,
+   "ci_high": 20947.569999999992,
    "n": 120
   },
   "model_latency_p50_ms": {
-   "value": 3449.0,
-   "ci_low": 3286.5,
-   "ci_high": 3624.6,
+   "value": 3464.2,
+   "ci_low": 3294.5,
+   "ci_high": 3677.05,
    "n": 120
   },
   "model_latency_p95_ms": {
    "value": 19574.114999999983,
-   "ci_low": 7115.600000000001,
+   "ci_low": 7276.2,
    "ci_high": 34128.3,
    "n": 120
   },
@@ -133,17 +133,17 @@
    "n": 120
   },
   "tokens_mean": {
-   "value": 8216.666666666666,
-   "ci_low": 7787.6325,
-   "ci_high": 8667.545833333334,
+   "value": 8238.275,
+   "ci_low": 7794.70875,
+   "ci_high": 8714.788125000001,
    "n": 120
   }
  },
  "summary_by_dataset": {
   "financebench": {
    "citation_precision": {
-    "value": 1.0,
-    "ci_low": 0.8513451253913791,
+    "value": 0.9772727272727273,
+    "ci_low": 0.9318181818181818,
     "ci_high": 1.0,
     "n": 22
    },
@@ -154,9 +154,9 @@
     "n": 27
    },
    "cost_usd_mean": {
-    "value": 0.0037557555555555546,
-    "ci_low": 0.0034237617361111104,
-    "ci_high": 0.004099137569444443,
+    "value": 0.003808836111111111,
+    "ci_low": 0.003434000416666667,
+    "ci_high": 0.004203479166666667,
     "n": 36
    },
    "error_rate": {
@@ -172,26 +172,26 @@
     "n": 36
    },
    "latency_p50_ms": {
-    "value": 21.299999999999997,
-    "ci_low": 10.8,
-    "ci_high": 23391.3,
+    "value": 7.0,
+    "ci_low": 6.15,
+    "ci_high": 11.1,
     "n": 36
    },
    "latency_p95_ms": {
-    "value": 32137.975,
-    "ci_low": 24206.775,
-    "ci_high": 32614.6,
+    "value": 23235.199999999997,
+    "ci_low": 9959.625,
+    "ci_high": 32154.9,
     "n": 36
    },
    "model_latency_p50_ms": {
-    "value": 3969.2000000000003,
-    "ci_low": 3641.7000000000003,
-    "ci_high": 5187.099999999999,
+    "value": 4926.45,
+    "ci_low": 3910.2999999999997,
+    "ci_high": 5477.9,
     "n": 36
    },
    "model_latency_p95_ms": {
     "value": 45315.100000000006,
-    "ci_low": 12209.225,
+    "ci_low": 12329.675,
     "ci_high": 98553.2,
     "n": 36
    },
@@ -232,9 +232,9 @@
     "n": 36
    },
    "tokens_mean": {
-    "value": 9477.888888888889,
-    "ci_low": 8755.468055555555,
-    "ci_high": 10239.004166666666,
+    "value": 9549.916666666666,
+    "ci_low": 8735.052083333334,
+    "ci_high": 10390.802777777777,
     "n": 36
    }
   },
@@ -252,15 +252,15 @@
     "n": 24
    },
    "latency_p50_ms": {
-    "value": 5.0,
-    "ci_low": 4.7,
-    "ci_high": 5.4,
+    "value": 4.7,
+    "ci_low": 4.2,
+    "ci_high": 4.9,
     "n": 24
    },
    "latency_p95_ms": {
-    "value": 7.009999999999998,
-    "ci_low": 5.7,
-    "ci_high": 7.8,
+    "value": 5.554999999999999,
+    "ci_low": 5.0,
+    "ci_high": 5.8,
     "n": 24
    },
    "model_latency_p50_ms": {
@@ -314,15 +314,15 @@
     "n": 60
    },
    "latency_p50_ms": {
-    "value": 9.75,
-    "ci_low": 9.05,
-    "ci_high": 10.5,
+    "value": 9.45,
+    "ci_low": 8.649999999999999,
+    "ci_high": 10.3,
     "n": 60
    },
    "latency_p95_ms": {
-    "value": 17.309999999999963,
-    "ci_low": 13.794999999999995,
-    "ci_high": 43.29499999999997,
+    "value": 15.249999999999996,
+    "ci_low": 12.629999999999997,
+    "ci_high": 43.44499999999997,
     "n": 60
    },
    "model_latency_p50_ms": {
@@ -382,11 +382,11 @@
   }
  },
  "usage_total": {
-  "prompt_tokens": 942186,
-  "completion_tokens": 43814,
-  "llm_calls": 465,
-  "cost_usd": 0.39219079999999984,
-  "latency_ms": 762118.2999999999
+  "prompt_tokens": 944264,
+  "completion_tokens": 44329,
+  "llm_calls": 466,
+  "cost_usd": 0.3941016999999999,
+  "latency_ms": 774124.8
  },
  "results": [
   {
@@ -457,7 +457,7 @@
      "latency_ms": 3759.4000000000005
     }
    },
-   "wall_ms": 16.7,
+   "wall_ms": 16.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -523,7 +523,7 @@
      "latency_ms": 2094.7
     }
    },
-   "wall_ms": 10.1,
+   "wall_ms": 9.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -598,7 +598,7 @@
      "latency_ms": 3061.3999999999996
     }
    },
-   "wall_ms": 14.1,
+   "wall_ms": 13.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -656,7 +656,7 @@
      "latency_ms": 2466.7
     }
    },
-   "wall_ms": 5.1,
+   "wall_ms": 5.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -713,7 +713,7 @@
      "latency_ms": 3019.0
     }
    },
-   "wall_ms": 10.1,
+   "wall_ms": 9.2,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -785,7 +785,7 @@
      "latency_ms": 3227.0
     }
    },
-   "wall_ms": 10.2,
+   "wall_ms": 10.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -843,7 +843,7 @@
      "latency_ms": 2345.5
     }
    },
-   "wall_ms": 7.8,
+   "wall_ms": 7.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -909,7 +909,7 @@
      "latency_ms": 2297.3
     }
    },
-   "wall_ms": 7.6,
+   "wall_ms": 7.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -975,7 +975,7 @@
      "latency_ms": 2812.3
     }
    },
-   "wall_ms": 8.4,
+   "wall_ms": 8.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1033,7 +1033,7 @@
      "latency_ms": 2281.5
     }
    },
-   "wall_ms": 6.3,
+   "wall_ms": 6.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1101,7 +1101,7 @@
      "latency_ms": 3263.6000000000004
     }
    },
-   "wall_ms": 9.5,
+   "wall_ms": 8.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1174,7 +1174,7 @@
      "latency_ms": 2985.8999999999996
     }
    },
-   "wall_ms": 8.2,
+   "wall_ms": 9.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1232,7 +1232,7 @@
      "latency_ms": 2404.4
     }
    },
-   "wall_ms": 6.0,
+   "wall_ms": 7.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1303,7 +1303,7 @@
      "latency_ms": 4838.0
     }
    },
-   "wall_ms": 9.6,
+   "wall_ms": 9.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1373,7 +1373,7 @@
      "latency_ms": 2939.8999999999996
     }
    },
-   "wall_ms": 10.2,
+   "wall_ms": 10.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1447,7 +1447,7 @@
      "latency_ms": 3236.6
     }
    },
-   "wall_ms": 11.7,
+   "wall_ms": 11.4,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1521,7 +1521,7 @@
      "latency_ms": 3286.5
     }
    },
-   "wall_ms": 10.7,
+   "wall_ms": 10.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1589,7 +1589,7 @@
      "latency_ms": 3038.2000000000003
     }
    },
-   "wall_ms": 11.0,
+   "wall_ms": 10.8,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1647,7 +1647,7 @@
      "latency_ms": 2325.8
     }
    },
-   "wall_ms": 3.7,
+   "wall_ms": 3.8,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1785,7 +1785,7 @@
      "latency_ms": 2514.6
     }
    },
-   "wall_ms": 6.5,
+   "wall_ms": 5.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1843,7 +1843,7 @@
      "latency_ms": 2382.0
     }
    },
-   "wall_ms": 7.1,
+   "wall_ms": 7.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1901,7 +1901,7 @@
      "latency_ms": 1947.9
     }
    },
-   "wall_ms": 6.5,
+   "wall_ms": 3.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1969,7 +1969,7 @@
      "latency_ms": 2821.2
     }
    },
-   "wall_ms": 9.9,
+   "wall_ms": 9.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2118,7 +2118,7 @@
      "latency_ms": 3378.6000000000004
     }
    },
-   "wall_ms": 10.8,
+   "wall_ms": 10.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2195,7 +2195,7 @@
      "latency_ms": 2952.7
     }
    },
-   "wall_ms": 11.0,
+   "wall_ms": 11.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2264,7 +2264,7 @@
      "latency_ms": 3624.6
     }
    },
-   "wall_ms": 9.3,
+   "wall_ms": 8.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2333,7 +2333,7 @@
      "latency_ms": 3557.5
     }
    },
-   "wall_ms": 8.7,
+   "wall_ms": 8.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2402,7 +2402,7 @@
      "latency_ms": 3275.3999999999996
     }
    },
-   "wall_ms": 9.6,
+   "wall_ms": 9.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2490,7 +2490,7 @@
      "latency_ms": 3612.7
     }
    },
-   "wall_ms": 11.0,
+   "wall_ms": 10.3,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -2570,7 +2570,7 @@
      "latency_ms": 9040.099999999999
     }
    },
-   "wall_ms": 14.9,
+   "wall_ms": 15.2,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -2725,7 +2725,7 @@
      "latency_ms": 13773.7
     }
    },
-   "wall_ms": 11.8,
+   "wall_ms": 9.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2794,7 +2794,7 @@
      "latency_ms": 3454.1000000000004
     }
    },
-   "wall_ms": 5.8,
+   "wall_ms": 5.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2863,7 +2863,7 @@
      "latency_ms": 4265.5
     }
    },
-   "wall_ms": 8.5,
+   "wall_ms": 8.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2932,7 +2932,7 @@
      "latency_ms": 3947.3999999999996
     }
    },
-   "wall_ms": 8.5,
+   "wall_ms": 5.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3001,7 +3001,7 @@
      "latency_ms": 3227.0
     }
    },
-   "wall_ms": 8.1,
+   "wall_ms": 7.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3147,7 +3147,7 @@
      "latency_ms": 3884.8
     }
    },
-   "wall_ms": 10.5,
+   "wall_ms": 10.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3224,7 +3224,7 @@
      "latency_ms": 3474.1000000000004
     }
    },
-   "wall_ms": 10.1,
+   "wall_ms": 10.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3302,7 +3302,7 @@
      "latency_ms": 3277.2000000000003
     }
    },
-   "wall_ms": 13.7,
+   "wall_ms": 51.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3378,7 +3378,7 @@
      "latency_ms": 3423.2
     }
    },
-   "wall_ms": 6.5,
+   "wall_ms": 43.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3447,7 +3447,7 @@
      "latency_ms": 3280.6000000000004
     }
    },
-   "wall_ms": 8.9,
+   "wall_ms": 8.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3509,7 +3509,7 @@
      "latency_ms": 3000.5
     }
    },
-   "wall_ms": 9.2,
+   "wall_ms": 8.8,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -3584,7 +3584,7 @@
      "latency_ms": 4334.6
     }
    },
-   "wall_ms": 10.3,
+   "wall_ms": 10.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3662,7 +3662,7 @@
      "latency_ms": 3454.2999999999997
     }
    },
-   "wall_ms": 11.8,
+   "wall_ms": 11.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3747,7 +3747,7 @@
      "latency_ms": 3906.1
     }
    },
-   "wall_ms": 15.6,
+   "wall_ms": 13.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3816,7 +3816,7 @@
      "latency_ms": 3401.3
     }
    },
-   "wall_ms": 5.6,
+   "wall_ms": 7.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3885,7 +3885,7 @@
      "latency_ms": 3345.4
     }
    },
-   "wall_ms": 9.3,
+   "wall_ms": 10.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -3955,7 +3955,7 @@
      "latency_ms": 3308.4
     }
    },
-   "wall_ms": 8.0,
+   "wall_ms": 5.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4034,7 +4034,7 @@
      "latency_ms": 3764.6000000000004
     }
    },
-   "wall_ms": 50.8,
+   "wall_ms": 12.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4103,7 +4103,7 @@
      "latency_ms": 3755.7
     }
    },
-   "wall_ms": 42.9,
+   "wall_ms": 5.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4188,7 +4188,7 @@
      "latency_ms": 3440.7
     }
    },
-   "wall_ms": 10.6,
+   "wall_ms": 10.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4266,7 +4266,7 @@
      "latency_ms": 3531.2
     }
    },
-   "wall_ms": 11.4,
+   "wall_ms": 10.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4343,7 +4343,7 @@
      "latency_ms": 3516.5
     }
    },
-   "wall_ms": 10.6,
+   "wall_ms": 13.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4412,7 +4412,7 @@
      "latency_ms": 3234.0
     }
    },
-   "wall_ms": 8.5,
+   "wall_ms": 5.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4477,7 +4477,7 @@
      "latency_ms": 4783.099999999999
     }
    },
-   "wall_ms": 14.6,
+   "wall_ms": 14.9,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -4547,7 +4547,7 @@
      "latency_ms": 3638.8
     }
    },
-   "wall_ms": 7.1,
+   "wall_ms": 6.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4625,7 +4625,7 @@
      "latency_ms": 3649.6000000000004
     }
    },
-   "wall_ms": 28.9,
+   "wall_ms": 9.3,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4652,7 +4652,7 @@
    "gold_value": 1.9,
    "gold_unit": "percent",
    "prediction": {
-    "answer": "The filings do not provide the FY2017 revenue needed to calculate the 3-year average of capex as a % of revenue.",
+    "answer": "The filings do not provide the FY2017 and FY2018 net revenues required to calculate the three-year average capex as a percentage of revenue.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -4667,16 +4667,20 @@
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00113",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00232",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00238",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00159",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00112",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00115",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00131",
      "FB-ACTIVISIONBLIZZARD_2019_10K:section:00125",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00161",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00163",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00251",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00188",
-     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00141"
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00292",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00291",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00254",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00293",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00237",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00239",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00226",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00142",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00141",
+     "FB-ACTIVISIONBLIZZARD_2019_10K:section:00139"
     ],
     "steps": [
      "plan",
@@ -4688,19 +4692,19 @@
      "search_filings",
      "plan",
      "search_filings",
-     "get_table",
+     "search_filings",
      "answer",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 10239,
-     "completion_tokens": 294,
+     "prompt_tokens": 10433,
+     "completion_tokens": 330,
      "llm_calls": 4,
-     "cost_usd": 0.0038066999999999997,
-     "latency_ms": 3641.7000000000003
+     "cost_usd": 0.0039549,
+     "latency_ms": 6821.4
     }
    },
-   "wall_ms": 22683.2,
+   "wall_ms": 20810.1,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -4728,7 +4732,7 @@
    "gold_value": 3215000000.0,
    "gold_unit": "USD",
    "prediction": {
-    "answer": "General Mills' free cash flow for fiscal year 2020 was $3,215.4 million [1], calculated using net cash provided by operating activities of $3,676.2 million [1] less purchases of land, buildings, and equipment of $460.8 million [1].",
+    "answer": "General Mills' FY2020 free cash flow was $3,215.4 million, calculated as net cash provided by operating activities of $3,676.2 million minus purchases of land, buildings, and equipment of $460.8 million [1].",
     "refused": false,
     "answer_value": 3215400000.0,
     "answer_unit": "USD",
@@ -4739,7 +4743,7 @@
       "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Free Cash Flow Conversion Rate",
       "page": 37,
       "page_end": 37,
-      "quote": "Purchases of land, buildings, and equipment (460.8)"
+      "quote": "Free cash flow $3,215.4"
      }
     ],
     "retrieved_chunk_ids": [
@@ -4749,8 +4753,9 @@
      "FB-GENERALMILLS_2020_10K:section:00107",
      "FB-GENERALMILLS_2020_10K:section:00191",
      "FB-GENERALMILLS_2020_10K:section:00147",
-     "FB-GENERALMILLS_2020_10K:section:00110",
-     "FB-GENERALMILLS_2020_10K:section:00109"
+     "FB-GENERALMILLS_2020_10K:section:00065",
+     "FB-GENERALMILLS_2020_10K:section:00111",
+     "FB-GENERALMILLS_2020_10K:section:00110"
     ],
     "steps": [
      "plan",
@@ -4758,21 +4763,22 @@
      "search_filings",
      "plan",
      "get_table",
-     "get_table",
+     "search_filings",
      "plan",
+     "get_table",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 8978,
-     "completion_tokens": 358,
+     "prompt_tokens": 8670,
+     "completion_tokens": 315,
      "llm_calls": 4,
-     "cost_usd": 0.0035883999999999994,
-     "latency_ms": 3862.2
+     "cost_usd": 0.0033885,
+     "latency_ms": 4798.0
     }
    },
-   "wall_ms": 19379.3,
+   "wall_ms": 15167.8,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4800,7 +4806,7 @@
    "gold_value": 93.86,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "The provided financial filings do not contain the necessary line items for accounts payable, inventory, and cost of sales (COGS) to calculate Amazon's FY2017 days payable outstanding (DPO).",
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -4822,16 +4828,9 @@
      "FB-AMAZON_2017_10K:section:00118",
      "FB-AMAZON_2017_10K:section:00133",
      "FB-AMAZON_2017_10K:section:00194",
-     "FB-AMAZON_2017_10K:section:00163",
-     "FB-AMAZON_2017_10K:section:00165",
      "FB-AMAZON_2017_10K:section:00256",
-     "FB-AMAZON_2017_10K:section:00069",
      "FB-AMAZON_2017_10K:section:00231",
-     "FB-AMAZON_2017_10K:section:00189",
-     "FB-AMAZON_2017_10K:section:00070",
-     "FB-AMAZON_2017_10K:section:00120",
-     "FB-AMAZON_2017_10K:section:00167",
-     "FB-AMAZON_2017_10K:section:00288"
+     "FB-AMAZON_2017_10K:section:00189"
     ],
     "steps": [
      "plan",
@@ -4845,18 +4844,24 @@
      "search_filings",
      "plan",
      "search_filings",
+     "search_filings",
      "answer",
-     "self_check"
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: numbers: these numbers do not appear in the evidence: 93.7"
     ],
     "usage": {
-     "prompt_tokens": 10983,
-     "completion_tokens": 521,
-     "llm_calls": 4,
-     "cost_usd": 0.0045974,
-     "latency_ms": 7115.600000000001
+     "prompt_tokens": 15519,
+     "completion_tokens": 1109,
+     "llm_calls": 5,
+     "cost_usd": 0.0074282,
+     "latency_ms": 9557.0
     }
    },
-   "wall_ms": 23391.3,
+   "wall_ms": 32154.9,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -4884,7 +4889,7 @@
    "gold_value": 16525000000.0,
    "gold_unit": "USD",
    "prediction": {
-    "answer": "At the end of FY2019 (May 31, 2019), Nike's total current assets were $16,525 million [1].",
+    "answer": "At the end of FY2019, Nike had total current assets of $16,525 million [1].",
     "refused": false,
     "answer_value": 16525000000.0,
     "answer_unit": "USD",
@@ -4904,9 +4909,7 @@
      "FB-NIKE_2019_10K:section:00212",
      "FB-NIKE_2019_10K:section:00215",
      "FB-NIKE_2019_10K:section:00296",
-     "FB-NIKE_2019_10K:section:00236",
-     "FB-NIKE_2019_10K:section:00319",
-     "FB-NIKE_2019_10K:section:00306"
+     "FB-NIKE_2019_10K:section:00236"
     ],
     "steps": [
      "plan",
@@ -4920,14 +4923,14 @@
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 8323,
-     "completion_tokens": 213,
+     "prompt_tokens": 7427,
+     "completion_tokens": 201,
      "llm_calls": 4,
-     "cost_usd": 0.0030294,
-     "latency_ms": 3179.1
+     "cost_usd": 0.0027306,
+     "latency_ms": 5236.1
     }
    },
-   "wall_ms": 23926.3,
+   "wall_ms": 8385.8,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -4955,7 +4958,7 @@
    "gold_value": 55.1,
    "gold_unit": "percent",
    "prediction": {
-    "answer": "The provided evidence does not contain Nike's Consolidated Statements of Income showing total cost of sales and revenues for fiscal years 2016 to 2018; therefore, the filings do not provide it.",
+    "answer": "The provided filings do not disclose the Consolidated Statements of Income showing total revenue and cost of sales for FY2016, FY2017, and FY2018 to calculate this metric.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -4967,9 +4970,8 @@
      "FB-NIKE_2018_10K:section:00277",
      "FB-NIKE_2018_10K:section:00142",
      "FB-NIKE_2018_10K:section:00105",
-     "FB-NIKE_2018_10K:section:00307",
-     "FB-NIKE_2018_10K:section:00309",
      "FB-NIKE_2018_10K:section:00212",
+     "FB-NIKE_2018_10K:section:00309",
      "FB-NIKE_2018_10K:section:00213",
      "FB-NIKE_2018_10K:section:00171"
     ],
@@ -4980,18 +4982,19 @@
      "plan",
      "search_filings",
      "plan",
+     "search_filings",
      "answer",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 8978,
-     "completion_tokens": 277,
+     "prompt_tokens": 8539,
+     "completion_tokens": 244,
      "llm_calls": 4,
-     "cost_usd": 0.0033859,
-     "latency_ms": 3506.3
+     "cost_usd": 0.0031717,
+     "latency_ms": 6476.7
     }
    },
-   "wall_ms": 24553.3,
+   "wall_ms": 14681.1,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -5076,7 +5079,7 @@
      "latency_ms": 5163.8
     }
    },
-   "wall_ms": 32332.6,
+   "wall_ms": 31.6,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -5104,7 +5107,7 @@
    "gold_value": 0.8,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "Coca-Cola's FY2022 dividend payout ratio was 79.82%, based on total cash dividends paid of $7,616 million [1] and net income attributable to shareowners of $9,542 million [2].",
+    "answer": "Coca-Cola's FY2022 dividend payout ratio is 79.82%, calculated using total cash dividends paid of $7,616 million [1] and net income attributable to shareowners of The Coca-Cola Company of $9,542 million [2].",
     "refused": false,
     "answer_value": 79.82,
     "answer_unit": "percent",
@@ -5134,23 +5137,17 @@
      "FB-COCACOLA_2022_10K:section:00287",
      "FB-COCACOLA_2022_10K:section:00418",
      "FB-COCACOLA_2022_10K:section:00215",
-     "FB-COCACOLA_2022_10K:section:00300",
      "FB-COCACOLA_2022_10K:section:00186",
-     "FB-COCACOLA_2022_10K:section:00191",
-     "FB-COCACOLA_2022_10K:section:00193",
-     "FB-COCACOLA_2022_10K:section:00196",
-     "FB-COCACOLA_2022_10K:section:00197",
-     "FB-COCACOLA_2022_10K:section:00223",
-     "FB-COCACOLA_2022_10K:section:00194",
      "FB-COCACOLA_2022_10K:section:00227",
-     "FB-COCACOLA_2022_10K:section:00411",
      "FB-COCACOLA_2022_10K:section:00216",
-     "FB-COCACOLA_2022_10K:section:00226",
-     "FB-COCACOLA_2022_10K:section:00413",
-     "FB-COCACOLA_2022_10K:section:00228",
+     "FB-COCACOLA_2022_10K:section:00411",
      "FB-COCACOLA_2022_10K:section:00218",
      "FB-COCACOLA_2022_10K:section:00225",
-     "FB-COCACOLA_2022_10K:section:00472"
+     "FB-COCACOLA_2022_10K:section:00223",
+     "FB-COCACOLA_2022_10K:section:00472",
+     "FB-COCACOLA_2022_10K:section:00193",
+     "FB-COCACOLA_2022_10K:section:00201",
+     "FB-COCACOLA_2022_10K:section:00413"
     ],
     "steps": [
      "plan",
@@ -5159,7 +5156,8 @@
      "search_filings",
      "plan",
      "search_filings",
-     "search_filings",
+     "get_table",
+     "get_table",
      "plan",
      "search_filings",
      "search_filings",
@@ -5168,14 +5166,14 @@
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 10549,
-     "completion_tokens": 492,
+     "prompt_tokens": 9312,
+     "completion_tokens": 438,
      "llm_calls": 4,
-     "cost_usd": 0.0043947,
-     "latency_ms": 3500.5
+     "cost_usd": 0.0038886,
+     "latency_ms": 3734.8
     }
    },
-   "wall_ms": 24051.2,
+   "wall_ms": 23559.5,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -5248,7 +5246,7 @@
      "latency_ms": 5478.499999999999
     }
    },
-   "wall_ms": 32073.1,
+   "wall_ms": 29.5,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -5282,20 +5280,20 @@
     "answer_unit": "USD",
     "citations": [
      {
-      "chunk_id": "xbrl:COST:Assets:2021-08-29:USD",
-      "filing_id": "COST-10K-2021FY",
-      "section": "XBRL companyfacts",
-      "page": null,
-      "page_end": null,
-      "quote": "Assets (us-gaap:Assets): 59,268,000,000 USD for as of 2021-08-29 [instant]"
-     },
-     {
       "chunk_id": "FB-COSTCO_2021_10K:section:00108",
       "filing_id": "FB-COSTCO_2021_10K",
       "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
       "page": 38,
       "page_end": 38,
-      "quote": "TOTAL ASSETS $59,268"
+      "quote": "TOTAL ASSETS | $59,268"
+     },
+     {
+      "chunk_id": "FB-COSTCO_2021_10K:section:00107",
+      "filing_id": "FB-COSTCO_2021_10K",
+      "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+      "page": 38,
+      "page_end": 38,
+      "quote": "August 29, 2021"
      }
     ],
     "retrieved_chunk_ids": [
@@ -5306,7 +5304,9 @@
      "FB-COSTCO_2021_10K:section:00091",
      "FB-COSTCO_2021_10K:section:00112",
      "FB-COSTCO_2021_10K:section:00121",
-     "FB-COSTCO_2021_10K:section:00148"
+     "FB-COSTCO_2021_10K:section:00114",
+     "FB-COSTCO_2021_10K:section:00104",
+     "FB-COSTCO_2021_10K:section:00096"
     ],
     "steps": [
      "plan",
@@ -5314,25 +5314,26 @@
      "search_filings",
      "search_filings",
      "plan",
-     "get_table",
+     "search_filings",
      "plan",
+     "search_filings",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 9432,
-     "completion_tokens": 309,
+     "prompt_tokens": 9660,
+     "completion_tokens": 342,
      "llm_calls": 4,
-     "cost_usd": 0.0036020999999999996,
-     "latency_ms": 3298.3999999999996
+     "cost_usd": 0.0037529999999999994,
+     "latency_ms": 3486.3
     }
    },
-   "wall_ms": 23182.9,
+   "wall_ms": 23127.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
-    "citation_precision": 1.0,
+    "citation_precision": 0.5,
     "citation_recall": 1.0,
     "recall_at_5": 0.0,
     "recall_at_10": 1.0,
@@ -5403,7 +5404,7 @@
      "latency_ms": 3443.9
     }
    },
-   "wall_ms": 23332.2,
+   "wall_ms": 17.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -5503,7 +5504,7 @@
      "latency_ms": 3943.4
     }
    },
-   "wall_ms": 24833.5,
+   "wall_ms": 13.6,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -5572,7 +5573,7 @@
      "latency_ms": 5187.099999999999
     }
    },
-   "wall_ms": 32614.6,
+   "wall_ms": 15.0,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -5648,7 +5649,7 @@
      "latency_ms": 4487.0
     }
    },
-   "wall_ms": 23617.7,
+   "wall_ms": 8.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -5751,7 +5752,7 @@
      "latency_ms": 3910.2999999999997
     }
    },
-   "wall_ms": 21.2,
+   "wall_ms": 8.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -5819,7 +5820,7 @@
      "latency_ms": 2897.1
     }
    },
-   "wall_ms": 9.9,
+   "wall_ms": 5.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -5900,7 +5901,7 @@
      "latency_ms": 3427.1000000000004
     }
    },
-   "wall_ms": 10.8,
+   "wall_ms": 7.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -5970,7 +5971,7 @@
      "latency_ms": 3202.6000000000004
     }
    },
-   "wall_ms": 8.5,
+   "wall_ms": 6.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6055,7 +6056,7 @@
      "latency_ms": 3995.0000000000005
     }
    },
-   "wall_ms": 9.6,
+   "wall_ms": 7.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -6117,7 +6118,7 @@
      "latency_ms": 3120.3
     }
    },
-   "wall_ms": 7.0,
+   "wall_ms": 5.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -6190,7 +6191,7 @@
      "latency_ms": 3300.0999999999995
     }
    },
-   "wall_ms": 6.9,
+   "wall_ms": 5.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6266,7 +6267,7 @@
      "latency_ms": 3704.5
     }
    },
-   "wall_ms": 24445.5,
+   "wall_ms": 6.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6355,7 +6356,7 @@
      "latency_ms": 4132.6
     }
    },
-   "wall_ms": 21.4,
+   "wall_ms": 8.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6440,7 +6441,7 @@
      "latency_ms": 3104.0
     }
    },
-   "wall_ms": 8.6,
+   "wall_ms": 5.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6521,7 +6522,7 @@
      "latency_ms": 3143.6
     }
    },
-   "wall_ms": 23399.0,
+   "wall_ms": 6.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6597,7 +6598,7 @@
      "latency_ms": 5054.9
     }
    },
-   "wall_ms": 19.8,
+   "wall_ms": 6.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6665,7 +6666,7 @@
      "latency_ms": 7276.2
     }
    },
-   "wall_ms": 10.4,
+   "wall_ms": 5.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6739,7 +6740,7 @@
      "latency_ms": 5401.0
     }
    },
-   "wall_ms": 23774.9,
+   "wall_ms": 6.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6808,7 +6809,7 @@
      "latency_ms": 27490.1
     }
    },
-   "wall_ms": 15.7,
+   "wall_ms": 5.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6891,7 +6892,7 @@
      "latency_ms": 34128.3
     }
    },
-   "wall_ms": 12.3,
+   "wall_ms": 7.1,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -6957,7 +6958,7 @@
      "latency_ms": 78875.5
     }
    },
-   "wall_ms": 6.7,
+   "wall_ms": 4.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7030,7 +7031,7 @@
      "latency_ms": 98553.2
     }
    },
-   "wall_ms": 8.6,
+   "wall_ms": 5.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7096,7 +7097,7 @@
      "latency_ms": 18983.800000000003
     }
    },
-   "wall_ms": 24127.2,
+   "wall_ms": 5.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -7170,7 +7171,7 @@
      "latency_ms": 30833.800000000003
     }
    },
-   "wall_ms": 16.6,
+   "wall_ms": 4.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7233,7 +7234,7 @@
      "latency_ms": 6544.8
     }
    },
-   "wall_ms": 10.7,
+   "wall_ms": 5.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -7303,7 +7304,7 @@
      "latency_ms": 5477.9
     }
    },
-   "wall_ms": 9.6,
+   "wall_ms": 5.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7381,7 +7382,7 @@
      "latency_ms": 3803.3
     }
    },
-   "wall_ms": 9.3,
+   "wall_ms": 6.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7445,7 +7446,7 @@
      "latency_ms": 3581.1
     }
    },
-   "wall_ms": 7.8,
+   "wall_ms": 5.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7496,7 +7497,7 @@
      "latency_ms": 2545.7
     }
    },
-   "wall_ms": 4.8,
+   "wall_ms": 3.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7554,7 +7555,7 @@
      "latency_ms": 3235.3
     }
    },
-   "wall_ms": 5.5,
+   "wall_ms": 4.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7612,7 +7613,7 @@
      "latency_ms": 2362.1
     }
    },
-   "wall_ms": 4.4,
+   "wall_ms": 3.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7672,7 +7673,7 @@
      "latency_ms": 3877.5
     }
    },
-   "wall_ms": 7.1,
+   "wall_ms": 5.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7735,7 +7736,7 @@
      "latency_ms": 3209.3
     }
    },
-   "wall_ms": 6.0,
+   "wall_ms": 4.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7793,7 +7794,7 @@
      "latency_ms": 3264.5
     }
    },
-   "wall_ms": 5.7,
+   "wall_ms": 5.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7855,7 +7856,7 @@
      "latency_ms": 3112.5
     }
    },
-   "wall_ms": 5.8,
+   "wall_ms": 4.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7906,7 +7907,7 @@
      "latency_ms": 3027.5
     }
    },
-   "wall_ms": 4.0,
+   "wall_ms": 3.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -7960,7 +7961,7 @@
      "latency_ms": 3651.5
     }
    },
-   "wall_ms": 4.7,
+   "wall_ms": 4.1,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8019,7 +8020,7 @@
      "latency_ms": 23929.2
     }
    },
-   "wall_ms": 5.0,
+   "wall_ms": 4.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8061,7 +8062,7 @@
      "latency_ms": 1994.2
     }
    },
-   "wall_ms": 2.7,
+   "wall_ms": 2.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8118,7 +8119,7 @@
      "latency_ms": 4934.700000000001
     }
    },
-   "wall_ms": 5.4,
+   "wall_ms": 5.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8181,7 +8182,7 @@
      "latency_ms": 3014.5
     }
    },
-   "wall_ms": 6.5,
+   "wall_ms": 4.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8242,7 +8243,7 @@
      "latency_ms": 3242.6
     }
    },
-   "wall_ms": 5.3,
+   "wall_ms": 5.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8348,7 +8349,7 @@
      "latency_ms": 2620.0
     }
    },
-   "wall_ms": 3.1,
+   "wall_ms": 3.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8401,7 +8402,7 @@
      "latency_ms": 3961.6000000000004
     }
    },
-   "wall_ms": 4.1,
+   "wall_ms": 4.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8455,7 +8456,7 @@
      "latency_ms": 2981.3
     }
    },
-   "wall_ms": 4.1,
+   "wall_ms": 4.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8514,7 +8515,7 @@
      "latency_ms": 19344.899999999998
     }
    },
-   "wall_ms": 5.2,
+   "wall_ms": 5.3,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8572,7 +8573,7 @@
      "latency_ms": 6327.7
     }
    },
-   "wall_ms": 5.0,
+   "wall_ms": 5.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8629,7 +8630,7 @@
      "latency_ms": 16418.899999999998
     }
    },
-   "wall_ms": 4.8,
+   "wall_ms": 4.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8691,7 +8692,7 @@
      "latency_ms": 5728.4
     }
    },
-   "wall_ms": 5.0,
+   "wall_ms": 4.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -8750,7 +8751,7 @@
      "latency_ms": 2728.9
     }
    },
-   "wall_ms": 5.3,
+   "wall_ms": 4.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
