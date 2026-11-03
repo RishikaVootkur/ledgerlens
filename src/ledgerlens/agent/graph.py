@@ -63,6 +63,9 @@ class AgentConfig:
     # by one arithmetic step (sum, difference, ratio, percent, percent change). Off
     # reproduces the original verifier, which refused such answers.
     derive_numbers: bool = True
+    # Split grouped citation markers like [E1, E4] before the self-check. Off reproduces
+    # the original parser, which saw no citation in a grouped marker.
+    split_grouped_markers: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -449,7 +452,8 @@ def build_graph(run: _Run) -> Any:
             purpose="answer" if not problems else "repair",
         )
         draft = parse_json_answer(resp.content)
-        draft["answer"] = split_grouped_refs(str(draft.get("answer") or ""))
+        if cfg.split_grouped_markers:
+            draft["answer"] = split_grouped_refs(str(draft.get("answer") or ""))
         return {"draft": draft, "problems": [], "steps": [*state.get("steps", []), "answer"]}
 
     def verify(state: State) -> State:

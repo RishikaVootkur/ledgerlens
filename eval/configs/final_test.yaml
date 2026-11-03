@@ -1,0 +1,16 @@
+# Final held-out run. Report once; do not tune on it.
+name: final_test
+description: "Held-out test subsample (120 questions, stratified): the final agent on Gemini 3.5 Flash-Lite"
+model: gemini-3.5-flash-lite
+strategy: section
+method: hybrid
+k: 6
+max_rounds: 3
+xbrl_tool: true
+verify_numbers: true
+self_check: true
+datasets: [xbrl, financebench, unanswerable]
+qids_file: eval/slices/final_test.txt
+scope: document
+concurrency: 2
+citation_support: false
