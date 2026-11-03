@@ -1,0 +1,125 @@
+{
+ "args": {
+  "doc_name": "WALMART_2018_10K",
+  "query": "consolidated statements of income net sales revenue cost of sales operating income net income"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00209",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 57,
+   "page_end": 57,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0049"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income | p.57]\n| (Amounts in millions, except per share data) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Revenues: |  |  |  |\n| Net sales | $495,761 | $481,317 | $478,614 |\n| Membership and other income | 4,582 | 4,556 | 3,516 |\n| Total revenues | 500,343 | 485,873 | 482,130 |\n| Costs and expenses: |  |  |  |\n| Cost of sales | 373,396 | 361,256 | 360,984 |\n| Operating, selling, general and administrative expenses | 106,510 | 101,853 | 97,041 |\n| Operating income | 20,437 | 22,764 | 24,105 |\n| Interest: |  |  |  |\n| Debt | 1,978 | 2,044 | 2,027 |\n| Capital lease and financing obligations | 352 | 323 | 521 |\n| Interest income | (152) | (100) | (81) |\n| Interest, net | 2,178 | 2,267 | 2,467 |\n| Loss on extinguishment of debt | 3,136 | — | — |\n| Income before income taxes | 15,123 | 20,497 | 21,638 |\n| Provision for income taxes | 4,600 | 6,204 | 6,558 |\n| Consolidated net income | 10,523 | 14,293 | 15,080 |\n| Consolidated net income attributable to noncontrolling interest | (661) | (650) | (386) |\n| Consolidated net income attributable to Walmart | $9,862 | $13,643 | $14,694 |\n| Net income per common share: |  |  |  |\n| Basic net income per common share attributable to Walmart | $3.29 | $4.40 | $4.58 |\n| Diluted net income per common share attributable to Walmart | 3.28 | 4.38 | 4.57 |\n| Weighted-average common shares outstanding: |  |  |  |\n| Basic | 2,995 | 3,101 | 3,207 |\n| Diluted | 3,010 | 3,112 | 3,217 |\n| Dividends declared per common share | $2.04 | $2.00 | $1.96 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00211",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 58,
+   "page_end": 58,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0050"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income | p.58]\n| (Amounts in millions) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Consolidated net income | $10,523 | $14,293 | $15,080 |\n| Consolidated net income attributable to noncontrolling interest | (661) | (650) | (386) |\n| Consolidated net income attributable to Walmart | 9,862 | 13,643 | 14,694 |\n| Other comprehensive income (loss), net of income taxes |  |  |  |\n| Currency translation and other | 2,540 | (3,027) | (5,220) |\n| Net investment hedges | (405) | 413 | 366 |\n| Unrealized gain on available-for-sale securities | 1,501 | 145 | — |\n| Cash flow hedges | 437 | 21 | (202) |\n| Minimum pension liability | 147 | (397) | 86 |\n| Other comprehensive income (loss), net of income taxes | 4,220 | (2,845) | (4,970) |\n| Other comprehensive (income) loss attributable to noncontrolling interest | (169) | 210 | 541 |\n| Other comprehensive income (loss) attributable to Walmart | 4,051 | (2,635) | (4,429) |\n| Comprehensive income, net of income taxes | 14,743 | 11,448 | 10,110 |\n| Comprehensive (income) loss attributable to noncontrolling interest | (830) | (440) | 155 |\n| Comprehensive income attributable to Walmart | $13,913 | $11,008 | $10,265 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00158",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 43,
+   "page_end": 43,
+   "section": "Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Walmart International Segment",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Walmart International Segment | p.43]\nOperating expenses as a percentage of segment net sales decreased 11 basis points for fiscal 2018 and increased 58 basis points for fiscal 2017 , when compared to the previous fiscal year. The decrease in operating expenses as a percentage of segment net sales for fiscal 2018 was primarily due to an increase in net sales partially offset by restructuring and impairment charges in certain markets of approximately $0.5 billion, including charges from decisions to exit certain properties and to wind down the first party Brazil eCommerce operations. The increase in operating expenses as a percentage of segment net sales for fiscal 2017 was primarily due to declining sales on relatively flat fixed costs in the United Kingdom, as well as adjustments to useful lives of certain assets and impairment charges in certain markets.\n\nSegment operating income was negatively impacted by fluctuations in currency exchange rates of $68 million and $642 million for fiscal 2018 and 2017 , respectively. As a result of the factors discussed above, segment operating income decreased $406 million for fiscal 2018 and increased $412 million for fiscal 2017 , respectively.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00333",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 87,
+   "page_end": 87,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 17. Quarterly Financial Data (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0088"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Note 17. Quarterly Financial Data (Unaudited) | p.87]\n|  | Q1 | Fiscal Year Ended January Q2 | 31, Q3 | 2017 Q4 | Total |\n|---|---|---|---|---|---|\n| Total revenues | $115,904 | $120,854 | $118,179 | $130,936 | $485,873 |\n| Net sales | 114,986 | 119,405 | 117,176 | 129,750 | 481,317 |\n| Cost of sales | 86,544 | 89,485 | 87,484 | 97,743 | 361,256 |\n| Consolidated net income | 3,216 | 3,889 | 3,202 | 3,986 | 14,293 |\n| Consolidated net income attributable to Walmart | 3,079 | 3,773 | 3,034 | 3,757 | 13,643 |\n| Basic net income per common share attributable to Walmart | 0.98 | 1.21 | 0.98 | 1.23 | 4.40 |\n| (1) Diluted net income per common share attributable to Walmart | 0.98 | 1.21 | 0.98 | 1.22 | 4.38 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00152",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 41,
+   "page_end": 42,
+   "section": "Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Results of Operations Consolidated Results of Operations",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Results of Operations Consolidated Results of Operations | pp.41-42]\nOperating expenses as a percentage of net sales increased 32 and 88 basis points for fiscal 2018 and 2017 , respectively, when compared to the previous fiscal year. For fiscal 2018 , the increase in operating expenses as a percentage of net sales was primarily due to approximately $0.6 billion in charges related to Sam's Club closures and discontinued real estate projects, approximately $400 million related to a lump sum bonus paid to associates, $300 million related to Home Office severance, a legal accrual of $283 million related to the FCPA matter in the third quarter, a charge of $244 million related to discontinued real estate projects in Walmart U.S., and the decisions to exit certain international properties and wind down the first party Brazil eCommerce operations. For fiscal 2017 , the increase in operating expenses as a percentage of net sales was primarily due to an increase in wage expense at the Walmart U.S. and Sam's Club segments resulting from the continued investment in associate wage structure, a $370 million charge related to discontinued domestic real estate projects and severance, and our\n\ncontinued investments in eCommerce and technology. The increase in operating expenses as a percentage of net sales for fiscal 2017 was partially offset by the impact of store closures in the fourth quarter of fiscal 2016.\n\nMembership and other income was relatively flat for fiscal 2018 and increased $1.0 billion for fiscal 2017 , when compared to the same period in the previous fiscal year. While fiscal 2018 included a $387 million gain from the sale of Suburbia, a $47 million gain from a land sale, higher recycling income from our sustainability efforts and higher membership income from increased Plus Member penetration at Sam's Club, these gains were less than gains recognized in fiscal 2017 . Fiscal 2017 included a $535 million gain from the sale of our Yihaodian business and a $194 million gain from the sale of shopping malls in Chile.\n\nFor fiscal 2018, loss on extinguishment of debt was $3.1 billion , due to the early extinguishment of long-term debt which allowed us to retire higher rate debt to reduce interest expense in future periods .",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00150",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 41,
+   "page_end": 41,
+   "section": "Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Results of Operations Consolidated Results of Operations",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0034"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Results of Operations Consolidated Results of Operations | p.41]\n| (Amounts in millions, except unit counts) | Fiscal Years Ended January 31, 2018 | 2017 | 2016 |\n|---|---|---|---|\n| Total revenues | $500,343 | $485,873 | $482,130 |\n| Percentage change from comparable period | 3.0% | 0.8% | (0.7)% |\n| Net sales | $495,761 | $481,317 | $478,614 |\n| Percentage change from comparable period | 3.0% | 0.6% | (0.7)% |\n| Total U.S. calendar comparable sales increase | 2.2% | 1.4% | 0.3% |\n| Gross profit rate | 24.7% | 24.9% | 24.6% |\n| Operating income | $20,437 | $22,764 | $24,105 |\n| Operating income as a percentage of net sales | 4.1% | 4.7% | 5.0% |\n| Consolidated net income | $10,523 | $14,293 | $15,080 |\n| Unit counts at period end | 11,718 | 11,695 | 11,528 |\n| Retail square feet at period end | 1,158 | 1,164 | 1,149 |",
+   "ticker": "WMT"
+  }
+ ],
+ "tool": "search_filings"
+}

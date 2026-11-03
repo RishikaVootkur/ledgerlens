@@ -1,0 +1,120 @@
+{
+ "args": {
+  "doc_name": "AES_2022_10K",
+  "form": "10-K",
+  "query": "Consolidated Balance Sheets Total Assets December 31 2022 2021"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00636",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 209,
+   "page_end": 209,
+   "section": "Item 15. Exhibits And Financial Statement Schedule",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0133"
+   ],
+   "text": "[AES 10-K FY2022 | Item 15. Exhibits And Financial Statement Schedule | p.209]\n| Financial Statements and Schedules: | Page |\n|---|---|\n| Consolidated Balance Sheets as of December 31, 2022 and 2021 | 128 |\n| Consolidated Statements of Operations for the years ended December 31, 2022, 2021 and 2020 | 129 |\n| Consolidated Statements of Comprehensive Income (Loss) for the years ended December 31, 2022, 2021 and 2020 | 130 |\n| Consolidated Statements of Changes in Equity for the years ended December 31, 2022, 2021 and 2020 | 131 |\n| Consolidated Statements of Cash Flows for the years ended December 31, 2022, 2021 and 2020 | 132 |\n| Notes to Consolidated Financial Statements | 133 |\n| Schedules | S-2-S-7 |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00318",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 130,
+   "page_end": 130,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.130]\nDecember 31, 2022 and 2021\n\n2022\n\n2021",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00612",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 202,
+   "page_end": 202,
+   "section": "Item 8. Financial Statements And Supplementary Data > Years Ended December 31,",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Years Ended December 31, | p.202]\nThe following table summarizes the balance sheet accounts with related parties included in the Company's Consolidated Balance Sheets as of the periods indicated (in millions):\n\nDecember 31,\n\n2022\n\n2021",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00544",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 183,
+   "page_end": 183,
+   "section": "Item 8. Financial Statements And Supplementary Data > Total Revenue Long-Lived Assets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Total Revenue Long-Lived Assets | p.183]\n_____________________________\n\n(1)\n\nFor purposes of this disclosure, long-lived assets implies hard assets that cannot be readily removed, and thus excludes intangibles. Long-lived assets disclosed above include amounts recorded in\n\nProperty, plant and equipment, net and right-of-use assets for operating leases recorded in Other noncurrent assets on the Consolidated Balance Sheets.\n\n(2)\n\nIncludes Puerto Rico revenues of $293 million, $311 million, and $298 million for the years ended December 31, 2022, 2021, and 2020, respectively, and long-lived assets of $96 million and $79 million\n\nas of December 31, 2022 and 2021, respectively.\n\n(3)\n\nThe Mong Duong II power project is operated under a BOT contract. Future expected payments for the construction performance obligation are recognized in Loan receivable on the Consolidated\n\nBalance Sheets. See Note 20—Revenue for further information.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00489",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 172,
+   "page_end": 172,
+   "section": "Item 8. Financial Statements And Supplementary Data > 2021 U.S. Foreign U.S. Foreign",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > 2021 U.S. Foreign U.S. Foreign | p.172]\nThe following table summarizes the amounts recognized on the Consolidated Balance Sheets related to the funded status of the DB Plans, both domestic and foreign, as of the periods indicated (in millions):\n\n2022\n\n2021\n\nDecember 31,",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00470",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 169,
+   "page_end": 169,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheet Classification",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheet Classification | p.169]\nDecember 31, 2022\n\nDecember 31, 2021",
+   "ticker": "AES"
+  }
+ ],
+ "tool": "search_filings"
+}

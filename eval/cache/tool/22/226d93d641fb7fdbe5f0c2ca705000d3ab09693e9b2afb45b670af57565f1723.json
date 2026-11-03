@@ -1,0 +1,125 @@
+{
+ "args": {
+  "doc_name": "AES_2022_10K",
+  "query": "consolidated balance sheets total assets inventories receivables accounts payable total liabilities shareholders equity"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00572",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 191,
+   "page_end": 191,
+   "section": "Item 8. Financial Statements And Supplementary Data > 23. Income Taxes",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > 23. Income Taxes | p.191]\nIncome Tax Receivables and Payables — The current income taxes receivable and payable are included in Other current assets and Accrued and other liabilities, respectively, on the accompanying Consolidated Balance Sheets. The noncurrent income taxes receivable and payable are included in Other noncurrent assets and Other noncurrent liabilities, respectively, on the accompanying Consolidated Balance Sheets. The following table summarizes the income taxes receivable and payable as of the periods indicated (in millions):\n\nDecember 31,\n\n2022\n\n2021",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00409",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 155,
+   "page_end": 156,
+   "section": "Item 8. Financial Statements And Supplementary Data > Financial Instruments not Measured at Fair Value in the Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Financial Instruments not Measured at Fair Value in the Consolidated Balance Sheets | pp.155-156]\n_____________________________\n\nThese amounts primarily relate to amounts impacted by the Stabilization Fund enacted by the Chilean government, and future premium payments on a heat rate call option entered into on behalf of the Southland Energy CCGT units. The premium payments are expected to be received in 2024. These amounts are included in Other noncurrent assets in the accompanying Condensed Consolidated Balance Sheets. See Note 7—Financing Receivables for further information.\n\nThese amounts primarily relate to amounts due from CAMMESA, the administrator of the wholesale electricity market in Argentina, and amounts impacted by the Stabilization Fund enacted by the Chilean government, and are included in Other noncurrent assets in the accompanying Condensed Consolidated Balance Sheets. The fair value and carrying amount of the Argentina receivables exclude VAT of $2 million as of December 31, 2021. See Note 7—Financing Receivables for further information.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00319",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 130,
+   "page_end": 130,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0039"
+   ],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.130]\n|  |  |  |\n|---|---|---|\n| ASSETS |  |  |\n| CURRENT ASSETS |  |  |\n| Cash and cash equivalents | $1,374 | $943 |\n| Restricted cash | 536 | 304 |\n| Short-term investments | 730 | 232 |\n| Accounts receivable, net of allowance for doubtful accounts of $5 and $5, respectively | 1,799 | 1,418 |\n| Inventory | 1,055 | 604 |\n| Prepaid expenses | 98 | 142 |\n| Other current assets, net of CECL allowance of $2 and $0, respectively | 1,533 | 897 |\n| Current held-for-sale assets | 518 | 816 |\n| Total current assets | 7,643 | 5,356 |\n| NONCURRENT ASSETS |  |  |\n| Property, Plant and Equipment: |  |  |\n| Land | 470 | 426 |\n| Electric generation, distribution assets and other | 26,599 | 25,552 |\n| Accumulated depreciation | (8,651) | (8,486) |\n| Construction in progress | 4,621 | 2,414 |\n| Property, plant and equipment, net | 23,039 | 19,906 |\n| Other Assets: |  |  |\n| Investments in and advances to affiliates | 952 | 1,080 |\n| Debt service reserves and other deposits | 177 | 237 |\n| Goodwill | 362 | 1,177 |\n| Other intangible assets, net of accumulated amortization of $434 and $385, respectively | 1,841 | 1,450 |\n| Deferred income taxes | 319 | 409 |\n| Loan receivable, net of allowance of $26 | 1,051 | — |\n| Other noncurrent assets, net of allowance of $51 and $23, respectively | 2,979 | 2,188 |\n| Noncurrent held-for-sale assets | — | 1,160 |\n| Total other assets | 7,681 | 7,701 |\n| TOTAL ASSETS | $38,363 | $32,963 |\n| LIABILITIES AND EQUITY |  |  |\n| CURRENT LIABILITIES |  |  |\n| Accounts payable | $1,730 | $1,153 |\n| Accrued interest | 249 | 182 |\n| Accrued non-income taxes | 249 | 266 |\n| Accrued and other liabilities | 2,151 | 1,205 |\n| Non-recourse debt, including $416 and $302, respectively, related to variable interest entities | 1,758 | 1,367 |\n| Current held-for-sale liabilities | 354 | 559 |\n| Total current liabilities | 6,491 | 4,732 |\n| NONCURRENT LIABILITIES |  |  |\n| Recourse debt | 3,894 | 3,729 |\n| Non-recourse debt, including $2,295 and $2,223, respectively, related to variable interest entities | 17,846 | 13,603 |\n| Deferred income taxes | 1,139 | 977 |\n| Other noncurrent liabilities | 3,168 | 3,358 |\n| Noncurrent held-for-sale liabilities | — | 740 |\n| Total noncurrent liabilities | 26,047 | 22,407 |\n| Commitments and Contingencies (see Notes 12 and 13) |  |  |\n| Redeemable stock of subsidiaries | 1,321 | 1,257 |\n| EQUITY |  |  |\n| THE AES CORPORATION STOCKHOLDERS’ EQUITY |  |  |\n| Preferred stock (without par value, 50,000,000 shares authorized; 1,043,050 issued and outstanding at December 31, 2022 and December 31, 2021) | 838 | 838 |\n| Common stock ($0.01 par value, 1,200,000,000 shares authorized; 818,790,001 issued and 668,743,464 outstanding at December 31, 2022 and 818,717,043 issued and 666,793,625 outstanding at December 31, 2021) | 8 | 8 |\n| Additional paid-in capital | 6,688 | 7,106 |\n| Accumulated deficit | (1,635) | (1,089) |\n| Accumulated other comprehensive loss | (1,640) | (2,220) |\n| Treasury stock, at cost (150,046,537 and 151,923,418 shares at December 31, 2022 and December 31, 2021, respectively) | (1,822) | (1,845) |\n| Total AES Corporation stockholders’ equity | 2,437 | 2,798 |\n| NONCONTROLLING INTERESTS | 2,067 | 1,769 |\n| Total equity | 4,504 | 4,567 |\n| TOTAL LIABILITIES AND EQUITY | $38,363 | $32,963 |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00651",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 214,
+   "page_end": 214,
+   "section": "Item 15. Exhibits And Financial Statement Schedule > Schedule I Condensed Financial Information Of Parent Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0136"
+   ],
+   "text": "[AES 10-K FY2022 | Item 15. Exhibits And Financial Statement Schedule > Schedule I Condensed Financial Information Of Parent Balance Sheets | p.214]\n|  |  |  |\n|---|---|---|\n| ASSETS |  |  |\n| Current Assets: |  |  |\n| Cash and cash equivalents | $24 | $40 |\n| Accounts and notes receivable from subsidiaries | 169 | 231 |\n| Prepaid expenses and other current assets | 47 | 50 |\n| Total current assets | 240 | 321 |\n| Investment in and advances to subsidiaries and affiliates | 7,204 | 7,159 |\n| Office Equipment: |  |  |\n| Cost | 16 | 29 |\n| Accumulated depreciation | (10) | (23) |\n| Office equipment, net | 6 | 6 |\n| Other Assets: |  |  |\n| Deferred financing costs, net of accumulated amortization of $9 and $7, respectively | 8 | 6 |\n| Other assets | 117 | 33 |\n| Total other assets | 125 | 39 |\n| Total assets | $7,575 | $7,525 |\n| LIABILITIES AND STOCKHOLDERS' EQUITY |  |  |\n| Current Liabilities: |  |  |\n| Accounts payable | $33 | $17 |\n| Accounts and notes payable to subsidiaries | 609 | 161 |\n| Accrued and other liabilities | 319 | 340 |\n| Total current liabilities | 961 | 518 |\n| Long-term Liabilities: |  |  |\n| Debt | 3,894 | 3,729 |\n| Other long-term liabilities | 283 | 480 |\n| Total long-term liabilities | 4,177 | 4,209 |\n| Stockholders' equity: |  |  |\n| Preferred stock | 838 | 838 |\n| Common stock | 8 | 8 |\n| Additional paid-in capital | 6,688 | 7,106 |\n| Accumulated deficit | (1,635) | (1,089) |\n| Accumulated other comprehensive loss | (1,640) | (2,220) |\n| Treasury stock | (1,822) | (1,845) |\n| Total stockholders' equity | 2,437 | 2,798 |\n| Total liabilities and equity | $7,575 | $7,525 |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00471",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 169,
+   "page_end": 169,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheet Classification",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0084"
+   ],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheet Classification | p.169]\n|  |  |  |  |\n|---|---|---|---|\n| Assets |  |  |  |\n| Right-of-use assets — finance leases | Electric generation, distribution assets and other | $160 | $125 |\n| Right-of-use assets — operating leases | Other noncurrent assets | 356 | 278 |\n| Total right-of-use assets |  | $516 | $403 |\n| Liabilities |  |  |  |\n| Finance lease liabilities (current) | Non-recourse debt (current liabilities) | $6 | $6 |\n| Finance lease liabilities (noncurrent) | Non-recourse debt (noncurrent liabilities) | 169 | 128 |\n| Total finance lease liabilities |  | 175 | 134 |\n| Operating lease liabilities (current) | Accrued and other liabilities | 26 | 20 |\n| Operating lease liabilities (noncurrent) | Other noncurrent liabilities | 374 | 294 |\n| Total operating lease liabilities |  | 400 | 314 |\n| Total lease liabilities |  | $575 | $448 |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00367",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 147,
+   "page_end": 147,
+   "section": "Item 8. Financial Statements And Supplementary Data > January 1, 2020 Condensed Consolidated Balance Sheet",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0047"
+   ],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > January 1, 2020 Condensed Consolidated Balance Sheet | p.147]\n|  |  |  |  |\n|---|---|---|---|\n| Assets |  |  |  |\n| Accounts receivable, net of allowance for doubtful accounts of $20 | $1,479 | $— | $1,479 |\n| Other current assets | 802 | (2) | 800 |\n| Deferred income taxes | 156 | 9 | 165 |\n| Loan receivable, net of allowance of $32 | 1,351 | (32) | 1,319 |\n| (1) Other noncurrent assets | 1,635 | (30) | 1,605 |\n| Liabilities and Equity |  |  |  |\n| Accumulated deficit | $(692) | $(39) | $(731) |\n| Noncontrolling interests | 2,233 | (16) | 2,217 |",
+   "ticker": "AES"
+  }
+ ],
+ "tool": "search_filings"
+}
