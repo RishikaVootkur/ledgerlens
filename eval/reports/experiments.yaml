@@ -35,10 +35,10 @@ tables:
   - id: ablation-agent
     title: "Agent components (62-question dev slice)"
     description: "Gemini 3.5 Flash-Lite. Removing the XBRL facts tool, or the number verification and citation self-check."
-    baseline: Full agent
+    baseline: "Full agent (fixes 1-3)"
     columns: [numeric_correct, judge_correct, refusal_correct, tokens_mean]
     rows:
-      - {name: "Full agent", run_id: ablation_no_statement_search-dev}
+      - {name: "Full agent (fixes 1-3)", run_id: ablation_no_statement_search-dev}
       - {name: "Without XBRL facts tool", run_id: ablation_no_xbrl-dev}
       - {name: "Without verification and self-check", run_id: ablation_no_checks-dev}
 
