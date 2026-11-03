@@ -3,8 +3,8 @@
 # each table's baseline row (Holm-adjusted across the metrics of that comparison).
 
 headline:
-  run_id: ablation_default-dev
-  title: "62-question dev slice: Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes"
+  run_id: final-test
+  title: "Held-out test subsample (120 questions): Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes"
   metrics: [numeric_correct, judge_correct, refusal_correct, citation_precision, citation_recall, model_latency_p50_ms, cost_usd_mean]
 
 tables:
@@ -21,7 +21,7 @@ tables:
 
   - id: ablation-chunking
     title: "Chunking strategy (FinanceBench dev)"
-    description: "Section- and table-aware chunks vs fixed 512-token chunks, same retrieval methods. Fixed chunks are about 2.6x longer, so each hit covers more of a labeled page."
+    description: "Section- and table-aware chunks vs fixed 512-token chunks, same retrieval methods. Fixed chunks are about twice as long on average, so each hit covers more of a labeled page."
     baseline: "Section, hybrid"
     columns: [recall_at_10, recall_at_5, mrr, ndcg_at_10]
     rows:
@@ -51,10 +51,11 @@ tables:
       - {name: "All fixes", run_id: ablation_default-dev}
       - {name: "Without fix 1: repeated tool calls", run_id: ablation_no_dedupe-dev}
       - {name: "Without fix 2: derived numbers", run_id: ablation_no_derive-dev}
+      - {name: "Without fix 3: grouped citation markers", run_id: ablation_no_group_split-dev}
 
   - id: model-comparison
     title: "Models (20-question smoke slice)"
-    description: "Same agent and settings; the Groq run is the recorded CI baseline. Local model latency is measured on a laptop GPU shared with other jobs."
+    description: "Same agent and settings (dedupe off, as when the Groq run was recorded for the first CI baseline). Local model latency is measured on a laptop GPU shared with other jobs."
     baseline: Qwen3.8 27B (Groq)
     columns: [numeric_correct, refusal_correct, model_latency_p50_ms, tokens_mean, cost_usd_mean]
     rows:
@@ -62,6 +63,6 @@ tables:
       - {name: "Gemini 3.5 Flash-Lite", run_id: model_flash_lite_smoke-dev}
       - {name: "Qwen3 8B (local Ollama)", run_id: model-ollama-qwen3-8b-smoke}
 
-failures_from: [ablation_default-dev]
+failures_from: [final-test]
 max_failure_examples: 30
 judge_calibration: eval/reports/judge_calibration_groq-gpt-oss-120b_test.json
