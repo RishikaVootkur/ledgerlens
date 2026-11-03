@@ -144,6 +144,9 @@ class EvidenceRegistry:
         self._by_source[item.source_id] = item.ref
         return item
 
+    def ref_for(self, source_id: str) -> str | None:
+        return self._by_source.get(source_id)
+
     def drop(self, ref: str) -> None:
         item = self.items.pop(ref, None)
         if item is not None:
@@ -188,6 +191,14 @@ def resolve_index_version(config: RetrievalConfig) -> str:
         return config.index_version
     path = get_settings().data_dir / "index" / f"version_{config.strategy}.txt"
     return path.read_text().strip() if path.exists() else "none"
+
+
+def search_results(args: dict[str, Any], config: RetrievalConfig) -> list[dict[str, Any]]:
+    """Ranked chunks for a search, through the same cache `run_tool` uses."""
+    result: list[dict[str, Any]] = _cached_tool(
+        "search_filings", args, config, lambda: _search(args, config)
+    )
+    return result
 
 
 def _search(args: dict[str, Any], config: RetrievalConfig) -> list[dict[str, Any]]:

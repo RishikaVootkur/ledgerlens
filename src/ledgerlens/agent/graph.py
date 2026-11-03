@@ -32,6 +32,7 @@ from ledgerlens.agent.tools import (
     openai_tools,
     parse_arguments,
     run_tool,
+    search_results,
 )
 from ledgerlens.llm import DEFAULT_ANSWER_MODEL, ToolCall, complete, track_usage
 from ledgerlens.retrieval.filters import SearchFilters
@@ -117,7 +118,7 @@ STATEMENTS: dict[str, tuple[re.Pattern[str], str]] = {
         re.compile(
             r"income statement|statement of (?:income|operations|earnings)|p&l|cogs|"
             r"cost of (?:goods|sales|revenue)|net income|operating income|gross (?:margin|profit)|"
-            r"ebitda|interest expense|revenue|net sales",
+            r"ebitda|interest expense|(?<!deferred )revenue|net sales",
             re.IGNORECASE,
         ),
         "consolidated statements of income net sales revenue cost of sales operating income "
@@ -141,9 +142,12 @@ _NAMED_STATEMENT = re.compile(
 
 
 def statements_needed(question: str, filters: SearchFilters) -> list[str]:
-    """Statements to search for this question. Only when searching within one document
-    (FinanceBench's setting) or when the question names a statement outright, so ordinary
-    metric questions answered from XBRL facts are unaffected."""
+    """Statements to search for this question. Only when the search is scoped to one company
+    or document, and either scoped to a single document (FinanceBench's setting) or the
+    question names a statement outright, so ordinary metric questions answered from XBRL
+    facts are unaffected and an unscoped search never pulls in other companies."""
+    if not (filters.doc_name or filters.filing_id or filters.ticker):
+        return []
     if filters.doc_name is None and not _NAMED_STATEMENT.search(question):
         return []
     return [name for name, (cue, _) in STATEMENTS.items() if cue.search(question)]
@@ -487,11 +491,15 @@ def build_graph(run: _Run) -> Any:
                 )
                 before = set(run.registry.items)
                 run_tool("search_filings", args, run.registry, cfg.retrieval)
-                added = [r for r in run.registry.items if r not in before]
-                for ref in added[:2]:  # the statement itself is almost always a top-2 hit
-                    run.registry.items[ref].priority = True
-                for ref in added[2:]:  # lower hits add noise; drop them from the evidence
-                    run.registry.drop(ref)
+                ranked = [h["chunk_id"] for h in search_results(args, cfg.retrieval)]
+                for rank, chunk_id in enumerate(ranked):
+                    ref = run.registry.ref_for(chunk_id)
+                    if ref is None:
+                        continue
+                    if rank < 2:  # the statement itself is almost always a top-2 hit
+                        run.registry.items[ref].priority = True
+                    elif ref not in before:  # lower hits add noise unless already gathered
+                        run.registry.drop(ref)
                 run.on_step("search_filings", f"statement search: {name.replace('_', ' ')}")
                 steps.append("search_filings")
         return {"pending": [], "steps": steps}
@@ -499,6 +507,12 @@ def build_graph(run: _Run) -> Any:
     def after_gather(state: State) -> str:
         if state.get("pending") and state.get("round", 0) <= cfg.max_rounds:
             return "tools"
+        if (
+            state.get("round", 0) == 1
+            and cfg.statement_search
+            and statements_needed(state["question"], state["filters"])
+        ):
+            return "tools"  # statement searches still run when round 1 proposes no calls
         return "answer"
 
     def after_tools(state: State) -> str:
