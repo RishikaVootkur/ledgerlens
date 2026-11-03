@@ -1,0 +1,123 @@
+{
+ "args": {
+  "doc_name": "AES_2022_10K",
+  "query": "Consolidated Statements of Income net income"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00325",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 133,
+   "page_end": 133,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss)",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0041"
+   ],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss) | p.133]\n|  |  |  |  |\n|---|---|---|---|\n| NET INCOME (LOSS) | $(505) | $(951) | $152 |\n| Foreign currency translation activity: |  |  |  |\n| Foreign currency translation adjustments, net of income tax expense of $0, $0, and $8, respectively | (36) | (130) | (52) |\n| Reclassification to earnings, net of $0 income tax for all periods | — | 3 | 192 |\n| Total foreign currency translation adjustments | (36) | (127) | 140 |\n| Derivative activity: |  |  |  |\n| Change in derivative fair value, net of income tax (expense) benefit of $(191), $1, and $110, respectively | 711 | 5 | (368) |\n| Reclassification to earnings, net of income tax expense of $9, $105, and $17, respectively | 59 | 387 | 74 |\n| Total change in fair value of derivatives | 770 | 392 | (294) |\n| Pension activity: |  |  |  |\n| Change in pension adjustments due to prior service cost, net of $0 income tax for all periods | — | — | 1 |\n| Change in pension adjustments due to net actuarial gain (loss) for the period, net of income tax (expense) benefit of $(5), $(10), and $4, respectively | 13 | 26 | (14) |\n| Reclassification to earnings, net of income tax expense of $1, $3, and $0, respectively | 1 | 1 | — |\n| Total pension adjustments | 14 | 27 | (13) |\n| OTHER COMPREHENSIVE INCOME (LOSS) | 748 | 292 | (167) |\n| COMPREHENSIVE INCOME (LOSS) | 243 | (659) | (15) |\n| Less: Comprehensive loss (income) attributable to noncontrolling interests and redeemable stock of subsidiaries | (127) | 438 | 4 |\n| COMPREHENSIVE INCOME (LOSS) ATTRIBUTABLE TO THE AES CORPORATION | $116 | $(221) | $(11) |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00657",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 216,
+   "page_end": 216,
+   "section": "Item 15. Exhibits And Financial Statement Schedule > Schedule I Condensed Financial Information Of Parent Statements Of Comprehensive Income (loss)",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0138"
+   ],
+   "text": "[AES 10-K FY2022 | Item 15. Exhibits And Financial Statement Schedule > Schedule I Condensed Financial Information Of Parent Statements Of Comprehensive Income (loss) | p.216]\n|  |  |  |  |\n|---|---|---|---|\n| NET INCOME (LOSS) | $(546) | $(409) | $46 |\n| Foreign currency translation activity: |  |  |  |\n| Foreign currency translation adjustments, net of income tax (expense) benefit of $0, $0 and $(8), respectively | (37) | (86) | — |\n| Reclassification to earnings, net of $0 income tax for all periods | — | 3 | 192 |\n| Total foreign currency translation adjustments, net of tax | (37) | (83) | 192 |\n| Derivative activity: |  |  |  |\n| Change in derivative fair value, net of income tax benefit (expense) of $(198), $8 and $90, respectively | 645 | (7) | (309) |\n| Reclassification to earnings, net of income tax expense of $0, $73 and $19, respectively | 44 | 254 | 72 |\n| Total change in fair value of derivatives, net of tax | 689 | 247 | (237) |\n| Pension activity: |  |  |  |\n| Change in pension adjustments due to net actuarial gain (loss) for the period, net of income tax (expense) benefit of $(2), $(9) and $4, respectively | 10 | 23 | (12) |\n| Reclassification of earnings, net of income tax expense of $1, $3 and $0, respectively | — | 1 | — |\n| Total change in unfunded pension obligation | 10 | 24 | (12) |\n| OTHER COMPREHENSIVE INCOME (LOSS) | 662 | 188 | (57) |\n| COMPREHENSIVE INCOME (LOSS) | $116 | $(221) | $(11) |",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00326",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 133,
+   "page_end": 133,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss)",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss) | p.133]\nSee Accompanying Notes to Consolidated Financial Statements.",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00572",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 191,
+   "page_end": 191,
+   "section": "Item 8. Financial Statements And Supplementary Data > 23. Income Taxes",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > 23. Income Taxes | p.191]\nIncome Tax Receivables and Payables — The current income taxes receivable and payable are included in Other current assets and Accrued and other liabilities, respectively, on the accompanying Consolidated Balance Sheets. The noncurrent income taxes receivable and payable are included in Other noncurrent assets and Other noncurrent liabilities, respectively, on the accompanying Consolidated Balance Sheets. The following table summarizes the income taxes receivable and payable as of the periods indicated (in millions):\n\nDecember 31,\n\n2022\n\n2021",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00324",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 133,
+   "page_end": 133,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss)",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income (Loss) | p.133]\nYears ended December 31, 2022, 2021, and 2020",
+   "ticker": "AES"
+  },
+  {
+   "chunk_id": "FB-AES_2022_10K:section:00334",
+   "company": "AES Corporation",
+   "doc_name": "AES_2022_10K",
+   "filing_id": "FB-AES_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 135,
+   "page_end": 135,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Cash Flows",
+   "strategy": "section",
+   "table_ids": [
+    "FB-AES_2022_10K:table:0043"
+   ],
+   "text": "[AES 10-K FY2022 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Cash Flows | p.135]\n| OPERATING ACTIVITIES: | (in millions) |  |  |\n|---|---|---|---|\n| SUPPLEMENTAL DISCLOSURES: |  |  |  |\n| Cash payments for interest, net of amounts capitalized | $928 | $815 | $908 |\n| Cash payments for income taxes, net of refunds | 271 | 459 | 333 |\n| SCHEDULE OF NONCASH INVESTING AND FINANCING ACTIVITIES: |  |  |  |\n| Dividends declared but not yet paid | 111 | 105 | 100 |\n| Notes payable issued for the acquisition of business interests (see Notes 17 and 25) | — | 258 | 47 |",
+   "ticker": "AES"
+  }
+ ],
+ "tool": "search_filings"
+}

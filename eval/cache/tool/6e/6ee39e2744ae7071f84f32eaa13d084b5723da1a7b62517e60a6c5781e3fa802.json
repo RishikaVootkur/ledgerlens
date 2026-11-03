@@ -1,0 +1,125 @@
+{
+ "args": {
+  "fiscal_year": 2026,
+  "form": "10-Q",
+  "query": "Condensed Consolidated Balance Sheets June 27 2026 current assets current liabilities",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "AAPL-10Q-2026Q2:section:00014",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 5,
+   "page_end": 5,
+   "section": "Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED BALANCE SHEETS (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q2:table:0007"
+   ],
+   "text": "[AAPL 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED BALANCE SHEETS (Unaudited) | p.5]\n|  | March 28, 2026 | September 27, 2025 |\n|---|---|---|\n| ASSETS: |  |  |\n| Current assets: |  |  |\n| Cash and cash equivalents | $45,572 | $35,934 |\n| Marketable securities | 22,935 | 18,763 |\n| Accounts receivable, net | 30,339 | 39,777 |\n| Vendor non-trade receivables | 23,172 | 33,180 |\n| Inventories | 6,747 | 5,718 |\n| Other current assets | 15,349 | 14,585 |\n| Total current assets | 144,114 | 147,957 |\n| Non-current assets: |  |  |\n| Marketable securities | 78,088 | 77,723 |\n| Property, plant and equipment, net | 50,116 | 49,834 |\n| Intangible assets, net | 21,334 | 11,093 |\n| Other non-current assets | 77,430 | 72,634 |\n| Total non-current assets | 226,968 | 211,284 |\n| Total assets | $371,082 | $359,241 |\n| LIABILITIES AND SHAREHOLDERS’ EQUITY: |  |  |\n| Current liabilities: |  |  |\n| Accounts payable | $57,349 | $69,860 |\n| Other current liabilities | 57,654 | 66,387 |\n| Deferred revenue | 9,331 | 9,055 |\n| Commercial paper | 1,997 | 7,979 |\n| Term debt | 8,310 | 12,350 |\n| Total current liabilities | 134,641 | 165,631 |\n| Non-current liabilities: |  |  |\n| Term debt | 74,404 | 78,328 |\n| Other non-current liabilities | 55,546 | 41,549 |\n| Total non-current liabilities | 129,950 | 119,877 |\n| Total liabilities | 264,591 | 285,508 |\n| Commitments and contingencies |  |  |\n| Shareholders’ equity: |  |  |\n| Common stock and additional paid-in capital, $0.00001 par value: 50,400,000 shares authorized; 14,667,688 and 14,773,260 shares issued and outstanding, respectively | 99,507 | 93,568 |\n| Retained earnings/(Accumulated deficit) | 12,359 | (14,264) |\n| Accumulated other comprehensive loss | (5,375) | (5,571) |\n| Total shareholders’ equity | 106,491 | 73,733 |\n| Total liabilities and shareholders’ equity | $371,082 | $359,241 |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00014",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 5,
+   "page_end": 5,
+   "section": "Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED BALANCE SHEETS (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0007"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED BALANCE SHEETS (Unaudited) | p.5]\n|  | June 27, 2026 | September 27, 2025 |\n|---|---|---|\n| ASSETS: |  |  |\n| Current assets: |  |  |\n| Cash and cash equivalents | $39,544 | $35,934 |\n| Marketable securities | 22,855 | 18,763 |\n| Accounts receivable, net | 31,398 | 39,777 |\n| Vendor non-trade receivables | 27,509 | 33,180 |\n| Inventories | 11,092 | 5,718 |\n| Other current assets | 17,420 | 14,585 |\n| Total current assets | 149,818 | 147,957 |\n| Non-current assets: |  |  |\n| Marketable securities | 84,118 | 77,723 |\n| Property, plant and equipment, net | 51,431 | 49,834 |\n| Intangible assets, net | 20,342 | 11,093 |\n| Other non-current assets | 77,557 | 72,634 |\n| Total non-current assets | 233,448 | 211,284 |\n| Total assets | $383,266 | $359,241 |\n| LIABILITIES AND SHAREHOLDERS’ EQUITY: |  |  |\n| Current liabilities: |  |  |\n| Accounts payable | $64,525 | $69,860 |\n| Other current liabilities | 62,259 | 66,387 |\n| Deferred revenue | 9,538 | 9,055 |\n| Commercial paper | 1,997 | 7,979 |\n| Term debt | 11,007 | 12,350 |\n| Total current liabilities | 149,326 | 165,631 |\n| Non-current liabilities: |  |  |\n| Term debt | 71,340 | 78,328 |\n| Other non-current liabilities | 55,080 | 41,549 |\n| Total non-current liabilities | 126,420 | 119,877 |\n| Total liabilities | 275,746 | 285,508 |\n| Commitments and contingencies |  |  |\n| Shareholders’ equity: |  |  |\n| Common stock and additional paid-in capital, $0.00001 par value: 50,400,000 shares authorized; 14,608,963 and 14,773,260 shares issued and outstanding, respectively | 100,702 | 93,568 |\n| Retained earnings/(Accumulated deficit) | 11,326 | (14,264) |\n| Accumulated other comprehensive loss | (4,508) | (5,571) |\n| Total shareholders’ equity | 107,520 | 73,733 |\n| Total liabilities and shareholders’ equity | $383,266 | $359,241 |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00033",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Note 5 – Condensed Consolidated Financial Statement Details",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Note 5 – Condensed Consolidated Financial Statement Details | p.11]\nThe following tables show the Company’s condensed consolidated financial statement details as of June 27, 2026 and September 27, 2025 (in millions):",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00018",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 7,
+   "page_end": 7,
+   "section": "Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS (Unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0009"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS (Unaudited) | p.7]\n|  | Nine Months Ended June 27, 2026 | June 28, 2025 |\n|---|---|---|\n| Cash, cash equivalents, and restricted cash and cash equivalents, beginning balances | $35,934 | $29,943 |\n| Operating activities: |  |  |\n| Net income | 101,464 | 84,544 |\n| Adjustments to reconcile net income to cash generated by operating activities: |  |  |\n| Depreciation and amortization | 9,973 | 8,571 |\n| Share-based compensation expense | 10,523 | 9,680 |\n| Other | (2,037) | (1,748) |\n| Changes in operating assets and liabilities: |  |  |\n| Accounts receivable, net | 8,316 | 5,685 |\n| Vendor non-trade receivables | 5,671 | 13,555 |\n| Inventories | (5,461) | 1,223 |\n| Other current and non-current assets | (16,266) | (6,116) |\n| Accounts payable | (5,203) | (18,479) |\n| Other current and non-current liabilities | 10,016 | (15,161) |\n| Cash generated by operating activities | 116,996 | 81,754 |\n| Investing activities: |  |  |\n| Purchases of marketable securities | (48,752) | (17,591) |\n| Proceeds from maturities of marketable securities | 26,504 | 35,036 |\n| Proceeds from sales of marketable securities | 12,016 | 10,785 |\n| Payments for acquisition of property, plant and equipment | (6,799) | (9,473) |\n| Other | (1,780) | (975) |\n| Cash generated by/(used in) investing activities | (18,811) | 17,782 |\n| Financing activities: |  |  |\n| Payments for taxes related to net share settlement of equity awards | (6,462) | (5,719) |\n| Payments for dividends and dividend equivalents | (11,778) | (11,559) |\n| Repurchases of common stock | (62,094) | (70,579) |\n| Proceeds from issuance of term debt, net | — | 4,481 |\n| Repayments of term debt | (8,146) | (9,682) |\n| Repayments of commercial paper, net | (5,911) | (65) |\n| Other | (184) | (87) |\n| Cash used in financing activities | (94,575) | (93,210) |\n| Increase in cash, cash equivalents, and restricted cash and cash equivalents | 3,610 | 6,326 |\n| Cash, cash equivalents, and restricted cash and cash equivalents, ending balances | $39,544 | $36,269 |\n| Supplemental cash flow disclosure: |  |  |\n| Cash paid for income taxes, net | $26,555 | $37,332 |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q2:section:00033",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Note 5 – Condensed Consolidated Financial Statement Details",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Note 5 – Condensed Consolidated Financial Statement Details | p.11]\nThe following tables show the Company’s condensed consolidated financial statement details as of March 28, 2026 and September 27, 2025 (in millions):",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q2:section:00019",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 8,
+   "page_end": 8,
+   "section": "Part I > Item 1. Financial Statements > Basis of Presentation and Preparation",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Basis of Presentation and Preparation | p.8]\nThe condensed consolidated financial statements include the accounts of Apple Inc. and its wholly owned subsidiaries (collectively “Apple” or the “Company”). In the opinion of the Company’s management, the condensed consolidated financial statements reflect all adjustments, which are normal and recurring in nature, necessary for fair financial statement presentation. The preparation of these condensed consolidated financial statements and accompanying notes in conformity with U.S. generally accepted accounting principles (“GAAP”) requires the use of management estimates. Certain prior period amounts in the condensed consolidated financial statements and accompanying notes have been reclassified to conform to the current period’s presentation. These condensed consolidated financial statements and accompanying notes should be read in conjunction with the Company’s annual consolidated financial statements and accompanying notes included in its Annual Report on Form 10-K for the fiscal year ended September 27, 2025 (the “2025 Form 10-K”).\n\nThe Company’s fiscal year is the 52- or 53-week period that ends on the last Saturday of September. An additional week is included in the first fiscal quarter every five or six years to realign the Company’s fiscal quarters with calendar quarters. The Company’s fiscal years 2026 and 2025 span 52 weeks each. Unless otherwise stated, references to particular years, quarters, months and periods refer to the Company’s fiscal years ended in September and the associated quarters, months and periods of those fiscal years.",
+   "ticker": "AAPL"
+  }
+ ],
+ "tool": "search_filings"
+}

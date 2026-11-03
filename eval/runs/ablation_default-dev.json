@@ -1,0 +1,4627 @@
+{
+ "schema_version": 1,
+ "run_id": "ablation_default-dev",
+ "created_at": "2026-11-03T04:53:18.603886Z",
+ "git_sha": "3bd854d",
+ "config_name": "ablation_default",
+ "config": {
+  "name": "ablation_default",
+  "description": "Ablation baseline: Gemini 3.5 Flash-Lite, hybrid retrieval, section chunks, XBRL tool, verify + self-check",
+  "model": "gemini-3.5-flash-lite",
+  "strategy": "section",
+  "method": "hybrid",
+  "k": 6,
+  "index_version": "auto",
+  "max_rounds": 3,
+  "xbrl_tool": true,
+  "search_tool": true,
+  "verify_numbers": true,
+  "self_check": true,
+  "dedupe_tool_calls": true,
+  "derive_numbers": true,
+  "datasets": [
+   "xbrl",
+   "financebench",
+   "unanswerable"
+  ],
+  "scope": "document",
+  "limit": null,
+  "qids": null,
+  "qids_file": "eval/slices/ablation_dev.txt",
+  "concurrency": 2,
+  "judge": true,
+  "judge_model": "groq-gpt-oss-120b",
+  "citation_support": false
+ },
+ "split": "dev",
+ "datasets": [
+  "xbrl",
+  "financebench",
+  "unanswerable"
+ ],
+ "summary": {
+  "citation_precision": {
+   "value": 1.0,
+   "ci_low": 0.9010990076755959,
+   "ci_high": 1.0,
+   "n": 35
+  },
+  "citation_recall": {
+   "value": 0.8421052631578947,
+   "ci_low": 0.6958318822077686,
+   "ci_high": 0.9255613658484106,
+   "n": 38
+  },
+  "cost_usd_mean": {
+   "value": 0.003226488709677419,
+   "ci_low": 0.002992616612903225,
+   "ci_high": 0.003486344193548387,
+   "n": 62
+  },
+  "error_rate": {
+   "value": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.058344072101372484,
+   "n": 62
+  },
+  "judge_correct": {
+   "value": 0.55,
+   "ci_low": 0.34208534245034233,
+   "ci_high": 0.7418021417443759,
+   "n": 20
+  },
+  "latency_p50_ms": {
+   "value": 76.1,
+   "ci_low": 62.080000000000005,
+   "ci_high": 89.3,
+   "n": 62
+  },
+  "latency_p95_ms": {
+   "value": 15780.314999999975,
+   "ci_low": 435.1,
+   "ci_high": 23996.6,
+   "n": 62
+  },
+  "model_latency_p50_ms": {
+   "value": 3307.9000000000005,
+   "ci_low": 3181.7,
+   "ci_high": 3441.0,
+   "n": 62
+  },
+  "model_latency_p95_ms": {
+   "value": 5406.320000000001,
+   "ci_low": 4264.4,
+   "ci_high": 5943.599999999999,
+   "n": 62
+  },
+  "mrr": {
+   "value": 0.6565174614581729,
+   "ci_low": 0.5493594292729669,
+   "ci_high": 0.7661543084715021,
+   "n": 44
+  },
+  "ndcg_at_10": {
+   "value": 0.6988108984256816,
+   "ci_low": 0.6000255172202714,
+   "ci_high": 0.7991039554488802,
+   "n": 44
+  },
+  "numeric_correct": {
+   "value": 0.8125,
+   "ci_low": 0.6469084479862404,
+   "ci_high": 0.9111045531043405,
+   "n": 32
+  },
+  "recall_at_10": {
+   "value": 0.8863636363636364,
+   "ci_low": 0.7954545454545454,
+   "ci_high": 0.9659090909090909,
+   "n": 44
+  },
+  "recall_at_5": {
+   "value": 0.8181818181818182,
+   "ci_low": 0.7045454545454546,
+   "ci_high": 0.9204545454545454,
+   "n": 44
+  },
+  "refusal_correct": {
+   "value": 0.8709677419354839,
+   "ci_low": 0.7655067270982637,
+   "ci_high": 0.9331412194071697,
+   "n": 62
+  },
+  "tokens_mean": {
+   "value": 8170.435483870968,
+   "ci_low": 7615.93064516129,
+   "ci_high": 8790.406048387096,
+   "n": 62
+  }
+ },
+ "summary_by_dataset": {
+  "financebench": {
+   "citation_precision": {
+    "value": 1.0,
+    "ci_low": 0.7411670330319684,
+    "ci_high": 1.0,
+    "n": 11
+   },
+   "citation_recall": {
+    "value": 0.5714285714285714,
+    "ci_low": 0.3259064457965074,
+    "ci_high": 0.7861920109552588,
+    "n": 14
+   },
+   "cost_usd_mean": {
+    "value": 0.00366043,
+    "ci_low": 0.0032175596249999993,
+    "ci_high": 0.004208131999999999,
+    "n": 20
+   },
+   "error_rate": {
+    "value": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.16112515805281938,
+    "n": 20
+   },
+   "judge_correct": {
+    "value": 0.55,
+    "ci_low": 0.34208534245034233,
+    "ci_high": 0.7418021417443759,
+    "n": 20
+   },
+   "latency_p50_ms": {
+    "value": 79.44999999999999,
+    "ci_low": 54.95,
+    "ci_high": 96.65,
+    "n": 20
+   },
+   "latency_p95_ms": {
+    "value": 159.82999999999998,
+    "ci_low": 131.13,
+    "ci_high": 162.3,
+    "n": 20
+   },
+   "model_latency_p50_ms": {
+    "value": 3358.9500000000003,
+    "ci_low": 3138.45,
+    "ci_high": 3813.2000000000003,
+    "n": 20
+   },
+   "model_latency_p95_ms": {
+    "value": 6230.180000000004,
+    "ci_low": 4264.4,
+    "ci_high": 11675.2,
+    "n": 20
+   },
+   "mrr": {
+    "value": 0.3943384152079804,
+    "ci_low": 0.2607640457368718,
+    "ci_high": 0.5454767316017316,
+    "n": 20
+   },
+   "ndcg_at_10": {
+    "value": 0.4481050504650623,
+    "ci_low": 0.31423768093185106,
+    "ci_high": 0.5899039865901653,
+    "n": 20
+   },
+   "numeric_correct": {
+    "value": 0.5,
+    "ci_low": 0.21521606221387757,
+    "ci_high": 0.7847839377861224,
+    "n": 8
+   },
+   "recall_at_10": {
+    "value": 0.75,
+    "ci_low": 0.575,
+    "ci_high": 0.9,
+    "n": 20
+   },
+   "recall_at_5": {
+    "value": 0.6,
+    "ci_low": 0.4,
+    "ci_high": 0.8,
+    "n": 20
+   },
+   "refusal_correct": {
+    "value": 0.7,
+    "ci_low": 0.4810271816464765,
+    "ci_high": 0.8545227551323956,
+    "n": 20
+   },
+   "tokens_mean": {
+    "value": 9192.2,
+    "ci_low": 8238.2525,
+    "ci_high": 10331.335,
+    "n": 20
+   }
+  },
+  "unanswerable": {
+   "cost_usd_mean": {
+    "value": 0.002648772222222222,
+    "ci_low": 0.002342723611111111,
+    "ci_high": 0.0029279236111111116,
+    "n": 18
+   },
+   "error_rate": {
+    "value": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.17587922364665765,
+    "n": 18
+   },
+   "latency_p50_ms": {
+    "value": 70.85,
+    "ci_low": 51.8,
+    "ci_high": 9151.0,
+    "n": 18
+   },
+   "latency_p95_ms": {
+    "value": 24022.085,
+    "ci_low": 10392.2,
+    "ci_high": 24166.5,
+    "n": 18
+   },
+   "model_latency_p50_ms": {
+    "value": 3088.3,
+    "ci_low": 2819.65,
+    "ci_high": 3255.5,
+    "n": 18
+   },
+   "model_latency_p95_ms": {
+    "value": 3378.5550000000003,
+    "ci_low": 3265.33,
+    "ci_high": 3386.8,
+    "n": 18
+   },
+   "refusal_correct": {
+    "value": 0.8888888888888888,
+    "ci_low": 0.672002348698212,
+    "ci_high": 0.9689804773543876,
+    "n": 18
+   },
+   "tokens_mean": {
+    "value": 7237.5,
+    "ci_low": 6316.427777777778,
+    "ci_high": 8092.945833333333,
+    "n": 18
+   }
+  },
+  "xbrl": {
+   "citation_precision": {
+    "value": 1.0,
+    "ci_low": 0.8620237953250198,
+    "ci_high": 1.0,
+    "n": 24
+   },
+   "citation_recall": {
+    "value": 1.0,
+    "ci_low": 0.8620237953250198,
+    "ci_high": 1.0,
+    "n": 24
+   },
+   "cost_usd_mean": {
+    "value": 0.0032981583333333334,
+    "ci_low": 0.002961737291666667,
+    "ci_high": 0.003594417604166666,
+    "n": 24
+   },
+   "error_rate": {
+    "value": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.13797620467498017,
+    "n": 24
+   },
+   "latency_p50_ms": {
+    "value": 73.25,
+    "ci_low": 53.2,
+    "ci_high": 147.5,
+    "n": 24
+   },
+   "latency_p95_ms": {
+    "value": 995.1649999999986,
+    "ci_low": 188.7,
+    "ci_high": 1113.0,
+    "n": 24
+   },
+   "model_latency_p50_ms": {
+    "value": 3565.1,
+    "ci_low": 3356.8,
+    "ci_high": 3761.6,
+    "n": 24
+   },
+   "model_latency_p95_ms": {
+    "value": 5309.339999999999,
+    "ci_low": 4093.014999999999,
+    "ci_high": 5603.299999999999,
+    "n": 24
+   },
+   "mrr": {
+    "value": 0.875,
+    "ci_low": 0.7916666666666666,
+    "ci_high": 0.9583333333333334,
+    "n": 24
+   },
+   "ndcg_at_10": {
+    "value": 0.9077324383928644,
+    "ci_low": 0.8462207306547741,
+    "ci_high": 0.9692441461309548,
+    "n": 24
+   },
+   "numeric_correct": {
+    "value": 0.9166666666666666,
+    "ci_low": 0.741511978067893,
+    "ci_high": 0.9768411847029567,
+    "n": 24
+   },
+   "recall_at_10": {
+    "value": 1.0,
+    "ci_low": 0.8620237953250198,
+    "ci_high": 1.0,
+    "n": 24
+   },
+   "recall_at_5": {
+    "value": 1.0,
+    "ci_low": 0.8620237953250198,
+    "ci_high": 1.0,
+    "n": 24
+   },
+   "refusal_correct": {
+    "value": 1.0,
+    "ci_low": 0.8620237953250198,
+    "ci_high": 1.0,
+    "n": 24
+   },
+   "tokens_mean": {
+    "value": 8018.666666666667,
+    "ci_low": 7053.803125,
+    "ci_high": 8861.982291666665,
+    "n": 24
+   }
+  }
+ },
+ "usage_total": {
+  "prompt_tokens": 484716,
+  "completion_tokens": 21851,
+  "llm_calls": 241,
+  "cost_usd": 0.2000423,
+  "latency_ms": 221967.79999999996
+ },
+ "results": [
+  {
+   "qid": "xbrl-wmt-10k2026fy-total_assets",
+   "dataset": "xbrl",
+   "question": "What were Walmart's total assets as of the end of fiscal year 2026 (January 31, 2026), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "WMT",
+   "fiscal_year": 2026,
+   "gold": "$284,668,000,000 (about $284.67 billion)",
+   "gold_value": 284668000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Walmart's total assets as of January 31, 2026, were 284,668,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 284668000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:WMT:Assets:2026-01-31:USD",
+      "filing_id": "WMT-10K-2026FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "284,668,000,000 USD for as of 2026-01-31"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 2963,
+     "completion_tokens": 200,
+     "llm_calls": 3,
+     "cost_usd": 0.0013889,
+     "latency_ms": 3995.3
+    }
+   },
+   "wall_ms": 53.2,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-intc-10q2026q3-cash",
+   "dataset": "xbrl",
+   "question": "What were Intel's cash and cash equivalents as of September 26, 2026 (end of fiscal 2026 Q3), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "INTC",
+   "fiscal_year": 2026,
+   "gold": "$21,846,000,000 (about $21.85 billion)",
+   "gold_value": 21846000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Intel's cash and cash equivalents as of September 26, 2026, were $21,846 million (or $21,846,000,000) [1][2].",
+    "refused": false,
+    "answer_value": 21846000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:INTC:CashAndCashEquivalentsAtCarryingValue:2026-09-26:USD",
+      "filing_id": "INTC-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "21,846,000,000 USD for as of 2026-09-26"
+     },
+     {
+      "chunk_id": "INTC-10Q-2026Q3:section:00129",
+      "filing_id": "INTC-10Q-2026Q3",
+      "section": "N/A",
+      "page": 45,
+      "page_end": 45,
+      "quote": "$21,846"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "INTC-10Q-2026Q3:section:00129",
+     "INTC-10Q-2026Q3:section:00056",
+     "INTC-10Q-2026Q3:section:00058",
+     "INTC-10Q-2026Q2:section:00118",
+     "INTC-10Q-2026Q3:section:00055",
+     "INTC-10Q-2026Q3:section:00026"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 5246,
+     "completion_tokens": 286,
+     "llm_calls": 3,
+     "cost_usd": 0.0022887999999999997,
+     "latency_ms": 2865.5
+    }
+   },
+   "wall_ms": 435.1,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-jpm-10k2025fy-cash",
+   "dataset": "xbrl",
+   "question": "What were JPMorgan Chase's cash and due from banks as of the end of fiscal year 2025 (December 31, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "gold": "$21,742,000,000 (about $21.74 billion)",
+   "gold_value": 21742000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "As of December 31, 2025, JPMorgan Chase's cash and due from banks was $21,742 million [1].",
+    "refused": false,
+    "answer_value": 21742000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "JPM-10K-2025FY:section:00162",
+      "filing_id": "JPM-10K-2025FY",
+      "section": "Part IV > Consolidated balance sheets analysis",
+      "page": 57,
+      "page_end": 57,
+      "quote": "Cash and due from banks | $21,742"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "JPM-10K-2025FY:section:00937",
+     "JPM-10K-2025FY:section:00936",
+     "JPM-10K-2025FY:section:00168",
+     "JPM-10K-2025FY:section:00351",
+     "JPM-10K-2025FY:section:00195",
+     "JPM-10K-2025FY:section:00760",
+     "JPM-10K-2025FY:section:00512",
+     "JPM-10K-2025FY:section:00164",
+     "JPM-10K-2025FY:section:00162",
+     "JPM-10K-2025FY:section:00163",
+     "JPM-10K-2025FY:section:01017"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8927,
+     "completion_tokens": 321,
+     "llm_calls": 4,
+     "cost_usd": 0.0034805999999999995,
+     "latency_ms": 3357.7
+    }
+   },
+   "wall_ms": 421.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-jpm-10k2025fy-total_assets",
+   "dataset": "xbrl",
+   "question": "What were JPMorgan Chase's total assets as of the end of fiscal year 2025 (December 31, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "gold": "$4,424,900,000,000 (about $4.42 trillion)",
+   "gold_value": 4424900000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "JPMorgan Chase's total assets as of December 31, 2025, were $4,424,900,000,000 [1].",
+    "refused": false,
+    "answer_value": 4424900000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:JPM:Assets:2025-12-31:USD",
+      "filing_id": "JPM-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Assets (us-gaap:Assets): 4,424,900,000,000 USD for as of 2025-12-31 [instant]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "JPM-10K-2025FY:section:00497",
+     "JPM-10K-2025FY:section:00969",
+     "JPM-10K-2025FY:section:00495",
+     "JPM-10K-2025FY:section:00833",
+     "JPM-10K-2025FY:section:00834",
+     "JPM-10K-2025FY:section:00508",
+     "JPM-10K-2025FY:section:00484",
+     "JPM-10K-2025FY:section:00496",
+     "JPM-10K-2025FY:section:00162",
+     "JPM-10K-2025FY:section:00948",
+     "JPM-10K-2025FY:section:00165",
+     "JPM-10K-2025FY:section:00161",
+     "JPM-10K-2025FY:section:00550"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 10061,
+     "completion_tokens": 382,
+     "llm_calls": 4,
+     "cost_usd": 0.0039733,
+     "latency_ms": 5603.299999999999
+    }
+   },
+   "wall_ms": 64.4,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-cost-10q2026q2-operating_income",
+   "dataset": "xbrl",
+   "question": "What was Costco's operating income for the 12 weeks ended February 15, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "COST",
+   "fiscal_year": 2026,
+   "gold": "$2,606,000,000 (about $2.61 billion)",
+   "gold_value": 2606000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Costco's operating income for the 12 weeks ended February 15, 2026, was $2,606 million [1].",
+    "refused": false,
+    "answer_value": 2606000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "COST-10Q-2026Q2:section:00011",
+      "filing_id": "COST-10Q-2026Q2",
+      "section": "Part I > Item 1. Financial Statements > Condensed Consolidated Statements Of Income",
+      "page": 3,
+      "page_end": 3,
+      "quote": "Operating income | 2,606"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "COST-10Q-2026Q2:section:00077",
+     "COST-10Q-2026Q2:section:00075",
+     "COST-10Q-2026Q2:section:00023",
+     "COST-10Q-2026Q2:section:00041",
+     "COST-10Q-2026Q2:section:00011",
+     "COST-10Q-2026Q2:section:00013"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7754,
+     "completion_tokens": 218,
+     "llm_calls": 4,
+     "cost_usd": 0.0028711999999999995,
+     "latency_ms": 2718.2
+    }
+   },
+   "wall_ms": 1113.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-cvx-10q2026q1-total_assets",
+   "dataset": "xbrl",
+   "question": "What were Chevron's total assets as of March 31, 2026 (end of fiscal 2026 Q1), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "CVX",
+   "fiscal_year": 2026,
+   "gold": "$329,551,000,000 (about $329.55 billion)",
+   "gold_value": 329551000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Chevron's total assets as of March 31, 2026, were $329,551 million [1][2].",
+    "refused": false,
+    "answer_value": 329551000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:CVX:Assets:2026-03-31:USD",
+      "filing_id": "CVX-10Q-2026Q1",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "329,551,000,000 USD for as of 2026-03-31"
+     },
+     {
+      "chunk_id": "CVX-10Q-2026Q1:section:00019",
+      "filing_id": "CVX-10Q-2026Q1",
+      "section": "Part I > Item 1. Consolidated Financial Statements > Consolidated Balance Sheet",
+      "page": 6,
+      "page_end": 6,
+      "quote": "Total Assets | $329,551"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "CVX-10Q-2026Q1:section:00048",
+     "CVX-10Q-2026Q1:section:00065",
+     "CVX-10Q-2026Q1:section:00019",
+     "CVX-10Q-2026Q1:section:00068",
+     "CVX-10Q-2026Q2:section:00068",
+     "CVX-10Q-2026Q1:section:00040",
+     "CVX-10Q-2026Q1:section:00061",
+     "CVX-10Q-2026Q1:section:00044",
+     "CVX-10Q-2026Q1:section:00132"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9723,
+     "completion_tokens": 345,
+     "llm_calls": 4,
+     "cost_usd": 0.0037793999999999996,
+     "latency_ms": 3248.8
+    }
+   },
+   "wall_ms": 1094.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-nee-10k2025fy-eps_diluted",
+   "dataset": "xbrl",
+   "question": "What was NextEra Energy's diluted earnings per share for fiscal year 2025 (the year ended December 31, 2025), in US dollars per share?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "NEE",
+   "fiscal_year": 2025,
+   "gold": "$3.30 per diluted share",
+   "gold_value": 3.3,
+   "gold_unit": "per_share",
+   "prediction": {
+    "answer": "NextEra Energy's diluted earnings per share for fiscal year 2025 was $3.30 [1].",
+    "refused": false,
+    "answer_value": 3.3,
+    "answer_unit": "per_share",
+    "citations": [
+     {
+      "chunk_id": "xbrl:NEE:EarningsPerShareDiluted:2025-01-01_2025-12-31:USD/shares",
+      "filing_id": "NEE-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Earnings Per Share, Diluted (us-gaap:EarningsPerShareDiluted): 3.3000 USD/shares for 2025-01-01 to 2025-12-31 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "NEE-10K-2025FY:section:00372",
+     "NEE-10K-2025FY:section:00378",
+     "NEE-10K-2025FY:section:00213",
+     "NEE-10K-2025FY:section:00374",
+     "NEE-10K-2025FY:section:00379",
+     "NEE-10K-2025FY:section:00112",
+     "NEE-10K-2025FY:section:00373",
+     "NEE-10K-2025FY:section:00370",
+     "NEE-10K-2025FY:section:00368"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9218,
+     "completion_tokens": 314,
+     "llm_calls": 4,
+     "cost_usd": 0.0035504,
+     "latency_ms": 3610.0
+    }
+   },
+   "wall_ms": 176.8,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-amt-10q2026q2-net_income",
+   "dataset": "xbrl",
+   "question": "What was American Tower's net income attributable to common stockholders for the three months ended June 30, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AMT",
+   "fiscal_year": 2026,
+   "gold": "$867,500,000 (about $867.50 million)",
+   "gold_value": 867500000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "American Tower's net income attributable to American Tower Corporation common stockholders for the three months ended June 30, 2026 was $867.5 million [1].",
+    "refused": false,
+    "answer_value": 867500000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "AMT-10Q-2026Q2:section:00098",
+      "filing_id": "AMT-10Q-2026Q2",
+      "section": "Part I > Item 1. Unaudited Consolidated And Condensed Consolidated Financial Statements > 12. Earnings Per Common Share",
+      "page": 24,
+      "page_end": 24,
+      "quote": "Net income attributable to American Tower Corporation common stockholders | $867.5"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "AMT-10Q-2026Q2:section:00098",
+     "AMT-10Q-2026Q3:section:00103",
+     "AMT-10Q-2026Q2:section:00147",
+     "AMT-10Q-2026Q3:section:00153",
+     "AMT-10Q-2026Q2:section:00151",
+     "AMT-10Q-2026Q2:section:00014",
+     "AMT-10Q-2026Q3:section:00129",
+     "AMT-10Q-2026Q2:section:00123"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8575,
+     "completion_tokens": 318,
+     "llm_calls": 4,
+     "cost_usd": 0.0033675,
+     "latency_ms": 3356.8
+    }
+   },
+   "wall_ms": 188.7,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-jpm-10q2026q2-net_income",
+   "dataset": "xbrl",
+   "question": "What was JPMorgan Chase's net income for the three months ended June 30, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2026,
+   "gold": "$21,155,000,000 (about $21.16 billion)",
+   "gold_value": 21155000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "JPMorgan Chase's net income for the three months ended June 30, 2026, was $21,155 million [1].",
+    "refused": false,
+    "answer_value": 21155000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "JPM-10Q-2026Q2:section:00288",
+      "filing_id": "JPM-10Q-2026Q2",
+      "section": "Consolidated statements of comprehensive income (unaudited)",
+      "page": 94,
+      "page_end": 94,
+      "quote": "Net income | $21,155"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "JPM-10Q-2026Q2:section:00163",
+     "JPM-10Q-2026Q1:section:00152",
+     "JPM-10Q-2026Q2:section:00642",
+     "JPM-10Q-2026Q2:section:00288",
+     "JPM-10Q-2026Q1:section:00018",
+     "JPM-10Q-2026Q2:section:00164"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6652,
+     "completion_tokens": 223,
+     "llm_calls": 3,
+     "cost_usd": 0.0025531,
+     "latency_ms": 2915.6
+    }
+   },
+   "wall_ms": 123.5,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-amzn-10q2026q2-operating_income",
+   "dataset": "xbrl",
+   "question": "What was Amazon's operating income for the three months ended June 30, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AMZN",
+   "fiscal_year": 2026,
+   "gold": "$27,461,000,000 (about $27.46 billion)",
+   "gold_value": 27461000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Amazon's operating income for the three months ended June 30, 2026, was $27,461,000,000 (or $27.5 billion) [1][2].",
+    "refused": false,
+    "answer_value": 27461000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AMZN:OperatingIncomeLoss:2026-04-01_2026-06-30:USD",
+      "filing_id": "AMZN-10Q-2026Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "27,461,000,000 USD for 2026-04-01 to 2026-06-30"
+     },
+     {
+      "chunk_id": "AMZN-10Q-2026Q2:section:00121",
+      "filing_id": "AMZN-10Q-2026Q2",
+      "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Results of Operations",
+      "page": 32,
+      "page_end": 33,
+      "quote": "$27.5 billion in Q2 2026"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "AMZN-10Q-2026Q2:section:00120",
+     "AMZN-10Q-2026Q2:section:00121",
+     "AMZN-10Q-2026Q3:section:00123",
+     "AMZN-10Q-2026Q2:section:00090",
+     "AMZN-10Q-2026Q2:section:00106",
+     "AMZN-10Q-2026Q2:section:00114"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6861,
+     "completion_tokens": 312,
+     "llm_calls": 3,
+     "cost_usd": 0.0028382999999999998,
+     "latency_ms": 2391.2
+    }
+   },
+   "wall_ms": 81.2,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-aapl-10k2025fy-operating_income-yoy-pct",
+   "dataset": "xbrl",
+   "question": "By what percentage did Apple's operating income change from fiscal year 2024 to fiscal year 2025? Give the signed percent change.",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "7.98%",
+   "gold_value": 7.9811,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Apple's operating income changed by +7.98 percent from fiscal year 2024 to fiscal year 2025 [1][2]. Operating income was 123,216,000,000 USD in 2024 [2] and increased to 133,050,000,000 USD in 2025 [1].",
+    "refused": false,
+    "answer_value": 7.98,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:OperatingIncomeLoss:2024-09-29_2025-09-27:USD",
+      "filing_id": "AAPL-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "133,050,000,000 USD for 2024-09-29 to 2025-09-27 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:AAPL:OperatingIncomeLoss:2023-10-01_2024-09-28:USD",
+      "filing_id": "AAPL-10K-2024FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "123,216,000,000 USD for 2023-10-01 to 2024-09-28 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4106,
+     "completion_tokens": 560,
+     "llm_calls": 4,
+     "cost_usd": 0.0026318,
+     "latency_ms": 4329.1
+    }
+   },
+   "wall_ms": 32.1,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-pfe-10k2025fy-revenue-yoy-abs",
+   "dataset": "xbrl",
+   "question": "By how much did Pfizer's total revenue change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "PFE",
+   "fiscal_year": 2025,
+   "gold": "-$1,048,000,000 (about -$1.05 billion)",
+   "gold_value": -1048000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Pfizer's total revenue decreased by $1,048,000,000 from fiscal year 2024 to fiscal year 2025. Total revenues were $63,627,000,000 for fiscal year 2024 [1] and $62,579,000,000 for fiscal year 2025 [2].",
+    "refused": false,
+    "answer_value": -1.048e+18,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:PFE:Revenues:2024-01-01_2024-12-31:USD",
+      "filing_id": "PFE-10K-2024FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "63,627,000,000 USD for 2024-01-01 to 2024-12-31 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:PFE:Revenues:2025-01-01_2025-12-31:USD",
+      "filing_id": "PFE-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "62,579,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "PFE-10K-2025FY:section:00169",
+     "PFE-10K-2025FY:section:00226",
+     "PFE-10K-2025FY:section:00436",
+     "PFE-10K-2025FY:section:00284",
+     "PFE-10K-2025FY:section:00435",
+     "PFE-10K-2025FY:section:00139"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7557,
+     "completion_tokens": 517,
+     "llm_calls": 4,
+     "cost_usd": 0.0035596,
+     "latency_ms": 4151.5
+    }
+   },
+   "wall_ms": 147.5,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": "arithmetic",
+   "failure_note": "inputs gathered but the computed result is wrong"
+  },
+  {
+   "qid": "xbrl-ko-10k2025fy-operating_income-yoy-abs",
+   "dataset": "xbrl",
+   "question": "By how much did Coca-Cola's operating income change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "gold": "$3,770,000,000 (about $3.77 billion)",
+   "gold_value": 3770000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Coca-Cola's operating income increased by $3,770,000,000 from fiscal year 2024 to fiscal year 2025, moving from $9,992,000,000 in 2024 to $13,762,000,000 in 2025 [1][2].",
+    "refused": false,
+    "answer_value": 3770000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:OperatingIncomeLoss:2024-01-01_2024-12-31:USD",
+      "filing_id": "KO-10K-2024FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "9,992,000,000 USD for 2024-01-01 to 2024-12-31 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:KO:OperatingIncomeLoss:2025-01-01_2025-12-31:USD",
+      "filing_id": "KO-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "13,762,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "KO-10K-2025FY:section:00171",
+     "KO-10K-2025FY:section:00152",
+     "KO-10K-2025FY:section:00455",
+     "KO-10K-2025FY:section:00489",
+     "FB-COCACOLA_2017_10K:section:00512",
+     "KO-10K-2025FY:section:00208",
+     "KO-10K-2025FY:section:00170",
+     "KO-10K-2025FY:section:00292",
+     "KO-10K-2025FY:section:00436",
+     "KO-10K-2025FY:section:00438"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9213,
+     "completion_tokens": 565,
+     "llm_calls": 4,
+     "cost_usd": 0.004176399999999999,
+     "latency_ms": 4729.3
+    }
+   },
+   "wall_ms": 276.9,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-cvx-10k2025fy-net_income-yoy-abs",
+   "dataset": "xbrl",
+   "question": "By how much did Chevron's net income attributable to Chevron change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "CVX",
+   "fiscal_year": 2025,
+   "gold": "-$5,362,000,000 (about -$5.36 billion)",
+   "gold_value": -5362000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Chevron's net income attributable to Chevron changed by -5,362,000,000 USD from fiscal year 2024 to fiscal year 2025, decreasing from $17,661 million to $12,299 million [1][2][3].",
+    "refused": false,
+    "answer_value": -5.362e+18,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:CVX:NetIncomeLoss:2024-01-01_2024-12-31:USD",
+      "filing_id": "CVX-10K-2024FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "17,661,000,000 USD for 2024-01-01 to 2024-12-31"
+     },
+     {
+      "chunk_id": "xbrl:CVX:NetIncomeLoss:2025-01-01_2025-12-31:USD",
+      "filing_id": "CVX-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "12,299,000,000 USD for 2025-01-01 to 2025-12-31"
+     },
+     {
+      "chunk_id": "CVX-10K-2025FY:section:00105",
+      "filing_id": "CVX-10K-2025FY",
+      "section": "Item 14. Principal Accountant Fees and Services > Key Financial Results",
+      "page": 36,
+      "page_end": 36,
+      "quote": "$12,299 | $17,661"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "CVX-10K-2025FY:section:00105",
+     "CVX-10K-2025FY:section:00192",
+     "CVX-10K-2025FY:section:00312",
+     "CVX-10K-2025FY:section:00426",
+     "CVX-10K-2025FY:section:00190",
+     "CVX-10K-2025FY:section:00423"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7524,
+     "completion_tokens": 554,
+     "llm_calls": 4,
+     "cost_usd": 0.0036422,
+     "latency_ms": 3761.6
+    }
+   },
+   "wall_ms": 47.4,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": "arithmetic",
+   "failure_note": "inputs gathered but the computed result is wrong"
+  },
+  {
+   "qid": "xbrl-wmt-10k2026fy-revenue-yoy-pct",
+   "dataset": "xbrl",
+   "question": "By what percentage did Walmart's total revenue change from fiscal year 2025 to fiscal year 2026? Give the signed percent change.",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "WMT",
+   "fiscal_year": 2026,
+   "gold": "4.73%",
+   "gold_value": 4.7252,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Walmart's total revenue changed by 4.7% from fiscal year 2025 to fiscal year 2026 [1]. Total revenues were $713,163 million for fiscal year 2026 and $680,985 million for fiscal year 2025 [2].",
+    "refused": false,
+    "answer_value": 4.7,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "WMT-10K-2026FY:section:00126",
+      "filing_id": "WMT-10K-2026FY",
+      "section": "Item 7. Management's Discussion And Analysis Of Financial Condition And Results Of Operations > Consolidated Results of Operations",
+      "page": 38,
+      "page_end": 38,
+      "quote": "Our total revenues increased $32.2 billion or 4.7% and $32.9 billion or 5.1% for fiscal 2026 and 2025"
+     },
+     {
+      "chunk_id": "WMT-10K-2026FY:section:00287",
+      "filing_id": "WMT-10K-2026FY",
+      "section": "Item 8. Financial Statements And Supplementary Data > Note 11. Segments and Disaggregated Revenue",
+      "page": 78,
+      "page_end": 78,
+      "quote": "Total revenues | $713,163 | $680,985 | $648,125"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "WMT-10K-2026FY:section:00287",
+     "WMT-10K-2026FY:section:00128",
+     "WMT-10K-2026FY:section:00138",
+     "WMT-10K-2026FY:section:00126",
+     "WMT-10K-2026FY:section:00135",
+     "WMT-10K-2026FY:section:00127"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 10150,
+     "completion_tokens": 453,
+     "llm_calls": 4,
+     "cost_usd": 0.004177500000000001,
+     "latency_ms": 5411.700000000001
+    }
+   },
+   "wall_ms": 55.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-lin-10k2025fy-net_income-yoy-pct",
+   "dataset": "xbrl",
+   "question": "By what percentage did Linde's net income attributable to Linde change from fiscal year 2024 to fiscal year 2025? Give the signed percent change.",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "LIN",
+   "fiscal_year": 2025,
+   "gold": "5.07%",
+   "gold_value": 5.0724,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Linde's net income attributable to Linde increased by 5% (or approximately 5.07%) from fiscal year 2024 to fiscal year 2025 [1]. Net income – Linde plc was $6,565 million in 2024 and rose to $6,898 million in 2025 [2].",
+    "refused": false,
+    "answer_value": 5.0,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "LIN-10K-2025FY:section:00067",
+      "filing_id": "LIN-10K-2025FY",
+      "section": "Item 7. Management’s Discussion And Analysis Of Financial Condition And Results Of Operations > Net Income - Linde plc",
+      "page": 22,
+      "page_end": 22,
+      "quote": "net income - Linde plc increased $333 million, or 5%."
+     },
+     {
+      "chunk_id": "LIN-10K-2025FY:section:00149",
+      "filing_id": "LIN-10K-2025FY",
+      "section": "Item 8. Financial Statements And Supplementary Data > Linde Plc And Subsidiaries",
+      "page": 45,
+      "page_end": 45,
+      "quote": "| Net Income – Linde plc | $6,898 | $6,565 |"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "LIN-10K-2025FY:section:00067",
+     "LIN-10K-2025FY:section:00149",
+     "LIN-10K-2025FY:section:00208",
+     "LIN-10K-2025FY:section:00152",
+     "LIN-10K-2025FY:section:00161",
+     "LIN-10K-2025FY:section:00068",
+     "LIN-10K-2025FY:section:00070",
+     "LIN-10K-2025FY:section:00048",
+     "LIN-10K-2025FY:section:00207"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9864,
+     "completion_tokens": 494,
+     "llm_calls": 4,
+     "cost_usd": 0.0041942,
+     "latency_ms": 3797.0
+    }
+   },
+   "wall_ms": 112.9,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-jnj-10k2025fy-current_ratio",
+   "dataset": "xbrl",
+   "question": "What was Johnson & Johnson's current ratio (total current assets divided by total current liabilities) as of the end of fiscal year 2025 (December 28, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "JNJ",
+   "fiscal_year": 2025,
+   "gold": "1.03",
+   "gold_value": 1.0277,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "Johnson & Johnson's current ratio as of the end of fiscal year 2025 (December 28, 2025) was 1.03, calculated from total current assets of $55,624,000,000 [1] divided by total current liabilities of $54,126,000,000 [2].",
+    "refused": false,
+    "answer_value": 1.03,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "xbrl:JNJ:AssetsCurrent:2025-12-28:USD",
+      "filing_id": "JNJ-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "55,624,000,000 USD for as of 2025-12-28"
+     },
+     {
+      "chunk_id": "xbrl:JNJ:LiabilitiesCurrent:2025-12-28:USD",
+      "filing_id": "JNJ-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "54,126,000,000 USD for as of 2025-12-28"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 5275,
+     "completion_tokens": 461,
+     "llm_calls": 4,
+     "cost_usd": 0.002735,
+     "latency_ms": 3181.7
+    }
+   },
+   "wall_ms": 42.5,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-unh-10q2026q2-current_ratio",
+   "dataset": "xbrl",
+   "question": "What was UnitedHealth Group's current ratio (total current assets divided by total current liabilities) as of June 30, 2026 (end of fiscal 2026 Q2)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "UNH",
+   "fiscal_year": 2026,
+   "gold": "0.78",
+   "gold_value": 0.7768,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "As of June 30, 2026, UnitedHealth Group's current ratio was approximately 0.78, based on total current assets of $86,860 million [1] and total current liabilities of $111,820 million [2].",
+    "refused": false,
+    "answer_value": 0.78,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "xbrl:UNH:AssetsCurrent:2026-06-30:USD",
+      "filing_id": "UNH-10Q-2026Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Assets, Current (us-gaap:AssetsCurrent): 86,860,000,000 USD for as of 2026-06-30 [instant]"
+     },
+     {
+      "chunk_id": "xbrl:UNH:LiabilitiesCurrent:2026-06-30:USD",
+      "filing_id": "UNH-10Q-2026Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Liabilities, Current (us-gaap:LiabilitiesCurrent): 111,820,000,000 USD for as of 2026-06-30 [instant]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "UNH-10Q-2026Q2:section:00012",
+     "UNH-10Q-2026Q1:section:00012",
+     "UNH-10Q-2026Q2:section:00052",
+     "UNH-10Q-2026Q1:section:00050",
+     "UNH-10Q-2026Q2:section:00037",
+     "UNH-10Q-2026Q2:section:00030"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9243,
+     "completion_tokens": 520,
+     "llm_calls": 4,
+     "cost_usd": 0.0040729,
+     "latency_ms": 3495.2000000000003
+    }
+   },
+   "wall_ms": 73.5,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-amzn-10k2025fy-net_margin",
+   "dataset": "xbrl",
+   "question": "What was Amazon's net profit margin (net income divided by total revenue, as a percentage) for fiscal year 2025 (the year ended December 31, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AMZN",
+   "fiscal_year": 2025,
+   "gold": "10.83%",
+   "gold_value": 10.8338,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Amazon's net profit margin for fiscal year 2025 was 10.83 percent, based on a net income of 77,670,000,000 USD [1] and total revenue of 716,924,000,000 USD [2].",
+    "refused": false,
+    "answer_value": 10.83,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AMZN:NetIncomeLoss:2025-01-01_2025-12-31:USD",
+      "filing_id": "AMZN-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "77,670,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:AMZN:RevenueFromContractWithCustomerExcludingAssessedTax:2025-01-01_2025-12-31:USD",
+      "filing_id": "AMZN-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "716,924,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4944,
+     "completion_tokens": 424,
+     "llm_calls": 4,
+     "cost_usd": 0.0025432,
+     "latency_ms": 3592.2
+    }
+   },
+   "wall_ms": 39.4,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-aapl-10q2026q3-operating_margin",
+   "dataset": "xbrl",
+   "question": "What was Apple's operating margin (operating income divided by total revenue, as a percentage) for the three months ended June 27, 2026 (fiscal 2026 Q3)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "gold": "32.62%",
+   "gold_value": 32.6229,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Apple's operating margin for the three months ended June 27, 2026, was 32.62 percent, calculated from an operating income of 35,695,000,000 USD [1] and total revenue of 109,417,000,000 USD [2].",
+    "refused": false,
+    "answer_value": 32.62,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:OperatingIncomeLoss:2026-03-29_2026-06-27:USD",
+      "filing_id": "AAPL-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "35,695,000,000 USD for 2026-03-29 to 2026-06-27"
+     },
+     {
+      "chunk_id": "xbrl:AAPL:RevenueFromContractWithCustomerExcludingAssessedTax:2026-03-29_2026-06-27:USD",
+      "filing_id": "AAPL-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "109,417,000,000 USD for 2026-03-29 to 2026-06-27"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 5218,
+     "completion_tokens": 425,
+     "llm_calls": 4,
+     "cost_usd": 0.0026279,
+     "latency_ms": 3604.5
+    }
+   },
+   "wall_ms": 34.1,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-aapl-10k2025fy-liabilities_to_equity",
+   "dataset": "xbrl",
+   "question": "What was Apple's ratio of total liabilities to total stockholders' equity attributable to Apple (excluding noncontrolling interests) as of the end of fiscal year 2025 (September 27, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "3.87",
+   "gold_value": 3.8722,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "Apple's ratio of total liabilities to total stockholders' equity attributable to Apple as of September 27, 2025 was 3.87, based on total liabilities of $285,508,000,000 [1] and total shareholders' equity of $73,733,000,000 [2].",
+    "refused": false,
+    "answer_value": 3.87,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:Liabilities:2025-09-27:USD",
+      "filing_id": "AAPL-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Liabilities (us-gaap:Liabilities): 285,508,000,000 USD for as of 2025-09-27 [instant]"
+     },
+     {
+      "chunk_id": "xbrl:AAPL:StockholdersEquity:2025-09-27:USD",
+      "filing_id": "AAPL-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Stockholders' Equity Attributable to Parent (us-gaap:StockholdersEquity): 73,733,000,000 USD for as of 2025-09-27 [instant]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "AAPL-10K-2025FY:section:00069",
+     "AAPL-10K-2025FY:section:00196",
+     "AAPL-10K-2025FY:section:00111",
+     "AAPL-10K-2025FY:section:00202",
+     "AAPL-10K-2025FY:section:00108",
+     "AAPL-10K-2025FY:section:00066"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9790,
+     "completion_tokens": 469,
+     "llm_calls": 4,
+     "cost_usd": 0.0041095,
+     "latency_ms": 3384.0
+    }
+   },
+   "wall_ms": 64.9,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-amt-10q2026q3-current_ratio",
+   "dataset": "xbrl",
+   "question": "What was American Tower's current ratio (total current assets divided by total current liabilities) as of September 30, 2026 (end of fiscal 2026 Q3)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AMT",
+   "fiscal_year": 2026,
+   "gold": "0.35",
+   "gold_value": 0.3526,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "As of September 30, 2026, American Tower's current ratio was approximately 0.35, based on total current assets of $3,150.3 million [1] divided by total current liabilities of $8,934.6 million [1].",
+    "refused": false,
+    "answer_value": 0.352596,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "AMT-10Q-2026Q3:section:00010",
+      "filing_id": "AMT-10Q-2026Q3",
+      "section": "Part I > Item 1. Unaudited Consolidated And Condensed Consolidated Financial Statements > Consolidated Balance Sheets",
+      "page": 3,
+      "page_end": 3,
+      "quote": "Total current liabilities | 8,934.6"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "AMT-10Q-2026Q3:section:00048",
+     "AMT-10Q-2026Q3:section:00010",
+     "AMT-10Q-2026Q3:section:00037",
+     "AMT-10Q-2026Q3:section:00041",
+     "AMT-10Q-2026Q2:section:00010",
+     "AMT-10Q-2026Q2:section:00033"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9775,
+     "completion_tokens": 447,
+     "llm_calls": 4,
+     "cost_usd": 0.00405,
+     "latency_ms": 3198.8
+    }
+   },
+   "wall_ms": 73.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-ko-10k2025fy-current_ratio",
+   "dataset": "xbrl",
+   "question": "What was Coca-Cola's current ratio (total current assets divided by total current liabilities) as of the end of fiscal year 2025 (December 31, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "gold": "1.46",
+   "gold_value": 1.4588,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "Coca-Cola's current ratio as of the end of fiscal year 2025 (December 31, 2025) was 1.46, calculated using total current assets of $31,044,000,000 [1] divided by total current liabilities of $21,281,000,000 [2].",
+    "refused": false,
+    "answer_value": 1.45877,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:AssetsCurrent:2025-12-31:USD",
+      "filing_id": "KO-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "31,044,000,000 USD for as of 2025-12-31"
+     },
+     {
+      "chunk_id": "xbrl:KO:LiabilitiesCurrent:2025-12-31:USD",
+      "filing_id": "KO-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "21,281,000,000 USD for as of 2025-12-31"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "KO-10K-2025FY:section:00214",
+     "KO-10K-2025FY:section:00489",
+     "KO-10K-2025FY:section:00448",
+     "KO-10K-2025FY:section:00455",
+     "KO-10K-2025FY:section:00488",
+     "KO-10K-2025FY:section:00220"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9915,
+     "completion_tokens": 463,
+     "llm_calls": 4,
+     "cost_usd": 0.004132,
+     "latency_ms": 3638.4000000000005
+    }
+   },
+   "wall_ms": 52.3,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "xbrl-lin-10k2025fy-net_margin",
+   "dataset": "xbrl",
+   "question": "What was Linde's net profit margin (net income attributable to Linde divided by total revenue, as a percentage) for fiscal year 2025 (the year ended December 31, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "LIN",
+   "fiscal_year": 2025,
+   "gold": "20.30%",
+   "gold_value": 20.2966,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "Linde's net profit margin for fiscal year 2025 was 20.30%, calculated using net income attributable to the parent of 6,898,000,000 USD [1] and total revenue of 33,986,000,000 USD [2].",
+    "refused": false,
+    "answer_value": 20.3,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "xbrl:LIN:NetIncomeLoss:2025-01-01_2025-12-31:USD",
+      "filing_id": "LIN-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Net Income (Loss) Attributable to Parent (us-gaap:NetIncomeLoss): 6,898,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:LIN:RevenueFromContractWithCustomerExcludingAssessedTax:2025-01-01_2025-12-31:USD",
+      "filing_id": "LIN-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Revenue from Contract with Customer, Excluding Assessed Tax (us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax): 33,986,000,000 USD for 2025-01-01 to 2025-12-31 [FY]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4157,
+     "completion_tokens": 466,
+     "llm_calls": 4,
+     "cost_usd": 0.0024121,
+     "latency_ms": 3538.0
+    }
+   },
+   "wall_ms": 6.8,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-04103",
+   "dataset": "financebench",
+   "question": "What is the FY2019 cash conversion cycle (CCC) for General Mills? CCC is defined as: DIO + DSO - DPO. DIO is defined as: 365 * (average inventory between FY2018 and FY2019) / (FY2019 COGS). DSO is defined as: 365 * (average accounts receivable between FY2018 and FY2019) / (FY2019 Revenue). DPO is defined as: 365 * (average accounts payable between FY2018 and FY2019) / (FY2019 COGS + change in inventory between FY2018 and FY2019). Round your answer to two decimal places. Address the question by using the line items and information shown within the income statement and the balance sheet.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "GIS",
+   "fiscal_year": 2019,
+   "gold": "-3.7",
+   "gold_value": -3.7,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-GENERALMILLS_2019_10K:section:00192",
+     "FB-GENERALMILLS_2019_10K:section:00383",
+     "FB-GENERALMILLS_2019_10K:section:00413",
+     "FB-GENERALMILLS_2019_10K:section:00277",
+     "FB-GENERALMILLS_2019_10K:section:00201",
+     "FB-GENERALMILLS_2019_10K:section:00193",
+     "FB-GENERALMILLS_2019_10K:section:00186",
+     "FB-GENERALMILLS_2019_10K:section:00239",
+     "FB-GENERALMILLS_2019_10K:section:00224",
+     "FB-GENERALMILLS_2019_10K:section:00066",
+     "FB-GENERALMILLS_2019_10K:section:00304",
+     "FB-GENERALMILLS_2019_10K:section:00219",
+     "FB-GENERALMILLS_2019_10K:section:00384",
+     "FB-GENERALMILLS_2019_10K:section:00191"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: numbers: these numbers do not appear in the evidence: 50.56, 50.41"
+    ],
+    "usage": {
+     "prompt_tokens": 14991,
+     "completion_tokens": 859,
+     "llm_calls": 5,
+     "cost_usd": 0.006644799999999999,
+     "latency_ms": 5943.599999999999
+    }
+   },
+   "wall_ms": 159.7,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.5,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 0.8175295903539445,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "fb-10420",
+   "dataset": "financebench",
+   "question": "Based on the information provided primarily in the statement of financial position and the statement of income, what is AES's FY2022 return on assets (ROA)? ROA is defined as: FY2022 net income / (average total assets between FY2021 and FY2022). Round your answer to two decimal places.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "AES",
+   "fiscal_year": 2022,
+   "gold": "-0.02",
+   "gold_value": -0.02,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The provided filings do not supply the total assets and net income figures required to calculate AES's FY2022 return on assets (ROA).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-AES_2022_10K:section:00325",
+     "FB-AES_2022_10K:section:00657",
+     "FB-AES_2022_10K:section:00326",
+     "FB-AES_2022_10K:section:00572",
+     "FB-AES_2022_10K:section:00324",
+     "FB-AES_2022_10K:section:00334",
+     "FB-AES_2022_10K:section:00312",
+     "FB-AES_2022_10K:section:00471",
+     "FB-AES_2022_10K:section:00482",
+     "FB-AES_2022_10K:section:00319",
+     "FB-AES_2022_10K:section:00367",
+     "FB-AES_2022_10K:section:00544",
+     "FB-AES_2022_10K:section:00636",
+     "FB-AES_2022_10K:section:00656",
+     "FB-AES_2022_10K:section:00205",
+     "FB-AES_2022_10K:section:00532",
+     "FB-AES_2022_10K:section:00318",
+     "FB-AES_2022_10K:section:00612",
+     "FB-AES_2022_10K:section:00489",
+     "FB-AES_2022_10K:section:00409",
+     "FB-AES_2022_10K:section:00470",
+     "FB-AES_2022_10K:section:00539",
+     "FB-AES_2022_10K:section:00274"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 10556,
+     "completion_tokens": 383,
+     "llm_calls": 4,
+     "cost_usd": 0.004124299999999999,
+     "latency_ms": 3784.9000000000005
+    }
+   },
+   "wall_ms": 162.3,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.5,
+    "mrr": 0.1,
+    "ndcg_at_10": 0.17723928678404774,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "fb-04417",
+   "dataset": "financebench",
+   "question": "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "BBY",
+   "fiscal_year": 2019,
+   "gold": "$5409.00",
+   "gold_value": 5409000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "At the end of fiscal year 2019 (February 2, 2019), Best Buy's merchandise inventories were $5,409 million [1].",
+    "refused": false,
+    "answer_value": 5409000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-BESTBUY_2019_10K:section:00184",
+      "filing_id": "FB-BESTBUY_2019_10K",
+      "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+      "page": 52,
+      "page_end": 52,
+      "quote": "Merchandise inventories | 5,409"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-BESTBUY_2019_10K:section:00218",
+     "FB-BESTBUY_2019_10K:section:00261",
+     "FB-BESTBUY_2019_10K:section:00184",
+     "FB-BESTBUY_2019_10K:section:00303",
+     "FB-BESTBUY_2019_10K:section:00183",
+     "FB-BESTBUY_2019_10K:section:00227"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6890,
+     "completion_tokens": 205,
+     "llm_calls": 4,
+     "cost_usd": 0.0025795,
+     "latency_ms": 3159.6
+    }
+   },
+   "wall_ms": 78.6,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.5,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-06247",
+   "dataset": "financebench",
+   "question": "What is FY2018 days payable outstanding (DPO) for Walmart? DPO is defined as: 365 * (average accounts payable between FY2017 and FY2018) / (FY2018 COGS + change in inventory between FY2017 and FY2018). Round your answer to two decimal places. Please base your judgments on the information provided primarily in the statement of financial position and the P&L statement.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "WMT",
+   "fiscal_year": 2018,
+   "gold": "42.69",
+   "gold_value": 42.69,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The filings do not provide the accounts payable balances for FY2017 and FY2018 necessary to calculate average accounts payable.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-WALMART_2018_10K:section:00225",
+     "FB-WALMART_2018_10K:section:00209",
+     "FB-WALMART_2018_10K:section:00217",
+     "FB-WALMART_2018_10K:section:00189",
+     "FB-WALMART_2018_10K:section:00240",
+     "FB-WALMART_2018_10K:section:00220",
+     "FB-WALMART_2018_10K:section:00211",
+     "FB-WALMART_2018_10K:section:00262",
+     "FB-WALMART_2018_10K:section:00200",
+     "FB-WALMART_2018_10K:section:00210",
+     "FB-WALMART_2018_10K:section:00214",
+     "FB-WALMART_2018_10K:section:00213",
+     "FB-WALMART_2018_10K:section:00145",
+     "FB-WALMART_2018_10K:section:00203",
+     "FB-WALMART_2018_10K:section:00301"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "search_filings",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 11181,
+     "completion_tokens": 368,
+     "llm_calls": 4,
+     "cost_usd": 0.0042743,
+     "latency_ms": 3394.8
+    }
+   },
+   "wall_ms": 87.2,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.38685280723454163,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "fb-04660",
+   "dataset": "financebench",
+   "question": "Considering the data in the balance sheet, what is Block's (formerly known as Square) FY2016 working capital ratio? Define working capital ratio as total current assets divided by total current liabilities. Round your answer to two decimal places.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "SQ",
+   "fiscal_year": 2016,
+   "gold": "1.73",
+   "gold_value": 1.73,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "Block's working capital ratio for FY 2016 was 1.73, calculated by dividing total current assets of $1,001,425 thousand by total current liabilities of $577,464 thousand [1].",
+    "refused": false,
+    "answer_value": 1.73,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "FB-BLOCK_2016_10K:section:00194",
+      "filing_id": "FB-BLOCK_2016_10K",
+      "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+      "page": 68,
+      "page_end": 68,
+      "quote": "Total current liabilities |  | 577,464"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-BLOCK_2016_10K:section:00172",
+     "FB-BLOCK_2016_10K:section:00194",
+     "FB-BLOCK_2016_10K:section:00283",
+     "FB-BLOCK_2016_10K:section:00279",
+     "FB-BLOCK_2016_10K:section:00281",
+     "FB-BLOCK_2016_10K:section:00105",
+     "FB-BLOCK_2016_10K:section:00275",
+     "FB-BLOCK_2016_10K:section:00294"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8953,
+     "completion_tokens": 318,
+     "llm_calls": 4,
+     "cost_usd": 0.0034809,
+     "latency_ms": 3651.2
+    }
+   },
+   "wall_ms": 135.5,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-03029",
+   "dataset": "financebench",
+   "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "MMM",
+   "fiscal_year": 2018,
+   "gold": "$1577.00",
+   "gold_value": 1577000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "In FY 2018, 3M's capital expenditures, represented by purchases of property, plant and equipment (PP&E), were $1,577 million [1].",
+    "refused": false,
+    "answer_value": 1577000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-3M_2018_10K:section:00142",
+      "filing_id": "FB-3M_2018_10K",
+      "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > 6,439 Cash Flows from Investing Activities: Years ended December 31",
+      "page": 46,
+      "page_end": 46,
+      "quote": "Purchases of property, plant and equipment (PP&E) | $(1,577)"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-3M_2018_10K:section:00147",
+     "FB-3M_2018_10K:section:00139",
+     "FB-3M_2018_10K:section:00142",
+     "FB-3M_2018_10K:section:00115",
+     "FB-3M_2018_10K:section:00141",
+     "FB-3M_2018_10K:section:00148"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7167,
+     "completion_tokens": 223,
+     "llm_calls": 4,
+     "cost_usd": 0.0027076,
+     "latency_ms": 3094.6
+    }
+   },
+   "wall_ms": 130.9,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-04080",
+   "dataset": "financebench",
+   "question": "When primarily referencing the income statement and the statement of financial position, what is the FY2021 inventory turnover ratio for Nike? Inventory turnover ratio is defined as: (FY2021 COGS) / (average inventory between FY2020 and FY2021). Round your answer to two decimal places.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "NKE",
+   "fiscal_year": 2021,
+   "gold": "3.46",
+   "gold_value": 3.46,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-NIKE_2021_10K:section:00314",
+     "FB-NIKE_2021_10K:section:00203",
+     "FB-NIKE_2021_10K:section:00218",
+     "FB-NIKE_2021_10K:section:00196",
+     "FB-NIKE_2021_10K:section:00143",
+     "FB-NIKE_2021_10K:section:00356",
+     "FB-NIKE_2021_10K:section:00180",
+     "FB-NIKE_2021_10K:section:00289",
+     "FB-NIKE_2021_10K:section:00338",
+     "FB-NIKE_2021_10K:section:00183"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: numbers: these numbers do not appear in the evidence: 7.1105e+09"
+    ],
+    "usage": {
+     "prompt_tokens": 11823,
+     "completion_tokens": 928,
+     "llm_calls": 5,
+     "cost_usd": 0.0058668999999999995,
+     "latency_ms": 5304.099999999999
+    }
+   },
+   "wall_ms": 77.6,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.5,
+    "mrr": 0.14285714285714285,
+    "ndcg_at_10": 0.20438239758848611,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "fb-03856",
+   "dataset": "financebench",
+   "question": "What is the FY2017 operating cash flow ratio for Adobe? Operating cash flow ratio is defined as: cash from operations / total current liabilities. Round your answer to two decimal places. Please utilize information provided primarily within the balance sheet and the cash flow statement.",
+   "question_type": "metrics_generated",
+   "answerable": true,
+   "ticker": "ADBE",
+   "fiscal_year": 2017,
+   "gold": "0.83",
+   "gold_value": 0.83,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "Adobe's FY2017 operating cash flow ratio is 0.83, calculated using net cash provided by operating activities of $2,912,853,000 [1] divided by total current liabilities of $3,527,457,000 [2].",
+    "refused": false,
+    "answer_value": 0.83,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "xbrl:ADBE:NetCashProvidedByUsedInOperatingActivities:2016-12-03_2017-12-01:USD",
+      "filing_id": "ADBE-10K-2017FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Net Cash Provided by (Used in) Operating Activities (us-gaap:NetCashProvidedByUsedInOperatingActivities): 2,912,853,000 USD"
+     },
+     {
+      "chunk_id": "xbrl:ADBE:LiabilitiesCurrent:2017-12-01:USD",
+      "filing_id": "ADBE-10K-2017FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Liabilities, Current (us-gaap:LiabilitiesCurrent): 3,527,457,000 USD for as of 2017-12-01"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-ADOBE_2017_10K:section:00201",
+     "FB-ADOBE_2017_10K:section:00223",
+     "FB-ADOBE_2017_10K:section:00200",
+     "FB-ADOBE_2017_10K:section:00202",
+     "FB-ADOBE_2017_10K:section:00186",
+     "FB-ADOBE_2017_10K:section:00156",
+     "FB-ADOBE_2017_10K:section:00189",
+     "FB-ADOBE_2017_10K:section:00255",
+     "FB-ADOBE_2017_10K:section:00188",
+     "FB-ADOBE_2017_10K:section:00190",
+     "FB-ADOBE_2017_10K:section:00098"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "search_filings",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 10688,
+     "completion_tokens": 577,
+     "llm_calls": 4,
+     "cost_usd": 0.0046489,
+     "latency_ms": 3629.2
+    }
+   },
+   "wall_ms": 74.6,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.5,
+    "mrr": 0.16666666666666666,
+    "ndcg_at_10": 0.21840743681816419,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-00080",
+   "dataset": "financebench",
+   "question": "Does Paypal have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "PYPL",
+   "fiscal_year": 2022,
+   "gold": "Yes. Paypal has a positive working capital of $ 1.6Bn as of FY2022 end.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "PayPal has positive working capital of $12,416 million for fiscal year 2022 [1]. Total current assets were $57,517 million and total current liabilities were $45,101 million as of December 31, 2022 [1].",
+    "refused": false,
+    "answer_value": 12416000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-PAYPAL_2022_10K:section:00195",
+      "filing_id": "FB-PAYPAL_2022_10K",
+      "section": "Item 15. Exhibits, Financial Statement Schedules > CONSOLIDATED BALANCE SHEETS As of December 31,",
+      "page": 61,
+      "page_end": 61,
+      "quote": "Total current liabilities | 45,101 | 43,029"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-PAYPAL_2022_10K:section:00353",
+     "FB-PAYPAL_2022_10K:section:00440",
+     "FB-PAYPAL_2022_10K:section:00195",
+     "FB-PAYPAL_2022_10K:section:00408",
+     "FB-PAYPAL_2022_10K:section:00387",
+     "FB-PAYPAL_2022_10K:section:00221",
+     "FB-PAYPAL_2022_10K:section:00439",
+     "FB-PAYPAL_2022_10K:section:00230"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7886,
+     "completion_tokens": 337,
+     "llm_calls": 4,
+     "cost_usd": 0.0032083,
+     "latency_ms": 3223.8999999999996
+    }
+   },
+   "wall_ms": 90.4,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.5,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "table_misread",
+   "failure_note": "evidence page gathered (with tables) but the answer is wrong"
+  },
+  {
+   "qid": "fb-00499",
+   "dataset": "financebench",
+   "question": "Is 3M a capital-intensive business based on FY2022 data?",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "MMM",
+   "fiscal_year": 2022,
+   "gold": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "The provided filings do not explicitly state whether 3M is a capital-intensive business, but do disclose that for FY 2022 the company had property, plant and equipment balances of $9.2 billion [1], payments to acquire property, plant, and equipment of 1,749,000,000 USD [2], and total assets of 46,455,000,000 USD [3].",
+    "refused": false,
+    "answer_value": 9200000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-3M_2022_10K:section:00174",
+      "filing_id": "FB-3M_2022_10K",
+      "section": "Item 8. Financial Statements and Supplementary Data > Critical Audit Matters",
+      "page": 47,
+      "page_end": 47,
+      "quote": "consolidated property, plant and equipment balance was $9.2 billion"
+     },
+     {
+      "chunk_id": "xbrl:MMM:PaymentsToAcquirePropertyPlantAndEquipment:2022-01-01_2022-12-31:USD",
+      "filing_id": "MMM-10K-2022FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Payments to Acquire Property, Plant, and Equipment (us-gaap:PaymentsToAcquirePropertyPlantAndEquipment): 1,749,000,000 USD for 2022-01-01 to 2022-12-31 [FY]"
+     },
+     {
+      "chunk_id": "xbrl:MMM:Assets:2022-12-31:USD",
+      "filing_id": "MMM-10K-2022FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Assets (us-gaap:Assets): 46,455,000,000 USD for as of 2022-12-31 [instant]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-3M_2022_10K:section:00203",
+     "FB-3M_2022_10K:section:00174",
+     "FB-3M_2022_10K:section:00475",
+     "FB-3M_2022_10K:section:00197",
+     "FB-3M_2022_10K:section:00121",
+     "FB-3M_2022_10K:section:00149",
+     "FB-3M_2022_10K:section:00119",
+     "FB-3M_2022_10K:section:00183",
+     "FB-3M_2022_10K:section:00314",
+     "FB-3M_2022_10K:section:00182"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "get_company_facts",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9597,
+     "completion_tokens": 814,
+     "llm_calls": 4,
+     "cost_usd": 0.004914099999999999,
+     "latency_ms": 4264.4
+    }
+   },
+   "wall_ms": 102.9,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.043478260869565216,
+    "ndcg_at_10": 0.0,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "retrieval_miss",
+   "failure_note": "no labeled evidence page was gathered"
+  },
+  {
+   "qid": "fb-01091",
+   "dataset": "financebench",
+   "question": "Has Boeing reported any materially important ongoing legal battles from FY2022?",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "BA",
+   "fiscal_year": 2022,
+   "gold": "Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Yes, Boeing reported multiple legal actions and investigations, including lawsuits resulting from the Lion Air Flight 610 and Ethiopian Airlines Flight 302 accidents, a Deferred Prosecution Agreement with the U.S. Department of Justice, a shareholder derivative lawsuit settlement that resulted in the Company receiving $219 million in the second quarter of 2022, and a settled SEC investigation that resulted in an earnings charge of $200 million [1].",
+    "refused": false,
+    "answer_value": 219000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-BOEING_2022_10K:section:00388",
+      "filing_id": "FB-BOEING_2022_10K",
+      "section": "Item 8. Financial Statements and Supplementary Data > Note 21 – Legal Proceedings",
+      "page": 112,
+      "page_end": 113,
+      "quote": "Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302. During 2021, we entered into (i) a Deferred Prosecution Agreement with the U.S. Department of Justice that resolved "
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-BOEING_2022_10K:section:00056",
+     "FB-BOEING_2022_10K:section:00149",
+     "FB-BOEING_2022_10K:section:00388",
+     "FB-BOEING_2022_10K:section:00148",
+     "FB-BOEING_2022_10K:section:00297",
+     "FB-BOEING_2022_10K:section:00298",
+     "FB-BOEING_2022_10K:section:00286",
+     "FB-BOEING_2022_10K:section:00104",
+     "FB-BOEING_2022_10K:section:00103",
+     "FB-BOEING_2022_10K:section:00137",
+     "FB-BOEING_2022_10K:section:00288",
+     "FB-BOEING_2022_10K:section:00044",
+     "FB-BOEING_2022_10K:section:00549",
+     "FB-BOEING_2022_10K:section:00457"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7788,
+     "completion_tokens": 504,
+     "llm_calls": 4,
+     "cost_usd": 0.0035964,
+     "latency_ms": 3841.5
+    }
+   },
+   "wall_ms": 59.8,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.5,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01275",
+   "dataset": "financebench",
+   "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "BBY",
+   "fiscal_year": 2023,
+   "gold": "Best Buy generated the most cash flow from operating activities in FY 2023 ($1.8 bn)",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Operating activities brought in the most cash flow for Best Buy in FY2023, providing $1,824 million [1]. In comparison, investing activities used $962 million and financing activities used $1,806 million [1].",
+    "refused": false,
+    "answer_value": 1824000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-BESTBUY_2023_10K:section:00121",
+      "filing_id": "FB-BESTBUY_2023_10K",
+      "section": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations > Cash Flows",
+      "page": 29,
+      "page_end": 29,
+      "quote": "Financing activities (1,806)"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-BESTBUY_2023_10K:section:00122",
+     "FB-BESTBUY_2023_10K:section:00121",
+     "FB-BESTBUY_2023_10K:section:00170",
+     "FB-BESTBUY_2023_10K:section:00117",
+     "FB-BESTBUY_2023_10K:section:00123",
+     "FB-BESTBUY_2023_10K:section:00184",
+     "FB-BESTBUY_2023_10K:section:00150",
+     "FB-BESTBUY_2023_10K:section:00171",
+     "FB-BESTBUY_2023_10K:section:00169"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "search_filings",
+     "plan",
+     "get_table",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8127,
+     "completion_tokens": 351,
+     "llm_calls": 4,
+     "cost_usd": 0.0033156,
+     "latency_ms": 3323.1000000000004
+    }
+   },
+   "wall_ms": 143.5,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.5,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01148",
+   "dataset": "financebench",
+   "question": "What industry does AMCOR primarily operate in?",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "AMCR",
+   "fiscal_year": 2023,
+   "gold": "Amcor is a global leader in packaging production for various use cases.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Amcor operates primarily in the packaging industry, developing and producing responsible packaging for food, beverage, pharmaceutical, medical, home and personal-care, and other products [1].",
+    "refused": false,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [
+     {
+      "chunk_id": "FB-AMCOR_2023_10K:section:00095",
+      "filing_id": "FB-AMCOR_2023_10K",
+      "section": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations > Overview",
+      "page": 30,
+      "page_end": 30,
+      "quote": "Amcor is a global leader in developing and producing responsible packaging for food, beverage, pharmaceutical, medical, home and personalcare, and other products."
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-AMCOR_2023_10K:section:00016",
+     "FB-AMCOR_2023_10K:section:00095",
+     "FB-AMCOR_2023_10K:section:00017",
+     "FB-AMCOR_2023_10K:section:00024",
+     "FB-AMCOR_2023_10K:section:00046",
+     "FB-AMCOR_2023_10K:section:00183"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4575,
+     "completion_tokens": 177,
+     "llm_calls": 3,
+     "cost_usd": 0.001815,
+     "latency_ms": 2182.1000000000004
+    }
+   },
+   "wall_ms": 32.1,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": 0.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-00735",
+   "dataset": "financebench",
+   "question": "Has Pepsico reported any materially important ongoing legal battles from FY2022 and FY2021?",
+   "question_type": "domain_relevant",
+   "answerable": true,
+   "ticker": "PEP",
+   "fiscal_year": 2022,
+   "gold": "No, Pepsico is not involved in material legal battles.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Pepsico and its subsidiaries are party to a variety of litigation, claims, and regulatory proceedings, but management believes their final outcome will not have a material adverse effect on the company's financial condition, results of operations, or cash flows [1].",
+    "refused": false,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [
+     {
+      "chunk_id": "FB-PEPSICO_2022_10K:section:00076",
+      "filing_id": "FB-PEPSICO_2022_10K",
+      "section": "Item 3. Legal Proceedings",
+      "page": 26,
+      "page_end": 26,
+      "quote": "management believes that the final outcome of the foregoing will not have a material adverse effect on our financial condition, results of operations or cash flows."
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-PEPSICO_2022_10K:section:00076",
+     "FB-PEPSICO_2022_10K:section:00241",
+     "FB-PEPSICO_2022_10K:section:00071",
+     "FB-PEPSICO_2022_10K:section:00462",
+     "FB-PEPSICO_2022_10K:section:00577",
+     "FB-PEPSICO_2022_10K:section:00511",
+     "FB-PEPSICO_2022_10K:section:00527",
+     "FB-PEPSICO_2022_10K:section:00804"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7470,
+     "completion_tokens": 276,
+     "llm_calls": 4,
+     "cost_usd": 0.002931,
+     "latency_ms": 2976.8999999999996
+    }
+   },
+   "wall_ms": 50.1,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01902",
+   "dataset": "financebench",
+   "question": "Which Best Buy product category performed the best (by top line) in the domestic (USA) Market during Q2 of FY2024?",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "BBY",
+   "fiscal_year": 2024,
+   "gold": "The entertainment segment experienced the highest growth of 9% during Q2 FY2024, primarily from gaming division.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "During Q2 of FY2024 (Three Months Ended July 29, 2023), Computing and Mobile Phones performed the best by top line in the Domestic market with $3,674 million in revenue [1].",
+    "refused": false,
+    "answer_value": 3674000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-BESTBUY_2024Q2_10Q:section:00057",
+      "filing_id": "FB-BESTBUY_2024Q2_10Q",
+      "section": "Part I > Item 1. Financial Statements > 9. Repurchase of Common Stock",
+      "page": 13,
+      "page_end": 13,
+      "quote": "Computing and Mobile Phones | $3,674"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-BESTBUY_2024Q2_10Q:section:00057",
+     "FB-BESTBUY_2024Q2_10Q:section:00085",
+     "FB-BESTBUY_2024Q2_10Q:section:00083",
+     "FB-BESTBUY_2024Q2_10Q:section:00074",
+     "FB-BESTBUY_2024Q2_10Q:section:00078",
+     "FB-BESTBUY_2024Q2_10Q:section:00072",
+     "FB-BESTBUY_2024Q2_10Q:section:00076",
+     "FB-BESTBUY_2024Q2_10Q:section:00051",
+     "FB-BESTBUY_2024Q2_10Q:section:00077",
+     "FB-BESTBUY_2024Q2_10Q:section:00084",
+     "FB-BESTBUY_2024Q2_10Q:section:00063"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8474,
+     "completion_tokens": 296,
+     "llm_calls": 4,
+     "cost_usd": 0.0032822,
+     "latency_ms": 3097.3
+    }
+   },
+   "wall_ms": 80.3,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.2,
+    "ndcg_at_10": 0.38685280723454163,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "table_misread",
+   "failure_note": "evidence page gathered (with tables) but the answer is wrong"
+  },
+  {
+   "qid": "fb-01474",
+   "dataset": "financebench",
+   "question": "As of FY2023Q1, why did Pepsico raise full year guidance for FY2023?",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "PEP",
+   "fiscal_year": 2023,
+   "gold": "Pepsico experienced a strong start to FY2023.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "PepsiCo raised its full-year 2023 guidance due to a strong start to the year and resilient categories and geographies during the first quarter [1]. Chairman and CEO Ramon Laguarta stated, \"Given our strong start to the year, we now expect our full-year 2023 organic revenue to increase 8 percent (previously 6 percent) and core constant currency EPS to increase 9 percent (previously 8 percent)\" [1].",
+    "refused": false,
+    "answer_value": 8.0,
+    "answer_unit": "percent",
+    "citations": [
+     {
+      "chunk_id": "FB-PEPSICO_2023Q1_EARNINGS:section:00002",
+      "filing_id": "FB-PEPSICO_2023Q1_EARNINGS",
+      "section": "Organic/Core (non-GAAP)1 First-Quarter 2023 Results",
+      "page": 1,
+      "page_end": 1,
+      "quote": "Given our strong start to the year, we now expect our full-year 2023 organic revenue to increase 8 percent (previously 6 percent) and core constant currency EPS to increase 9 percent (previously 8 percent)"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00023",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00006",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00001",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00002",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00005",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00024",
+     "FB-PEPSICO_2023Q1_EARNINGS:section:00042"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6753,
+     "completion_tokens": 374,
+     "llm_calls": 4,
+     "cost_usd": 0.0029609,
+     "latency_ms": 4633.5
+    }
+   },
+   "wall_ms": 27.5,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.5,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01935",
+   "dataset": "financebench",
+   "question": "What was the key agenda of the AMCOR's 8k filing dated 1st July 2022?",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "AMCR",
+   "fiscal_year": 2022,
+   "gold": "Amcor Finance (USA), Inc. and Amcor Flexibles North America, Inc., entered into supplemental indentures relating to Guaranteed Senior Notes due 2026 and 2028. This involved the substitution of the Substitute Issuer (Amcor Flexibles North America) for the Former Issuer (Amcor Finance) and the assumption of covenants under the indentures. (In essence a novation agreement)",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Amcor's 8-K filing dated July 1, 2022, reported that Amcor Finance (USA), Inc. and Amcor Flexibles North America, Inc. entered into supplemental indentures relating to the substitution of the substitute issuer for the former issuer and the assumption of covenants for existing notes [1].",
+    "refused": false,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [
+     {
+      "chunk_id": "FB-AMCOR_2022_8K_dated-2022-07-01:section:00006",
+      "filing_id": "FB-AMCOR_2022_8K_dated-2022-07-01",
+      "section": "Other Events.",
+      "page": 2,
+      "page_end": 2,
+      "quote": "entered into a (i) Second Supplemental Indenture (the “Second Supplemental Indenture”) with the Trustee (as defined below) with respect to the Indenture, dated as of April 28, 2016... and (ii) First Supplemental Indenture... relating to the substitution of the Substitute Issuer for the Former Issuer"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00005",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00008",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00007",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00015",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00021",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00000",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00016",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00006",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00020",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00010",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00014",
+     "FB-AMCOR_2022_8K_dated-2022-07-01:section:00002"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8633,
+     "completion_tokens": 416,
+     "llm_calls": 4,
+     "cost_usd": 0.0036298999999999997,
+     "latency_ms": 11675.2
+    }
+   },
+   "wall_ms": 22.7,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01928",
+   "dataset": "financebench",
+   "question": "What Was AMCOR's Adjusted Non GAAP EBITDA for FY 2023",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "AMCR",
+   "fiscal_year": 2023,
+   "gold": "AMCOR's Adj. EBITDA was $2,018mn in FY 2023",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "Amcor's Adjusted EBITDA for the full year 2023 (Twelve Months Ended June 30, 2023) was $2,018 million [1][2].",
+    "refused": false,
+    "answer_value": 2018000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "FB-AMCOR_2023Q4_EARNINGS:section:00051",
+      "filing_id": "FB-AMCOR_2023Q4_EARNINGS",
+      "section": "and tax (EBIT), Net income, Earnings per share (EPS) and Free Cash Flow",
+      "page": 12,
+      "page_end": 12,
+      "quote": "Adjusted EBITDA, EBIT, Net income and EPS 2,018 1,608 1,089 73.3"
+     },
+     {
+      "chunk_id": "FB-AMCOR_2023Q4_EARNINGS:section:00006",
+      "filing_id": "FB-AMCOR_2023Q4_EARNINGS",
+      "section": "repurchases and a compelling and growing dividend.”",
+      "page": 1,
+      "page_end": 1,
+      "quote": "EBITDA 2,117 2,018"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "FB-AMCOR_2023Q4_EARNINGS:section:00040",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00048",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00007",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00049",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00000",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00011",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00051",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00006",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00016",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00056"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "search_filings",
+     "plan",
+     "get_table",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9013,
+     "completion_tokens": 324,
+     "llm_calls": 4,
+     "cost_usd": 0.0035139,
+     "latency_ms": 3176.1
+    }
+   },
+   "wall_ms": 88.0,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.14285714285714285,
+    "ndcg_at_10": 0.3333333333333333,
+    "judge_correct": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "fb-01865",
+   "dataset": "financebench",
+   "question": "If we exclude the impact of M&A, which segment has dragged down 3M's overall growth in 2022?",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "MMM",
+   "fiscal_year": 2022,
+   "gold": "The consumer segment shrunk by 0.9% organically.",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "The filings do not provide a consolidated analysis or summary identifying a single segment dragging down overall growth excluding M&A impacts across all segments for 2022.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-3M_2022_10K:section:00112",
+     "FB-3M_2022_10K:section:00108",
+     "FB-3M_2022_10K:section:00103",
+     "FB-3M_2022_10K:section:00113",
+     "FB-3M_2022_10K:section:00116",
+     "FB-3M_2022_10K:section:00472",
+     "FB-3M_2022_10K:section:00226",
+     "FB-3M_2022_10K:section:00216",
+     "FB-3M_2022_10K:section:00109",
+     "FB-3M_2022_10K:section:00466",
+     "FB-3M_2022_10K:section:00072"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7691,
+     "completion_tokens": 237,
+     "llm_calls": 4,
+     "cost_usd": 0.0028998,
+     "latency_ms": 3109.0
+    }
+   },
+   "wall_ms": 22.3,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.09090909090909091,
+    "ndcg_at_10": 0.0,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "fb-02416",
+   "dataset": "financebench",
+   "question": "What are three main companies acquired by Pfizer mentioned in this 10K report?",
+   "question_type": "novel_generated",
+   "answerable": true,
+   "ticker": "PFE",
+   "fiscal_year": 2021,
+   "gold": "Trillium, Array, and Therachon",
+   "gold_value": null,
+   "gold_unit": "text",
+   "prediction": {
+    "answer": "The provided filings mention two acquired companies, Trillium and Array, but do not provide a third main company acquired by Pfizer.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-PFIZER_2021_10K:section:00086",
+     "FB-PFIZER_2021_10K:section:00228",
+     "FB-PFIZER_2021_10K:section:00245",
+     "FB-PFIZER_2021_10K:section:00179",
+     "FB-PFIZER_2021_10K:section:00475",
+     "FB-PFIZER_2021_10K:section:00247",
+     "FB-PFIZER_2021_10K:section:00116",
+     "FB-PFIZER_2021_10K:section:00162",
+     "FB-PFIZER_2021_10K:section:00267",
+     "FB-PFIZER_2021_10K:section:00266"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7381,
+     "completion_tokens": 240,
+     "llm_calls": 4,
+     "cost_usd": 0.0028142999999999996,
+     "latency_ms": 3117.3
+    }
+   },
+   "wall_ms": 31.4,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.3333333333333333,
+    "ndcg_at_10": 0.3065735963827292,
+    "judge_correct": 0.0
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
+  },
+  {
+   "qid": "unans-premise-05",
+   "dataset": "unanswerable",
+   "question": "How much revenue did Coca-Cola's Beer and Spirits segment generate in 2025?",
+   "question_type": "false_premise",
+   "answerable": false,
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not provide the revenue generated by Coca-Cola's Beer and Spirits segment in 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "KO-10K-2025FY:section:00139",
+     "KO-10K-2025FY:section:00251",
+     "KO-10K-2025FY:section:00250",
+     "KO-10K-2025FY:section:00146",
+     "KO-10K-2025FY:section:00226",
+     "KO-10K-2025FY:section:00067",
+     "KO-10K-2025FY:section:00122",
+     "KO-10K-2025FY:section:00249",
+     "KO-10K-2025FY:section:00015",
+     "KO-10K-2025FY:section:00017",
+     "KO-10K-2025FY:section:00428",
+     "KO-10K-2025FY:section:00026",
+     "KO-10K-2025FY:section:00016",
+     "KO-10K-2025FY:section:00126",
+     "KO-10K-2025FY:section:00021",
+     "KO-10K-2025FY:section:00223"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7262,
+     "completion_tokens": 207,
+     "llm_calls": 4,
+     "cost_usd": 0.0026961,
+     "latency_ms": 3352.2000000000003
+    }
+   },
+   "wall_ms": 22.7,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-premise-08",
+   "dataset": "unanswerable",
+   "question": "What was attendance at Netflix's theme parks segment in 2025?",
+   "question_type": "false_premise",
+   "answerable": false,
+   "ticker": "NFLX",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide attendance at Netflix's theme parks segment in 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "NFLX-10K-2025FY:section:00078",
+     "NFLX-10K-2025FY:section:00022",
+     "NFLX-10K-2025FY:section:00285",
+     "NFLX-10K-2025FY:section:00183",
+     "NFLX-10K-2025FY:section:00068",
+     "NFLX-10K-2025FY:section:00184",
+     "FB-NETFLIX_2017_10K:section:00062",
+     "FB-NETFLIX_2017_10K:section:00016",
+     "FB-NETFLIX_2015_10K:section:00055",
+     "FB-NETFLIX_2015_10K:section:00058"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8794,
+     "completion_tokens": 178,
+     "llm_calls": 4,
+     "cost_usd": 0.0030832,
+     "latency_ms": 3377.1000000000004
+    }
+   },
+   "wall_ms": 10392.2,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-premise-01",
+   "dataset": "unanswerable",
+   "question": "What were sales of Johnson & Johnson's Consumer Health segment in fiscal 2025?",
+   "question_type": "false_premise",
+   "answerable": false,
+   "ticker": "JNJ",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not provide the sales for Johnson & Johnson's Consumer Health segment in fiscal 2025 because the Consumer Health business was separated in the fiscal third quarter of 2023.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "JNJ-10K-2025FY:section:00289",
+     "JNJ-10K-2025FY:section:00168",
+     "JNJ-10K-2025FY:section:00090",
+     "JNJ-10K-2025FY:section:00167",
+     "JNJ-10K-2025FY:section:00130",
+     "JNJ-10K-2025FY:section:00109"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_table",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7222,
+     "completion_tokens": 236,
+     "llm_calls": 4,
+     "cost_usd": 0.0027566,
+     "latency_ms": 3090.8
+    }
+   },
+   "wall_ms": 89.3,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-future-04",
+   "dataset": "unanswerable",
+   "question": "What was Microsoft's diluted EPS for the quarter ended December 31, 2026 (fiscal 2027 Q2)?",
+   "question_type": "future_period",
+   "answerable": false,
+   "ticker": "MSFT",
+   "fiscal_year": 2027,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide Microsoft's diluted EPS for the quarter ended December 31, 2026 (fiscal 2027 Q2).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "MSFT-10Q-2027Q1:section:00127",
+     "MSFT-10Q-2027Q1:section:00034",
+     "MSFT-10Q-2027Q1:section:00147",
+     "MSFT-10Q-2027Q1:section:00219",
+     "MSFT-10Q-2027Q1:section:00011",
+     "MSFT-10Q-2027Q1:section:00217",
+     "MSFT-10Q-2027Q1:section:00033"
+    ],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7144,
+     "completion_tokens": 320,
+     "llm_calls": 4,
+     "cost_usd": 0.0029431999999999995,
+     "latency_ms": 3183.5
+    }
+   },
+   "wall_ms": 53.2,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-future-08",
+   "dataset": "unanswerable",
+   "question": "What were ExxonMobil's total capital and exploration expenditures in 2029?",
+   "question_type": "future_period",
+   "answerable": false,
+   "ticker": "XOM",
+   "fiscal_year": 2029,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not disclose ExxonMobil's total capital and exploration expenditures for 2029.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "XOM-10K-2025FY:section:00350",
+     "XOM-10K-2025FY:section:00168",
+     "XOM-10K-2025FY:section:00181",
+     "XOM-10K-2025FY:section:00180",
+     "XOM-10K-2025FY:section:00225",
+     "XOM-10K-2025FY:section:00347",
+     "XOM-10K-2025FY:section:00345"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8002,
+     "completion_tokens": 206,
+     "llm_calls": 4,
+     "cost_usd": 0.0029156,
+     "latency_ms": 2883.4
+    }
+   },
+   "wall_ms": 46.7,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-future-06",
+   "dataset": "unanswerable",
+   "question": "How many Walmart U.S. stores were open at the end of fiscal year 2028?",
+   "question_type": "future_period",
+   "answerable": false,
+   "ticker": "WMT",
+   "fiscal_year": 2028,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide the number of Walmart U.S. stores open at the end of fiscal year 2028.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-WALMART_2018_10K:section:00038",
+     "FB-WALMART_2020_10K:section:00118",
+     "FB-WALMART_2018_10K:section:00024",
+     "WMT-10K-2026FY:section:00089",
+     "FB-WALMART_2018_10K:section:00026",
+     "FB-WALMART_2019_10K:section:00037",
+     "FB-WALMART_2020_10K:section:00024",
+     "FB-WALMART_2018_10K:section:00025",
+     "FB-WALMART_2019_10K:section:00026",
+     "FB-WALMART_2018_10K:section:00029",
+     "FB-WALMART_2018_10K:section:00037",
+     "FB-WALMART_2018_10K:section:00036",
+     "FB-WALMART_2019_10K:section:00036",
+     "FB-WALMART_2019_10K:section:00034"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8535,
+     "completion_tokens": 214,
+     "llm_calls": 4,
+     "cost_usd": 0.0030955,
+     "latency_ms": 3130.2000000000003
+    }
+   },
+   "wall_ms": 22169.4,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-trivia-02",
+   "dataset": "unanswerable",
+   "question": "What is Tim Cook's favorite Apple product?",
+   "question_type": "nonfinancial_trivia",
+   "answerable": false,
+   "ticker": "AAPL",
+   "fiscal_year": null,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide information regarding Tim Cook's favorite Apple product.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "AAPL-10K-2025FY:section:00012",
+     "AAPL-10K-2025FY:section:00071",
+     "AAPL-10K-2025FY:section:00013",
+     "AAPL-10K-2025FY:section:00001",
+     "AAPL-10K-2025FY:section:00006",
+     "AAPL-10Q-2026Q3:section:00006"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4128,
+     "completion_tokens": 155,
+     "llm_calls": 3,
+     "cost_usd": 0.0016259,
+     "latency_ms": 2964.5
+    }
+   },
+   "wall_ms": 30.6,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-trivia-05",
+   "dataset": "unanswerable",
+   "question": "What was the name of the first airplane William Boeing built?",
+   "question_type": "nonfinancial_trivia",
+   "answerable": false,
+   "ticker": "BA",
+   "fiscal_year": null,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not disclose the name of the first airplane William Boeing built.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "BA-10K-2025FY:section:00029",
+     "FB-BOEING_2018_10K:section:00084",
+     "FB-BOEING_2018_10K:section:00007",
+     "FB-BOEING_2022_10K:section:00007",
+     "FB-BOEING_2018_10K:section:00022",
+     "FB-BOEING_2018_10K:section:00095",
+     "FB-BOEING_2018_10K:section:00434",
+     "FB-BOEING_2022_10K:section:00452",
+     "FB-BOEING_2022_10K:section:00126",
+     "BA-10Q-2026Q3:section:00214",
+     "FB-BOEING_2018_10K:section:00437",
+     "BA-10Q-2026Q2:section:00212"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8147,
+     "completion_tokens": 215,
+     "llm_calls": 4,
+     "cost_usd": 0.0029816,
+     "latency_ms": 3292.7000000000003
+    }
+   },
+   "wall_ms": 16063.9,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-trivia-09",
+   "dataset": "unanswerable",
+   "question": "What was Pepsi-Cola's original name when it was created in 1893?",
+   "question_type": "nonfinancial_trivia",
+   "answerable": false,
+   "ticker": "PEP",
+   "fiscal_year": null,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not disclose Pepsi-Cola's original name when it was created in 1893.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-PEPSICO_2021_10K:section:00757",
+     "FB-PEPSICO_2021_10K:section:00011",
+     "FB-PEPSICO_2022_10K:section:00011",
+     "PEP-10K-2025FY:section:00012",
+     "FB-PEPSICO_2022_10K:section:00819",
+     "FB-PEPSICO_2022_10K:section:00815",
+     "PEP-10K-2025FY:section:00016",
+     "PEP-10K-2025FY:section:00015",
+     "FB-PEPSICO_2021_10K:section:00015",
+     "FB-PEPSICO_2022_10K:section:00015",
+     "FB-PEPSICO_2021_10K:section:00402",
+     "FB-PEPSICO_2021_10K:section:00031",
+     "PEP-10K-2025FY:section:00032"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8025,
+     "completion_tokens": 165,
+     "llm_calls": 4,
+     "cost_usd": 0.0028199999999999996,
+     "latency_ms": 3260.5
+    }
+   },
+   "wall_ms": 24166.5,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-undisclosed-02",
+   "dataset": "unanswerable",
+   "question": "What is the home address of JPMorgan Chase's chief executive officer?",
+   "question_type": "not_disclosed",
+   "answerable": false,
+   "ticker": "JPM",
+   "fiscal_year": null,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide the home address of JPMorgan Chase's chief executive officer.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "JPM-10K-2025FY:section:00003",
+     "JPM-10Q-2026Q1:section:00003",
+     "JPM-10Q-2026Q2:section:00003",
+     "FB-JPMORGAN_2022_10K:section:00002",
+     "FB-JPMORGAN_2021Q1_10Q:section:00002",
+     "FB-JPMORGAN_2022Q2_10Q:section:00002",
+     "JPM-10K-2025FY:section:00112",
+     "FB-JPMORGAN_2022_10K:section:01033",
+     "FB-JPMORGAN_2022_10K:section:00138",
+     "JPM-10K-2025FY:section:01040",
+     "FB-JPMORGAN_2022_10K:section:01326",
+     "FB-JPMORGAN_2023Q2_10Q:section:00737"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 9152,
+     "completion_tokens": 181,
+     "llm_calls": 4,
+     "cost_usd": 0.0031981,
+     "latency_ms": 3085.8
+    }
+   },
+   "wall_ms": 23996.6,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-undisclosed-01",
+   "dataset": "unanswerable",
+   "question": "How many iPhone units did Apple sell in the quarter ended June 27, 2026?",
+   "question_type": "not_disclosed",
+   "answerable": false,
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not disclose the number of iPhone units sold in the quarter ended June 27, 2026, providing only iPhone net sales revenue of $54,252 million.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "AAPL-10Q-2026Q2:section:00061",
+     "AAPL-10Q-2026Q3:section:00062",
+     "AAPL-10Q-2026Q2:section:00021",
+     "AAPL-10Q-2026Q3:section:00021",
+     "AAPL-10Q-2026Q2:section:00062",
+     "AAPL-10Q-2026Q3:section:00063",
+     "AAPL-10Q-2026Q2:section:00040",
+     "AAPL-10Q-2026Q3:section:00060"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8520,
+     "completion_tokens": 259,
+     "llm_calls": 4,
+     "cost_usd": 0.0032034999999999998,
+     "latency_ms": 2745.9
+    }
+   },
+   "wall_ms": 71.2,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-undisclosed-10",
+   "dataset": "unanswerable",
+   "question": "What was AWS's revenue from Netflix as a customer in 2025?",
+   "question_type": "not_disclosed",
+   "answerable": false,
+   "ticker": "AMZN",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not disclose AWS's revenue from Netflix as a customer in 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "AMZN-10K-2025FY:section:00187",
+     "AMZN-10K-2025FY:section:00149",
+     "AMZN-10K-2025FY:section:00140",
+     "AMZN-10K-2025FY:section:00094",
+     "AMZN-10K-2025FY:section:00015",
+     "AMZN-10K-2025FY:section:00148",
+     "AMZN-10K-2025FY:section:00016",
+     "AMZN-10K-2025FY:section:00019",
+     "AMZN-10K-2025FY:section:00026",
+     "AMZN-10K-2025FY:section:00018"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7227,
+     "completion_tokens": 195,
+     "llm_calls": 4,
+     "cost_usd": 0.0026556,
+     "latency_ms": 2678.8999999999996
+    }
+   },
+   "wall_ms": 57.7,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-company-03",
+   "dataset": "unanswerable",
+   "question": "What was Home Depot's comparable sales growth for fiscal 2025?",
+   "question_type": "not_in_corpus_company",
+   "answerable": false,
+   "ticker": "HD",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not contain information regarding Home Depot's comparable sales growth for fiscal 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "WMT-10K-2026FY:section:00111",
+     "FB-BESTBUY_2019_10K:section:00112",
+     "FB-BESTBUY_2019_10K:section:00118",
+     "FB-BESTBUY_2024Q2_10Q:section:00074",
+     "WMT-10K-2026FY:section:00130",
+     "FB-BESTBUY_2017_10K:section:00121"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6522,
+     "completion_tokens": 252,
+     "llm_calls": 4,
+     "cost_usd": 0.0025865999999999997,
+     "latency_ms": 2893.4
+    }
+   },
+   "wall_ms": 7909.8,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-company-09",
+   "dataset": "unanswerable",
+   "question": "What was UPS's average daily package volume in 2025?",
+   "question_type": "not_in_corpus_company",
+   "answerable": false,
+   "ticker": "UPS",
+   "fiscal_year": 2025,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide UPS's average daily package volume in 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 2384,
+     "completion_tokens": 127,
+     "llm_calls": 3,
+     "cost_usd": 0.0010327,
+     "latency_ms": 2190.2
+    }
+   },
+   "wall_ms": 29.9,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-company-08",
+   "dataset": "unanswerable",
+   "question": "What was Salesforce's subscription and support revenue for fiscal 2026?",
+   "question_type": "not_in_corpus_company",
+   "answerable": false,
+   "ticker": "CRM",
+   "fiscal_year": 2026,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The provided filings do not contain information regarding Salesforce's subscription and support revenue for fiscal 2026, as the evidence documents pertain to Adobe (ADBE).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "FB-ADOBE_2022_10K:section:00124",
+     "ADBE-10Q-2026Q3:section:00108",
+     "ADBE-10Q-2026Q2:section:00108",
+     "ADBE-10Q-2026Q2:section:00112",
+     "ADBE-10K-2025FY:section:00107",
+     "ADBE-10K-2025FY:section:00100"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 5184,
+     "completion_tokens": 218,
+     "llm_calls": 3,
+     "cost_usd": 0.0021002,
+     "latency_ms": 2500.4
+    }
+   },
+   "wall_ms": 70.5,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "unans-oldperiod-01",
+   "dataset": "unanswerable",
+   "question": "What were Apple's net sales for the quarter ended March 26, 2011 (fiscal 2011 Q2)?",
+   "question_type": "wrong_form_or_period",
+   "answerable": false,
+   "ticker": "AAPL",
+   "fiscal_year": 2011,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "Apple's net sales for the quarter ended March 26, 2011 were 24,667,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 24667000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:SalesRevenueNet:2010-12-26_2011-03-26:USD",
+      "filing_id": "AAPL-10Q-2011Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "24,667,000,000 USD for 2010-12-26 to 2011-03-26 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3167,
+     "completion_tokens": 207,
+     "llm_calls": 3,
+     "cost_usd": 0.0014676,
+     "latency_ms": 2243.3
+    }
+   },
+   "wall_ms": 40.6,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "answered a question the filings cannot answer"
+  },
+  {
+   "qid": "unans-oldperiod-02",
+   "dataset": "unanswerable",
+   "question": "What was Coca-Cola's operating income for the third quarter of 2010?",
+   "question_type": "wrong_form_or_period",
+   "answerable": false,
+   "ticker": "KO",
+   "fiscal_year": 2010,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "Coca-Cola's operating income for the third quarter of 2010 was $2,344,000,000 [1].",
+    "refused": false,
+    "answer_value": 2344000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:OperatingIncomeLoss:2010-07-03_2010-10-01:USD",
+      "filing_id": "KO-10Q-2010Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Operating Income (Loss) (us-gaap:OperatingIncomeLoss): 2,344,000,000 USD for 2010-07-03 to 2010-10-01 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "KO-10Q-2026Q3:section:00023",
+     "KO-10Q-2026Q3:section:00206",
+     "KO-10Q-2026Q3:section:00102",
+     "KO-10Q-2026Q3:section:00143",
+     "KO-10Q-2026Q3:section:00103",
+     "KO-10Q-2026Q2:section:00206"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_company_facts",
+     "search_filings",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8436,
+     "completion_tokens": 323,
+     "llm_calls": 4,
+     "cost_usd": 0.0033382999999999998,
+     "latency_ms": 3250.5
+    }
+   },
+   "wall_ms": 56.9,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": "bad_refusal",
+   "failure_note": "answered a question the filings cannot answer"
+  },
+  {
+   "qid": "unans-oldperiod-06",
+   "dataset": "unanswerable",
+   "question": "What was PepsiCo's Frito-Lay North America operating profit in the third quarter of 2012?",
+   "question_type": "wrong_form_or_period",
+   "answerable": false,
+   "ticker": "PEP",
+   "fiscal_year": 2012,
+   "gold": null,
+   "gold_value": null,
+   "gold_unit": null,
+   "prediction": {
+    "answer": "The filings do not provide PepsiCo's Frito-Lay North America operating profit in the third quarter of 2012.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [
+     "PEP-10Q-2026Q3:section:00032",
+     "PEP-10Q-2026Q3:section:00031",
+     "PEP-10Q-2026Q2:section:00031",
+     "PEP-10Q-2026Q2:section:00032",
+     "PEP-10Q-2026Q3:section:00024",
+     "PEP-10Q-2026Q3:section:00153",
+     "PEP-10Q-2026Q3:section:00118",
+     "PEP-10Q-2026Q3:section:00129",
+     "PEP-10Q-2026Q2:section:00117",
+     "PEP-10Q-2026Q2:section:00128"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 8517,
+     "completion_tokens": 249,
+     "llm_calls": 4,
+     "cost_usd": 0.0031776,
+     "latency_ms": 3386.8
+    }
+   },
+   "wall_ms": 81.2,
+   "scores": {
+    "numeric_correct": null,
+    "refusal_correct": 1.0,
+    "citation_precision": null,
+    "citation_recall": null
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  }
+ ]
+}

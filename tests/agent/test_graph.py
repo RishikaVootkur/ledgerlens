@@ -452,3 +452,10 @@ def test_dedupe_uses_arguments_after_user_filters(scripted):
 
     result = run_agent("q", AgentConfig(max_rounds=1), filters=SearchFilters(ticker="AAPL"))
     assert result.steps.count("search_filings") == 1
+
+
+def test_group_split_can_be_disabled(scripted):
+    queue, _ = scripted
+    grouped = answer_json(answer="Total net sales were $416,161 million in 2025 [E1, E1].")
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped), _resp(grouped)]
+    assert run_agent("q", AgentConfig(split_grouped_markers=False)).refused

@@ -1,0 +1,123 @@
+{
+ "args": {
+  "query": "chief executive officer address JPMorgan Chase executive offices",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00003",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 1,
+   "page_end": 1,
+   "section": "JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0002"
+   ],
+   "text": "[JPM 10-K FY2025 | JPMorgan Chase & Co. | p.1]\n| Delaware (State or other jurisdiction of incorporation or organization) |  | 13-2624428 (I.R.S. employer identification no.) |\n|---|---|---|\n| 270 Park Avenue, |  |  |\n| New York, | New York | 10017 |\n| (Address of principal executive offices) |  | (Zip Code) |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q1:section:00003",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 1,
+   "page_end": 1,
+   "section": "JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q1:table:0002"
+   ],
+   "text": "[JPM 10-Q Q1 FY2026 | JPMorgan Chase & Co. | p.1]\n| Delaware (State or other jurisdiction of incorporation or organization) |  | 13-2624428 (I.R.S. employer identification no.) |\n|---|---|---|\n| 270 Park Avenue, |  |  |\n| New York, | New York | 10017 |\n| (Address of principal executive offices) |  | (Zip Code) |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00003",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 1,
+   "page_end": 1,
+   "section": "JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0002"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | JPMorgan Chase & Co. | p.1]\n| Delaware (State or other jurisdiction of incorporation or organization) |  | 13-2624428 (I.R.S. employer identification no.) |\n|---|---|---|\n| 270 Park Avenue, |  |  |\n| New York, | New York | 10017 |\n| (Address of principal executive offices) |  | (Zip Code) |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2022_10K:section:00002",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2022_10K",
+   "filing_id": "FB-JPMORGAN_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 1,
+   "page_end": 1,
+   "section": "number 1-5805 JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2022 | number 1-5805 JPMorgan Chase & Co. | p.1]\n(Exact name of registrant as specified in its charter) Delaware\n\n13-2624428\n\n(State or other jurisdiction of\n\n(I.R.S. employer incorporation or organization) identification no.) 383 Madison Avenue, New York, New York\n\n10179\n\n(Address of principal executive offices)\n\n(Zip Code) Registrant’s telephone number, including area code: (212) 270-6000",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2021Q1_10Q:section:00002",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2021Q1_10Q",
+   "filing_id": "FB-JPMORGAN_2021Q1_10Q",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2021,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 1,
+   "page_end": 1,
+   "section": "number 1-5805 JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-Q Q1 FY2021 | number 1-5805 JPMorgan Chase & Co. | p.1]\n(Exact name of registrant as specified in its charter) Delaware\n\n13-2624428\n\n(State or other jurisdiction of\n\n(I.R.S. employer incorporation or organization) identification no.) 383 Madison Avenue, New York, New York\n\n10179\n\n(Address of principal executive offices)\n\n(Zip Code) Registrant’s telephone number, including area code: (212) 270-6000",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2022Q2_10Q:section:00002",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2022Q2_10Q",
+   "filing_id": "FB-JPMORGAN_2022Q2_10Q",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2022,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 1,
+   "page_end": 1,
+   "section": "number 1-5805 JPMorgan Chase & Co.",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-Q Q2 FY2022 | number 1-5805 JPMorgan Chase & Co. | p.1]\n(Exact name of registrant as specified in its charter) Delaware\n\n13-2624428\n\n(State or other jurisdiction of\n\n(I.R.S. employer incorporation or organization) identification no.) 383 Madison Avenue, New York, New York\n\n10179\n\n(Address of principal executive offices)\n\n(Zip Code) Registrant’s telephone number, including area code: (212) 270-6000",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

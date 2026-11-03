@@ -1,0 +1,125 @@
+{
+ "args": {
+  "fiscal_year": 2025,
+  "form": "10-K",
+  "query": "Net income attributable to shareowners or Consolidated Statements of Income",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "KO-10K-2025FY:section:00209",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 63,
+   "page_end": 63,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Income",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Income | p.63]\n1 Calculated based on net income attributable to shareowners of The Coca-Cola Company.\n\nRefer to Notes to Consolidated Financial Statements.",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10K-2025FY:section:00393",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 108,
+   "page_end": 108,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 16: Other Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Note 16: Other Comprehensive Income | p.108]\nAOCI attributable to shareowners of The Coca-Cola Company is separately presented in our consolidated balance sheet as a component of The Coca-Cola Company’s shareowners’ equity, which also includes our proportionate share of equity method investees’ AOCI. OCI attributable to noncontrolling interests is allocated to, and included in, our consolidated balance sheet as part of the line item equity attributable to noncontrolling interests.\n\nAOCI attributable to shareowners of The Coca-Cola Company consisted of the following, net of tax (in millions):",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10K-2025FY:section:00211",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 64,
+   "page_end": 64,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10K-2025FY:table:0022"
+   ],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Comprehensive Income | p.64]\n| Year Ended December 31, | 2025 | 2024 | 2023 |\n|---|---|---|---|\n| Consolidated Net Income | $13,137 | $10,649 | $10,703 |\n| Other Comprehensive Income: |  |  |  |\n| Net foreign currency translation adjustments | 2,868 | (2,893) | 736 |\n| Net gains (losses) on derivatives | (360) | 270 | (178) |\n| Net change in unrealized gains (losses) on available-for-sale debt securities | 38 | (63) | 24 |\n| Net change in pension and other postretirement benefit liabilities | 94 | 109 | (109) |\n| Total Comprehensive Income | 15,777 | 8,072 | 11,176 |\n| Less: Comprehensive income (loss) attributable to noncontrolling interests | (42) | 9 | (158) |\n| Total Comprehensive Income Attributable to Shareowners of The Coca-Cola Company | $15,819 | $8,063 | $11,334 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10K-2025FY:section:00208",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 63,
+   "page_end": 63,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Income",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10K-2025FY:table:0021"
+   ],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Income | p.63]\n| Year Ended December 31, | 2025 | 2024 | 2023 |\n|---|---|---|---|\n| Net Operating Revenues | $47,941 | $47,061 | $45,754 |\n| Cost of goods sold | 18,397 | 18,324 | 18,520 |\n| Gross Profit | 29,544 | 28,737 | 27,234 |\n| Selling, general and administrative expenses | 14,521 | 14,582 | 13,972 |\n| Other operating charges | 1,261 | 4,163 | 1,951 |\n| Operating Income | 13,762 | 9,992 | 11,311 |\n| Interest income | 786 | 988 | 907 |\n| Interest expense | 1,654 | 1,656 | 1,527 |\n| Equity income (loss) — net | 2,031 | 1,770 | 1,691 |\n| Other income (loss) — net | 1,073 | 1,992 | 570 |\n| Income Before Income Taxes | 15,998 | 13,086 | 12,952 |\n| Income taxes | 2,861 | 2,437 | 2,249 |\n| Consolidated Net Income | 13,137 | 10,649 | 10,703 |\n| Less: Net income (loss) attributable to noncontrolling interests | 30 | 18 | (11) |\n| Net Income Attributable to Shareowners of The Coca-Cola Company | $13,107 | $10,631 | $10,714 |\n| Basic Net Income Per Share 1 | $3.05 | $2.47 | $2.48 |\n| Diluted Net Income Per Share 1 | $3.04 | $2.46 | $2.47 |\n| Average Shares Outstanding — Basic | 4,303 | 4,309 | 4,323 |\n| Effect of dilutive securities | 10 | 11 | 16 |\n| Average Shares Outstanding — Diluted | 4,313 | 4,320 | 4,339 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10K-2025FY:section:00220",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 67,
+   "page_end": 67,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Shareowners’ Equity",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10K-2025FY:table:0025"
+   ],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements Of Shareowners’ Equity | p.67]\n|  | 2025 | 2024 | 2023 |\n|---|---|---|---|\n| Equity Attributable to Shareowners of The Coca-Cola Company |  |  |  |\n| Number of Common Shares Outstanding |  |  |  |\n| Balance at beginning of year | 4,302 | 4,308 | 4,328 |\n| Treasury stock issued to employees related to stock-based compensation plans | 9 | 21 | 17 |\n| Purchases of stock for treasury | (9) | (27) | (37) |\n| Balance at end of year | 4,302 | 4,302 | 4,308 |\n| Common Stock | $1,760 | $1,760 | $1,760 |\n| Capital Surplus |  |  |  |\n| Balance at beginning of year | 19,801 | 19,209 | 18,822 |\n| Stock issued to employees related to stock-based compensation plans | 94 | 319 | 177 |\n| Stock-based compensation expense | 266 | 273 | 233 |\n| Sale of subsidiary shares | 420 | — | — |\n| Acquisition of interests held by noncontrolling owners | — | — | (20) |\n| Other activities | — | — | (3) |\n| Balance at end of year | 20,581 | 19,801 | 19,209 |\n| Reinvested Earnings |  |  |  |\n| Balance at beginning of year | 76,054 | 73,782 | 71,019 |\n| Net income attributable to shareowners of The Coca-Cola Company | 13,107 | 10,631 | 10,714 |\n| Dividends (per share — $2.04 , $1.94 and $1.84 in 2025, 2024 and 2023, respectively) | (8,779) | (8,359) | (7,951) |\n| Balance at end of year | 80,382 | 76,054 | 73,782 |\n| Accumulated Other Comprehensive Income (Loss) |  |  |  |\n| Balance at beginning of year | (16,843) | (14,275) | (14,895) |\n| Net other comprehensive income (loss) | 2,712 | (2,568) | 620 |\n| Balance at end of year | (14,131) | (16,843) | (14,275) |\n| Treasury Stock |  |  |  |\n| Balance at beginning of year | (55,916) | (54,535) | (52,601) |\n| Treasury stock issued to employees related to stock-based compensation plans | 127 | 321 | 255 |\n| Purchases of stock for treasury | (634) | (1,702) | (2,189) |\n| Balance at end of year | (56,423) | (55,916) | (54,535) |\n| Total Equity Attributable to Shareowners of The Coca-Cola Company | $32,169 | $24,856 | $25,941 |\n| Equity Attributable to Noncontrolling Interests |  |  |  |\n| Balance at beginning of year | $1,516 | $1,539 | $1,721 |\n| Sale of subsidiary shares | 644 | — | — |\n| Net income attributable to noncontrolling interests | 30 | 18 | (11) |\n| Net foreign currency translation adjustments | (69) | (9) | (147) |\n| Dividends paid to noncontrolling interests | (25) | (28) | (25) |\n| Contributions by noncontrolling interests | 13 | — | — |\n| Net change in pension and other postretirement benefit liabilities | (3) | — | — |\n| Divestitures | — | (4) | — |\n| Acquisition of interests held by noncontrolling owners | — | — | (2) |\n| Other activities | — | — | 3 |\n| Total Equity Attributable to Noncontrolling Interests | $2,106 | $1,516 | $1,539 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10K-2025FY:section:00397",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 108,
+   "page_end": 109,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 16: Other Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-K FY2025 | Item 8. Financial Statements And Supplementary Data > Note 16: Other Comprehensive Income | pp.108-109]\n1Includes reclassification of $226 million of foreign currency translation adjustments from shareowners of The Coca-Cola Company to noncontrolling interests related to our bottling operations in India. Refer to Note 1.\n\n2Refer to Note 5 for additional information related to the net gains or losses on derivative instruments.\n\n3Refer to Note 4 for additional information related to the net unrealized gains or losses on available-for-sale debt securities.\n\n4Refer to Note 14 for additional information related to the Company’s pension and other postretirement benefit liabilities.\n\nThe following tables present OCI attributable to shareowners of The Coca-Cola Company, including our proportionate share of equity method investees’ OCI (in millions):",
+   "ticker": "KO"
+  }
+ ],
+ "tool": "search_filings"
+}

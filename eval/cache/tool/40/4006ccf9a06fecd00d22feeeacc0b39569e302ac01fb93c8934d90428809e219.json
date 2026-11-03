@@ -1,0 +1,129 @@
+{
+ "args": {
+  "fiscal_year": 2027,
+  "form": "10-Q",
+  "query": "diluted earnings per share December 31 2026",
+  "ticker": "MSFT"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00127",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 32,
+   "page_end": 32,
+   "section": "Part I > Item 2. Management’s Discussion And Analysis Of Financial Condition And Results Of Operations > Devices and Consumer",
+   "strategy": "section",
+   "table_ids": [
+    "MSFT-10Q-2027Q1:table:0045"
+   ],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part I > Item 2. Management’s Discussion And Analysis Of Financial Condition And Results Of Operations > Devices and Consumer | p.32]\n| (In millions, except percentages and per share amounts) | Three Months Ended September 30, 2026 | Percentage Change 2025 |  |\n|---|---|---|---|\n| Revenue | $92,279 | $77,673 | 19% |\n| Gross margin | 62,559 | 53,630 | 17% |\n| Operating income | 45,915 | 37,961 | 21% |\n| Net income | 36,629 | 27,747 | 32% |\n| Diluted earnings per share | 4.92 | 3.72 | 32% |\n| Adjusted net income (non-GAAP) | 36,422 | 30,833 | 18% |\n| Adjusted diluted earnings per share (non-GAAP) | 4.89 | 4.13 | 18% |",
+   "ticker": "MSFT"
+  },
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00034",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Income Statement – Disaggregation of Income Statement Expenses",
+   "strategy": "section",
+   "table_ids": [
+    "MSFT-10Q-2027Q1:table:0012"
+   ],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part I > Item 1. Financial Statements > Income Statement – Disaggregation of Income Statement Expenses | p.11]\n| (In millions, except per share amounts) Three Months Ended September 30, | 2026 | 2025 |\n|---|---|---|\n| Net income available for common shareholders (A) | $36,629 | $27,747 |\n| Weighted average outstanding shares of common stock (B) | 7,426 | 7,433 |\n| Dilutive effect of stock-based awards | 20 | 33 |\n| Common stock and common stock equivalents (C) | 7,446 | 7,466 |\n| Earnings Per Share |  |  |\n| Basic (A/B) | $4.93 | $3.73 |\n| Diluted (A/C) | $4.92 | $3.72 |",
+   "ticker": "MSFT"
+  },
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00219",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 58,
+   "page_end": 58,
+   "section": "Part II > Item 2. Unregistered Sales Of Equity Securities And Use Of Proceeds",
+   "strategy": "section",
+   "table_ids": [
+    "MSFT-10Q-2027Q1:table:0055"
+   ],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part II > Item 2. Unregistered Sales Of Equity Securities And Use Of Proceeds | p.58]\n| Declaration Date | Record Date | Payment Date | Dividend Per Share | Amount (In millions) |\n|---|---|---|---|---|\n| September 15, 2026 | November 19, 2026 | December 10, 2026 | $0.98 | $7,279 |",
+   "ticker": "MSFT"
+  },
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00147",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 36,
+   "page_end": 36,
+   "section": "Part I > Item 2. Management’s Discussion And Analysis Of Financial Condition And Results Of Operations > Uncertain Tax Positions",
+   "strategy": "section",
+   "table_ids": [
+    "MSFT-10Q-2027Q1:table:0051"
+   ],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part I > Item 2. Management’s Discussion And Analysis Of Financial Condition And Results Of Operations > Uncertain Tax Positions | p.36]\n| (In millions, except percentages and per share amounts) | Three Months Ended September 30, 2026 | Percentage Change 2025 |  |\n|---|---|---|---|\n| Other income (expense), net | $38 | $(3,660) | 101% |\n| Net (gains) losses from investments in OpenAI | (272) | 4,061 | (107)% |\n| Adjusted other income (expense), net (non-GAAP) | $(234) | $401 | (158)% |\n| Net income | $36,629 | $27,747 | 32% |\n| Net (gains) losses from investments in OpenAI, net of tax of $65 and $(975) | (207) | 3,086 | (107)% |\n| Adjusted net income (non-GAAP) | $36,422 | $30,833 | 18% |\n| Diluted earnings per share | $4.92 | $3.72 | 32% |\n| Net (gains) losses from investments in OpenAI | (0.03) | 0.41 | (107)% |\n| Adjusted diluted earnings per share (non-GAAP) | $4.89 | $4.13 | 18% |",
+   "ticker": "MSFT"
+  },
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00217",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 58,
+   "page_end": 58,
+   "section": "Part II > Item 2. Unregistered Sales Of Equity Securities And Use Of Proceeds",
+   "strategy": "section",
+   "table_ids": [
+    "MSFT-10Q-2027Q1:table:0054"
+   ],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part II > Item 2. Unregistered Sales Of Equity Securities And Use Of Proceeds | p.58]\n| Period | Total Number of Shares Purchased | Average Price Paid Per Share | Total Number of Shares Purchased as Part of Publicly Announced Plans or Programs | Approximate Dollar Value of Shares That May Yet Be Purchased Under the Plans or Programs (In millions) |\n|---|---|---|---|---|\n| July 1, 2026 – July 31, 2026 | 2,921,818 | $393.77 | 2,921,818 | $39,480 |\n| August 1, 2026 – August 31, 2026 | 1,394,620 | 494.12 | 1,394,620 | 38,790 |\n| September 1, 2026 – September 30, 2026 | 2,172,432 | 499.62 | 2,172,432 | 37,705 |\n|  | 6,488,870 |  | 6,488,870 |  |",
+   "ticker": "MSFT"
+  },
+  {
+   "chunk_id": "MSFT-10Q-2027Q1:section:00033",
+   "company": "Microsoft Corporation",
+   "doc_name": null,
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 11,
+   "page_end": 11,
+   "section": "Part I > Item 1. Financial Statements > Income Statement – Disaggregation of Income Statement Expenses",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[MSFT 10-Q Q1 FY2027 | Part I > Item 1. Financial Statements > Income Statement – Disaggregation of Income Statement Expenses | p.11]\nIn November 2024, the Financial Accounting Standards Board issued a new standard to expand disclosures about income statement expenses. The guidance requires disaggregation of certain costs and expenses included in each relevant expense caption on our consolidated income statements in a separate note to the financial statements at each interim and annual reporting period, including amounts of purchases of inventory, employee compensation, depreciation, and intangible asset amortization. The standard will be effective for us beginning with our annual reporting for fiscal year 2028 and interim periods thereafter, with early adoption permitted. We are currently evaluating the impact of this standard on our disclosures.\n\nNOTE 2 — EARNINGS PER SHARE\n\nBasic earnings per share (“EPS”) is computed based on the weighted average number of shares of common stock outstanding during the period. Diluted EPS is computed based on the weighted average number of shares of common stock plus the effect of dilutive potential common shares outstanding during the period using the treasury stock method. Dilutive potential common shares include outstanding stock options and stock awards.\n\nThe components of basic and diluted EPS were as follows:",
+   "ticker": "MSFT"
+  }
+ ],
+ "tool": "search_filings"
+}

@@ -1,0 +1,33 @@
+{
+ "args": {
+  "chunk_id": "FB-BESTBUY_2019_10K:section:00184"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00184",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 52,
+   "page_end": 52,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BESTBUY_2019_10K:table:0037"
+   ],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets | p.52]\n|  | February 2, 2019 | February 3, 2018 |\n|---|---|---|\n| Assets |  |  |\n| Current assets |  |  |\n| Cash and cash equivalents | $1,980 | $1,101 |\n| Short-term investments | — | 2,032 |\n| Receivables, net | 1,015 | 1,049 |\n| Merchandise inventories | 5,409 | 5,209 |\n| Other current assets | 466 | 438 |\n| Total current assets | 8,870 | 9,829 |\n| Property and equipment |  |  |\n| Land and buildings | 637 | 623 |\n| Leasehold improvements | 2,119 | 2,327 |\n| Fixtures and equipment | 5,865 | 5,410 |\n| Property under capital and financing leases | 579 | 340 |\n| Gross property and equipment | 9,200 | 8,700 |\n| Less accumulated depreciation | 6,690 | 6,279 |\n| Net property and equipment | 2,510 | 2,421 |\n| Goodwill | 915 | 425 |\n| Other assets | 606 | 374 |\n| Total assets | $12,901 | $13,049 |\n| Liabilities and equity |  |  |\n| Current liabilities |  |  |\n| Accounts payable | $5,257 | $4,873 |\n| Unredeemed gift card liabilities | 290 | 385 |\n| Deferred revenue | 446 | 453 |\n| Accrued compensation and related expenses | 482 | 561 |\n| Accrued liabilities | 982 | 1,001 |\n| Current portion of long-term debt | 56 | 544 |\n| Total current liabilities | 7,513 | 7,817 |\n| Long-term liabilities | 750 | 809 |\n| Long-term debt | 1,332 | 811 |\n| Contingencies and commitments (Note 13) |  |  |\n| Equity |  |  |\n| Best Buy Co., Inc. Shareholders' Equity |  |  |\n| Preferred stock, $1.00 par value: Authorized — 400,000 shares; Issued and outstanding — none | — | — |\n| Common stock, $0.10 par value: Authorized — 1.0 billion shares; Issued and outstanding — 265,703,000 and |  |  |\n| 282,988,000 shares, respectively | 27 | 28 |\n| Additional paid-in capital | — | — |\n| Retained earnings | 2,985 | 3,270 |\n| Accumulated other comprehensive income | 294 | 314 |\n| Total equity | 3,306 | 3,612 |\n| Total liabilities and equity | $12,901 | $13,049 |",
+   "ticker": "BBY"
+  }
+ ],
+ "tool": "get_table"
+}

@@ -1,0 +1,125 @@
+{
+ "args": {
+  "query": "home address of Chief Executive Officer Jamie Dimon",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00112",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 39,
+   "page_end": 39,
+   "section": "Item 10. Directors, Executive Officers and Corporate Governance > Executive officers of the registrant",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0010"
+   ],
+   "text": "[JPM 10-K FY2025 | Item 10. Directors, Executive Officers and Corporate Governance > Executive officers of the registrant | p.39]\n| Name | Age (at December 31, 2025) | Positions and offices |\n|---|---|---|\n| James Dimon | 69 | Chairman of the Board since December 2006 and Chief Executive Officer since December 2005. |\n| Ashley Bacon | 56 | Chief Risk Officer since June 2013. |\n| Jeremy Barnum | 53 | Chief Financial Officer since May 2021, prior to which he was Head of Global Research for the former Corporate & Investment Bank since February 2021. He previously served as Chief Financial Officer of the former Corporate & Investment Bank from July 2013 until February 2021. |\n| Lori A. Beer | 58 | Chief Information Officer since September 2017. |\n| Mary Callahan Erdoes | 58 | Chief Executive Officer of Asset & Wealth Management since September 2009. |\n| Stacey Friedman | 57 | General Counsel since January 2016. |\n| Marianne Lake | 56 | Chief Executive Officer of Consumer & Community Banking since January 2024, having previously served as its Co-Chief Executive Officer since May 2021. She was Chief Executive Officer of Consumer Lending from May 2019 until May 2021. |\n| Robin Leopold | 61 | Head of Human Resources since January 2018. |\n| Douglas B. Petno | 60 | Co-Chief Executive Officer of the Commercial & Investment Bank since January 2025, having previously served as Co-Head of Global Banking since January 2024, prior to which he had been Chief Executive Officer of the former Commercial Banking since January 2012. |\n| Jennifer A. Piepszak | 55 | Chief Operating Officer since January 2025, having previously served as Co-Chief Executive Officer of the Commercial & Investment Bank since January 2024, prior to which she had been Co-Chief Executive Officer of Consumer & Community Banking since May 2021. She was Chief Financial Officer from May 2019 until May 2021. |\n| Troy Rohrbaugh | 55 | Co-Chief Executive Officer of the Commercial & Investment Bank since January 2024, prior to which he had been the Co-Head of Markets & Securities Services since June 2023. He was Head of Global Markets from January 2019 until June 2023. |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2022_10K:section:01033",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2022_10K",
+   "filing_id": "FB-JPMORGAN_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 306,
+   "page_end": 306,
+   "section": "Part IV > Signatures",
+   "strategy": "section",
+   "table_ids": [
+    "FB-JPMORGAN_2022_10K:table:0269"
+   ],
+   "text": "[JPM 10-K FY2022 | Part IV > Signatures | p.306]\n|  | Capacity | Date |\n|---|---|---|\n| /s/ JAMES DIMON | Director, Chairman and Chief Executive Officer |  |\n| (James Dimon) | (Principal Executive Officer) |  |\n| /s/ LINDA B. BAMMANN | Director |  |\n| (Linda B. Bammann) |  |  |\n| /s/ STEPHEN B. BURKE | Director |  |\n| (Stephen B. Burke) |  |  |\n| /s/ TODD A. COMBS | Director |  |\n| (Todd A. Combs) |  |  |\n| /s/ JAMES S. CROWN | Director | February 21, 2023 |\n| (James S. Crown) |  |  |\n| /s/ TIMOTHY P. FLYNN | Director |  |\n| (Timothy P. Flynn) |  |  |\n| /s/ ALEX GORSKY | Director |  |\n| (Alex Gorsky) |  |  |\n| /s/ MELLODY HOBSON | Director |  |\n| (Mellody Hobson) |  |  |\n| /s/ MICHAEL A. NEAL | Director |  |\n| (Michael A. Neal) |  |  |\n| /s/ PHEBE N. NOVAKOVIC | Director |  |\n| (Phebe N. Novakovic) |  |  |\n| /s/ VIRGINIA M. ROMETTY | Director |  |\n| (Virginia M. Rometty) |  |  |\n| /s/ JEREMY BARNUM | Executive Vice President and Chief Financial Officer |  |\n| (Jeremy Barnum) | (Principal Financial Officer) |  |\n| /s/ ELENA KORABLINA | Managing Director and Firmwide Controller |  |\n| (Elena Korablina) | (Principal Accounting Officer) |  |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2022_10K:section:00138",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2022_10K",
+   "filing_id": "FB-JPMORGAN_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": true,
+   "page": 38,
+   "page_end": 38,
+   "section": "Item 10. Directors, Executive Officers and Corporate Governance > Executive officers of the registrant",
+   "strategy": "section",
+   "table_ids": [
+    "FB-JPMORGAN_2022_10K:table:0007"
+   ],
+   "text": "[JPM 10-K FY2022 | Item 10. Directors, Executive Officers and Corporate Governance > Executive officers of the registrant | p.38]\n| Name | Age (at December 31, 2022) | Positions and offices |\n|---|---|---|\n| James Dimon | 66 | Chairman of the Board since December 2006 and Chief Executive Officer since December 2005. |\n| Ashley Bacon | 53 | Chief Risk Officer since June 2013. |\n| Jeremy Barnum | 50 | Chief Financial Officer since May 2021, prior to which he was Head of Global Research for the Corporate & Investment Bank since February 2021. He previously served as Chief Financial Officer of the Corporate & Investment Bank from July 2013 until February 2021. |\n| Lori A. Beer | 55 | Chief Information Officer since September 2017, prior to which she had been Chief Information Officer of the Corporate & Investment Bank since June 2016. |\n| Mary Callahan Erdoes | 55 | Chief Executive Officer of Asset & Wealth Management since September 2009. |\n| Stacey Friedman | 54 | General Counsel since January 2016. |\n| Marianne Lake | 53 | Co-Chief Executive Officer of Consumer & Community Banking since May 2021, prior to which she had been Chief Executive Officer of Consumer Lending since May 2019. She was Chief Financial Officer from January 2013 until May 2019. |\n| Robin Leopold | 58 | Head of Human Resources since January 2018, prior to which she had been Head of Human Resources for the Corporate & Investment Bank since August 2012. |\n| Douglas B. Petno | 57 | Chief Executive Officer of Commercial Banking since January 2012. |\n| Jennifer A. Piepszak | 52 | Co-Chief Executive Officer of Consumer & Community Banking since May 2021, prior to which she had been Chief Financial Officer since May 2019. She previously served as Chief Executive Officer for Card Services from February 2017 until May 2019. |\n| Daniel E. Pinto | 60 | President and Chief Operating Officer since January 2022 and Chief Executive Officer of the Corporate & Investment Bank since March 2014, having previously served as Co-President and Co-Chief Operating Officer since January 2018. |\n| Peter L. Scher | 61 | Vice Chairman since March 2021. He previously served as Chairman of the Mid- Atlantic Region from February 2015 until December 2022 and Head of Corporate Responsibility from April 2011 until September 2021. |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:01040",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 330,
+   "page_end": 330,
+   "section": "Part IV > Signatures",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0307"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Signatures | p.330]\n|  | Capacity | Date |\n|---|---|---|\n| /s/ JAMES DIMON | Director, Chairman and Chief Executive Officer (Principal Executive Officer) |  |\n| (James Dimon) |  |  |\n| /s/ LINDA B. BAMMANN | Director |  |\n| (Linda B. Bammann) |  |  |\n| /s/ MICHELE G. BUCK | Director |  |\n| (Michele G. Buck) |  |  |\n| /s/ STEPHEN B. BURKE | Director |  |\n| (Stephen B. Burke) |  |  |\n| /s/ ALICIA BOLER DAVIS | Director |  |\n| (Alicia Boler Davis) |  |  |\n| /s/ ALEX GORSKY | Director | February 13, 2026 |\n| (Alex Gorsky) |  |  |\n| /s/ MELLODY HOBSON | Director |  |\n| (Mellody Hobson) |  |  |\n| /s/ PHEBE N. NOVAKOVIC | Director |  |\n| (Phebe N. Novakovic) |  |  |\n| /s/ VIRGINIA M. ROMETTY | Director |  |\n| (Virginia M. Rometty) |  |  |\n| /s/ BRAD D. SMITH | Director |  |\n| (Brad D. Smith) |  |  |\n| /s/ MARK A. WEINBERGER | Director |  |\n| (Mark A. Weinberger) |  |  |\n| /s/ JEREMY BARNUM | Executive Vice President and Chief Financial Officer |  |\n| (Jeremy Barnum) | (Principal Financial Officer) |  |\n| /s/ ELENA KORABLINA | Managing Director and Firmwide Controller |  |\n| (Elena Korablina) | (Principal Accounting Officer) |  |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2022_10K:section:01326",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2022_10K",
+   "filing_id": "FB-JPMORGAN_2022_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2022,
+   "form": "10-K",
+   "has_table": false,
+   "page": 380,
+   "page_end": 381,
+   "section": "Part IV > Certification",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2022 | Part IV > Certification | pp.380-381]\n5. The registrant’s other certifying officer and I have disclosed, based on our most recent evaluation of internal control over financial reporting, to the registrant’s auditors and the audit committee of the registrant’s board of directors (or persons performing the equivalent function):\n\n(a) All significant deficiencies and material weaknesses in the design or operation of internal control over financial\n\nreporting which are reasonably likely to adversely affect the registrant’s ability to record, process, summarize and report financial information; and\n\n(b) Any fraud, whether or not material, that involves management or other employees who have a significant role in the\n\nregistrant’s internal control over financial reporting.\n\nDate: February 21, 2023\n\n/s/ James Dimon\n\nJames Dimon Chairman and Chief Executive Officer\n\nExhibit 31.2\n\nJPMorgan Chase & Co.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "FB-JPMORGAN_2023Q2_10Q:section:00737",
+   "company": "JPMorgan",
+   "doc_name": "JPMORGAN_2023Q2_10Q",
+   "filing_id": "FB-JPMORGAN_2023Q2_10Q",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2023,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 215,
+   "page_end": 216,
+   "section": "Part II > Item 6. Exhibits > Certification",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-Q Q2 FY2023 | Part II > Item 6. Exhibits > Certification | pp.215-216]\n5. The registrant's other certifying officer and I have disclosed, based on our most recent evaluation of internal control over financial reporting, to the registrant's auditors and the audit committee of the registrant's board of directors (or persons performing the equivalent function):\n\n(a) All significant deficiencies and material weaknesses in the design or operation of internal control over financial\n\nreporting which are reasonably likely to adversely affect the registrant's ability to record, process, summarize and report financial information; and\n\n(b) Any fraud, whether or not material, that involves management or other employees who have a significant role in the\n\nregistrant's internal control over financial reporting.\n\nDate: August 3, 2023\n\n/s/ James Dimon\n\nJames Dimon Chairman and Chief Executive Officer\n\nExhibit 31.2\n\nJPMorgan Chase & Co.",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

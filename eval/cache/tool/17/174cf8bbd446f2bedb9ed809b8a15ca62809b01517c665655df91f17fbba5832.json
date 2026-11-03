@@ -1,0 +1,85 @@
+{
+ "args": {
+  "duration": "instant",
+  "fiscal_year": 2025,
+  "metric": "total_assets",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0001628280-26-008131",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-12-31",
+   "fact_id": "xbrl:JPM:Assets:2025-12-31:USD",
+   "filed": "2026-02-13",
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "label": "Assets",
+   "start": null,
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 4424900000000.0
+  },
+  {
+   "accession": "0001628280-25-048859",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-09-30",
+   "fact_id": "xbrl:JPM:Assets:2025-09-30:USD",
+   "filed": "2025-11-04",
+   "filing_id": "JPM-10Q-2025Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 4560205000000.0
+  },
+  {
+   "accession": "0000019617-25-000615",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-06-30",
+   "fact_id": "xbrl:JPM:Assets:2025-06-30:USD",
+   "filed": "2025-08-05",
+   "filing_id": "JPM-10Q-2025Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 4552482000000.0
+  },
+  {
+   "accession": "0000019617-25-000421",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-03-31",
+   "fact_id": "xbrl:JPM:Assets:2025-03-31:USD",
+   "filed": "2025-05-01",
+   "filing_id": "JPM-10Q-2025Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 4357856000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

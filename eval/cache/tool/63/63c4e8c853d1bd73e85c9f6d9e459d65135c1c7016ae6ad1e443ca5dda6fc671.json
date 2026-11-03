@@ -1,0 +1,16 @@
+{
+ "args": {
+  "duration": "instant",
+  "fiscal_year": 2025,
+  "metric": "cash",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [],
+ "tool": "get_company_facts"
+}

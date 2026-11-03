@@ -1,0 +1,14 @@
+{
+ "args": {
+  "query": "Home Depot comparable sales growth fiscal 2025",
+  "ticker": "HD"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [],
+ "tool": "search_filings"
+}

@@ -1,0 +1,16 @@
+{
+ "args": {
+  "duration": "Q",
+  "fiscal_year": 2026,
+  "metric": "interest_income",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [],
+ "tool": "get_company_facts"
+}

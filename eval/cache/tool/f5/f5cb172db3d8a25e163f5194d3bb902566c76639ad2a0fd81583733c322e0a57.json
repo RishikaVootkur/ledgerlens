@@ -1,0 +1,121 @@
+{
+ "args": {
+  "query": "Tim Cook favorite Apple product",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "AAPL-10K-2025FY:section:00012",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 3,
+   "page_end": 3,
+   "section": "Item 1. Business > Products",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-K FY2025 | Item 1. Business > Products | p.3]\niPhone\n\niPhone® is the Company’s line of smartphones based on its iOS operating system. The iPhone line includes iPhone 17 Pro, iPhone Air™, iPhone 17, iPhone 16 and iPhone 16e.\n\nMac\n\nMac® is the Company’s line of personal computers based on its macOS® operating system. The Mac line includes laptops MacBook Air® and MacBook Pro®, as well as desktops iMac®, Mac mini®, Mac Studio® and Mac Pro®.\n\niPad\n\niPad® is the Company’s line of multipurpose tablets based on its iPadOS® operating system. The iPad line includes iPad Pro®, iPad Air®, iPad and iPad mini®.\n\nWearables, Home and Accessories\n\nWearables includes smartwatches, wireless headphones and spatial computers. The Company’s line of smartwatches, based on its watchOS® operating system, includes Apple Watch® Series 11, Apple Watch SE® 3 and Apple Watch Ultra® 3. The Company’s line of wireless headphones includes AirPods®, AirPods Pro®, AirPods Max® and Beats® products. Apple Vision Pro™ is the Company’s spatial computer based on its visionOS® operating system.\n\nHome includes Apple TV 4K®, the Company’s media streaming and gaming device based on its tvOS® operating system, and HomePod® and HomePod mini®, high-fidelity wireless smart speakers.\n\nAccessories includes Apple-branded and third-party accessories.",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10K-2025FY:section:00071",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 23,
+   "page_end": 23,
+   "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Product, Service and Software Announcements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-K FY2025 | Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Product, Service and Software Announcements | p.23]\nThe Company announces new product, service and software offerings at various times during the year. Significant announcements during fiscal year 2025 included the following:\n\nFirst Quarter 2025:\n\n•MacBook Pro\n\n•Mac mini\n\n•iMac\n\n•iPad mini\n\nSecond Quarter 2025:\n\n•iPhone 16e\n\n•iPad Air\n\n•iPad\n\n•MacBook Air\n\n•Mac Studio\n\nThird Quarter 2025:\n\n•iOS 26, macOS Tahoe 26, iPadOS 26, watchOS 26, visionOS 26 and tvOS 26\n\nFourth Quarter 2025:\n\n•iPhone 17, iPhone Air, iPhone 17 Pro and iPhone 17 Pro Max\n\n•Apple Watch Series 11, Apple Watch SE 3 and Apple Watch Ultra 3\n\n•AirPods Pro 3",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10K-2025FY:section:00013",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 4,
+   "page_end": 4,
+   "section": "Item 1. Business > Services",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-K FY2025 | Item 1. Business > Services | p.4]\nAdvertising\n\nThe Company’s advertising services include third-party licensing arrangements and the Company’s own advertising platforms.\n\nAppleCare\n\nThe Company offers a portfolio of fee-based service and support products under the AppleCare® brand. The offerings provide priority access to Apple technical support, access to the global Apple authorized service network for repair and replacement services, and in many cases additional coverage for instances of accidental damage or theft and loss, depending on the country and type of product.\n\nCloud Services\n\nThe Company’s cloud services store and keep customers’ content up-to-date and available across multiple Apple devices and Windows personal computers.\n\nDigital Content\n\nThe Company operates various platforms, including the App Store®, that allow customers to discover and download applications and digital content, such as books, music, video, games and podcasts.\n\nThe Company also offers digital content through subscription-based services, including Apple Arcade®, a game service; Apple Fitness+®, a personalized fitness service; Apple Music®, which offers users a curated listening experience with on-demand radio stations; Apple News+®, a news and magazine service; and Apple TV®, which offers exclusive original content and live sports.\n\nPayment Services\n\nThe Company offers payment services, including Apple Card®, a co-branded credit card, and Apple Pay®, a cashless payment service.",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10K-2025FY:section:00001",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 1,
+   "page_end": 1,
+   "section": "Apple Inc.",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[AAPL 10-K FY2025 | Apple Inc. | p.1]\n(Exact name of Registrant as specified in its charter)",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10K-2025FY:section:00006",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 1,
+   "page_end": 1,
+   "section": "Apple Inc.",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10K-2025FY:table:0003"
+   ],
+   "text": "[AAPL 10-K FY2025 | Apple Inc. | p.1]\n| Large accelerated filer | ☒ | Accelerated filer | ☐ |\n|---|---|---|---|\n| Non-accelerated filer | ☐ | Smaller reporting company | ☐ |\n|  |  | Emerging growth company | ☐ |",
+   "ticker": "AAPL"
+  },
+  {
+   "chunk_id": "AAPL-10Q-2026Q3:section:00006",
+   "company": "Apple Inc.",
+   "doc_name": null,
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 1,
+   "page_end": 1,
+   "section": "Apple Inc.",
+   "strategy": "section",
+   "table_ids": [
+    "AAPL-10Q-2026Q3:table:0003"
+   ],
+   "text": "[AAPL 10-Q Q3 FY2026 | Apple Inc. | p.1]\n| Large accelerated filer | ☒ | Accelerated filer | ☐ |\n|---|---|---|---|\n| Non-accelerated filer | ☐ | Smaller reporting company | ☐ |\n|  |  | Emerging growth company | ☐ |",
+   "ticker": "AAPL"
+  }
+ ],
+ "tool": "search_filings"
+}

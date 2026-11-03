@@ -1,0 +1,123 @@
+{
+ "args": {
+  "doc_name": "WALMART_2018_10K",
+  "query": "Consolidated Balance Sheets Accounts payable Inventories"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00214",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 59,
+   "page_end": 59,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.59]\nSee accompanying notes.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00213",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 59,
+   "page_end": 59,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0051"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.59]\n| (Amounts in millions) | As of January 31, 2018 | 2017 |\n|---|---|---|\n| ASSETS |  |  |\n| Current assets: |  |  |\n| Cash and cash equivalents | $6,756 | $6,867 |\n| Receivables, net | 5,614 | 5,835 |\n| Inventories | 43,783 | 43,046 |\n| Prepaid expenses and other | 3,511 | 1,941 |\n| Total current assets | 59,664 | 57,689 |\n| Property and equipment: |  |  |\n| Property and equipment | 185,154 | 179,492 |\n| Less accumulated depreciation | (77,479) | (71,782) |\n| Property and equipment, net | 107,675 | 107,710 |\n| Property under capital lease and financing obligations: |  |  |\n| Property under capital lease and financing obligations | 12,703 | 11,637 |\n| Less accumulated amortization | (5,560) | (5,169) |\n| Property under capital lease and financing obligations, net | 7,143 | 6,468 |\n| Goodwill | 18,242 | 17,037 |\n| Other assets and deferred charges | 11,798 | 9,921 |\n| Total assets | $204,522 | $198,825 |\n| LIABILITIES AND EQUITY |  |  |\n| Current liabilities: |  |  |\n| Short-term borrowings | $5,257 | $1,099 |\n| Accounts payable | 46,092 | 41,433 |\n| Accrued liabilities | 22,122 | 20,654 |\n| Accrued income taxes | 645 | 921 |\n| Long-term debt due within one year | 3,738 | 2,256 |\n| Capital lease and financing obligations due within one year | 667 | 565 |\n| Total current liabilities | 78,521 | 66,928 |\n| Long-term debt | 30,045 | 36,015 |\n| Long-term capital lease and financing obligations | 6,780 | 6,003 |\n| Deferred income taxes and other | 8,354 | 9,344 |\n| Commitments and contingencies |  |  |\n| Equity: |  |  |\n| Common stock | 295 | 305 |\n| Capital in excess of par value | 2,648 | 2,371 |\n| Retained earnings | 85,107 | 89,354 |\n| Accumulated other comprehensive loss | (10,181) | (14,232) |\n| Total Walmart shareholders' equity | 77,869 | 77,798 |\n| Noncontrolling interest | 2,953 | 2,737 |\n| Total equity | 80,822 | 80,535 |\n| Total liabilities and equity | $204,522 | $198,825 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00145",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 40,
+   "page_end": 40,
+   "section": "Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Returns",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0032"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Returns | p.40]\n|  | 2018 | As of January 31, 2017 | 2016 |\n|---|---|---|---|\n| Certain Balance Sheet Data |  |  |  |\n| Total assets | $204,522 | $198,825 | $199,581 |\n| Accumulated depreciation and amortization | 83,039 | 76,951 | 71,538 |\n| Accounts payable | 46,092 | 41,433 | 38,487 |\n| Accrued liabilities | 22,122 | 20,654 | 19,607 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00200",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 53,
+   "page_end": 53,
+   "section": "Item 8. Financial Statements And Supplementary Data > Table of Contents",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0048"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Table of Contents | p.53]\n|  | Page |\n|---|---|\n| Management's Report to Our Shareholders | 52 |\n| Report of Independent Registered Public Accounting Firm | 53 |\n| Report of Independent Registered Public Accounting Firm on Internal Control over Financial Reporting | 54 |\n| Consolidated Statements of Income | 55 |\n| Consolidated Statements of Comprehensive Income | 56 |\n| Consolidated Balance Sheets | 57 |\n| Consolidated Statements of Shareholders' Equity | 58 |\n| Consolidated Statements of Cash Flows | 59 |\n| Notes to Consolidated Financial Statements | 60 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00203",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 55,
+   "page_end": 55,
+   "section": "Item 8. Financial Statements And Supplementary Data > Opinion on the Financial Statements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Opinion on the Financial Statements | p.55]\nWe have audited the accompanying consolidated balance sheets of Walmart Inc. (the Company) as of January 31, 2018 and 2017 , the related consolidated statements of income, comprehensive income, shareholders' equity and cash flows for each of the three years in the period ended January 31, 2018 , and the related notes (collectively referred to as the \"consolidated financial statements\"). In our opinion, the consolidated financial statements present fairly, in all material respects, the financial position of the Company at January 31, 2018 and 2017 , and the results of its operations and its cash flows for each of the three years in the period ended January 31, 2018 , in conformity with U.S. generally accepted accounting principles.\n\nWe also have audited, in accordance with the standards of the Public Company Accounting Oversight Board (United States) (PCAOB), the Company's internal control over financial reporting as of January 31, 2018 , based on criteria established in Internal Control-Integrated Framework issued by the Committee of Sponsoring Organizations of the Treadway Commission (2013 framework) and our report dated March 30, 2018 expressed an unqualified opinion thereon.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00301",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 80,
+   "page_end": 80,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 9. Taxes",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Note 9. Taxes | p.80]\nThe deferred taxes noted above are classified as follows in the Company's Consolidated Balance Sheets:",
+   "ticker": "WMT"
+  }
+ ],
+ "tool": "search_filings"
+}

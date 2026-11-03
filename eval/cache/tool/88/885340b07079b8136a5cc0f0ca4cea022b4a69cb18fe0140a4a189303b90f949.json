@@ -1,0 +1,51 @@
+{
+ "args": {
+  "duration": "Q",
+  "fiscal_year": 2027,
+  "metric": "eps_diluted",
+  "ticker": "MSFT"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0001193125-26-436133",
+   "concept": "us-gaap:EarningsPerShareDiluted",
+   "duration": "Q",
+   "end": "2026-09-30",
+   "fact_id": "xbrl:MSFT:EarningsPerShareDiluted:2026-07-01_2026-09-30:USD/shares",
+   "filed": "2026-10-28",
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "label": "Earnings Per Share, Diluted",
+   "start": "2026-07-01",
+   "ticker": "MSFT",
+   "unit": "USD/shares",
+   "value": 4.92
+  },
+  {
+   "accession": "0001193125-26-436133",
+   "concept": "us-gaap:EarningsPerShareDiluted",
+   "duration": "Q",
+   "end": "2025-09-30",
+   "fact_id": "xbrl:MSFT:EarningsPerShareDiluted:2025-07-01_2025-09-30:USD/shares",
+   "filed": "2026-10-28",
+   "filing_id": "MSFT-10Q-2027Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2027,
+   "form": "10-Q",
+   "label": "Earnings Per Share, Diluted",
+   "start": "2025-07-01",
+   "ticker": "MSFT",
+   "unit": "USD/shares",
+   "value": 3.72
+  }
+ ],
+ "tool": "get_company_facts"
+}
