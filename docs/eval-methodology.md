@@ -11,12 +11,12 @@ How LedgerLens is measured, and why the numbers can be trusted. Every number in 
 | Unanswerable | 60 | Questions the corpus cannot answer (future periods, uncovered companies, undisclosed facts, false premises) | Refusal accuracy and hallucination rate |
 | Smoke | 20 | A dev-only subset of XBRL for AAPL, JPM and KO | The CI regression gate |
 
-Each dataset has a datasheet in `eval/datasets/`. Splits are fixed by a hash of the question id within each question type (about 40% dev, 60% test). The test split is held out: it is run once, at the end, and only reported.
+Each dataset has a datasheet in `eval/datasets/`. Splits are fixed by a hash of the question id within each question type (about 40% dev, 60% test). The test split is held out and only reported. It was run once with the agent developed on dev (fixes 1 to 3); its FinanceBench false-refusal rate then prompted fix 4, which was developed on dev only, and the test split was run a second time. Both runs are committed (`final-test`, `final-test-v2`), and the first is the clean held-out estimate.
 
 Free-tier quotas (Groq: 200,000 tokens per model per day; Gemini 3.8 Flash: 20 requests per day) bound how many agent questions fit in a day, so experiments use fixed, committed slices:
 
 - `eval/slices/ablation_dev.txt`: 62 dev questions (24 XBRL across single-fact, year-over-year and multi-step; 20 FinanceBench across its three question types; 18 unanswerable, three per category), chosen by a hash of the question id within each type. Every agent ablation and fix comparison runs on exactly these questions.
-- `eval/slices/final_test.txt`: 120 held-out test questions (60 XBRL, 36 FinanceBench, 24 unanswerable), stratified the same way and run once with the final configuration.
+- `eval/slices/final_test.txt`: 120 held-out test questions (60 XBRL, 36 FinanceBench, 24 unanswerable), stratified the same way; run before and after fix 4 (see above).
 - The full FinanceBench dev split (60 questions) is used for the LLM-free retrieval ablation.
 
 ## Running an experiment
