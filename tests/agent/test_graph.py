@@ -485,7 +485,8 @@ def test_statement_search_adds_targeted_searches(scripted, monkeypatch):
 
     q = "What is FY2025 inventory turnover? Use COGS and average inventory."
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
-    result = run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"))
+    reg = EvidenceRegistry()
+    result = run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"), registry=reg)
     assert result.steps.count("search_filings") == 3
     assert any("balance sheets" in c for c in captured) and any(
         "statements of income" in c for c in captured

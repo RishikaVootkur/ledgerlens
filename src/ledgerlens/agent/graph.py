@@ -186,8 +186,16 @@ def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int
 
 
 def _evidence_full(registry: EvidenceRegistry, budget: int) -> str:
-    # Facts and calculations first (short and exact), then passages in retrieval order.
-    ordered = sorted(registry.items.values(), key=lambda i: {"fact": 0, "calc": 1}.get(i.kind, 2))
+    # Facts and calculations first (short and exact), then priority passages (statements a
+    # formula needs), then the other passages in retrieval order.
+    def rank(item: EvidenceItem) -> int:
+        if item.kind == "fact":
+            return 0
+        if item.kind == "calc":
+            return 1
+        return 2 if item.priority else 3
+
+    ordered = sorted(registry.items.values(), key=rank)
     parts, used = [], 0
     for item in ordered:
         block = f"[{item.ref}] {item.header}\n{item.text}"
@@ -476,7 +484,13 @@ def build_graph(run: _Run) -> Any:
                 args = effective_args(
                     "search_filings", json.dumps({"query": STATEMENTS[name][1]}), filters
                 )
+                before = set(run.registry.items)
                 run_tool("search_filings", args, run.registry, cfg.retrieval)
+                added = [r for r in run.registry.items if r not in before]
+                for ref in added[:2]:  # the statement itself is almost always a top-2 hit
+                    run.registry.items[ref].priority = True
+                for ref in added[2:]:  # lower hits add noise; drop them from the evidence
+                    run.registry.drop(ref)
                 run.on_step("search_filings", f"statement search: {name.replace('_', ' ')}")
                 steps.append("search_filings")
         return {"pending": [], "steps": steps}

@@ -124,20 +124,30 @@ class EvidenceItem:
     text: str
     header: str
     doc_name: str | None = None
+    # Shown to the answer step before ordinary passages (e.g. financial statements a
+    # question's formula needs), so they cannot be crowded out of the evidence budget.
+    priority: bool = False
 
 
 @dataclass
 class EvidenceRegistry:
     items: dict[str, EvidenceItem] = field(default_factory=dict)
     _by_source: dict[str, str] = field(default_factory=dict)
+    _issued: int = 0  # refs are never reused, even after a drop
 
     def add(self, item: EvidenceItem) -> EvidenceItem:
         if existing := self._by_source.get(item.source_id):
             return self.items[existing]
-        item.ref = f"E{len(self.items) + 1}"
+        self._issued += 1
+        item.ref = f"E{self._issued}"
         self.items[item.ref] = item
         self._by_source[item.source_id] = item.ref
         return item
+
+    def drop(self, ref: str) -> None:
+        item = self.items.pop(ref, None)
+        if item is not None:
+            self._by_source.pop(item.source_id, None)
 
     def chunk_ids(self) -> list[str]:
         return [i.source_id for i in self.items.values() if i.kind == "chunk"]
