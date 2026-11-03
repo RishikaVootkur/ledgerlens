@@ -1,0 +1,67 @@
+# Which runs the eval dashboard shows and how they are grouped. Every row points at a
+# committed run file in eval/runs/. Deltas and p-values are paired comparisons against
+# each table's baseline row (Holm-adjusted across the metrics of that comparison).
+
+headline:
+  run_id: ablation_default-dev
+  title: "62-question dev slice: Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes"
+  metrics: [numeric_correct, judge_correct, refusal_correct, citation_precision, citation_recall, model_latency_p50_ms, cost_usd_mean]
+
+tables:
+  - id: ablation-retrieval
+    title: "Retrieval methods (FinanceBench dev, section chunks)"
+    description: "LLM-free: each FinanceBench dev question is run against its own document and scored against the human-labeled evidence pages."
+    baseline: BM25
+    columns: [recall_at_10, recall_at_5, mrr, ndcg_at_10]
+    rows:
+      - {name: "BM25", run_id: retrieval-bm25-section-dev}
+      - {name: "Dense (nomic-embed-text)", run_id: retrieval-dense-section-dev}
+      - {name: "Hybrid (RRF)", run_id: retrieval-hybrid-section-dev}
+      - {name: "Hybrid + cross-encoder rerank", run_id: retrieval-hybrid_rerank-section-dev}
+
+  - id: ablation-chunking
+    title: "Chunking strategy (FinanceBench dev)"
+    description: "Section- and table-aware chunks vs fixed 512-token chunks, same retrieval methods. Fixed chunks are about 2.6x longer, so each hit covers more of a labeled page."
+    baseline: "Section, hybrid"
+    columns: [recall_at_10, recall_at_5, mrr, ndcg_at_10]
+    rows:
+      - {name: "Section, hybrid", run_id: retrieval-hybrid-section-dev}
+      - {name: "Fixed, hybrid", run_id: retrieval-hybrid-fixed-dev}
+      - {name: "Section, dense", run_id: retrieval-dense-section-dev}
+      - {name: "Fixed, dense", run_id: retrieval-dense-fixed-dev}
+      - {name: "Section, BM25", run_id: retrieval-bm25-section-dev}
+      - {name: "Fixed, BM25", run_id: retrieval-bm25-fixed-dev}
+
+  - id: ablation-agent
+    title: "Agent components (62-question dev slice)"
+    description: "Gemini 3.5 Flash-Lite. Removing the XBRL facts tool, or the number verification and citation self-check."
+    baseline: Full agent
+    columns: [numeric_correct, judge_correct, refusal_correct, tokens_mean]
+    rows:
+      - {name: "Full agent", run_id: ablation_default-dev}
+      - {name: "Without XBRL facts tool", run_id: ablation_no_xbrl-dev}
+      - {name: "Without verification and self-check", run_id: ablation_no_checks-dev}
+
+  - id: error-fixes
+    title: "Targeted fixes from error analysis (62-question dev slice)"
+    description: "Each row turns one fix off. Deltas are the cost of removing that fix."
+    baseline: All fixes
+    columns: [numeric_correct, judge_correct, refusal_correct, tokens_mean]
+    rows:
+      - {name: "All fixes", run_id: ablation_default-dev}
+      - {name: "Without fix 1: repeated tool calls", run_id: ablation_no_dedupe-dev}
+      - {name: "Without fix 2: derived numbers", run_id: ablation_no_derive-dev}
+
+  - id: model-comparison
+    title: "Models (20-question smoke slice)"
+    description: "Same agent and settings; the Groq run is the recorded CI baseline. Local model latency is measured on a laptop GPU shared with other jobs."
+    baseline: Qwen3.8 27B (Groq)
+    columns: [numeric_correct, refusal_correct, model_latency_p50_ms, tokens_mean, cost_usd_mean]
+    rows:
+      - {name: "Qwen3.8 27B (Groq)", run_id: model-groq-qwen3.8-27b-smoke}
+      - {name: "Gemini 3.5 Flash-Lite", run_id: model_flash_lite_smoke-dev}
+      - {name: "Qwen3 8B (local Ollama)", run_id: model-ollama-qwen3-8b-smoke}
+
+failures_from: [ablation_default-dev]
+max_failure_examples: 30
+judge_calibration: eval/reports/judge_calibration_groq-gpt-oss-120b_test.json

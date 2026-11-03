@@ -1,0 +1,2008 @@
+{
+ "generated_at": "2026-11-03T05:47:04.588134+00:00",
+ "headline": {
+  "run_id": "ablation_default-dev",
+  "title": "62-question dev slice: Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes",
+  "metrics": {
+   "numeric_correct": {
+    "value": 0.8125,
+    "ci_low": 0.6469084479862404,
+    "ci_high": 0.9111045531043405,
+    "n": 32
+   },
+   "judge_correct": {
+    "value": 0.55,
+    "ci_low": 0.34208534245034233,
+    "ci_high": 0.7418021417443759,
+    "n": 20
+   },
+   "refusal_correct": {
+    "value": 0.8709677419354839,
+    "ci_low": 0.7655067270982637,
+    "ci_high": 0.9331412194071697,
+    "n": 62
+   },
+   "citation_precision": {
+    "value": 1.0,
+    "ci_low": 0.9010990076755959,
+    "ci_high": 1.0,
+    "n": 35
+   },
+   "citation_recall": {
+    "value": 0.8421052631578947,
+    "ci_low": 0.6958318822077686,
+    "ci_high": 0.9255613658484106,
+    "n": 38
+   },
+   "model_latency_p50_ms": {
+    "value": 3307.9000000000005,
+    "ci_low": 3181.7,
+    "ci_high": 3441.0,
+    "n": 62
+   },
+   "cost_usd_mean": {
+    "value": 0.003226488709677419,
+    "ci_low": 0.002992616612903225,
+    "ci_high": 0.003486344193548387,
+    "n": 62
+   }
+  }
+ },
+ "runs": [
+  {
+   "run_id": "model_flash_lite_smoke-dev",
+   "config_name": "model_flash_lite_smoke",
+   "split": "dev",
+   "created_at": "2026-11-03T05:02:29.826197+00:00",
+   "datasets": [
+    "smoke"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "citation_recall": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "cost_usd_mean": {
+     "value": 0.003166505,
+     "ci_low": 0.002697831375,
+     "ci_high": 0.0035971358750000004,
+     "n": 20
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.16112515805281938,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 31145.550000000003,
+     "ci_low": 23342.9,
+     "ci_high": 31917.699999999997,
+     "n": 20
+    },
+    "latency_p95_ms": {
+     "value": 32289.515,
+     "ci_low": 31948.085,
+     "ci_high": 32352.5,
+     "n": 20
+    },
+    "model_latency_p50_ms": {
+     "value": 3317.45,
+     "ci_low": 2968.1,
+     "ci_high": 3612.4500000000003,
+     "n": 20
+    },
+    "model_latency_p95_ms": {
+     "value": 4223.995000000001,
+     "ci_low": 3665.1,
+     "ci_high": 5603.299999999999,
+     "n": 20
+    },
+    "mrr": {
+     "value": 0.9,
+     "ci_low": 0.8,
+     "ci_high": 0.975,
+     "n": 20
+    },
+    "ndcg_at_10": {
+     "value": 0.9261859507142916,
+     "ci_low": 0.8523719014285831,
+     "ci_high": 0.9815464876785729,
+     "n": 20
+    },
+    "numeric_correct": {
+     "value": 0.95,
+     "ci_low": 0.763868806553258,
+     "ci_high": 0.9911185511992047,
+     "n": 20
+    },
+    "recall_at_10": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "recall_at_5": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "refusal_correct": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "tokens_mean": {
+     "value": 7774.95,
+     "ci_low": 6432.9,
+     "ci_high": 9009.907499999998,
+     "n": 20
+    }
+   }
+  },
+  {
+   "run_id": "ablation_no_xbrl-dev",
+   "config_name": "ablation_no_xbrl",
+   "split": "dev",
+   "created_at": "2026-11-03T04:58:27.898894+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.8830302015002593,
+     "ci_high": 1.0,
+     "n": 29
+    },
+    "citation_recall": {
+     "value": 0.9142857142857143,
+     "ci_low": 0.7762072603410349,
+     "ci_high": 0.9704176317330301,
+     "n": 35
+    },
+    "cost_usd_mean": {
+     "value": 0.0029538096774193545,
+     "ci_low": 0.002724772741935483,
+     "ci_high": 0.003183134919354838,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.5,
+     "ci_low": 0.2992980081982123,
+     "ci_high": 0.7007019918017877,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 102.4,
+     "ci_low": 61.55,
+     "ci_high": 7508.5,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 32032.949999999997,
+     "ci_low": 31823.413249999998,
+     "ci_high": 32293.8,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3322.45,
+     "ci_low": 3026.2,
+     "ci_high": 3571.05,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5055.665,
+     "ci_low": 4103.335,
+     "ci_high": 6266.2,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.7527597402597404,
+     "ci_low": 0.6473998917748917,
+     "ci_high": 0.8564502164502165,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.7806588063826392,
+     "ci_low": 0.6898194239806632,
+     "ci_high": 0.8649542869307352,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.65625,
+     "ci_low": 0.4831108797896222,
+     "ci_high": 0.7958956207556682,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.9469696969696969,
+     "ci_low": 0.8863636363636364,
+     "ci_high": 0.9924242424242423,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8409090909090909,
+     "ci_low": 0.7386363636363636,
+     "ci_high": 0.9431818181818182,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8387096774193549,
+     "ci_low": 0.7279366398602256,
+     "ci_high": 0.9099593112969091,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 7642.129032258064,
+     "ci_low": 7060.877822580645,
+     "ci_high": 8212.174596774194,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "ablation_no_checks-dev",
+   "config_name": "ablation_no_checks",
+   "split": "dev",
+   "created_at": "2026-11-03T04:53:27.056491+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9059421741627975,
+     "ci_high": 1.0,
+     "n": 37
+    },
+    "citation_recall": {
+     "value": 0.8375,
+     "ci_low": 0.7125,
+     "ci_high": 0.9375,
+     "n": 40
+    },
+    "cost_usd_mean": {
+     "value": 0.003156588709677419,
+     "ci_low": 0.0029571219758064513,
+     "ci_high": 0.0033593655645161287,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.6,
+     "ci_low": 0.3865815007622531,
+     "ci_high": 0.781193467627183,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 8.0,
+     "ci_low": 7.6,
+     "ci_high": 8.4,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 10.985,
+     "ci_low": 9.8,
+     "ci_high": 12.5,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3307.9000000000005,
+     "ci_low": 3181.7,
+     "ci_high": 3441.0,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 4724.51,
+     "ci_low": 4143.69,
+     "ci_high": 5603.299999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6565174614581729,
+     "ci_low": 0.5493594292729669,
+     "ci_high": 0.7661543084715021,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.6988108984256816,
+     "ci_low": 0.6000255172202714,
+     "ci_high": 0.7991039554488802,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.84375,
+     "ci_low": 0.682458504024696,
+     "ci_high": 0.9313557971749429,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.8863636363636364,
+     "ci_low": 0.7954545454545454,
+     "ci_high": 0.9659090909090909,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.9032258064516129,
+     "ci_low": 0.8045118138769257,
+     "ci_high": 0.9548881279768061,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8039.9838709677415,
+     "ci_low": 7526.277016129033,
+     "ci_high": 8563.518951612903,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "ablation_no_derive-dev",
+   "config_name": "ablation_no_derive",
+   "split": "dev",
+   "created_at": "2026-11-03T04:53:24.643568+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.895730002457548,
+     "ci_high": 1.0,
+     "n": 33
+    },
+    "citation_recall": {
+     "value": 0.8333333333333334,
+     "ci_low": 0.6810920568872054,
+     "ci_high": 0.9212955240498188,
+     "n": 36
+    },
+    "cost_usd_mean": {
+     "value": 0.0033024532258064516,
+     "ci_low": 0.0030454272580645162,
+     "ci_high": 0.003572372903225806,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.5,
+     "ci_low": 0.2992980081982123,
+     "ci_high": 0.7007019918017877,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 8.75,
+     "ci_low": 8.3475,
+     "ci_high": 10.0,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 16.30499999999999,
+     "ci_low": 12.7,
+     "ci_high": 20.9,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3354.5,
+     "ci_low": 3181.7,
+     "ci_high": 3543.7,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5406.320000000001,
+     "ci_low": 4346.5,
+     "ci_high": 5943.599999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6565174614581729,
+     "ci_low": 0.5493594292729669,
+     "ci_high": 0.7661543084715021,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.6988108984256816,
+     "ci_low": 0.6000255172202714,
+     "ci_high": 0.7991039554488802,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.78125,
+     "ci_low": 0.6124500635075647,
+     "ci_high": 0.8897616374739581,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.8863636363636364,
+     "ci_low": 0.7954545454545454,
+     "ci_high": 0.9659090909090909,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8387096774193549,
+     "ci_low": 0.7279366398602256,
+     "ci_high": 0.9099593112969091,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8352.209677419354,
+     "ci_low": 7716.858870967742,
+     "ci_high": 9021.176209677418,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "ablation_no_dedupe-dev",
+   "config_name": "ablation_no_dedupe",
+   "split": "dev",
+   "created_at": "2026-11-03T04:53:21.943327+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9010990076755959,
+     "ci_high": 1.0,
+     "n": 35
+    },
+    "citation_recall": {
+     "value": 0.8421052631578947,
+     "ci_low": 0.6958318822077686,
+     "ci_high": 0.9255613658484106,
+     "n": 38
+    },
+    "cost_usd_mean": {
+     "value": 0.003241174193548387,
+     "ci_low": 0.003011458911290322,
+     "ci_high": 0.0034940203225806445,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.55,
+     "ci_low": 0.34208534245034233,
+     "ci_high": 0.7418021417443759,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 10.25,
+     "ci_low": 9.8,
+     "ci_high": 11.2,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 15.764999999999997,
+     "ci_low": 12.6,
+     "ci_high": 27.0,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3307.9000000000005,
+     "ci_low": 3181.7,
+     "ci_high": 3441.0,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5406.320000000001,
+     "ci_low": 4264.4,
+     "ci_high": 5943.599999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6565174614581729,
+     "ci_low": 0.5493594292729669,
+     "ci_high": 0.7661543084715021,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.6988108984256816,
+     "ci_low": 0.6000255172202714,
+     "ci_high": 0.7991039554488802,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.8125,
+     "ci_low": 0.6469084479862404,
+     "ci_high": 0.9111045531043405,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.8863636363636364,
+     "ci_low": 0.7954545454545454,
+     "ci_high": 0.9659090909090909,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8709677419354839,
+     "ci_low": 0.7655067270982637,
+     "ci_high": 0.9331412194071697,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8216.193548387097,
+     "ci_low": 7674.243951612903,
+     "ci_high": 8811.95443548387,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "ablation_default-dev",
+   "config_name": "ablation_default",
+   "split": "dev",
+   "created_at": "2026-11-03T04:53:18.603886+00:00",
+   "datasets": [
+    "xbrl",
+    "financebench",
+    "unanswerable"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.9010990076755959,
+     "ci_high": 1.0,
+     "n": 35
+    },
+    "citation_recall": {
+     "value": 0.8421052631578947,
+     "ci_low": 0.6958318822077686,
+     "ci_high": 0.9255613658484106,
+     "n": 38
+    },
+    "cost_usd_mean": {
+     "value": 0.003226488709677419,
+     "ci_low": 0.002992616612903225,
+     "ci_high": 0.003486344193548387,
+     "n": 62
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.058344072101372484,
+     "n": 62
+    },
+    "judge_correct": {
+     "value": 0.55,
+     "ci_low": 0.34208534245034233,
+     "ci_high": 0.7418021417443759,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 76.1,
+     "ci_low": 62.080000000000005,
+     "ci_high": 89.3,
+     "n": 62
+    },
+    "latency_p95_ms": {
+     "value": 15780.314999999975,
+     "ci_low": 435.1,
+     "ci_high": 23996.6,
+     "n": 62
+    },
+    "model_latency_p50_ms": {
+     "value": 3307.9000000000005,
+     "ci_low": 3181.7,
+     "ci_high": 3441.0,
+     "n": 62
+    },
+    "model_latency_p95_ms": {
+     "value": 5406.320000000001,
+     "ci_low": 4264.4,
+     "ci_high": 5943.599999999999,
+     "n": 62
+    },
+    "mrr": {
+     "value": 0.6565174614581729,
+     "ci_low": 0.5493594292729669,
+     "ci_high": 0.7661543084715021,
+     "n": 44
+    },
+    "ndcg_at_10": {
+     "value": 0.6988108984256816,
+     "ci_low": 0.6000255172202714,
+     "ci_high": 0.7991039554488802,
+     "n": 44
+    },
+    "numeric_correct": {
+     "value": 0.8125,
+     "ci_low": 0.6469084479862404,
+     "ci_high": 0.9111045531043405,
+     "n": 32
+    },
+    "recall_at_10": {
+     "value": 0.8863636363636364,
+     "ci_low": 0.7954545454545454,
+     "ci_high": 0.9659090909090909,
+     "n": 44
+    },
+    "recall_at_5": {
+     "value": 0.8181818181818182,
+     "ci_low": 0.7045454545454546,
+     "ci_high": 0.9204545454545454,
+     "n": 44
+    },
+    "refusal_correct": {
+     "value": 0.8709677419354839,
+     "ci_low": 0.7655067270982637,
+     "ci_high": 0.9331412194071697,
+     "n": 62
+    },
+    "tokens_mean": {
+     "value": 8170.435483870968,
+     "ci_low": 7615.93064516129,
+     "ci_high": 8790.406048387096,
+     "n": 62
+    }
+   }
+  },
+  {
+   "run_id": "model-ollama-qwen3-8b-smoke",
+   "config_name": "model_ollama_qwen3_8b",
+   "split": "dev",
+   "created_at": "2026-11-02T03:46:02.900189+00:00",
+   "datasets": [
+    "smoke"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 1.0,
+     "ci_low": 0.6755924351161198,
+     "ci_high": 1.0,
+     "n": 8
+    },
+    "citation_recall": {
+     "value": 1.0,
+     "ci_low": 0.6755924351161198,
+     "ci_high": 1.0,
+     "n": 8
+    },
+    "cost_usd_mean": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 20
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.16112515805281938,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 11.5,
+     "ci_low": 10.3,
+     "ci_high": 42.35,
+     "n": 20
+    },
+    "latency_p95_ms": {
+     "value": 90.84000000000015,
+     "ci_low": 44.080000000000005,
+     "ci_high": 281.6,
+     "n": 20
+    },
+    "model_latency_p50_ms": {
+     "value": 93338.9,
+     "ci_low": 79125.75,
+     "ci_high": 149540.1,
+     "n": 20
+    },
+    "model_latency_p95_ms": {
+     "value": 187186.24500000002,
+     "ci_low": 166060.33500000002,
+     "ci_high": 207355.6,
+     "n": 20
+    },
+    "mrr": {
+     "value": 0.4875,
+     "ci_low": 0.3,
+     "ci_high": 0.675,
+     "n": 20
+    },
+    "ndcg_at_10": {
+     "value": 0.5292662662965341,
+     "ci_low": 0.3423592416536798,
+     "ci_high": 0.7108127539751069,
+     "n": 20
+    },
+    "numeric_correct": {
+     "value": 0.4,
+     "ci_low": 0.21880653237281705,
+     "ci_high": 0.6134184992377469,
+     "n": 20
+    },
+    "recall_at_10": {
+     "value": 0.65,
+     "ci_low": 0.43285427668523624,
+     "ci_high": 0.818808175898918,
+     "n": 20
+    },
+    "recall_at_5": {
+     "value": 0.65,
+     "ci_low": 0.43285427668523624,
+     "ci_high": 0.818808175898918,
+     "n": 20
+    },
+    "refusal_correct": {
+     "value": 0.4,
+     "ci_low": 0.21880653237281705,
+     "ci_high": 0.6134184992377469,
+     "n": 20
+    },
+    "tokens_mean": {
+     "value": 4744.5,
+     "ci_low": 4043.55,
+     "ci_high": 5509.93125,
+     "n": 20
+    }
+   }
+  },
+  {
+   "run_id": "model-groq-qwen3.8-27b-smoke",
+   "config_name": "ci_slice",
+   "split": "dev",
+   "created_at": "2026-11-02T03:36:56.237650+00:00",
+   "datasets": [
+    "smoke"
+   ],
+   "summary": {
+    "citation_precision": {
+     "value": 0.95,
+     "ci_low": 0.875,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "citation_recall": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "cost_usd_mean": {
+     "value": 0.00793984,
+     "ci_low": 0.007222901,
+     "ci_high": 0.008700598,
+     "n": 20
+    },
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.16112515805281938,
+     "n": 20
+    },
+    "latency_p50_ms": {
+     "value": 20.75,
+     "ci_low": 19.5,
+     "ci_high": 22.75,
+     "n": 20
+    },
+    "latency_p95_ms": {
+     "value": 28.080000000000002,
+     "ci_low": 23.51,
+     "ci_high": 29.6,
+     "n": 20
+    },
+    "model_latency_p50_ms": {
+     "value": 3105.8,
+     "ci_low": 2760.25,
+     "ci_high": 3743.1499999999996,
+     "n": 20
+    },
+    "model_latency_p95_ms": {
+     "value": 5786.9000000000015,
+     "ci_low": 4009.0,
+     "ci_high": 9218.3,
+     "n": 20
+    },
+    "mrr": {
+     "value": 0.875,
+     "ci_low": 0.775,
+     "ci_high": 0.9506249999999965,
+     "n": 20
+    },
+    "ndcg_at_10": {
+     "value": 0.9077324383928644,
+     "ci_low": 0.833918389107156,
+     "ci_high": 0.9635543131651789,
+     "n": 20
+    },
+    "numeric_correct": {
+     "value": 0.95,
+     "ci_low": 0.763868806553258,
+     "ci_high": 0.9911185511992047,
+     "n": 20
+    },
+    "recall_at_10": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "recall_at_5": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "refusal_correct": {
+     "value": 1.0,
+     "ci_low": 0.8388748419471806,
+     "ci_high": 1.0,
+     "n": 20
+    },
+    "tokens_mean": {
+     "value": 8045.4,
+     "ci_low": 7118.53625,
+     "ci_high": 9031.8025,
+     "n": 20
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-hybrid-fixed-dev",
+   "config_name": "retrieval_hybrid_fixed",
+   "split": "dev",
+   "created_at": "2026-11-02T03:21:14.142017+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.28611772486772485,
+     "ci_low": 0.19735367063492065,
+     "ci_high": 0.38541898148148135,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.32274529041808314,
+     "ci_low": 0.23375511686954017,
+     "ci_high": 0.418563962924696,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.175,
+     "ci_low": 0.09166666666666666,
+     "ci_high": 0.2833333333333333,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.49166666666666664,
+     "ci_low": 0.375,
+     "ci_high": 0.6083333333333333,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.35,
+     "ci_low": 0.24166666666666667,
+     "ci_high": 0.4585416666666655,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-dense-fixed-dev",
+   "config_name": "retrieval_dense_fixed",
+   "split": "dev",
+   "created_at": "2026-11-02T03:21:06.507305+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.2423809523809524,
+     "ci_low": 0.16934126984126982,
+     "ci_high": 0.32694907407407403,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.29862327537751165,
+     "ci_low": 0.220324968943326,
+     "ci_high": 0.3854691224587195,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.10833333333333334,
+     "ci_low": 0.041666666666666664,
+     "ci_high": 0.19166666666666668,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.525,
+     "ci_low": 0.4083333333333333,
+     "ci_high": 0.6583333333333333,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.4,
+     "ci_low": 0.2833333333333333,
+     "ci_high": 0.525,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-bm25-fixed-dev",
+   "config_name": "retrieval_bm25_fixed",
+   "split": "dev",
+   "created_at": "2026-11-02T03:20:59.180286+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.20990079365079362,
+     "ci_low": 0.13122470238095238,
+     "ci_high": 0.3037738095238095,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.24685184108216493,
+     "ci_low": 0.16231933604919513,
+     "ci_high": 0.3430057815440309,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.13333333333333333,
+     "ci_low": 0.06914109480586972,
+     "ci_high": 0.24165159676499615,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.38333333333333336,
+     "ci_low": 0.26666666666666666,
+     "ci_high": 0.5,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.3,
+     "ci_low": 0.19166666666666668,
+     "ci_high": 0.4166666666666667,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-hybrid_rerank-section-dev",
+   "config_name": "retrieval_hybrid_rerank_section",
+   "split": "dev",
+   "created_at": "2026-11-02T03:08:56.916996+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.21923280423280422,
+     "ci_low": 0.14144973544973544,
+     "ci_high": 0.3087705026455026,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.2620742347208528,
+     "ci_low": 0.18170278142031251,
+     "ci_high": 0.3521800741716291,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.13333333333333333,
+     "ci_low": 0.06914109480586972,
+     "ci_high": 0.24165159676499615,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.43333333333333335,
+     "ci_low": 0.31666666666666665,
+     "ci_high": 0.55,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.2916666666666667,
+     "ci_low": 0.18333333333333332,
+     "ci_high": 0.4083333333333333,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-hybrid-section-dev",
+   "config_name": "retrieval_hybrid_section",
+   "split": "dev",
+   "created_at": "2026-11-02T03:02:04.357116+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.2346494708994709,
+     "ci_low": 0.15238591269841273,
+     "ci_high": 0.325662533068783,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.27156648276508727,
+     "ci_low": 0.18770651789681556,
+     "ci_high": 0.36001325309753157,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.14166666666666666,
+     "ci_low": 0.06666666666666667,
+     "ci_high": 0.23333333333333334,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.44166666666666665,
+     "ci_low": 0.325,
+     "ci_high": 0.5585416666666655,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.30833333333333335,
+     "ci_low": 0.2,
+     "ci_high": 0.4166666666666667,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-dense-section-dev",
+   "config_name": "retrieval_dense_section",
+   "split": "dev",
+   "created_at": "2026-11-02T03:02:01.007907+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.21619708994708992,
+     "ci_low": 0.13444791666666664,
+     "ci_high": 0.309391369047619,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.24913419696706834,
+     "ci_low": 0.1648322346506695,
+     "ci_high": 0.34153485357906005,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.14166666666666666,
+     "ci_low": 0.06666666666666667,
+     "ci_high": 0.23333333333333334,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.4,
+     "ci_low": 0.2833333333333333,
+     "ci_high": 0.5168749999999989,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.26666666666666666,
+     "ci_low": 0.17479166666666668,
+     "ci_high": 0.375,
+     "n": 60
+    }
+   }
+  },
+  {
+   "run_id": "retrieval-bm25-section-dev",
+   "config_name": "retrieval_bm25_section",
+   "split": "dev",
+   "created_at": "2026-11-02T02:54:35.282893+00:00",
+   "datasets": [
+    "financebench"
+   ],
+   "summary": {
+    "error_rate": {
+     "value": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.06017185214208986,
+     "n": 60
+    },
+    "mrr": {
+     "value": 0.16689814814814816,
+     "ci_low": 0.09527777777777778,
+     "ci_high": 0.2506296296296295,
+     "n": 60
+    },
+    "ndcg_at_10": {
+     "value": 0.21250131887156065,
+     "ci_low": 0.136357119160002,
+     "ci_high": 0.29713085109609133,
+     "n": 60
+    },
+    "recall_at_1": {
+     "value": 0.1,
+     "ci_low": 0.04664283447388416,
+     "ci_high": 0.20149464723978772,
+     "n": 60
+    },
+    "recall_at_10": {
+     "value": 0.36666666666666664,
+     "ci_low": 0.25,
+     "ci_high": 0.48333333333333334,
+     "n": 60
+    },
+    "recall_at_5": {
+     "value": 0.20833333333333334,
+     "ci_low": 0.10833333333333334,
+     "ci_high": 0.31666666666666665,
+     "n": 60
+    }
+   }
+  }
+ ],
+ "tables": [
+  {
+   "id": "ablation-retrieval",
+   "title": "Retrieval methods (FinanceBench dev, section chunks)",
+   "description": "LLM-free: each FinanceBench dev question is run against its own document and scored against the human-labeled evidence pages.",
+   "baseline": "BM25",
+   "columns": [
+    "recall_at_10",
+    "recall_at_5",
+    "mrr",
+    "ndcg_at_10"
+   ],
+   "rows": [
+    {
+     "name": "BM25",
+     "run_id": "retrieval-bm25-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.36666666666666664,
+       "ci_low": 0.25,
+       "ci_high": 0.48333333333333334
+      },
+      "recall_at_5": {
+       "value": 0.20833333333333334,
+       "ci_low": 0.10833333333333334,
+       "ci_high": 0.31666666666666665
+      },
+      "mrr": {
+       "value": 0.16689814814814816,
+       "ci_low": 0.09527777777777778,
+       "ci_high": 0.2506296296296295
+      },
+      "ndcg_at_10": {
+       "value": 0.21250131887156065,
+       "ci_low": 0.136357119160002,
+       "ci_high": 0.29713085109609133
+      }
+     }
+    },
+    {
+     "name": "Dense (nomic-embed-text)",
+     "run_id": "retrieval-dense-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.4,
+       "ci_low": 0.2833333333333333,
+       "ci_high": 0.5168749999999989,
+       "delta": 0.03333333333333333,
+       "p_value": 0.9551044895510449
+      },
+      "recall_at_5": {
+       "value": 0.26666666666666666,
+       "ci_low": 0.17479166666666668,
+       "ci_high": 0.375,
+       "delta": 0.058333333333333334,
+       "p_value": 0.9551044895510449
+      },
+      "mrr": {
+       "value": 0.21619708994708992,
+       "ci_low": 0.13444791666666664,
+       "ci_high": 0.309391369047619,
+       "delta": 0.0492989417989418,
+       "p_value": 0.5209479052094791
+      },
+      "ndcg_at_10": {
+       "value": 0.24913419696706834,
+       "ci_low": 0.1648322346506695,
+       "ci_high": 0.34153485357906005,
+       "delta": 0.0366328780955077,
+       "p_value": 0.9551044895510449
+      }
+     }
+    },
+    {
+     "name": "Hybrid (RRF)",
+     "run_id": "retrieval-hybrid-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.44166666666666665,
+       "ci_low": 0.325,
+       "ci_high": 0.5585416666666655,
+       "delta": 0.075,
+       "p_value": 0.060993900609939006
+      },
+      "recall_at_5": {
+       "value": 0.30833333333333335,
+       "ci_low": 0.2,
+       "ci_high": 0.4166666666666667,
+       "delta": 0.1,
+       "p_value": 0.05729427057294271
+      },
+      "mrr": {
+       "value": 0.2346494708994709,
+       "ci_low": 0.15238591269841273,
+       "ci_high": 0.325662533068783,
+       "delta": 0.06775132275132274,
+       "p_value": 0.0014998500149985001
+      },
+      "ndcg_at_10": {
+       "value": 0.27156648276508727,
+       "ci_low": 0.18770651789681556,
+       "ci_high": 0.36001325309753157,
+       "delta": 0.059065163893526625,
+       "p_value": 0.0014998500149985001
+      }
+     }
+    },
+    {
+     "name": "Hybrid + cross-encoder rerank",
+     "run_id": "retrieval-hybrid_rerank-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.43333333333333335,
+       "ci_low": 0.31666666666666665,
+       "ci_high": 0.55,
+       "delta": 0.06666666666666667,
+       "p_value": 0.654934506549345
+      },
+      "recall_at_5": {
+       "value": 0.2916666666666667,
+       "ci_low": 0.18333333333333332,
+       "ci_high": 0.4083333333333333,
+       "delta": 0.08333333333333333,
+       "p_value": 0.6359364063593641
+      },
+      "mrr": {
+       "value": 0.21923280423280422,
+       "ci_low": 0.14144973544973544,
+       "ci_high": 0.3087705026455026,
+       "delta": 0.05233465608465608,
+       "p_value": 0.6079392060793921
+      },
+      "ndcg_at_10": {
+       "value": 0.2620742347208528,
+       "ci_low": 0.18170278142031251,
+       "ci_high": 0.3521800741716291,
+       "delta": 0.04957291584929216,
+       "p_value": 0.6159384061593841
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ablation-chunking",
+   "title": "Chunking strategy (FinanceBench dev)",
+   "description": "Section- and table-aware chunks vs fixed 512-token chunks, same retrieval methods. Fixed chunks are about 2.6x longer, so each hit covers more of a labeled page.",
+   "baseline": "Section, hybrid",
+   "columns": [
+    "recall_at_10",
+    "recall_at_5",
+    "mrr",
+    "ndcg_at_10"
+   ],
+   "rows": [
+    {
+     "name": "Section, hybrid",
+     "run_id": "retrieval-hybrid-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.44166666666666665,
+       "ci_low": 0.325,
+       "ci_high": 0.5585416666666655
+      },
+      "recall_at_5": {
+       "value": 0.30833333333333335,
+       "ci_low": 0.2,
+       "ci_high": 0.4166666666666667
+      },
+      "mrr": {
+       "value": 0.2346494708994709,
+       "ci_low": 0.15238591269841273,
+       "ci_high": 0.325662533068783
+      },
+      "ndcg_at_10": {
+       "value": 0.27156648276508727,
+       "ci_low": 0.18770651789681556,
+       "ci_high": 0.36001325309753157
+      }
+     }
+    },
+    {
+     "name": "Fixed, hybrid",
+     "run_id": "retrieval-hybrid-fixed-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.49166666666666664,
+       "ci_low": 0.375,
+       "ci_high": 0.6083333333333333,
+       "delta": 0.05,
+       "p_value": 1.0
+      },
+      "recall_at_5": {
+       "value": 0.35,
+       "ci_low": 0.24166666666666667,
+       "ci_high": 0.4585416666666655,
+       "delta": 0.041666666666666664,
+       "p_value": 1.0
+      },
+      "mrr": {
+       "value": 0.28611772486772485,
+       "ci_low": 0.19735367063492065,
+       "ci_high": 0.38541898148148135,
+       "delta": 0.05146825396825396,
+       "p_value": 0.9054094590540945
+      },
+      "ndcg_at_10": {
+       "value": 0.32274529041808314,
+       "ci_low": 0.23375511686954017,
+       "ci_high": 0.418563962924696,
+       "delta": 0.05117880765299594,
+       "p_value": 0.9054094590540945
+      }
+     }
+    },
+    {
+     "name": "Section, dense",
+     "run_id": "retrieval-dense-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.4,
+       "ci_low": 0.2833333333333333,
+       "ci_high": 0.5168749999999989,
+       "delta": -0.041666666666666664,
+       "p_value": 1.0
+      },
+      "recall_at_5": {
+       "value": 0.26666666666666666,
+       "ci_low": 0.17479166666666668,
+       "ci_high": 0.375,
+       "delta": -0.041666666666666664,
+       "p_value": 1.0
+      },
+      "mrr": {
+       "value": 0.21619708994708992,
+       "ci_low": 0.13444791666666664,
+       "ci_high": 0.309391369047619,
+       "delta": -0.01845238095238095,
+       "p_value": 1.0
+      },
+      "ndcg_at_10": {
+       "value": 0.24913419696706834,
+       "ci_low": 0.1648322346506695,
+       "ci_high": 0.34153485357906005,
+       "delta": -0.02243228579801892,
+       "p_value": 1.0
+      }
+     }
+    },
+    {
+     "name": "Fixed, dense",
+     "run_id": "retrieval-dense-fixed-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.525,
+       "ci_low": 0.4083333333333333,
+       "ci_high": 0.6583333333333333,
+       "delta": 0.08333333333333333,
+       "p_value": 1.0
+      },
+      "recall_at_5": {
+       "value": 0.4,
+       "ci_low": 0.2833333333333333,
+       "ci_high": 0.525,
+       "delta": 0.09166666666666666,
+       "p_value": 0.8229177082291771
+      },
+      "mrr": {
+       "value": 0.2423809523809524,
+       "ci_low": 0.16934126984126982,
+       "ci_high": 0.32694907407407403,
+       "delta": 0.007731481481481479,
+       "p_value": 1.0
+      },
+      "ndcg_at_10": {
+       "value": 0.29862327537751165,
+       "ci_low": 0.220324968943326,
+       "ci_high": 0.3854691224587195,
+       "delta": 0.027056792612424392,
+       "p_value": 1.0
+      }
+     }
+    },
+    {
+     "name": "Section, BM25",
+     "run_id": "retrieval-bm25-section-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.36666666666666664,
+       "ci_low": 0.25,
+       "ci_high": 0.48333333333333334,
+       "delta": -0.075,
+       "p_value": 0.060993900609939006
+      },
+      "recall_at_5": {
+       "value": 0.20833333333333334,
+       "ci_low": 0.10833333333333334,
+       "ci_high": 0.31666666666666665,
+       "delta": -0.1,
+       "p_value": 0.05729427057294271
+      },
+      "mrr": {
+       "value": 0.16689814814814816,
+       "ci_low": 0.09527777777777778,
+       "ci_high": 0.2506296296296295,
+       "delta": -0.06775132275132274,
+       "p_value": 0.0014998500149985001
+      },
+      "ndcg_at_10": {
+       "value": 0.21250131887156065,
+       "ci_low": 0.136357119160002,
+       "ci_high": 0.29713085109609133,
+       "delta": -0.059065163893526625,
+       "p_value": 0.0014998500149985001
+      }
+     }
+    },
+    {
+     "name": "Fixed, BM25",
+     "run_id": "retrieval-bm25-fixed-dev",
+     "metrics": {
+      "recall_at_10": {
+       "value": 0.38333333333333336,
+       "ci_low": 0.26666666666666666,
+       "ci_high": 0.5,
+       "delta": -0.058333333333333334,
+       "p_value": 1.0
+      },
+      "recall_at_5": {
+       "value": 0.3,
+       "ci_low": 0.19166666666666668,
+       "ci_high": 0.4166666666666667,
+       "delta": -0.008333333333333333,
+       "p_value": 1.0
+      },
+      "mrr": {
+       "value": 0.20990079365079362,
+       "ci_low": 0.13122470238095238,
+       "ci_high": 0.3037738095238095,
+       "delta": -0.02474867724867724,
+       "p_value": 1.0
+      },
+      "ndcg_at_10": {
+       "value": 0.24685184108216493,
+       "ci_low": 0.16231933604919513,
+       "ci_high": 0.3430057815440309,
+       "delta": -0.024714641682922322,
+       "p_value": 1.0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ablation-agent",
+   "title": "Agent components (62-question dev slice)",
+   "description": "Gemini 3.5 Flash-Lite. Removing the XBRL facts tool, or the number verification and citation self-check.",
+   "baseline": "Full agent",
+   "columns": [
+    "numeric_correct",
+    "judge_correct",
+    "refusal_correct",
+    "tokens_mean"
+   ],
+   "rows": [
+    {
+     "name": "Full agent",
+     "run_id": "ablation_default-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8125,
+       "ci_low": 0.6469084479862404,
+       "ci_high": 0.9111045531043405
+      },
+      "judge_correct": {
+       "value": 0.55,
+       "ci_low": 0.34208534245034233,
+       "ci_high": 0.7418021417443759
+      },
+      "refusal_correct": {
+       "value": 0.8709677419354839,
+       "ci_low": 0.7655067270982637,
+       "ci_high": 0.9331412194071697
+      },
+      "tokens_mean": {
+       "value": 8170.435483870968,
+       "ci_low": 7615.93064516129,
+       "ci_high": 8790.406048387096
+      }
+     }
+    },
+    {
+     "name": "Without XBRL facts tool",
+     "run_id": "ablation_no_xbrl-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.65625,
+       "ci_low": 0.4831108797896222,
+       "ci_high": 0.7958956207556682,
+       "delta": -0.15625,
+       "p_value": 0.4375
+      },
+      "judge_correct": {
+       "value": 0.5,
+       "ci_low": 0.2992980081982123,
+       "ci_high": 0.7007019918017877,
+       "delta": -0.05,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.8387096774193549,
+       "ci_low": 0.7279366398602256,
+       "ci_high": 0.9099593112969091,
+       "delta": -0.03225806451612903,
+       "p_value": 1.0
+      },
+      "tokens_mean": {
+       "value": 7642.129032258064,
+       "ci_low": 7060.877822580645,
+       "ci_high": 8212.174596774194,
+       "delta": -528.3064516129034,
+       "p_value": null
+      }
+     }
+    },
+    {
+     "name": "Without verification and self-check",
+     "run_id": "ablation_no_checks-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.84375,
+       "ci_low": 0.682458504024696,
+       "ci_high": 0.9313557971749429,
+       "delta": 0.03125,
+       "p_value": 1.0
+      },
+      "judge_correct": {
+       "value": 0.6,
+       "ci_low": 0.3865815007622531,
+       "ci_high": 0.781193467627183,
+       "delta": 0.05,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.9032258064516129,
+       "ci_low": 0.8045118138769257,
+       "ci_high": 0.9548881279768061,
+       "delta": 0.03225806451612903,
+       "p_value": 1.0
+      },
+      "tokens_mean": {
+       "value": 8039.9838709677415,
+       "ci_low": 7526.277016129033,
+       "ci_high": 8563.518951612903,
+       "delta": -130.4516129032263,
+       "p_value": null
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "error-fixes",
+   "title": "Targeted fixes from error analysis (62-question dev slice)",
+   "description": "Each row turns one fix off. Deltas are the cost of removing that fix.",
+   "baseline": "All fixes",
+   "columns": [
+    "numeric_correct",
+    "judge_correct",
+    "refusal_correct",
+    "tokens_mean"
+   ],
+   "rows": [
+    {
+     "name": "All fixes",
+     "run_id": "ablation_default-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8125,
+       "ci_low": 0.6469084479862404,
+       "ci_high": 0.9111045531043405
+      },
+      "judge_correct": {
+       "value": 0.55,
+       "ci_low": 0.34208534245034233,
+       "ci_high": 0.7418021417443759
+      },
+      "refusal_correct": {
+       "value": 0.8709677419354839,
+       "ci_low": 0.7655067270982637,
+       "ci_high": 0.9331412194071697
+      },
+      "tokens_mean": {
+       "value": 8170.435483870968,
+       "ci_low": 7615.93064516129,
+       "ci_high": 8790.406048387096
+      }
+     }
+    },
+    {
+     "name": "Without fix 1: repeated tool calls",
+     "run_id": "ablation_no_dedupe-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.8125,
+       "ci_low": 0.6469084479862404,
+       "ci_high": 0.9111045531043405,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "judge_correct": {
+       "value": 0.55,
+       "ci_low": 0.34208534245034233,
+       "ci_high": 0.7418021417443759,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.8709677419354839,
+       "ci_low": 0.7655067270982637,
+       "ci_high": 0.9331412194071697,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "tokens_mean": {
+       "value": 8216.193548387097,
+       "ci_low": 7674.243951612903,
+       "ci_high": 8811.95443548387,
+       "delta": 45.7580645161288,
+       "p_value": null
+      }
+     }
+    },
+    {
+     "name": "Without fix 2: derived numbers",
+     "run_id": "ablation_no_derive-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.78125,
+       "ci_low": 0.6124500635075647,
+       "ci_high": 0.8897616374739581,
+       "delta": -0.03125,
+       "p_value": 1.0
+      },
+      "judge_correct": {
+       "value": 0.5,
+       "ci_low": 0.2992980081982123,
+       "ci_high": 0.7007019918017877,
+       "delta": -0.05,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 0.8387096774193549,
+       "ci_low": 0.7279366398602256,
+       "ci_high": 0.9099593112969091,
+       "delta": -0.03225806451612903,
+       "p_value": 1.0
+      },
+      "tokens_mean": {
+       "value": 8352.209677419354,
+       "ci_low": 7716.858870967742,
+       "ci_high": 9021.176209677418,
+       "delta": 181.7741935483864,
+       "p_value": null
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "model-comparison",
+   "title": "Models (20-question smoke slice)",
+   "description": "Same agent and settings; the Groq run is the recorded CI baseline. Local model latency is measured on a laptop GPU shared with other jobs.",
+   "baseline": "Qwen3.8 27B (Groq)",
+   "columns": [
+    "numeric_correct",
+    "refusal_correct",
+    "model_latency_p50_ms",
+    "tokens_mean",
+    "cost_usd_mean"
+   ],
+   "rows": [
+    {
+     "name": "Qwen3.8 27B (Groq)",
+     "run_id": "model-groq-qwen3.8-27b-smoke",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.95,
+       "ci_low": 0.763868806553258,
+       "ci_high": 0.9911185511992047
+      },
+      "refusal_correct": {
+       "value": 1.0,
+       "ci_low": 0.8388748419471806,
+       "ci_high": 1.0
+      },
+      "model_latency_p50_ms": {
+       "value": 3105.8,
+       "ci_low": 2760.25,
+       "ci_high": 3743.1499999999996
+      },
+      "tokens_mean": {
+       "value": 8045.4,
+       "ci_low": 7118.53625,
+       "ci_high": 9031.8025
+      },
+      "cost_usd_mean": {
+       "value": 0.00793984,
+       "ci_low": 0.007222901,
+       "ci_high": 0.008700598
+      }
+     }
+    },
+    {
+     "name": "Gemini 3.5 Flash-Lite",
+     "run_id": "model_flash_lite_smoke-dev",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.95,
+       "ci_low": 0.763868806553258,
+       "ci_high": 0.9911185511992047,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "refusal_correct": {
+       "value": 1.0,
+       "ci_low": 0.8388748419471806,
+       "ci_high": 1.0,
+       "delta": 0.0,
+       "p_value": 1.0
+      },
+      "model_latency_p50_ms": {
+       "value": 3317.45,
+       "ci_low": 2968.1,
+       "ci_high": 3612.4500000000003,
+       "delta": 211.64999999999964,
+       "p_value": null
+      },
+      "tokens_mean": {
+       "value": 7774.95,
+       "ci_low": 6432.9,
+       "ci_high": 9009.907499999998,
+       "delta": -270.4499999999998,
+       "p_value": null
+      },
+      "cost_usd_mean": {
+       "value": 0.003166505,
+       "ci_low": 0.002697831375,
+       "ci_high": 0.0035971358750000004,
+       "delta": -0.004773335,
+       "p_value": null
+      }
+     }
+    },
+    {
+     "name": "Qwen3 8B (local Ollama)",
+     "run_id": "model-ollama-qwen3-8b-smoke",
+     "metrics": {
+      "numeric_correct": {
+       "value": 0.4,
+       "ci_low": 0.21880653237281705,
+       "ci_high": 0.6134184992377469,
+       "delta": -0.55,
+       "p_value": 0.0068359375
+      },
+      "refusal_correct": {
+       "value": 0.4,
+       "ci_low": 0.21880653237281705,
+       "ci_high": 0.6134184992377469,
+       "delta": -0.6,
+       "p_value": 0.00390625
+      },
+      "model_latency_p50_ms": {
+       "value": 93338.9,
+       "ci_low": 79125.75,
+       "ci_high": 149540.1,
+       "delta": 90233.09999999999,
+       "p_value": null
+      },
+      "tokens_mean": {
+       "value": 4744.5,
+       "ci_low": 4043.55,
+       "ci_high": 5509.93125,
+       "delta": -3300.8999999999996,
+       "p_value": null
+      },
+      "cost_usd_mean": {
+       "value": 0.0,
+       "ci_low": 0.0,
+       "ci_high": 0.0,
+       "delta": -0.00793984,
+       "p_value": null
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "failure_counts": {},
+ "failures": [],
+ "judge_calibration": {
+  "created_at": "2026-11-02T02:10:39.993796Z",
+  "judge_model": "groq-gpt-oss-120b",
+  "prompt_version": "v2",
+  "split": "test",
+  "n": 147,
+  "accuracy": {
+   "value": 0.8979591836734694,
+   "ci_low": 0.8384664963129638,
+   "ci_high": 0.937182326727646,
+   "n": 147
+  },
+  "kappa": {
+   "value": 0.8460732984293196,
+   "ci_low": 0.7712328483477406,
+   "ci_high": 0.9169139465875372,
+   "n": 147
+  },
+  "error_rate": {
+   "value": 0.10204081632653061,
+   "ci_low": 0.062817673272354,
+   "ci_high": 0.16153350368703628,
+   "n": 147
+  },
+  "binary_accuracy": {
+   "value": 0.9183673469387755,
+   "ci_low": 0.862737986564198,
+   "ci_high": 0.9526876991964432,
+   "n": 147
+  },
+  "binary_kappa": {
+   "value": 0.7956441149212234,
+   "ci_low": 0.6779546185292361,
+   "ci_high": 0.8955223880597014,
+   "n": 147
+  },
+  "labels": [
+   "CORRECT",
+   "INCORRECT",
+   "REFUSAL"
+  ],
+  "confusion": [
+   [
+    34,
+    12,
+    0
+   ],
+   [
+    0,
+    49,
+    3
+   ],
+   [
+    0,
+    0,
+    49
+   ]
+  ],
+  "per_label_recall": {
+   "CORRECT": 0.7391304347826086,
+   "INCORRECT": 0.9423076923076923,
+   "REFUSAL": 1.0
+  },
+  "parse_errors": 0,
+  "clean_n": 52,
+  "clean_accuracy": {
+   "value": 0.8653846153846154,
+   "ci_low": 0.747266798348062,
+   "ci_high": 0.9332311829460386,
+   "n": 52
+  },
+  "clean_kappa": {
+   "value": 0.7883720930232558,
+   "ci_low": 0.6309984884111521,
+   "ci_high": 0.9120791271547168,
+   "n": 52
+  }
+ }
+}
