@@ -1,0 +1,1370 @@
+{
+ "schema_version": 1,
+ "run_id": "model-ollama-qwen3-8b-smoke",
+ "created_at": "2026-11-02T03:46:02.900189Z",
+ "git_sha": "4e44663",
+ "config_name": "model_ollama_qwen3_8b",
+ "config": {
+  "name": "model_ollama_qwen3_8b",
+  "description": "Model comparison: local Qwen3 8B on Ollama",
+  "model": "ollama-qwen3-8b",
+  "strategy": "section",
+  "method": "hybrid",
+  "k": 6,
+  "index_version": "auto",
+  "max_rounds": 3,
+  "xbrl_tool": true,
+  "search_tool": true,
+  "verify_numbers": true,
+  "self_check": true,
+  "dedupe_tool_calls": false,
+  "derive_numbers": true,
+  "datasets": [
+   "smoke"
+  ],
+  "scope": "document",
+  "limit": null,
+  "qids": null,
+  "qids_file": null,
+  "concurrency": 1,
+  "judge": true,
+  "judge_model": "groq-gpt-oss-120b",
+  "citation_support": false
+ },
+ "split": "dev",
+ "datasets": [
+  "smoke"
+ ],
+ "summary": {
+  "citation_precision": {
+   "value": 1.0,
+   "ci_low": 0.6755924351161198,
+   "ci_high": 1.0,
+   "n": 8
+  },
+  "citation_recall": {
+   "value": 1.0,
+   "ci_low": 0.6755924351161198,
+   "ci_high": 1.0,
+   "n": 8
+  },
+  "cost_usd_mean": {
+   "value": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "n": 20
+  },
+  "error_rate": {
+   "value": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.16112515805281938,
+   "n": 20
+  },
+  "latency_p50_ms": {
+   "value": 11.5,
+   "ci_low": 10.3,
+   "ci_high": 42.35,
+   "n": 20
+  },
+  "latency_p95_ms": {
+   "value": 90.84000000000015,
+   "ci_low": 44.080000000000005,
+   "ci_high": 281.6,
+   "n": 20
+  },
+  "model_latency_p50_ms": {
+   "value": 93338.9,
+   "ci_low": 79125.75,
+   "ci_high": 149540.1,
+   "n": 20
+  },
+  "model_latency_p95_ms": {
+   "value": 187186.24500000002,
+   "ci_low": 166060.33500000002,
+   "ci_high": 207355.6,
+   "n": 20
+  },
+  "mrr": {
+   "value": 0.4875,
+   "ci_low": 0.3,
+   "ci_high": 0.675,
+   "n": 20
+  },
+  "ndcg_at_10": {
+   "value": 0.5292662662965341,
+   "ci_low": 0.3423592416536798,
+   "ci_high": 0.7108127539751069,
+   "n": 20
+  },
+  "numeric_correct": {
+   "value": 0.4,
+   "ci_low": 0.21880653237281705,
+   "ci_high": 0.6134184992377469,
+   "n": 20
+  },
+  "recall_at_10": {
+   "value": 0.65,
+   "ci_low": 0.43285427668523624,
+   "ci_high": 0.818808175898918,
+   "n": 20
+  },
+  "recall_at_5": {
+   "value": 0.65,
+   "ci_low": 0.43285427668523624,
+   "ci_high": 0.818808175898918,
+   "n": 20
+  },
+  "refusal_correct": {
+   "value": 0.4,
+   "ci_low": 0.21880653237281705,
+   "ci_high": 0.6134184992377469,
+   "n": 20
+  },
+  "tokens_mean": {
+   "value": 4744.5,
+   "ci_low": 4043.55,
+   "ci_high": 5509.93125,
+   "n": 20
+  }
+ },
+ "summary_by_dataset": {
+  "smoke": {
+   "citation_precision": {
+    "value": 1.0,
+    "ci_low": 0.6755924351161198,
+    "ci_high": 1.0,
+    "n": 8
+   },
+   "citation_recall": {
+    "value": 1.0,
+    "ci_low": 0.6755924351161198,
+    "ci_high": 1.0,
+    "n": 8
+   },
+   "cost_usd_mean": {
+    "value": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "n": 20
+   },
+   "error_rate": {
+    "value": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.16112515805281938,
+    "n": 20
+   },
+   "latency_p50_ms": {
+    "value": 11.5,
+    "ci_low": 10.3,
+    "ci_high": 42.35,
+    "n": 20
+   },
+   "latency_p95_ms": {
+    "value": 90.84000000000015,
+    "ci_low": 44.080000000000005,
+    "ci_high": 281.6,
+    "n": 20
+   },
+   "model_latency_p50_ms": {
+    "value": 93338.9,
+    "ci_low": 79125.75,
+    "ci_high": 149540.1,
+    "n": 20
+   },
+   "model_latency_p95_ms": {
+    "value": 187186.24500000002,
+    "ci_low": 166060.33500000002,
+    "ci_high": 207355.6,
+    "n": 20
+   },
+   "mrr": {
+    "value": 0.4875,
+    "ci_low": 0.3,
+    "ci_high": 0.675,
+    "n": 20
+   },
+   "ndcg_at_10": {
+    "value": 0.5292662662965341,
+    "ci_low": 0.3423592416536798,
+    "ci_high": 0.7108127539751069,
+    "n": 20
+   },
+   "numeric_correct": {
+    "value": 0.4,
+    "ci_low": 0.21880653237281705,
+    "ci_high": 0.6134184992377469,
+    "n": 20
+   },
+   "recall_at_10": {
+    "value": 0.65,
+    "ci_low": 0.43285427668523624,
+    "ci_high": 0.818808175898918,
+    "n": 20
+   },
+   "recall_at_5": {
+    "value": 0.65,
+    "ci_low": 0.43285427668523624,
+    "ci_high": 0.818808175898918,
+    "n": 20
+   },
+   "refusal_correct": {
+    "value": 0.4,
+    "ci_low": 0.21880653237281705,
+    "ci_high": 0.6134184992377469,
+    "n": 20
+   },
+   "tokens_mean": {
+    "value": 4744.5,
+    "ci_low": 4043.55,
+    "ci_high": 5509.93125,
+    "n": 20
+   }
+  }
+ },
+ "usage_total": {
+  "prompt_tokens": 87699,
+  "completion_tokens": 7191,
+  "llm_calls": 82,
+  "cost_usd": 0.0,
+  "latency_ms": 2252411.0
+ },
+ "results": [
+  {
+   "qid": "smoke-aapl-10k2025fy-rd_expense",
+   "dataset": "smoke",
+   "question": "What was Apple's research and development expense for fiscal year 2025 (the year ended September 27, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "$34,550,000,000 (about $34.55 billion)",
+   "gold_value": 34550000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Apple's research and development expense for fiscal year 2025 was $34,550,000,000 [1].",
+    "refused": false,
+    "answer_value": 34550000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:ResearchAndDevelopmentExpense:2024-09-29_2025-09-27:USD",
+      "filing_id": "AAPL-10K-2025FY",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Research and Development Expense (us-gaap:ResearchAndDevelopmentExpense): 34,550,000,000 USD for 2024-09-29 to 2025-09-27 [FY], reported in 10-K FY 2025"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 2599,
+     "completion_tokens": 232,
+     "llm_calls": 3,
+     "cost_usd": 0.0,
+     "latency_ms": 91574.3
+    }
+   },
+   "wall_ms": 42.7,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10q2026q2-net_income",
+   "dataset": "smoke",
+   "question": "What was JPMorgan Chase's net income for the three months ended June 30, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2026,
+   "gold": "$21,155,000,000 (about $21.16 billion)",
+   "gold_value": 21155000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "JPMorgan Chase's net income for the three months ended June 30, 2026 (fiscal 2026 Q2) was 21,155,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 21155000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:JPM:NetIncomeLoss:2026-04-01_2026-06-30:USD",
+      "filing_id": "JPM-10Q-2026Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Net Income (Loss) Attributable to Parent (us-gaap:NetIncomeLoss): 21,155,000,000 USD for 2026-04-01 to 2026-06-30 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3300,
+     "completion_tokens": 505,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 131313.40000000002
+    }
+   },
+   "wall_ms": 80.8,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10q2026q3-eps_diluted",
+   "dataset": "smoke",
+   "question": "What was Coca-Cola's diluted earnings per share for the three months ended October 2, 2026 (fiscal 2026 Q3), in US dollars per share?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2026,
+   "gold": "$0.93 per diluted share",
+   "gold_value": 0.93,
+   "gold_unit": "per_share",
+   "prediction": {
+    "answer": "Coca-Cola's diluted earnings per share for the three months ended October 2, 2026 (fiscal 2026 Q3) was 0.9300 USD per share [1].",
+    "refused": false,
+    "answer_value": 0.93,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:EarningsPerShareDiluted:2026-07-04_2026-10-02:USD/shares",
+      "filing_id": "KO-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Earnings Per Share, Diluted (us-gaap:EarningsPerShareDiluted): 0.9300 USD/shares for 2026-07-04 to 2026-10-02 [Q], reported in 10-Q Q3 2026"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4952,
+     "completion_tokens": 306,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 92479.9
+    }
+   },
+   "wall_ms": 53.2,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10k2025fy-total_assets",
+   "dataset": "smoke",
+   "question": "What were Apple's total assets as of the end of fiscal year 2025 (September 27, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "$359,241,000,000 (about $359.24 billion)",
+   "gold_value": 359241000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings do not provide Apple's total assets as of the end of fiscal year 2025 (September 27, 2025).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3519,
+     "completion_tokens": 212,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 58790.7
+    }
+   },
+   "wall_ms": 10.9,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10q2026q1-net_interest_income",
+   "dataset": "smoke",
+   "question": "What was JPMorgan Chase's net interest income for the three months ended March 31, 2026 (fiscal 2026 Q1), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2026,
+   "gold": "$25,366,000,000 (about $25.37 billion)",
+   "gold_value": 25366000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "JPMorgan Chase's net interest income for the three months ended March 31, 2026 (fiscal 2026 Q1) was $25,366 million [1].",
+    "refused": false,
+    "answer_value": 25366000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "JPM-10Q-2026Q1:section:00398",
+      "filing_id": "JPM-10Q-2026Q1",
+      "section": "Note 6 – Interest income and interest expense",
+      "page": 115,
+      "page_end": 115,
+      "quote": "| Net interest income | $25,366 | $23,273 |"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "JPM-10Q-2026Q2:section:00058",
+     "JPM-10Q-2026Q1:section:00052",
+     "JPM-10Q-2026Q1:section:00053",
+     "JPM-10Q-2026Q1:section:00398",
+     "JPM-10Q-2026Q2:section:00105",
+     "JPM-10Q-2026Q1:section:00095"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 6888,
+     "completion_tokens": 280,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 135193.30000000002
+    }
+   },
+   "wall_ms": 281.6,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10q2026q2-revenue",
+   "dataset": "smoke",
+   "question": "What was Coca-Cola's total revenue for the three months ended July 3, 2026 (fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2026,
+   "gold": "$13,380,000,000 (about $13.38 billion)",
+   "gold_value": 13380000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Coca-Cola's total revenue for the three months ended July 3, 2026 (fiscal 2026 Q2) was $13,380,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 13380000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:Revenues:2026-04-04_2026-07-03:USD",
+      "filing_id": "KO-10Q-2026Q2",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Revenues (us-gaap:Revenues): 13,380,000,000 USD for 2026-04-04 to 2026-07-03 [Q], reported in 10-Q Q2 2026"
+     }
+    ],
+    "retrieved_chunk_ids": [
+     "KO-10Q-2026Q3:section:00033",
+     "KO-10Q-2026Q3:section:00034",
+     "KO-10Q-2026Q3:section:00152",
+     "KO-10Q-2026Q2:section:00033",
+     "KO-10Q-2026Q2:section:00149",
+     "KO-10Q-2026Q2:section:00034"
+    ],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 7841,
+     "completion_tokens": 313,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 168477.8
+    }
+   },
+   "wall_ms": 53.9,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.25,
+    "ndcg_at_10": 0.43067655807339306
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10q2026q3-operating_income",
+   "dataset": "smoke",
+   "question": "What was Apple's operating income for the three months ended June 27, 2026 (fiscal 2026 Q3), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "gold": "$35,695,000,000 (about $35.70 billion)",
+   "gold_value": 35695000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Apple's operating income for the three months ended June 27, 2026 (fiscal 2026 Q3) was $35,695,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 35695000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:OperatingIncomeLoss:2026-03-29_2026-06-27:USD",
+      "filing_id": "AAPL-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Operating Income (Loss) (us-gaap:OperatingIncomeLoss): 35,695,000,000 USD for 2026-03-29 to 2026-06-27 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 2924,
+     "completion_tokens": 297,
+     "llm_calls": 3,
+     "cost_usd": 0.0,
+     "latency_ms": 98958.20000000001
+    }
+   },
+   "wall_ms": 8.0,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10k2025fy-total_assets",
+   "dataset": "smoke",
+   "question": "What were JPMorgan Chase's total assets as of the end of fiscal year 2025 (December 31, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "gold": "$4,424,900,000,000 (about $4.42 trillion)",
+   "gold_value": 4424900000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings do not provide JPMorgan Chase's total assets as of the end of fiscal year 2025 (December 31, 2025).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3531,
+     "completion_tokens": 215,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 52048.49999999999
+    }
+   },
+   "wall_ms": 10.0,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10q2026q3-operating_income",
+   "dataset": "smoke",
+   "question": "What was Coca-Cola's operating income for the three months ended October 2, 2026 (fiscal 2026 Q3), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2026,
+   "gold": "$4,465,000,000 (about $4.46 billion)",
+   "gold_value": 4465000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Coca-Cola's operating income for the three months ended October 2, 2026 (fiscal 2026 Q3) was 4,465,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 4465000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:KO:OperatingIncomeLoss:2026-07-04_2026-10-02:USD",
+      "filing_id": "KO-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Operating Income (Loss) (us-gaap:OperatingIncomeLoss): 4,465,000,000 USD for 2026-07-04 to 2026-10-02 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 2912,
+     "completion_tokens": 277,
+     "llm_calls": 3,
+     "cost_usd": 0.0,
+     "latency_ms": 80421.5
+    }
+   },
+   "wall_ms": 7.3,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10q2026q3-net_income",
+   "dataset": "smoke",
+   "question": "What was Apple's net income for the three months ended June 27, 2026 (fiscal 2026 Q3), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "gold": "$29,789,000,000 (about $29.79 billion)",
+   "gold_value": 29789000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "Apple's net income for the three months ended June 27, 2026 (fiscal 2026 Q3) was $29,789,000,000 USD [1].",
+    "refused": false,
+    "answer_value": 29789000000.0,
+    "answer_unit": "USD",
+    "citations": [
+     {
+      "chunk_id": "xbrl:AAPL:NetIncomeLoss:2026-03-29_2026-06-27:USD",
+      "filing_id": "AAPL-10Q-2026Q3",
+      "section": "XBRL companyfacts",
+      "page": null,
+      "page_end": null,
+      "quote": "Net Income (Loss) Attributable to Parent (us-gaap:NetIncomeLoss): 29,789,000,000 USD for 2026-03-29 to 2026-06-27 [Q]"
+     }
+    ],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "answer",
+     "verify",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 4279,
+     "completion_tokens": 287,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 77830.0
+    }
+   },
+   "wall_ms": 10.2,
+   "scores": {
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10k2025fy-cash",
+   "dataset": "smoke",
+   "question": "What were JPMorgan Chase's cash and due from banks as of the end of fiscal year 2025 (December 31, 2025), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "gold": "$21,742,000,000 (about $21.74 billion)",
+   "gold_value": 21742000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings do not provide the information on JPMorgan Chase's cash and due from banks as of the end of fiscal year 2025 (December 31, 2025).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3543,
+     "completion_tokens": 218,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 59445.600000000006
+    }
+   },
+   "wall_ms": 7.9,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10q2026q2-total_assets",
+   "dataset": "smoke",
+   "question": "What were Coca-Cola's total assets as of July 3, 2026 (end of fiscal 2026 Q2), in US dollars?",
+   "question_type": "single_fact",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2026,
+   "gold": "$107,922,000,000 (about $107.92 billion)",
+   "gold_value": 107922000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings do not provide Coca-Cola's total assets as of July 3, 2026 (end of fiscal 2026 Q2).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3519,
+     "completion_tokens": 209,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 56860.7
+    }
+   },
+   "wall_ms": 8.8,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10k2025fy-operating_income-yoy-abs",
+   "dataset": "smoke",
+   "question": "By how much did Apple's operating income change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "$9,834,000,000 (about $9.83 billion)",
+   "gold_value": 9834000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: no citation: the answer cites no supporting evidence"
+    ],
+    "usage": {
+     "prompt_tokens": 4643,
+     "completion_tokens": 571,
+     "llm_calls": 5,
+     "cost_usd": 0.0,
+     "latency_ms": 186124.7
+    }
+   },
+   "wall_ms": 10.4,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10k2025fy-net_income-yoy-abs",
+   "dataset": "smoke",
+   "question": "By how much did JPMorgan Chase's net income change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2025,
+   "gold": "-$1,423,000,000 (about -$1.42 billion)",
+   "gold_value": -1423000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: no citation: the answer cites no supporting evidence"
+    ],
+    "usage": {
+     "prompt_tokens": 4684,
+     "completion_tokens": 727,
+     "llm_calls": 5,
+     "cost_usd": 0.0,
+     "latency_ms": 207355.6
+    }
+   },
+   "wall_ms": 13.9,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10k2025fy-net_income-yoy-pct",
+   "dataset": "smoke",
+   "question": "By what percentage did Coca-Cola's net income change from fiscal year 2024 to fiscal year 2025? Give the signed percent change.",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "gold": "23.29%",
+   "gold_value": 23.2904,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: no citation: the answer cites no supporting evidence"
+    ],
+    "usage": {
+     "prompt_tokens": 4677,
+     "completion_tokens": 672,
+     "llm_calls": 5,
+     "cost_usd": 0.0,
+     "latency_ms": 167350.1
+    }
+   },
+   "wall_ms": 13.5,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10k2025fy-revenue-yoy-abs",
+   "dataset": "smoke",
+   "question": "By how much did Apple's total revenue change from fiscal year 2024 to fiscal year 2025, in US dollars? Give the signed change (negative for a decrease).",
+   "question_type": "yoy_change",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "$25,126,000,000 (about $25.13 billion)",
+   "gold_value": 25126000000.0,
+   "gold_unit": "USD",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: no citation: the answer cites no supporting evidence"
+    ],
+    "usage": {
+     "prompt_tokens": 4699,
+     "completion_tokens": 591,
+     "llm_calls": 5,
+     "cost_usd": 0.0,
+     "latency_ms": 163886.9
+    }
+   },
+   "wall_ms": 11.1,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.5,
+    "ndcg_at_10": 0.6309297535714575
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10k2025fy-net_margin",
+   "dataset": "smoke",
+   "question": "What was Apple's net profit margin (net income divided by total revenue, as a percentage) for fiscal year 2025 (the year ended September 27, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2025,
+   "gold": "26.92%",
+   "gold_value": 26.9151,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "The filings do not provide Apple's net profit margin for fiscal year 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3551,
+     "completion_tokens": 233,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 70507.70000000001
+    }
+   },
+   "wall_ms": 42.0,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-jpm-10q2026q2-net_margin",
+   "dataset": "smoke",
+   "question": "What was JPMorgan Chase's net profit margin (net income divided by total net revenue, as a percentage) for the three months ended June 30, 2026 (fiscal 2026 Q2)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "JPM",
+   "fiscal_year": 2026,
+   "gold": "36.89%",
+   "gold_value": 36.8895,
+   "gold_unit": "percent",
+   "prediction": {
+    "answer": "The filings do not provide JPMorgan Chase's net profit margin for the three months ended June 30, 2026 (fiscal 2026 Q2).",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "plan",
+     "search_filings",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3579,
+     "completion_tokens": 281,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 81632.1
+    }
+   },
+   "wall_ms": 43.6,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-ko-10k2025fy-current_ratio",
+   "dataset": "smoke",
+   "question": "What was Coca-Cola's current ratio (total current assets divided by total current liabilities) as of the end of fiscal year 2025 (December 31, 2025)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "KO",
+   "fiscal_year": 2025,
+   "gold": "1.46",
+   "gold_value": 1.4588,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The filings do not provide Coca-Cola's current ratio as of the end of fiscal year 2025.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "answer",
+     "self_check"
+    ],
+    "usage": {
+     "prompt_tokens": 3547,
+     "completion_tokens": 339,
+     "llm_calls": 4,
+     "cost_usd": 0.0,
+     "latency_ms": 94197.9
+    }
+   },
+   "wall_ms": 11.2,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  },
+  {
+   "qid": "smoke-aapl-10q2026q3-current_ratio",
+   "dataset": "smoke",
+   "question": "What was Apple's current ratio (total current assets divided by total current liabilities) as of June 27, 2026 (end of fiscal 2026 Q3)?",
+   "question_type": "multi_step",
+   "answerable": true,
+   "ticker": "AAPL",
+   "fiscal_year": 2026,
+   "gold": "1.00",
+   "gold_value": 1.0033,
+   "gold_unit": "ratio",
+   "prediction": {
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
+    "retrieved_chunk_ids": [],
+    "steps": [
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
+     "plan",
+     "calculate",
+     "plan",
+     "calculate",
+     "answer",
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: no citation: the answer cites no supporting evidence"
+    ],
+    "usage": {
+     "prompt_tokens": 8512,
+     "completion_tokens": 426,
+     "llm_calls": 5,
+     "cost_usd": 0.0,
+     "latency_ms": 177962.09999999998
+    }
+   },
+   "wall_ms": 11.8,
+   "scores": {
+    "numeric_correct": 0.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 1.0,
+    "ndcg_at_10": 1.0
+   },
+   "error": null,
+   "failure_category": null,
+   "failure_note": null
+  }
+ ]
+}
