@@ -1,0 +1,125 @@
+{
+ "args": {
+  "fiscal_year": 2025,
+  "form": "10-K",
+  "query": "Consolidated Statements of Financial Condition total assets",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00497",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 169,
+   "page_end": 169,
+   "section": "Part IV > Consolidated balance sheets",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0125"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets | p.169]\n| December 31, (in millions) | 2025 | 2024 |\n|---|---|---|\n| Assets |  |  |\n| Trading assets | $4,835 | $3,885 |\n| Loans | 37,777 | 36,510 |\n| All other assets | 683 | 681 |\n| Total assets | $43,295 | $41,076 |\n| Liabilities |  |  |\n| Beneficial interests issued by consolidated VIEs | $27,951 | $27,323 |\n| All other liabilities | 691 | 454 |\n| Total liabilities | $28,642 | $27,777 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00969",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 303,
+   "page_end": 303,
+   "section": "Part IV > Pledged assets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Pledged assets | p.303]\nTotal pledged assets do not include assets of consolidated VIEs; these assets are used to settle the liabilities of those entities. Refer to Note 14 for additional information on assets and liabilities of consolidated VIEs. Refer to Note 11 for additional information on the Firm’s securities financing activities. Refer to Note 20 for additional information on the Firm’s long-term debt. The significant components of the Firm’s pledged assets were as follows.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00495",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 169,
+   "page_end": 169,
+   "section": "Part IV > Consolidated balance sheets",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0124"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets | p.169]\n| December 31, (in millions, except share data) | 2025 | 2024 |\n|---|---|---|\n| Assets |  |  |\n| Cash and due from banks | $21,742 | $23,372 |\n| Deposits with banks | 321,596 | 445,945 |\n| Federal funds sold and securities purchased under resale agreements (included $327,018 and $286,771 at fair value) | 336,426 | 295,001 |\n| Securities borrowed (included $98,111 and $83,962 at fair value) | 286,191 | 219,546 |\n| Trading assets (included assets pledged of $165,927 and $136,070) | 802,873 | 637,784 |\n| Available-for-sale securities (amortized cost of $507,226 and $411,045 ; included assets pledged of $7,735 and $10,162) | 507,198 | 406,852 |\n| Held-to-maturity securities | 270,134 | 274,468 |\n| Investment securities, net of allowance for credit losses | 777,332 | 681,320 |\n| Loans (included $70,684 and $41,350 at fair value) | 1,493,429 | 1,347,988 |\n| Allowance for loan losses | (25,765) | (24,345) |\n| Loans, net of allowance for loan losses | 1,467,664 | 1,323,643 |\n| Accrued interest and accounts receivable | 111,599 | 101,223 |\n| Premises and equipment | 36,244 | 32,223 |\n| Goodwill, MSRs and other intangible assets | 64,458 | 64,560 |\n| Other assets (included $15,849 and $15,122 at fair value and assets pledged of $11,984 and $6,288) | 198,775 | 178,197 |\n| Total assets (a) | $4,424,900 | $4,002,814 |\n| Liabilities |  |  |\n| Deposits (included $20,930 and $33,768 at fair value) | $2,559,320 | $2,406,032 |\n| Federal funds purchased and securities loaned or sold under repurchase agreements (included $360,194 and $226,329 at fair value) | 442,396 | 296,835 |\n| Short-term borrowings (included $32,460 and $26,521 at fair value) | 64,776 | 52,893 |\n| Trading liabilities | 216,019 | 192,883 |\n| Accounts payable and other liabilities (included $6,660 and $5,893 at fair value) | 316,794 | 280,672 |\n| Beneficial interests issued by consolidated VIEs (included $5 and $1 at fair value) | 27,951 | 27,323 |\n| Long-term debt (included $134,559 and $100,780 at fair value) | 435,206 | 401,418 |\n| Total liabilities (a) | 4,062,462 | 3,658,056 |\n| Commitments and contingencies (refer to Notes 28, 29 and 30) |  |  |\n| Stockholders’ equity |  |  |\n| Preferred stock ($1 par value; authorized 200,000,000 shares: issued 2,005,375 and 2,005,375 shares) | 20,045 | 20,050 |\n| Common stock ($1 par value; authorized 9,000,000,000 shares; issued 4,104,933,895 shares) | 4,105 | 4,105 |\n| Additional paid-in capital | 91,114 | 90,911 |\n| Retained earnings | 416,055 | 376,166 |\n| Accumulated other comprehensive losses | (4,290) | (12,456) |\n| Treasury stock, at cost (1,408,661,319 and 1,307,313,494 shares) | (164,591) | (134,018) |\n| Total stockholders’ equity | 362,438 | 344,758 |\n| Total liabilities and stockholders’ equity | $4,424,900 | $4,002,814 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00833",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 269,
+   "page_end": 269,
+   "section": "Part IV > Consolidated VIE assets and liabilities",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0242"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated VIE assets and liabilities | p.269]\n| December 31, 2025 (in millions) | Assets Trading assets | Loans |  | Other (c) | Total assets (d) | Liabilities Beneficial interests in VIE assets (e) | Other (f) | Total liabilities |\n|---|---|---|---|---|---|---|---|---|\n| VIE program type |  |  |  |  |  |  |  |  |\n| Firm-sponsored credit card trusts | $— | $12,872 |  | $170 | $13,042 | $5,884 | $11 | $5,895 |\n| Firm-administered multi-seller conduits | — | 20,140 |  | 115 | 20,255 | 18,174 | 24 | 18,198 |\n| Municipal bond vehicles | 3,367 | — |  | 29 | 3,396 | 3,760 | 17 | 3,777 |\n| Mortgage securitization entities (a) | 2 | 566 |  | 9 | 577 | 105 | 40 | 145 |\n| Other | 1,466 | 4,199 | (b) | 360 | 6,025 | 28 | 599 | 627 |\n| Total | $4,835 | $37,777 |  | $683 | $43,295 | $27,951 | $691 | $28,642 |\n|  | Assets |  |  |  |  | Liabilities |  |  |\n| December 31, 2024 (in millions) | Trading assets | Loans |  | Other (c) | Total assets (d) | Beneficial interests in VIE assets (e) | Other (f) | Total liabilities |\n| VIE program type |  |  |  |  |  |  |  |  |\n| Firm-sponsored credit card trusts | $— | $13,531 |  | $168 | $13,699 | $5,312 | $10 | $5,322 |\n| Firm-administered multi-seller conduits | 1 | 20,383 |  | 133 | 20,517 | 18,228 | 26 | 18,254 |\n| Municipal bond vehicles | 3,388 | — |  | 22 | 3,410 | 3,617 | 15 | 3,632 |\n| Mortgage securitization entities (a) | — | 630 |  | 8 | 638 | 115 | 48 | 163 |\n| Other | 496 | 1,966 |  | 350 | 2,812 | 51 | 355 | 406 |\n| Total | $3,885 | $36,510 |  | $681 | $41,076 | $27,323 | $454 | $27,777 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00834",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 269,
+   "page_end": 269,
+   "section": "Part IV > Consolidated VIE assets and liabilities",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated VIE assets and liabilities | p.269]\n(a)Includes residential mortgage securitizations.\n\n(b)Primarily includes consumer loans in CIB.\n\n(c)Includes assets classified as cash and other asset line items on the Consolidated balance sheets.\n\n(d)The assets of the consolidated VIEs included in the program types above are used to settle the liabilities of those entities. The assets and liabilities include third-party assets and liabilities of consolidated VIEs and exclude intercompany balances that eliminate in consolidation.\n\n(e)The interest-bearing beneficial interest liabilities issued by consolidated VIEs are classified on the Consolidated balance sheets as “Beneficial interests issued by consolidated VIEs.” The holders of these beneficial interests generally do not have recourse to the general credit of JPMorganChase. Included in beneficial interests in VIE assets are long-term beneficial interests of $6.0 billion and $5.5 billion at December 31, 2025 and 2024, respectively.\n\n(f)Includes liabilities classified as accounts payable and other liabilities on the Consolidated balance sheets.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00508",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 173,
+   "page_end": 173,
+   "section": "Part IV > Use of estimates in the preparation of consolidated financial statements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Use of estimates in the preparation of consolidated financial statements | p.173]\nThe preparation of the Consolidated Financial Statements requires management to make estimates and assumptions that affect the reported amounts of assets and liabilities, revenue and expense, and disclosures of contingent assets and liabilities. Actual results could be different from these estimates.",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

@@ -1,0 +1,123 @@
+{
+ "args": {
+  "doc_name": "WALMART_2018_10K",
+  "query": "Consolidated Statements of Income Cost of sales"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00209",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 57,
+   "page_end": 57,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0049"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income | p.57]\n| (Amounts in millions, except per share data) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Revenues: |  |  |  |\n| Net sales | $495,761 | $481,317 | $478,614 |\n| Membership and other income | 4,582 | 4,556 | 3,516 |\n| Total revenues | 500,343 | 485,873 | 482,130 |\n| Costs and expenses: |  |  |  |\n| Cost of sales | 373,396 | 361,256 | 360,984 |\n| Operating, selling, general and administrative expenses | 106,510 | 101,853 | 97,041 |\n| Operating income | 20,437 | 22,764 | 24,105 |\n| Interest: |  |  |  |\n| Debt | 1,978 | 2,044 | 2,027 |\n| Capital lease and financing obligations | 352 | 323 | 521 |\n| Interest income | (152) | (100) | (81) |\n| Interest, net | 2,178 | 2,267 | 2,467 |\n| Loss on extinguishment of debt | 3,136 | — | — |\n| Income before income taxes | 15,123 | 20,497 | 21,638 |\n| Provision for income taxes | 4,600 | 6,204 | 6,558 |\n| Consolidated net income | 10,523 | 14,293 | 15,080 |\n| Consolidated net income attributable to noncontrolling interest | (661) | (650) | (386) |\n| Consolidated net income attributable to Walmart | $9,862 | $13,643 | $14,694 |\n| Net income per common share: |  |  |  |\n| Basic net income per common share attributable to Walmart | $3.29 | $4.40 | $4.58 |\n| Diluted net income per common share attributable to Walmart | 3.28 | 4.38 | 4.57 |\n| Weighted-average common shares outstanding: |  |  |  |\n| Basic | 2,995 | 3,101 | 3,207 |\n| Diluted | 3,010 | 3,112 | 3,217 |\n| Dividends declared per common share | $2.04 | $2.00 | $1.96 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00240",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 67,
+   "page_end": 67,
+   "section": "Item 8. Financial Statements And Supplementary Data > Cost of Sales",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Cost of Sales | p.67]\nCost of sales includes actual product cost, the cost of transportation to the Company's distribution facilities, stores and clubs from suppliers, the cost of transportation from the Company's distribution facilities to the stores, clubs and customers and the cost of warehousing for the Sam's Club segment and import distribution centers. Cost of sales is reduced by supplier payments that are not a reimbursement of specific, incremental and identifiable costs.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00211",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 58,
+   "page_end": 58,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0050"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Comprehensive Income | p.58]\n| (Amounts in millions) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Consolidated net income | $10,523 | $14,293 | $15,080 |\n| Consolidated net income attributable to noncontrolling interest | (661) | (650) | (386) |\n| Consolidated net income attributable to Walmart | 9,862 | 13,643 | 14,694 |\n| Other comprehensive income (loss), net of income taxes |  |  |  |\n| Currency translation and other | 2,540 | (3,027) | (5,220) |\n| Net investment hedges | (405) | 413 | 366 |\n| Unrealized gain on available-for-sale securities | 1,501 | 145 | — |\n| Cash flow hedges | 437 | 21 | (202) |\n| Minimum pension liability | 147 | (397) | 86 |\n| Other comprehensive income (loss), net of income taxes | 4,220 | (2,845) | (4,970) |\n| Other comprehensive (income) loss attributable to noncontrolling interest | (169) | 210 | 541 |\n| Other comprehensive income (loss) attributable to Walmart | 4,051 | (2,635) | (4,429) |\n| Comprehensive income, net of income taxes | 14,743 | 11,448 | 10,110 |\n| Comprehensive (income) loss attributable to noncontrolling interest | (830) | (440) | 155 |\n| Comprehensive income attributable to Walmart | $13,913 | $11,008 | $10,265 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00262",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 71,
+   "page_end": 71,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 4. Accumulated Other Comprehensive Loss",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Note 4. Accumulated Other Comprehensive Loss | p.71]\nAmounts reclassified from accumulated other comprehensive loss for derivative instruments are recorded in interest, net, in the Company's Consolidated Statements of Income, and the amounts for the minimum pension liability are recorded in operating, selling, general and administrative expenses in the Company's Consolidated Statements of Income. The income tax impact for each of the amounts shown in the table above is immaterial.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00200",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 53,
+   "page_end": 53,
+   "section": "Item 8. Financial Statements And Supplementary Data > Table of Contents",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0048"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Table of Contents | p.53]\n|  | Page |\n|---|---|\n| Management's Report to Our Shareholders | 52 |\n| Report of Independent Registered Public Accounting Firm | 53 |\n| Report of Independent Registered Public Accounting Firm on Internal Control over Financial Reporting | 54 |\n| Consolidated Statements of Income | 55 |\n| Consolidated Statements of Comprehensive Income | 56 |\n| Consolidated Balance Sheets | 57 |\n| Consolidated Statements of Shareholders' Equity | 58 |\n| Consolidated Statements of Cash Flows | 59 |\n| Notes to Consolidated Financial Statements | 60 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00210",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 57,
+   "page_end": 57,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income | p.57]\nSee accompanying notes.",
+   "ticker": "WMT"
+  }
+ ],
+ "tool": "search_filings"
+}

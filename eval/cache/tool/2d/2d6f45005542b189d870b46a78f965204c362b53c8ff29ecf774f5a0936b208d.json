@@ -1,0 +1,127 @@
+{
+ "args": {
+  "fiscal_year": 2026,
+  "form": "10-Q",
+  "query": "Consolidated Statements of Income June 30 2026 net revenue net income",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00286",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 93,
+   "page_end": 93,
+   "section": "Consolidated statements of income (unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0099"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Consolidated statements of income (unaudited) | p.93]\n| (in millions, except per share data) | Three months ended June 30, 2026 | 2025 | Six months ended June 30, 2026 | 2025 |\n|---|---|---|---|---|\n| Revenue |  |  |  |  |\n| Investment banking fees | $3,208 | $2,499 | $6,066 | $4,677 |\n| Principal transactions | 9,007 | 7,149 | 16,994 | 14,763 |\n| Lending- and deposit-related fees | 2,511 | 2,248 | 4,905 | 4,380 |\n| Asset management fees | 5,658 | 4,806 | 11,173 | 9,506 |\n| Commissions and other fees | 2,614 | 2,194 | 5,096 | 4,227 |\n| Investment securities losses | (395) | (54) | (331) | (91) |\n| Mortgage fees and related income | 336 | 363 | 645 | 641 |\n| Card income | 1,348 | 1,344 | 2,538 | 2,560 |\n| Other income | 7,549 | 1,154 | 9,220 | 3,077 |\n| Noninterest revenue | 31,836 | 21,703 | 56,306 | 43,740 |\n| Interest income | 50,624 | 48,241 | 99,815 | 95,094 |\n| Interest expense | 25,113 | 25,032 | 48,938 | 48,612 |\n| Net interest income | 25,511 | 23,209 | 50,877 | 46,482 |\n| Total net revenue | 57,347 | 44,912 | 107,183 | 90,222 |\n| Provision for credit losses | 2,515 | 2,849 | 5,022 | 6,154 |\n| Noninterest expense |  |  |  |  |\n| Compensation expense | 15,159 | 13,710 | 30,498 | 27,803 |\n| Occupancy expense | 1,482 | 1,264 | 2,929 | 2,566 |\n| Technology, communications and equipment expense | 3,107 | 2,704 | 6,128 | 5,282 |\n| Professional and outside services | 3,855 | 3,006 | 7,338 | 5,845 |\n| Marketing | 1,670 | 1,279 | 3,274 | 2,583 |\n| Other expense | 2,043 | 1,816 | 3,999 | 3,297 |\n| Total noninterest expense | 27,316 | 23,779 | 54,166 | 47,376 |\n| Income before income tax expense | 27,516 | 18,284 | 47,995 | 36,692 |\n| Income tax expense | 6,361 | 3,297 | 10,346 | 7,062 |\n| Net income | $21,155 | $14,987 | $37,649 | $29,630 |\n| Net income applicable to common stockholders | $20,752 | $14,630 | $36,901 | $28,948 |\n| Net income per common share data |  |  |  |  |\n| Basic earnings per share | $7.71 | $5.25 | $13.65 | $10.32 |\n| Diluted earnings per share | 7.70 | 5.24 | 13.63 | 10.31 |\n| Weighted-average basic shares | 2,689.9 | 2,788.7 | 2,703.1 | 2,804.0 |\n| Weighted-average diluted shares | 2,694.2 | 2,793.7 | 2,707.2 | 2,809.0 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00288",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 94,
+   "page_end": 94,
+   "section": "Consolidated statements of comprehensive income (unaudited)",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0100"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Consolidated statements of comprehensive income (unaudited) | p.94]\n| (in millions) | Three months ended June 30, 2026 | 2025 | Six months ended June 30, 2026 | 2025 |\n|---|---|---|---|---|\n| Net income | $21,155 | $14,987 | $37,649 | $29,630 |\n| Other comprehensive income/(loss), after–tax |  |  |  |  |\n| Unrealized gains/(losses) on investment securities | 320 | (188) | (2,081) | 765 |\n| Translation adjustments, net of hedges | (21) | 868 | (188) | 1,357 |\n| Fair value hedges | (9) | (8) | 32 | 20 |\n| Cash flow hedges | (948) | 1,529 | (1,849) | 3,203 |\n| Defined benefit pension and OPEB plans | 37 | (28) | 41 | (44) |\n| DVA on fair value option elected liabilities | (383) | (305) | 642 | (88) |\n| Total other comprehensive income/(loss), after–tax | (1,004) | 1,868 | $(3,403) | 5,213 |\n| Comprehensive income | $20,151 | $16,855 | $34,246 | $34,843 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00592",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 175,
+   "page_end": 175,
+   "section": "Note 19 – Accumulated other comprehensive income/(loss)",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-Q Q2 FY2026 | Note 19 – Accumulated other comprehensive income/(loss) | p.175]\n(a)The pre-tax amount is reported in Investment securities gains/(losses) in the Consolidated statements of income.\n\n(b)Reclassifications of pre-tax realized gains/(losses) on translation adjustments and related hedges are reported in other income/expense in the Consolidated statements of income. The net amounts reclassified during the three and six months ended June 30, 2026 were not material. There were no sales or liquidations of legal entities that resulted in reclassifications for the three and six months ended June 30, 2025.\n\n(c)Represents changes in fair value of cross-currency swaps attributable to changes in cross-currency basis spreads, which are excluded from the assessment of hedge effectiveness and recorded in other comprehensive income. The initial cost of cross-currency basis spreads is recognized in earnings as part of the accrual of interest on the cross-currency swaps.\n\n(d)The pre-tax amounts are primarily recorded in noninterest revenue, net interest income and compensation expense in the Consolidated statements of income.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00103",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 35,
+   "page_end": 35,
+   "section": "Markets revenue",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0039"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Markets revenue | p.35]\n| Selected income statement data (in millions, except ratios) 2026 | Three months ended June 30, 2025 |  | Change | 2026 | Six months ended June 30, 2025 |  | Change |  |\n|---|---|---|---|---|---|---|---|---|\n| Revenue |  |  |  |  |  |  |  |  |\n| Asset management fees | $4,227 | $3,642 |  | 16% | $8,352 | $7,237 |  | 15% |\n| Commissions and other fees | 445 | 314 |  | 42 | 814 | 587 |  | 39 |\n| All other income | 370 | 117 |  | 216 | 524 | 242 |  | 117 |\n| Noninterest revenue | 5,042 | 4,073 |  | 24 | 9,690 | 8,066 |  | 20 |\n| Net interest income | 1,809 | 1,687 |  | 7 | 3,535 | 3,425 |  | 3 |\n| Total net revenue | 6,851 | 5,760 |  | 19 | 13,225 | 11,491 |  | 15 |\n| Provision for credit losses | 13 | 46 |  | (72) | (11) | 36 |  | NM |\n| Noninterest expense |  |  |  |  |  |  |  |  |\n| Compensation expense | 2,322 | 2,083 | (b) | 11 | 4,661 | 4,150 | (b) | 12 |\n| Noncompensation expense (a) | 1,885 | 1,650 | (b) | 14 | 3,713 | 3,296 | (b) | 13 |\n| Total noninterest expense | 4,207 | 3,733 |  | 13 | 8,374 | 7,446 |  | 12 |\n| Income before income tax expense | 2,631 | 1,981 |  | 33 | 4,862 | 4,009 |  | 21 |\n| Income tax expense | 674 | 508 |  | 33 | 1,130 | 953 |  | 19 |\n| Net income | $1,957 | $1,473 |  | 33 | $3,732 | $3,056 |  | 22 |\n| Revenue by line of business |  |  |  |  |  |  |  |  |\n| Asset Management | $3,320 | $2,705 |  | 23 | $6,392 | $5,376 |  | 19 |\n| Global Private Bank | 3,531 | 3,055 |  | 16 | 6,833 | 6,115 |  | 12 |\n| Total net revenue | $6,851 | $5,760 |  | 19% | $13,225 | $11,491 |  | 15% |\n| Financial ratios |  |  |  |  |  |  |  |  |\n| Return on equity | 48% | 36% |  |  | 46% | 38% |  |  |\n| Overhead ratio | 61 | 65 |  |  | 63 | 65 |  |  |\n| Pre-tax margin ratio: |  |  |  |  |  |  |  |  |\n| Asset Management | 36 | 33 |  |  | 35 | 33 |  |  |\n| Global Private Bank | 40 | 36 |  |  | 38 | 37 |  |  |\n| Asset & Wealth Management | 38 | 34 |  |  | 37 | 35 |  |  |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00381",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 126,
+   "page_end": 127,
+   "section": "Impact of derivatives on the Consolidated statements of income",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-Q Q2 FY2026 | Impact of derivatives on the Consolidated statements of income | pp.126-127]\n(a)Primarily consists of hedges of SOFR-indexed and Prime-indexed floating-rate assets. Gains and losses were recorded in net interest income.\n\n(b)Primarily consists of hedges of the foreign currency risk of non-U.S. dollar-denominated revenue and expense. The income statement classification of gains and losses follows the hedged item – primarily noninterest revenue and compensation expense.\n\nThe Firm did not experience any forecasted transactions that failed to occur for the three and six months ended June 30, 2026 and 2025.\n\nOver the next 12 months, the Firm expects that approximately $(1.7) billion (after-tax) of net losses recorded in AOCI at June 30, 2026, related to cash flow hedges will be recognized in income. For cash flow hedges that have been terminated, the maximum length of time over which the derivative results recorded in AOCI will be recognized in earnings is approximately ten years, corresponding to the timing of the originally hedged forecasted cash flows. For open cash flow hedges, the maximum length of time over which forecasted transactions are hedged is approximately ten years. The Firm’s longer-dated forecasted transactions relate to core lending and borrowing activities.\n\nNet investment hedge gains and losses\n\nThe following table presents hedging instruments, by contract type, that were used in net investment hedge accounting relationships, and the pre-tax gains/(losses) recorded on such instruments for the three and six months ended June 30, 2026 and 2025.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10Q-2026Q2:section:00098",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 33,
+   "page_end": 33,
+   "section": "Markets revenue",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q2:table:0036"
+   ],
+   "text": "[JPM 10-Q Q2 FY2026 | Markets revenue | p.33]\n| (in millions) | Three months ended June 30, 2026 Fixed Income Markets | Equity Markets | Total Markets | Three months ended June 30, 2025 Fixed Income Markets | Equity Markets | Total Markets |\n|---|---|---|---|---|---|---|\n| Principal transactions | $2,858 | $5,925 | $8,783 | $3,205 | $3,865 | $7,070 |\n| Lending- and deposit-related fees | 120 | 65 | 185 | 133 | 41 | 174 |\n| Commissions and other fees | 127 | 754 | 881 | 170 | 590 | 760 |\n| All other income | 369 | (85) | 284 | 399 | (28) | 371 |\n| Noninterest revenue | 3,474 | 6,659 | 10,133 | 3,907 | 4,468 | 8,375 |\n| Net interest income | 2,579 | (634) | 1,945 | 1,783 | (1,222) | 561 |\n| Total net revenue | $6,053 | $6,025 | $12,078 | $5,690 | $3,246 | $8,936 |\n|  | Six months ended June 30, |  |  | Six months ended June 30, |  |  |\n|  | 2026 |  |  | 2025 |  |  |\n| (in millions) | Fixed Income Markets | Equity Markets | Total Markets | Fixed Income Markets | Equity Markets | Total Markets |\n| Principal transactions | $6,666 | $9,960 | $16,626 | $6,627 | $8,039 | $14,666 |\n| Lending- and deposit-related fees | 220 | 118 | 338 | 243 | 74 | 317 |\n| Commissions and other fees | 296 | 1,561 | 1,857 | 331 | 1,196 | 1,527 |\n| All other income | 802 | (130) | 672 | 782 | (39) | 743 |\n| Noninterest revenue | 7,984 | 11,509 | 19,493 | 7,983 | 9,270 | 17,253 |\n| Net interest income | 5,147 | (1,003) | 4,144 | 3,556 | (2,210) | 1,346 |\n| Total net revenue | $13,131 | $10,506 | $23,637 | $11,539 | $7,060 | $18,599 |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

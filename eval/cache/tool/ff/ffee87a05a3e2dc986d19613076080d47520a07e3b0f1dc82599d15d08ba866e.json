@@ -1,0 +1,121 @@
+{
+ "args": {
+  "fiscal_year": 2025,
+  "form": "10-K",
+  "query": "Consolidated balance sheets Cash and due from banks",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00512",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 174,
+   "page_end": 174,
+   "section": "Part IV > Statements of cash flows",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Statements of cash flows | p.174]\nFor JPMorganChase’s Consolidated statements of cash flows, cash is defined as those amounts included in cash and due from banks and deposits with banks on the Consolidated balance sheets.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00164",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 58,
+   "page_end": 58,
+   "section": "Part IV > Consolidated balance sheets analysis",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets analysis | p.58]\nThere was also a $3.0 billion net addition to the allowance for lending-related commitments recognized in other liabilities on the Consolidated balance sheets. The net addition was predominantly driven by $2.2 billion related to the Apple Card transaction and the impact of new lending-related commitments.\n\nRefer to Consolidated Results of Operations and Credit and Investment Risk Management on pages 51–54 and pages 109–132, respectively, Critical Accounting Estimates Used by the Firm on pages 154–157, and Notes 2, 3, 12 and 13 for additional information on loans and the total allowance for credit losses.\n\nAccrued interest and accounts receivable increased predominantly due to higher client-driven activities in Markets.\n\nPremises and equipment increased, reflecting the impact of net additions and improvements to the Firm’s properties, including its new headquarters, bank branches and other corporate offices. Refer to Notes 16 and 18 for additional information.\n\nGoodwill, MSRs and other intangibles: Refer to Note 15 for additional information.\n\nOther assets increased predominantly due to higher cash collateral placed with counterparties in Markets, and higher auto operating lease assets in CCB.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00162",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 57,
+   "page_end": 57,
+   "section": "Part IV > Consolidated balance sheets analysis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0030"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets analysis | p.57]\n| Selected Consolidated balance sheets data December 31, (in millions) | 2025 | 2024 | Change |\n|---|---|---|---|\n| Assets |  |  |  |\n| Cash and due from banks | $21,742 | $23,372 | (7)% |\n| Deposits with banks | 321,596 | 445,945 | (28) |\n| Federal funds sold and securities purchased under resale agreements | 336,426 | 295,001 | 14 |\n| Securities borrowed | 286,191 | 219,546 | 30 |\n| Trading assets | 802,873 | 637,784 | 26 |\n| Available-for-sale securities | 507,198 | 406,852 | 25 |\n| Held-to-maturity securities | 270,134 | 274,468 | (2) |\n| Investment securities, net of allowance for credit losses | 777,332 | 681,320 | 14 |\n| Loans | 1,493,429 | 1,347,988 | 11 |\n| Allowance for loan losses | (25,765) | (24,345) | 6 |\n| Loans, net of allowance for loan losses | 1,467,664 | 1,323,643 | 11 |\n| Accrued interest and accounts receivable | 111,599 | 101,223 | 10 |\n| Premises and equipment | 36,244 | 32,223 | 12 |\n| Goodwill, MSRs and other intangible assets | 64,458 | 64,560 | — |\n| Other assets | 198,775 | 178,197 | 12 |\n| Total assets | $4,424,900 | $4,002,814 | 11% |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00163",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 57,
+   "page_end": 58,
+   "section": "Part IV > Consolidated balance sheets analysis",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets analysis | pp.57-58]\nCash and due from banks and deposits with banks decreased driven by Markets activities in CIB, higher investment securities, higher loans and cash deployment in Treasury and CIO, largely offset by the impact of higher deposits and higher long-term debt.\n\nFederal funds sold and securities purchased under resale agreements increased driven by Markets, reflecting the impact of lower levels of netting, higher collateral requirements and higher demand for securities to cover short positions.\n\nSecurities borrowed increased driven by Markets, reflecting higher client-driven activities and higher demand for securities to cover short positions.\n\nRefer to Note 11 for additional information on securities purchased under resale agreements and securities borrowed.\n\nTrading assets increased predominantly driven by Markets, due to higher levels of debt instruments, partially offset by lower levels of equity instruments, both related to client-driven market-making activities. Refer to Notes 2 and 5 for additional information.\n\nInvestment securities increased. Excluding a non-cash transfer in the third quarter of 2025 of $44.1 billion of securities from available-for-sale (\"AFS\") to held-to-maturity (“HTM”) for asset-liability management purposes,\n\n•AFS securities increased driven by net purchases, predominantly U.S. Treasuries and non-U.S. government debt securities, partially offset by maturities and paydowns; and\n\n•HTM securities decreased driven by maturities and paydowns.\n\nRefer to Corporate results on pages 80–82, Investment Portfolio Risk Management on page 132, and Notes 2 and 10 for additional information.\n\nLoans increased, reflecting:\n\n•higher wholesale loans, predominantly in Markets associated with higher client demand,\n\n•higher securities-based lending in AWM due to higher client demand, and\n\n•higher outstanding balances in Card Services driven by growth in new accounts and higher revolving balances,\n\npartially offset by\n\n•a decline in Home Lending as loan sales and paydowns outpaced originations.\n\nThe allowance for loan losses increased, reflecting a net addition to the allowance for loan losses of $1.4 billion, and consisted of:\n\n•$1.1 billion in consumer, driven by loan growth in Card Services and the impact of changes in the Firm's weighted-average macroeconomic outlook, partially offset by reduced borrower uncertainty, and\n\n•$350 million in wholesale, driven by a net increase in the loan portfolio, an update to loss assumptions on certain leveraged loans, and net changes in credit quality of client-specific exposures, partially offset by a reduction due to the impact of charge-offs and changes in the Firm's weighted-average macroeconomic outlook.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00937",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 294,
+   "page_end": 294,
+   "section": "Part IV > Restricted cash and other restricted assets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Restricted cash and other restricted assets | p.294]\n(a)Comprises $27.8 billion and $26.1 billion in deposits with banks, and $1.2 billion and $1.4 billion in cash and due from banks on the Consolidated balance sheets as of December 31, 2025 and 2024, respectively.\n\nAlso, as of December 31, 2025 and 2024, the Firm had the following other restricted assets:\n\n•Cash and securities pledged with clearing organizations for the benefit of customers of $44.9 billion and $40.7 billion, respectively.\n\n•Securities with a fair value of $40.8 billion and $26.8 billion, respectively, in relation to customer activity.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:01017",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 319,
+   "page_end": 319,
+   "section": "Part IV > Consolidated average balance sheets, interest and rates",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated average balance sheets, interest and rates | p.319]\n(a)The rates reflect the impact of interest earned on cash collateral where that cash collateral has been netted against certain derivative payables.\n\n(b)Represents the amount of noninterest-bearing liabilities funding interest-earning assets.\n\nRefer to the “Net interest income” discussion in Consolidated Results of Operations on pages 51–54 for further information.",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

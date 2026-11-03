@@ -1,0 +1,33 @@
+{
+ "args": {
+  "chunk_id": "JPM-10Q-2026Q1:section:00623"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10Q-2026Q1:section:00623",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 169,
+   "page_end": 169,
+   "section": "Basis for Review Results",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10Q-2026Q1:table:0233"
+   ],
+   "text": "[JPM 10-Q Q1 FY2026 | Basis for Review Results | p.169]\n| JPMorgan Chase & Co. Consolidated average balance sheets, interest and rates (unaudited) (Taxable-equivalent interest and rates; in millions, except rates) | Three months ended March 31, 2026 |  |  |  | Three months ended March 31, 2025 |  |  |  |\n|---|---|---|---|---|---|---|---|---|\n|  | Average balance | Interest (f) | Rate (annualized) |  | Average balance | Interest (f) | Rate (annualized) |  |\n| Assets |  |  |  |  |  |  |  |  |\n| Deposits with banks | $312,890 | $2,317 | 3.00% |  | $446,044 | $4,139 | 3.76% |  |\n| Federal funds sold and securities purchased under resale agreements | 437,916 | 4,185 | 3.88 |  | 377,998 | 4,216 | 4.52 |  |\n| Securities borrowed | 286,689 | 2,368 | 3.35 |  | 241,003 | 2,307 | 3.88 |  |\n| Trading assets – debt instruments | 682,348 | 7,233 | 4.30 |  | 495,143 | 5,568 | 4.56 |  |\n| Taxable securities | 774,201 | 6,975 | 3.65 |  | 638,124 | 5,992 | 3.81 |  |\n| Nontaxable securities (a) | 28,064 | 329 | 4.75 |  | 26,846 | 310 | 4.68 |  |\n| Total investment securities | 802,265 | 7,304 | 3.69 | (g) | 664,970 | 6,302 | 3.84 | (g) |\n| Loans | 1,486,145 | 24,078 | 6.57 |  | 1,339,391 | 22,471 | 6.80 |  |\n| All other interest-earning assets (b)(c) | 127,484 | 1,819 | 5.79 |  | 103,835 | 1,952 | 7.63 |  |\n| Total interest-earning assets | 4,135,737 | 49,304 | 4.83 |  | 3,668,384 | 46,955 | 5.19 |  |\n| Allowance for loan losses | (25,716) |  |  |  | (24,338) |  |  |  |\n| Cash and due from banks | 23,552 |  |  |  | 22,548 |  |  |  |\n| Trading assets – equity and other instruments | 241,307 |  |  |  | 225,468 |  |  |  |\n| Trading assets – derivative receivables | 68,328 |  |  |  | 59,099 |  |  |  |\n| Goodwill, MSRs and other intangible Assets | 64,316 |  |  |  | 64,437 |  |  |  |\n| All other noninterest-earning assets | 251,213 |  |  |  | 219,716 |  |  |  |\n| Total assets | $4,758,737 |  |  |  | $4,235,314 |  |  |  |\n| Liabilities |  |  |  |  |  |  |  |  |\n| Interest-bearing deposits | $1,991,590 | $10,284 | 2.09% |  | $1,842,888 | $11,077 | 2.44% |  |\n| Federal funds purchased and securities loaned or sold under repurchase agreements | 657,816 | 6,145 | 3.79 |  | 465,203 | 5,189 | 4.52 |  |\n| Short-term borrowings | 55,469 | 525 | 3.85 |  | 49,291 | 535 | 4.40 |  |\n| Trading liabilities – debt and all other interest-bearing liabilities (d)(e) | 324,559 | 2,263 | 2.83 |  | 288,140 | 2,091 | 2.94 |  |\n| Beneficial interests issued by consolidated VIEs | 27,519 | 266 | 3.92 |  | 25,775 | 296 | 4.66 |  |\n| Long-term debt | 367,478 | 4,342 | 4.79 |  | 344,945 | 4,392 | 5.16 |  |\n| Total interest-bearing liabilities | 3,424,431 | 23,825 | 2.82 |  | 3,016,242 | 23,580 | 3.17 |  |\n| Noninterest-bearing deposits | 611,294 |  |  |  | 587,417 |  |  |  |\n| Trading liabilities – equity and other instruments (e) | 57,021 |  |  |  | 37,671 |  |  |  |\n| Trading liabilities – derivative payables | 55,309 |  |  |  | 41,087 |  |  |  |\n| All other liabilities, including the allowance for lending-related commitments | 249,587 |  |  |  | 208,539 |  |  |  |\n| Total liabilities | 4,397,642 |  |  |  | 3,890,956 |  |  |  |\n| Stockholders’ equity |  |  |  |  |  |  |  |  |\n| Preferred stock | 20,045 |  |  |  | 20,013 |  |  |  |\n| Common stockholders’ equity | 341,050 |  |  |  | 324,345 |  |  |  |\n| Total stockholders’ equity | 361,095 |  |  |  | 344,358 |  |  |  |\n| Total liabilities and stockholders’ equity | $4,758,737 |  |  |  | $4,235,314 |  |  |  |\n| Interest rate spread |  |  | 2.01% |  |  |  | 2.02% |  |\n| Net interest income and net yield on interest-earning assets |  | $25,479 | 2.50 |  |  | $23,375 | 2.58 |  |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "get_table"
+}

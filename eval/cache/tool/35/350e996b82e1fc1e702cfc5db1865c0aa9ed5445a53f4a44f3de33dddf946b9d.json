@@ -1,0 +1,122 @@
+{
+ "args": {
+  "doc_name": "WALMART_2018_10K",
+  "query": "Consolidated Statements of Income Cost of sales inventories accounts payable",
+  "ticker": "WMT"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00225",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 64,
+   "page_end": 64,
+   "section": "Item 8. Financial Statements And Supplementary Data > Inventories",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Inventories | p.64]\nThe Company values inventories at the lower of cost or market as determined primarily by the retail inventory method of accounting, using the last-in, first-out (\"LIFO\") method for Walmart U.S. segment's inventories. The inventory at the Walmart International segment is valued primarily by the retail inventory method of accounting, using the first-in, first-out (\"FIFO\") method. The retail inventory method of accounting results in inventory being valued at the lower of cost or market, since permanent markdowns are immediately recorded as a reduction of the retail value of inventory. The inventory at the Sam's Club segment is valued using the weighted-average cost LIFO method. At January 31, 2018 and January 31, 2017 , the Company's inventories valued at LIFO approximated those inventories as if they were valued at FIFO.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00209",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 57,
+   "page_end": 57,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0049"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Income | p.57]\n| (Amounts in millions, except per share data) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Revenues: |  |  |  |\n| Net sales | $495,761 | $481,317 | $478,614 |\n| Membership and other income | 4,582 | 4,556 | 3,516 |\n| Total revenues | 500,343 | 485,873 | 482,130 |\n| Costs and expenses: |  |  |  |\n| Cost of sales | 373,396 | 361,256 | 360,984 |\n| Operating, selling, general and administrative expenses | 106,510 | 101,853 | 97,041 |\n| Operating income | 20,437 | 22,764 | 24,105 |\n| Interest: |  |  |  |\n| Debt | 1,978 | 2,044 | 2,027 |\n| Capital lease and financing obligations | 352 | 323 | 521 |\n| Interest income | (152) | (100) | (81) |\n| Interest, net | 2,178 | 2,267 | 2,467 |\n| Loss on extinguishment of debt | 3,136 | — | — |\n| Income before income taxes | 15,123 | 20,497 | 21,638 |\n| Provision for income taxes | 4,600 | 6,204 | 6,558 |\n| Consolidated net income | 10,523 | 14,293 | 15,080 |\n| Consolidated net income attributable to noncontrolling interest | (661) | (650) | (386) |\n| Consolidated net income attributable to Walmart | $9,862 | $13,643 | $14,694 |\n| Net income per common share: |  |  |  |\n| Basic net income per common share attributable to Walmart | $3.29 | $4.40 | $4.58 |\n| Diluted net income per common share attributable to Walmart | 3.28 | 4.38 | 4.57 |\n| Weighted-average common shares outstanding: |  |  |  |\n| Basic | 2,995 | 3,101 | 3,207 |\n| Diluted | 3,010 | 3,112 | 3,217 |\n| Dividends declared per common share | $2.04 | $2.00 | $1.96 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00217",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": true,
+   "page": 62,
+   "page_end": 62,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Cash Flows",
+   "strategy": "section",
+   "table_ids": [
+    "FB-WALMART_2018_10K:table:0053"
+   ],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Consolidated Statements of Cash Flows | p.62]\n| (Amounts in millions) | Fiscal Years Ended January 2018 | 31, 2017 | 2016 |\n|---|---|---|---|\n| Cash flows from operating activities: |  |  |  |\n| Consolidated net income | $10,523 | $14,293 | $15,080 |\n| Adjustments to reconcile consolidated net income to net cash provided by operating activities: |  |  |  |\n| Depreciation and amortization | 10,529 | 10,080 | 9,454 |\n| Deferred income taxes | (304) | 761 | (672) |\n| Loss on extinguishment of debt | 3,136 | — | — |\n| Other operating activities | 1,210 | 206 | 1,410 |\n| Changes in certain assets and liabilities, net of effects of acquisitions: |  |  |  |\n| Receivables, net | (1,074) | (402) | (19) |\n| Inventories | (140) | 1,021 | (703) |\n| Accounts payable | 4,086 | 3,942 | 2,008 |\n| Accrued liabilities | 928 | 1,280 | 1,466 |\n| Accrued income taxes | (557) | 492 | (472) |\n| Net cash provided by operating activities | 28,337 | 31,673 | 27,552 |\n| Cash flows from investing activities: |  |  |  |\n| Payments for property and equipment | (10,051) | (10,619) | (11,477) |\n| Proceeds from the disposal of property and equipment | 378 | 456 | 635 |\n| Proceeds from the disposal of certain operations | 1,046 | 662 | 246 |\n| Purchase of available for sale securities | — | (1,901) | — |\n| Business acquisitions, net of cash acquired | (375) | (2,463) | — |\n| Other investing activities | (58) | (122) | (79) |\n| Net cash used in investing activities | (9,060) | (13,987) | (10,675) |\n| Cash flows from financing activities: |  |  |  |\n| Net change in short-term borrowings | 4,148 | (1,673) | 1,235 |\n| Proceeds from issuance of long-term debt | 7,476 | 137 | 39 |\n| Repayments of long-term debt | (13,061) | (2,055) | (4,432) |\n| Premiums paid to extinguish debt | (3,059) | — | — |\n| Dividends paid | (6,124) | (6,216) | (6,294) |\n| Purchase of Company stock | (8,296) | (8,298) | (4,112) |\n| Dividends paid to noncontrolling interest | (690) | (479) | (719) |\n| Purchase of noncontrolling interest | (8) | (90) | (1,326) |\n| Other financing activities | (261) | (398) | (676) |\n| Net cash used in financing activities | (19,875) | (19,072) | (16,285) |\n| Effect of exchange rates on cash and cash equivalents | 487 | (452) | (1,022) |\n| Net increase (decrease) in cash and cash equivalents | (111) | (1,838) | (430) |\n| Cash and cash equivalents at beginning of year | 6,867 | 8,705 | 9,135 |\n| Cash and cash equivalents at end of year | $6,756 | $6,867 | $8,705 |\n| Supplemental disclosure of cash flow information: |  |  |  |\n| Income taxes paid | 6,179 | 4,507 | 8,111 |\n| Interest paid | 2,450 | 2,351 | 2,540 |",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00189",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 49,
+   "page_end": 49,
+   "section": "Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Inventories",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS Overview > Inventories | p.49]\nWe value inventories at the lower of cost or market as determined primarily by the retail inventory method of accounting, using the last-in, first-out (\"LIFO\") method for Walmart U.S. segment's inventories. The inventory at the Walmart International segment is valued primarily by the retail inventory method of accounting, using the first-in, first-out (\"FIFO\") method. The retail inventory method of accounting results in inventory being valued at the lower of cost or market, since permanent markdowns are immediately recorded as a reduction of the retail value of inventory. The inventory at the Sam's Club segment is valued using the weighted-average cost LIFO method.\n\nUnder the retail method of accounting, inventory is valued at the lower of cost or market, which is determined by applying a cost-to-retail ratio to each merchandise grouping's retail value. The FIFO cost-to-retail ratio is generally based on the fiscal year purchase activity. The cost-to-retail ratio for measuring any LIFO provision is based on the initial margin of the fiscal year purchase activity less the impact of any permanent markdowns. The retail method of accounting requires management to make certain judgments and estimates that may significantly impact the ending inventory valuation at cost, as well as the amount of gross profit recognized. Judgments made include recording markdowns used to sell inventory and shrinkage. When management determines the ability to sell inventory has diminished, markdowns for clearance activity and the related cost impact are recorded. Factors considered in the determination of markdowns include current and anticipated demand, customer preferences and age of merchandise, as well as seasonal and fashion trends. Changes in weather and customer preferences could also cause changes in the amount and timing of markdowns from year to year.\n\nWhen necessary, we record a LIFO provision for the estimated annual effect of inflation, and these estimates are adjusted to actual results determined at year-end. Our LIFO provision is calculated based on inventory levels, markup rates and internally generated retail price indices. As a measure of sensitivity, a 1% increase to our retail price indices would not have resulted in a decrease to the carrying value of inventory. At January 31, 2018 and 2017 , our inventories valued at LIFO approximated those inventories as if they were valued at FIFO.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00240",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 67,
+   "page_end": 67,
+   "section": "Item 8. Financial Statements And Supplementary Data > Cost of Sales",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Cost of Sales | p.67]\nCost of sales includes actual product cost, the cost of transportation to the Company's distribution facilities, stores and clubs from suppliers, the cost of transportation from the Company's distribution facilities to the stores, clubs and customers and the cost of warehousing for the Sam's Club segment and import distribution centers. Cost of sales is reduced by supplier payments that are not a reimbursement of specific, incremental and identifiable costs.",
+   "ticker": "WMT"
+  },
+  {
+   "chunk_id": "FB-WALMART_2018_10K:section:00220",
+   "company": "Walmart",
+   "doc_name": "WALMART_2018_10K",
+   "filing_id": "FB-WALMART_2018_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2018,
+   "form": "10-K",
+   "has_table": false,
+   "page": 63,
+   "page_end": 63,
+   "section": "Item 8. Financial Statements And Supplementary Data > Principles of Consolidation",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[WMT 10-K FY2018 | Item 8. Financial Statements And Supplementary Data > Principles of Consolidation | p.63]\nThe Consolidated Financial Statements include the accounts of Walmart and its subsidiaries as of and for the fiscal years ended January 31, 2018 (\"fiscal 2018 \"), January 31, 2017 (\"fiscal 2017 \") and January 31, 2016 (\"fiscal 2016 \"). All material intercompany accounts and transactions have been eliminated in consolidation. The Company consolidates variable interest entities where it has been determined that the Company is the primary beneficiary of those entities' operations. Investments in unconsolidated affiliates, which are 50% or less owned and do not otherwise meet consolidation requirements, are accounted for primarily using the equity method. These equity method investments are immaterial to the Company's Consolidated Financial Statements.\n\nThe Company's Consolidated Financial Statements are based on a fiscal year ending on January 31 for the United States (\"U.S.\") and Canadian operations. The Company consolidates all other operations generally using a one-month lag and based on a calendar year. There were no significant intervening events during the month of January 2018 related to the operations consolidated using a lag that materially affected the Consolidated Financial Statements.",
+   "ticker": "WMT"
+  }
+ ],
+ "tool": "search_filings"
+}

@@ -1,0 +1,127 @@
+{
+ "args": {
+  "fiscal_year": 2025,
+  "form": "10-K",
+  "query": "cash and due from banks December 31 2025",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00937",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 294,
+   "page_end": 294,
+   "section": "Part IV > Restricted cash and other restricted assets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Restricted cash and other restricted assets | p.294]\n(a)Comprises $27.8 billion and $26.1 billion in deposits with banks, and $1.2 billion and $1.4 billion in cash and due from banks on the Consolidated balance sheets as of December 31, 2025 and 2024, respectively.\n\nAlso, as of December 31, 2025 and 2024, the Firm had the following other restricted assets:\n\n•Cash and securities pledged with clearing organizations for the benefit of customers of $44.9 billion and $40.7 billion, respectively.\n\n•Securities with a fair value of $40.8 billion and $26.8 billion, respectively, in relation to customer activity.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00936",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 294,
+   "page_end": 294,
+   "section": "Part IV > Restricted cash and other restricted assets",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0281"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Restricted cash and other restricted assets | p.294]\n| December 31, (in billions) | 2025 | 2024 |\n|---|---|---|\n| Segregated for the benefit of securities and cleared derivative customers | $19.4 | $18.7 |\n| Cash reserves at non-U.S. central banks and held for other general purposes | 9.6 | 8.8 |\n| Total restricted cash (a) | $29.0 | $27.5 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00168",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 60,
+   "page_end": 60,
+   "section": "Part IV > Consolidated cash flows analysis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0032"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated cash flows analysis | p.60]\n| (in millions) | Year ended December 31, 2025 | 2024 | 2023 |\n|---|---|---|---|\n| Net cash provided by/ (used in) |  |  |  |\n| Operating activities | $(147,782) | $(42,012) | $12,974 |\n| Investing activities | (265,565) | (163,403) | 67,643 |\n| Financing activities | 269,533 | 63,447 | (25,571) |\n| Effect of exchange rate changes on cash | 17,835 | (12,866) | 1,871 |\n| Net increase/(decrease) in cash and due from banks and deposits with banks | $(125,979) | $(154,834) | $56,917 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00351",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 117,
+   "page_end": 117,
+   "section": "Part IV > Portfolio analysis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0091"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Portfolio analysis | p.117]\n| (in millions) | December 31, 2025 | December 31, 2024 |\n|---|---|---|\n| Current | $840 | $462 |\n| 30-89 days past due | 121 | 72 |\n| 90 or more days past due | 198 | 121 |\n| Total government guaranteed loans | $1,159 | $655 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00195",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 69,
+   "page_end": 69,
+   "section": "Part IV > Segment & Corporate Results – Managed Basis",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Segment & Corporate Results – Managed Basis | p.69]\n(a)Excludes mortgage loans past due and insured by U.S. government agencies, which are primarily 90 or more days past due. These loans have been excluded based upon the government guarantee. At December 31, 2025, 2024 and 2023, mortgage loans 90 or more days past due and insured by U.S. government agencies were $70 million, $84 million and $123 million, respectively. In addition, the Firm’s policy is generally to exempt credit card loans from being placed on nonaccrual status as permitted by regulatory guidance.\n\n(b)At December 31, 2025, 2024 and 2023, excluded mortgage loans insured by U.S. government agencies of $102 million, $122 million and $176 million, respectively, that are 30 or more days past due. These amounts have been excluded based upon the government guarantee.\n\n(c)Includes $2.2 billion related to the Apple Card transaction.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00760",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 251,
+   "page_end": 251,
+   "section": "Part IV > Loan modifications",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0211"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Loan modifications | p.251]\n| Year ended December 31, (in millions) | Amortized cost basis 2025 | 2024 | 2023 |\n|---|---|---|---|\n| Current and less than 30 days past due and still accruing | $1,801 | $811 | $558 |\n| 30-89 days past due and still accruing | 179 | 74 | 59 |\n| 90 or more days past due and still accruing | 104 | 41 | 31 |\n| Total | $2,084 | $926 | $648 |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

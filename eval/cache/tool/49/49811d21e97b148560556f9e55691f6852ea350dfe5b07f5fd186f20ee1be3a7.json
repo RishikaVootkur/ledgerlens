@@ -1,0 +1,131 @@
+{
+ "args": {
+  "fiscal_year": 2026,
+  "form": "10-Q",
+  "query": "total assets balance sheet July 3 2026",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00122",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 31,
+   "page_end": 31,
+   "section": "Part I > Item 1. Financial Statements > Nonrecurring Fair Value Measurements",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0047"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Nonrecurring Fair Value Measurements | p.31]\n|  | Gains (Losses) Three Months Ended July 3, 2026 | June 27, 2025 |  |  | Six Months Ended July 3, 2026 | June 27, 2025 |  |  |\n|---|---|---|---|---|---|---|---|---|\n| Assets held for sale | $66 | 1 | $(28) | 2 | $56 | 1 | $(28) | 2 |\n| Other-than-temporary impairment charges | — | (40) |  | 3 | — | (65) |  | 3,5 |\n| Impairment of intangible assets | — | (31) |  | 4 | — | (31) |  | 4 |\n| Total | $66 |  | $(99) |  | $56 |  | $(124) |  |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00037",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 12,
+   "page_end": 12,
+   "section": "Part I > Item 1. Financial Statements > Equity Securities",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0015"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Equity Securities | p.12]\n|  | Fair Value with Changes Recognized in Income | Measurement Alternative — No Readily Determinable Fair Value |\n|---|---|---|\n| July 3, 2026 |  |  |\n| Marketable securities | $547 | $— |\n| Other noncurrent assets | 2,738 | 293 |\n| Total equity securities | $3,285 | $293 |\n| December 31, 2025 |  |  |\n| Marketable securities | $489 | $— |\n| Other noncurrent assets | 2,100 | 44 |\n| Total equity securities | $2,589 | $44 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00117",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 30,
+   "page_end": 30,
+   "section": "Part I > Item 1. Financial Statements > Recurring Fair Value Measurements",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0045"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Recurring Fair Value Measurements | p.30]\n|  |  |  |  |  |  |  |  |  |\n|---|---|---|---|---|---|---|---|---|\n| July 3, 2026 | Level 1 | Level 2 | Level 3 | Other 3 | Netting Adjustment | 4 | Fair Value Measurements |  |\n| Assets: |  |  |  |  |  |  |  |  |\n| Equity securities with readily determinable values 1 | $2,427 | $435 | $70 | $353 | $— |  | $3,285 |  |\n| Debt securities 1 | — | 2,674 | — | — | — |  | 2,674 |  |\n| Derivatives 2 | 17 | 552 | — | — | (464) | 5 | 105 | 7 |\n| Total assets | $2,444 | $3,661 | $70 | $353 | $(464) |  | $6,064 |  |\n| Liabilities: |  |  |  |  |  |  |  |  |\n| Derivatives 2 | $— | $1,003 | $— | $— | $(991) | 6 | $12 | 7 |\n| Total liabilities | $— | $1,003 | $— | $— | $(991) |  | $12 |  |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00018",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 7,
+   "page_end": 7,
+   "section": "Part I > Item 1. Financial Statements > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0008"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Consolidated Balance Sheets | p.7]\n|  | July 3, 2026 | December 31, 2025 |\n|---|---|---|\n| ASSETS |  |  |\n| Current Assets |  |  |\n| Cash and cash equivalents | $12,907 | $10,270 |\n| Short-term investments | 622 | 3,602 |\n| Total Cash, Cash Equivalents and Short-Term Investments | 13,529 | 13,872 |\n| Marketable securities | 2,842 | 1,934 |\n| Trade accounts receivable, less allowances of $492 and $495 , respectively | 3,732 | 3,038 |\n| Inventories | 4,647 | 4,425 |\n| Prepaid expenses and other current assets | 2,688 | 2,433 |\n| Assets held for sale | 5,438 | 5,342 |\n| Total Current Assets | 32,876 | 31,044 |\n| Equity method investments | 20,782 | 20,235 |\n| Deferred income tax assets | 1,090 | 1,206 |\n| Property, plant and equipment, less accumulated depreciation of $9,328 and $9,119 , respectively | 9,636 | 9,613 |\n| Trademarks with indefinite lives | 12,500 | 12,531 |\n| Goodwill | 15,456 | 15,491 |\n| Other noncurrent assets | 15,582 | 14,696 |\n| Total Assets | $107,922 | $104,816 |\n| LIABILITIES AND EQUITY |  |  |\n| Current Liabilities |  |  |\n| Accounts payable and accrued expenses | $15,434 | $14,813 |\n| Loans and notes payable | 48 | 1,551 |\n| Current maturities of long-term debt | 6,494 | 1,822 |\n| Accrued income taxes | 782 | 525 |\n| Liabilities held for sale | 2,442 | 2,570 |\n| Total Current Liabilities | 25,200 | 21,281 |\n| Long-term debt | 37,001 | 42,119 |\n| Other noncurrent liabilities | 4,627 | 4,735 |\n| Deferred income tax liabilities | 2,779 | 2,406 |\n| The Coca-Cola Company Shareowners’ Equity |  |  |\n| Common stock, $0.25 par value; authorized — 11,200 shares; issued — 7,040 shares | 1,760 | 1,760 |\n| Capital surplus | 20,741 | 20,581 |\n| Reinvested earnings | 84,169 | 80,382 |\n| Accumulated other comprehensive income (loss) | (13,626) | (14,131) |\n| Treasury stock, at cost — 2,737 and 2,738 shares, respectively | (56,894) | (56,423) |\n| Equity Attributable to Shareowners of The Coca-Cola Company | 36,150 | 32,169 |\n| Equity attributable to noncontrolling interests | 2,165 | 2,106 |\n| Total Equity | 38,315 | 34,275 |\n| Total Liabilities and Equity | $107,922 | $104,816 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00048",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 13,
+   "page_end": 13,
+   "section": "Part I > Item 1. Financial Statements > Debt Securities",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0021"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Debt Securities | p.13]\n|  | Three Months Ended July 3, 2026 | June 27, 2025 | Six Months Ended July 3, 2026 | June 27, 2025 |\n|---|---|---|---|---|\n| Gross gains | $1 | $2 | $2 | $3 |\n| Gross losses | (2) | (2) | (3) | (4) |\n| Proceeds | 374 | 70 | 571 | 207 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00009",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 3,
+   "page_end": 3,
+   "section": "Table of Contents",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0005"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Table of Contents | p.3]\n|  | Forward-Looking Statements Part I. Financial Information | Page 1 |\n|---|---|---|\n| Item 1. | Financial Statements | 2 |\n|  | Consolidated Statements of Income — Three and Six Months Ended July 3, 2026 and June 2 7 , 2025 | 2 |\n|  | Consolidated Statements of Comprehensive Income — Three and Six Months Ended July 3, 2026 and June 27 , 2025 | 3 |\n|  | Consolidated Balance Sheets — July 3, 2026 and December 31, 2025 | 4 |\n|  | Consolidated Statements of Cash Flows — Six Months Ended July 3, 2026 and June 2 7 , 2025 | 5 |\n|  | Notes to Consolidated Financial Statements | 6 |\n| Item 2. | Management’s Discussion and Analysis of Financial Condition and Results of Operations | 31 |\n| Item 3. | Quantitative and Qualitative Disclosures About Market Risk | 46 |\n| Item 4. | Controls and Procedures | 46 |\n|  | Part II. Other Information |  |\n| Item 1. | Legal Proceedings | 46 |\n| Item 1A. | Risk Factors | 48 |\n| Item 2. | Unregistered Sales of Equity Securities and Use of Proceeds | 49 |\n| Item 5. | Other Information | 49 |\n| Item 6. | Exhibits | 49 |\n|  | Signatures | 53 |",
+   "ticker": "KO"
+  }
+ ],
+ "tool": "search_filings"
+}

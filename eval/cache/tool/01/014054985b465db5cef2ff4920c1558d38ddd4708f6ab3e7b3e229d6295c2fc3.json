@@ -1,0 +1,129 @@
+{
+ "args": {
+  "fiscal_year": 2026,
+  "form": "10-Q",
+  "query": "diluted net income per share October 2 2026 third quarter",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "KO-10Q-2026Q3:section:00012",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 5,
+   "page_end": 5,
+   "section": "Part I > Item 1. Financial Statements > Consolidated Statements Of Income",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q3:table:0006"
+   ],
+   "text": "[KO 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Consolidated Statements Of Income | p.5]\n|  | Three Months Ended October 2, 2026 | September 26, 2025 | Nine Months Ended October 2, 2026 | September 26, 2025 |\n|---|---|---|---|---|\n| Net Operating Revenues | $13,380 | $12,455 | $39,232 | $36,119 |\n| Cost of goods sold | 4,930 | 4,797 | 14,515 | 13,674 |\n| Gross Profit | 8,450 | 7,658 | 24,717 | 22,445 |\n| Selling, general and administrative expenses | 3,975 | 3,618 | 11,167 | 10,322 |\n| Other operating charges | 10 | 58 | 54 | 202 |\n| Operating Income | 4,465 | 3,982 | 13,496 | 11,921 |\n| Interest income | 224 | 185 | 644 | 553 |\n| Interest expense | 354 | 391 | 1,098 | 1,223 |\n| Equity income (loss) — net | 653 | 644 | 1,641 | 1,556 |\n| Other income (loss) — net | (155) | (237) | 236 | 229 |\n| Income Before Income Taxes | 4,833 | 4,183 | 14,919 | 13,036 |\n| Income taxes | 777 | 500 | 2,459 | 2,215 |\n| Consolidated Net Income | 4,056 | 3,683 | 12,460 | 10,821 |\n| Less: Net income (loss) attributable to noncontrolling interests | 47 | (13) | 102 | (15) |\n| Net Income Attributable to Shareowners of The Coca-Cola Company | $4,009 | $3,696 | $12,358 | $10,836 |\n| Basic Net Income Per Share 1 | $0.93 | $0.86 | $2.87 | $2.52 |\n| Diluted Net Income Per Share 1 | $0.93 | $0.86 | $2.86 | $2.51 |\n| Average Shares Outstanding — Basic | 4,303 | 4,303 | 4,302 | 4,303 |\n| Effect of dilutive securities | 11 | 10 | 11 | 11 |\n| Average Shares Outstanding — Diluted | 4,314 | 4,313 | 4,313 | 4,314 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q2:section:00012",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 5,
+   "page_end": 5,
+   "section": "Part I > Item 1. Financial Statements > Consolidated Statements Of Income",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q2:table:0006"
+   ],
+   "text": "[KO 10-Q Q2 FY2026 | Part I > Item 1. Financial Statements > Consolidated Statements Of Income | p.5]\n|  | Three Months Ended July 3, 2026 | June 27, 2025 | Six Months Ended July 3, 2026 | June 27, 2025 |\n|---|---|---|---|---|\n| Net Operating Revenues | $13,380 | $12,535 | $25,852 | $23,664 |\n| Cost of goods sold | 4,965 | 4,714 | 9,585 | 8,877 |\n| Gross Profit | 8,415 | 7,821 | 16,267 | 14,787 |\n| Selling, general and administrative expenses | 3,720 | 3,470 | 7,192 | 6,704 |\n| Other operating charges | 23 | 71 | 44 | 144 |\n| Operating Income | 4,672 | 4,280 | 9,031 | 7,939 |\n| Interest income | 198 | 188 | 420 | 368 |\n| Interest expense | 369 | 445 | 744 | 832 |\n| Equity income (loss) — net | 604 | 561 | 988 | 912 |\n| Other income (loss) — net | 370 | 212 | 391 | 466 |\n| Income Before Income Taxes | 5,475 | 4,796 | 10,086 | 8,853 |\n| Income taxes | 1,037 | 993 | 1,682 | 1,715 |\n| Consolidated Net Income | 4,438 | 3,803 | 8,404 | 7,138 |\n| Less: Net income (loss) attributable to noncontrolling interests | 13 | (7) | 55 | (2) |\n| Net Income Attributable to Shareowners of The Coca-Cola Company | $4,425 | $3,810 | $8,349 | $7,140 |\n| Basic Net Income Per Share 1 | $1.03 | $0.89 | $1.94 | $1.66 |\n| Diluted Net Income Per Share 1 | $1.03 | $0.88 | $1.94 | $1.65 |\n| Average Shares Outstanding — Basic | 4,303 | 4,304 | 4,302 | 4,303 |\n| Effect of dilutive securities | 10 | 11 | 11 | 11 |\n| Average Shares Outstanding — Diluted | 4,313 | 4,315 | 4,313 | 4,314 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q3:section:00198",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 54,
+   "page_end": 54,
+   "section": "Part II > Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q3:table:0055"
+   ],
+   "text": "[KO 10-Q Q3 FY2026 | Part II > Item 2. Unregistered Sales of Equity Securities and Use of Proceeds | p.54]\n| Period | Total Number of Shares Purchased 1 | Average Price Paid Per Share | Total Number of Shares Purchased as Part of the Publicly Announced Plan 2 | Maximum Number of Shares That May Yet Be Purchased Under the Publicly Announced Plan |\n|---|---|---|---|---|\n| July 4, 2026 through July 31, 2026 | 538,615 | $83.86 | 536,300 | 59,148,814 |\n| August 1, 2026 through August 28, 2026 | 1,085,783 | 88.60 | 1,085,783 | 58,063,031 |\n| August 29, 2026 through October 2, 2026 | 1,110,655 | 87.94 | 1,110,145 | 56,952,886 |\n| Total | 2,735,053 | $87.40 | 2,732,228 |  |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q3:section:00015",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 6,
+   "page_end": 6,
+   "section": "Part I > Item 1. Financial Statements > Consolidated Statements Of Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q3:table:0007"
+   ],
+   "text": "[KO 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Consolidated Statements Of Comprehensive Income | p.6]\n|  | Three Months Ended October 2, 2026 | September 26, 2025 | Nine Months Ended October 2, 2026 | September 26, 2025 |\n|---|---|---|---|---|\n| Consolidated Net Income | $4,056 | $3,683 | $12,460 | $10,821 |\n| Other Comprehensive Income: |  |  |  |  |\n| Net foreign currency translation adjustments | (668) | 437 | (311) | 2,159 |\n| Net gains (losses) on derivatives | 77 | 152 | 208 | (449) |\n| Net change in unrealized gains (losses) on available-for-sale debt securities | (7) | 9 | (21) | 32 |\n| Net change in pension and other postretirement benefit liabilities | 87 | 7 | 130 | 27 |\n| Total Comprehensive Income | 3,545 | 4,288 | 12,466 | 12,590 |\n| Less: Comprehensive income (loss) attributable to noncontrolling interests | — | (214) | 67 | (137) |\n| Total Comprehensive Income Attributable to Shareowners of The Coca-Cola Company | $3,545 | $4,502 | $12,399 | $12,727 |",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q3:section:00168",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": false,
+   "page": 45,
+   "page_end": 45,
+   "section": "Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Equity Income (Loss) — Net",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[KO 10-Q Q3 FY2026 | Part I > Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Equity Income (Loss) — Net | p.45]\nDuring the three months ended October 2, 2026, equity income was $653 million, compared to equity income of $644 million during the three months ended September 26, 2025, an increase of $9 million, or 1%. During the nine months ended October 2, 2026, equity income was $1,641 million, compared to equity income of $1,556 million during the nine months ended September 26, 2025, an increase of $85 million, or 5%. These increases reflect, among other items, the impact of more favorable operating results reported by certain of our equity method investees, and a favorable foreign currency exchange rate impact. These favorable impacts were partially offset by the increase of net charges resulting from the Company’s proportionate share of significant operating and nonoperating items recorded by certain of our equity method investees, and the impact of the sale of our ownership interests in certain equity method investees in 2025.",
+   "ticker": "KO"
+  },
+  {
+   "chunk_id": "KO-10Q-2026Q3:section:00102",
+   "company": "The Coca-Cola Company",
+   "doc_name": null,
+   "filing_id": "KO-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "has_table": true,
+   "page": 26,
+   "page_end": 26,
+   "section": "Part I > Item 1. Financial Statements > Note 11: Changes In Equity",
+   "strategy": "section",
+   "table_ids": [
+    "KO-10Q-2026Q3:table:0038"
+   ],
+   "text": "[KO 10-Q Q3 FY2026 | Part I > Item 1. Financial Statements > Note 11: Changes In Equity | p.26]\n| Three Months Ended October 2, 2026 | Common Shares Outstanding | Total | Shareowners of The Coca-Cola Company Reinvested Earnings | Accumulated Other Comprehensive Income (Loss) | Common Stock | Capital Surplus | Treasury Stock | Non-controlling Interests |\n|---|---|---|---|---|---|---|---|---|\n| July 3, 2026 | 4,303 | $38,315 | $84,169 | $(13,626) | $1,760 | $20,741 | $(56,894) | $2,165 |\n| Comprehensive income (loss) | — | 3,545 | 4,009 | (464) | — | — | — | — |\n| Dividends paid/payable to shareowners of The Coca-Cola Company ($0.53 per share) | — | (2,280) | (2,280) | — | — | — | — | — |\n| Dividends paid to noncontrolling interests | — | (4) | — | — | — | — | — | (4) |\n| Purchases of treasury stock | (3) | (238) | — | — | — | — | (238) | — |\n| Impact related to stock-based compensation plans | 2 | 195 | — | — | — | 153 | 42 | — |\n| October 2, 2026 | 4,302 | $39,533 | $85,898 | $(14,090) | $1,760 | $20,894 | $(57,090) | $2,161 |",
+   "ticker": "KO"
+  }
+ ],
+ "tool": "search_filings"
+}

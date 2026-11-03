@@ -1,21 +1,24 @@
-# The slice the CI regression gate replays from the committed response cache.
-# Same agent as default.yaml, on the 20-question smoke set (AAPL, JPM, KO).
+# The slice the CI regression gate replays from the committed response cache:
+# the 20 smoke questions (AAPL, JPM, KO XBRL facts) plus 5 FinanceBench and 5
+# unanswerable dev questions, so retrieval, judge and refusal metrics are gated on
+# non-trivial questions. Default agent settings. Re-record after any change that alters
+# prompts, tools or retrieval:
+#   ledgerlens eval run --config eval/configs/ci_slice.yaml --split dev \
+#     --run-id ci-slice-baseline --out eval/baselines/ci_slice.json --record-cache
 name: ci_slice
-description: CI replay slice (smoke set) with the default agent
-model: groq-qwen3.8-27b
+description: "CI replay slice: smoke + 5 FinanceBench + 5 unanswerable, default agent on Gemini 3.5 Flash-Lite"
+model: gemini-3.5-flash-lite
 strategy: section
 method: hybrid
 k: 6
 # Pinned to the index the replay cache was recorded against (see docs/eval-methodology.md).
-index_version: d94fbac6be01
+index_version: 446f34acdfa5-62209
 max_rounds: 3
 xbrl_tool: true
 verify_numbers: true
 self_check: true
-datasets: [smoke]
+datasets: [smoke, financebench, unanswerable]
+qids_file: eval/slices/ci_slice.txt
 scope: document
-concurrency: 3
-# Pinned to the prompt-affecting setting the replay cache was recorded with. Fixes that only
-# change post-processing (derived-number verification, grouped citation markers) are on.
-# Re-record the slice to drop this pin (tracked in PROGRESS.md).
-dedupe_tool_calls: false
+concurrency: 2
+citation_support: false

@@ -1,0 +1,34 @@
+{
+ "args": {
+  "duration": "FY",
+  "fiscal_year": 2024,
+  "metric": "operating_income",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0000320193-24-000123",
+   "concept": "us-gaap:OperatingIncomeLoss",
+   "duration": "FY",
+   "end": "2024-09-28",
+   "fact_id": "xbrl:AAPL:OperatingIncomeLoss:2023-10-01_2024-09-28:USD",
+   "filed": "2024-11-01",
+   "filing_id": "AAPL-10K-2024FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2024,
+   "form": "10-K",
+   "label": "Operating Income (Loss)",
+   "start": "2023-10-01",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 123216000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

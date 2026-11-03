@@ -1,0 +1,85 @@
+{
+ "args": {
+  "duration": "instant",
+  "fiscal_year": 2025,
+  "metric": "current_liabilities",
+  "ticker": "KO"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0001628280-26-010047",
+   "concept": "us-gaap:LiabilitiesCurrent",
+   "duration": "instant",
+   "end": "2025-12-31",
+   "fact_id": "xbrl:KO:LiabilitiesCurrent:2025-12-31:USD",
+   "filed": "2026-02-20",
+   "filing_id": "KO-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "label": "Liabilities, Current",
+   "start": null,
+   "ticker": "KO",
+   "unit": "USD",
+   "value": 21281000000.0
+  },
+  {
+   "accession": "0001628280-25-046054",
+   "concept": "us-gaap:LiabilitiesCurrent",
+   "duration": "instant",
+   "end": "2025-09-26",
+   "fact_id": "xbrl:KO:LiabilitiesCurrent:2025-09-26:USD",
+   "filed": "2025-10-23",
+   "filing_id": "KO-10Q-2025Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Liabilities, Current",
+   "start": null,
+   "ticker": "KO",
+   "unit": "USD",
+   "value": 22499000000.0
+  },
+  {
+   "accession": "0000021344-25-000061",
+   "concept": "us-gaap:LiabilitiesCurrent",
+   "duration": "instant",
+   "end": "2025-06-27",
+   "fact_id": "xbrl:KO:LiabilitiesCurrent:2025-06-27:USD",
+   "filed": "2025-07-24",
+   "filing_id": "KO-10Q-2025Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Liabilities, Current",
+   "start": null,
+   "ticker": "KO",
+   "unit": "USD",
+   "value": 21944000000.0
+  },
+  {
+   "accession": "0000021344-25-000029",
+   "concept": "us-gaap:LiabilitiesCurrent",
+   "duration": "instant",
+   "end": "2025-03-28",
+   "fact_id": "xbrl:KO:LiabilitiesCurrent:2025-03-28:USD",
+   "filed": "2025-05-01",
+   "filing_id": "KO-10Q-2025Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Liabilities, Current",
+   "start": null,
+   "ticker": "KO",
+   "unit": "USD",
+   "value": 23808000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

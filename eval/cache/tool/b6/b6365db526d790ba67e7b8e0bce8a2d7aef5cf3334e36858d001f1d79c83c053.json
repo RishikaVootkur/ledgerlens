@@ -1,0 +1,33 @@
+{
+ "args": {
+  "chunk_id": "FB-BLOCK_2016_10K:section:00194"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00194",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 68,
+   "page_end": 68,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0033"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.68]\n|  | Assets | December 31, 2016 | 2015 |\n|---|---|---|---|\n| Current assets: |  |  |  |\n| Cash and cash equivalents |  | $452,030 | $461,329 |\n| Short-term investments |  | 59,901 | — |\n| Restricted cash |  | 22,131 | 13,537 |\n| Settlements receivable |  | 321,102 | 142,727 |\n| Customer funds held |  | 43,574 | 9,446 |\n| Loans held for sale |  | 42,144 | 604 |\n| Merchant cash advance receivable, net |  | 4,212 | 36,473 |\n| Other current assets |  | 56,331 | 41,447 |\n| Total current assets |  | 1,001,425 | 705,563 |\n| Property and equipment, net |  | 88,328 | 87,222 |\n| Goodwill |  | 57,173 | 56,699 |\n| Acquired intangible assets, net |  | 19,292 | 26,776 |\n| Long-term investments |  | 27,366 | — |\n| Restricted cash |  | 14,584 | 14,686 |\n| Other assets |  | 3,194 | 3,826 |\n| Total assets |  | $1,211,362 | $894,772 |\n| Liabilities and Stockholders’ Equity |  |  |  |\n| Current liabilities: |  |  |  |\n| Accounts payable |  | $12,602 | $18,869 |\n| Customers payable |  | 388,058 | 215,365 |\n| Customer funds obligation |  | 43,574 | 9,446 |\n| Accrued transaction losses |  | 20,064 | 17,176 |\n| Accrued expenses |  | 39,543 | 44,401 |\n| Other current liabilities |  | 73,623 | 28,945 |\n| Total current liabilities |  | 577,464 | 334,202 |\n| Debt (Note 11) |  | — | — |\n| Other liabilities |  | 57,745 | 52,522 |\n| Total liabilities |  | 635,209 | 386,724 |\n| Commitments and contingencies (Note 16) |  |  |  |\n| Stockholders’ equity: |  |  |  |\n| Preferred stock, $0.0000001 par value: 100,000,000 | shares authorized at December 31, 2016 and December 31, 2015. None |  |  |\n| issued and outstanding at December 31, 2016 and December 31, 2015. |  | — | — |\n| Class A common stock, $0.0000001 par value: 1,000,000,000 shares authorized at December 31, 2016 and December 31, 2015; |  |  |  |\n| 198,746,620 and 31,717,133 issued and outstanding | at December 31, 2016 and December 31, 2015, respectively. | — | — |\n| Class B common stock, $0.0000001 par value: 500,000,000 shares authorized at December 31, 2016 and December 31, 2015; |  |  |  |\n| 165,800,756 and 303,232,312 issued and outstanding at December 31, 2016 and December 31, 2015, respectively. |  | — | — |\n| Additional paid-in capital |  | 1,357,381 | 1,116,882 |\n| Accumulated other comprehensive loss |  | (1,989) | (1,185) |\n| Accumulated deficit |  | (779,239) | (607,649) |\n| Total stockholders’ equity |  | 576,153 | 508,048 |\n| Total liabilities and stockholders’ equity |  | $1,211,362 | $894,772 |",
+   "ticker": "XYZ"
+  }
+ ],
+ "tool": "get_table"
+}

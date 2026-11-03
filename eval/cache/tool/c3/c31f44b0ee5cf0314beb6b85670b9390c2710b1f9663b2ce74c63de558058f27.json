@@ -1,0 +1,85 @@
+{
+ "args": {
+  "duration": "instant",
+  "fiscal_year": 2025,
+  "metric": "total_assets",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0000320193-25-000079",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-09-27",
+   "fact_id": "xbrl:AAPL:Assets:2025-09-27:USD",
+   "filed": "2025-10-31",
+   "filing_id": "AAPL-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "label": "Assets",
+   "start": null,
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 359241000000.0
+  },
+  {
+   "accession": "0000320193-25-000073",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-06-28",
+   "fact_id": "xbrl:AAPL:Assets:2025-06-28:USD",
+   "filed": "2025-08-01",
+   "filing_id": "AAPL-10Q-2025Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 331495000000.0
+  },
+  {
+   "accession": "0000320193-25-000057",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2025-03-29",
+   "fact_id": "xbrl:AAPL:Assets:2025-03-29:USD",
+   "filed": "2025-05-02",
+   "filing_id": "AAPL-10Q-2025Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 331233000000.0
+  },
+  {
+   "accession": "0000320193-25-000008",
+   "concept": "us-gaap:Assets",
+   "duration": "instant",
+   "end": "2024-12-28",
+   "fact_id": "xbrl:AAPL:Assets:2024-12-28:USD",
+   "filed": "2025-01-31",
+   "filing_id": "AAPL-10Q-2025Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2025,
+   "form": "10-Q",
+   "label": "Assets",
+   "start": null,
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 344085000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

@@ -1,0 +1,127 @@
+{
+ "args": {
+  "fiscal_year": 2025,
+  "form": "10-K",
+  "query": "Consolidated balance sheets Total assets December 31 2025 JPMorgan Chase",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00484",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 164,
+   "page_end": 164,
+   "section": "Part IV > Opinions on the Financial Statements and Internal Control over Financial Reporting",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Opinions on the Financial Statements and Internal Control over Financial Reporting | p.164]\nWe have audited the accompanying consolidated balance sheets of JPMorgan Chase & Co. and its subsidiaries (the “Firm”) as of December 31, 2025 and 2024, and the related consolidated statements of income, comprehensive income, changes in stockholders’ equity and cash flows for each of the three years in the period ended December 31, 2025, including the related notes (collectively referred to as the “consolidated financial statements”). We also have audited the Firm’s internal control over financial reporting as of December 31, 2025, based on criteria established in Internal Control - Integrated Framework (2013) issued by the Committee of Sponsoring Organizations of the Treadway Commission (COSO).\n\nIn our opinion, the consolidated financial statements referred to above present fairly, in all material respects, the financial position of the Firm as of December 31, 2025 and 2024, and the results of its operations and its cash flows for each of the three years in the period ended December 31, 2025 in conformity with accounting principles generally accepted in the United States of America. Also in our opinion, the Firm maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on criteria established in Internal Control – Integrated Framework (2013) issued by the COSO.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00497",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 169,
+   "page_end": 169,
+   "section": "Part IV > Consolidated balance sheets",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0125"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets | p.169]\n| December 31, (in millions) | 2025 | 2024 |\n|---|---|---|\n| Assets |  |  |\n| Trading assets | $4,835 | $3,885 |\n| Loans | 37,777 | 36,510 |\n| All other assets | 683 | 681 |\n| Total assets | $43,295 | $41,076 |\n| Liabilities |  |  |\n| Beneficial interests issued by consolidated VIEs | $27,951 | $27,323 |\n| All other liabilities | 691 | 454 |\n| Total liabilities | $28,642 | $27,777 |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00496",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": false,
+   "page": 169,
+   "page_end": 169,
+   "section": "Part IV > Consolidated balance sheets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets | p.169]\n(a)The following table presents information on assets and liabilities related to VIEs that are consolidated by the Firm at December 31, 2025 and 2024. The assets of the consolidated VIEs are used to settle the liabilities of those entities. The holders of the beneficial interests generally do not have recourse to the general credit of JPMorganChase. The assets and liabilities in the table below include third-party assets and liabilities of consolidated VIEs and exclude intercompany balances that eliminate in consolidation. Refer to Note 14 for a further discussion.",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00162",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 57,
+   "page_end": 57,
+   "section": "Part IV > Consolidated balance sheets analysis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0030"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets analysis | p.57]\n| Selected Consolidated balance sheets data December 31, (in millions) | 2025 | 2024 | Change |\n|---|---|---|---|\n| Assets |  |  |  |\n| Cash and due from banks | $21,742 | $23,372 | (7)% |\n| Deposits with banks | 321,596 | 445,945 | (28) |\n| Federal funds sold and securities purchased under resale agreements | 336,426 | 295,001 | 14 |\n| Securities borrowed | 286,191 | 219,546 | 30 |\n| Trading assets | 802,873 | 637,784 | 26 |\n| Available-for-sale securities | 507,198 | 406,852 | 25 |\n| Held-to-maturity securities | 270,134 | 274,468 | (2) |\n| Investment securities, net of allowance for credit losses | 777,332 | 681,320 | 14 |\n| Loans | 1,493,429 | 1,347,988 | 11 |\n| Allowance for loan losses | (25,765) | (24,345) | 6 |\n| Loans, net of allowance for loan losses | 1,467,664 | 1,323,643 | 11 |\n| Accrued interest and accounts receivable | 111,599 | 101,223 | 10 |\n| Premises and equipment | 36,244 | 32,223 | 12 |\n| Goodwill, MSRs and other intangible assets | 64,458 | 64,560 | — |\n| Other assets | 198,775 | 178,197 | 12 |\n| Total assets | $4,424,900 | $4,002,814 | 11% |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00948",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 296,
+   "page_end": 296,
+   "section": "Part IV > Note 27 – Regulatory capital",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0286"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Note 27 – Regulatory capital | p.296]\n| Three months ended (in millions, except ratios) JPMorgan Chase & Co. | December 31, 2025 JPMorgan Chase Bank, N.A. | JPMorgan Chase & Co. | December 31, 2024 JPMorgan Chase Bank, N.A. |  |\n|---|---|---|---|---|\n| Leverage-based capital metrics: (a) |  |  |  |  |\n| Adjusted average assets (b) | $4,472,394 | $3,766,709 | $4,070,499 | $3,491,283 |\n| Tier 1 leverage ratio | 6.9% | 7.8% | 7.2% | 7.9% |\n| Total leverage exposure | $5,302,001 | $4,571,728 | $4,837,568 | $4,246,516 |\n| SLR | 5.8% | 6.4% | 6.1% | 6.5% |",
+   "ticker": "JPM"
+  },
+  {
+   "chunk_id": "JPM-10K-2025FY:section:00165",
+   "company": "JPMorgan Chase & Co.",
+   "doc_name": null,
+   "filing_id": "JPM-10K-2025FY",
+   "fiscal_period": "FY",
+   "fiscal_year": 2025,
+   "form": "10-K",
+   "has_table": true,
+   "page": 58,
+   "page_end": 58,
+   "section": "Part IV > Consolidated balance sheets analysis",
+   "strategy": "section",
+   "table_ids": [
+    "JPM-10K-2025FY:table:0031"
+   ],
+   "text": "[JPM 10-K FY2025 | Part IV > Consolidated balance sheets analysis | p.58]\n| Selected Consolidated balance sheets data (continued) December 31, (in millions) | 2025 | 2024 | Change |\n|---|---|---|---|\n| Liabilities |  |  |  |\n| Deposits | $2,559,320 | $2,406,032 | 6% |\n| Federal funds purchased and securities loaned or sold under repurchase agreements | 442,396 | 296,835 | 49 |\n| Short-term borrowings | 64,776 | 52,893 | 22 |\n| Trading liabilities | 216,019 | 192,883 | 12 |\n| Accounts payable and other liabilities | 316,794 | 280,672 | 13 |\n| Beneficial interests issued by consolidated variable interest entities (“VIEs”) | 27,951 | 27,323 | 2 |\n| Long-term debt | 435,206 | 401,418 | 8 |\n| Total liabilities | 4,062,462 | 3,658,056 | 11 |\n| Stockholders’ equity | 362,438 | 344,758 | 5 |\n| Total liabilities and stockholders’ equity | $4,424,900 | $4,002,814 | 11% |",
+   "ticker": "JPM"
+  }
+ ],
+ "tool": "search_filings"
+}

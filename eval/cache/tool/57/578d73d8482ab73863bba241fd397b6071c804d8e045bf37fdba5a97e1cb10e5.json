@@ -1,0 +1,68 @@
+{
+ "args": {
+  "duration": "Q",
+  "fiscal_year": 2026,
+  "metric": "operating_income",
+  "ticker": "AAPL"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0000320193-26-000020",
+   "concept": "us-gaap:OperatingIncomeLoss",
+   "duration": "Q",
+   "end": "2026-06-27",
+   "fact_id": "xbrl:AAPL:OperatingIncomeLoss:2026-03-29_2026-06-27:USD",
+   "filed": "2026-07-31",
+   "filing_id": "AAPL-10Q-2026Q3",
+   "fiscal_period": "Q3",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Operating Income (Loss)",
+   "start": "2026-03-29",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 35695000000.0
+  },
+  {
+   "accession": "0000320193-26-000013",
+   "concept": "us-gaap:OperatingIncomeLoss",
+   "duration": "Q",
+   "end": "2026-03-28",
+   "fact_id": "xbrl:AAPL:OperatingIncomeLoss:2025-12-28_2026-03-28:USD",
+   "filed": "2026-05-01",
+   "filing_id": "AAPL-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Operating Income (Loss)",
+   "start": "2025-12-28",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 35885000000.0
+  },
+  {
+   "accession": "0000320193-26-000006",
+   "concept": "us-gaap:OperatingIncomeLoss",
+   "duration": "Q",
+   "end": "2025-12-27",
+   "fact_id": "xbrl:AAPL:OperatingIncomeLoss:2025-09-28_2025-12-27:USD",
+   "filed": "2026-01-30",
+   "filing_id": "AAPL-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Operating Income (Loss)",
+   "start": "2025-09-28",
+   "ticker": "AAPL",
+   "unit": "USD",
+   "value": 50852000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

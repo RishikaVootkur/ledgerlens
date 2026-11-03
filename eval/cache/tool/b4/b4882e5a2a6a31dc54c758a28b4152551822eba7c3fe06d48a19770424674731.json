@@ -1,0 +1,121 @@
+{
+ "args": {
+  "doc_name": "GENERALMILLS_2019_10K",
+  "query": "Consolidated Balance Sheets Inventories Accounts receivable Accounts payable"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00192",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 55,
+   "page_end": 55,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0046"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets | p.55]\n|  | May 26, 2019 | May 27, 2018 |\n|---|---|---|\n| ASSETS |  |  |\n| Current assets: |  |  |\n| Cash and cash equivalents | $450.0 | $399.0 |\n| Receivables | 1,679.7 | 1,684.2 |\n| Inventories | 1,559.3 | 1,642.2 |\n| Prepaid expenses and other current assets | 497.5 | 398.3 |\n| Total current assets | 4,186.5 | 4,123.7 |\n| Land, buildings, and equipment | 3,787.2 | 4,047.2 |\n| Goodwill | 13,995.8 | 14,065.0 |\n| Other intangible assets | 7,166.8 | 7,445.1 |\n| Other assets | 974.9 | 943.0 |\n| Total assets | $30,111.2 | $30,624.0 |\n| LIABILITIES AND EQUITY |  |  |\n| Current liabilities: |  |  |\n| Accounts payable | $2,854.1 | $2,746.2 |\n| Current portion of long-term debt | 1,396.5 | 1,600.1 |\n| Notes payable | 1,468.7 | 1,549.8 |\n| Other current liabilities | 1,367.8 | 1,445.8 |\n| Total current liabilities | 7,087.1 | 7,341.9 |\n| Long-term debt | 11,624.8 | 12,668.7 |\n| Deferred income taxes | 2,031.0 | 2,003.8 |\n| Other liabilities | 1,448.9 | 1,341.0 |\n| Total liabilities | 22,191.8 | 23,355.4 |\n| Redeemable interest | 551.7 | 776.2 |\n| Stockholders’ equity: |  |  |\n| Common stock, 754.6 shares issued, $0.10 par value | 75.5 | 75.5 |\n| Additional paid-in capital | 1,386.7 | 1,202.5 |\n| Retained earnings | 14,996.7 | 14,459.6 |\n| Common stock in treasury, at cost, shares of 152.7 and 161.5 | (6,779.0) | (7,167.5) |\n| Accumulated other comprehensive loss | (2,625.4) | (2,429.0) |\n| Total stockholders’ equity | 7,054.5 | 6,141.1 |\n| Noncontrolling interests | 313.2 | 351.3 |\n| Total equity | 7,367.7 | 6,492.4 |\n| Total liabilities and equity | $30,111.2 | $30,624.0 |",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00383",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 103,
+   "page_end": 103,
+   "section": "Item 8. Financial Statements and Supplementary Data > Note 17. Supplemental Information",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Note 17. Supplemental Information | p.103]\nThe components of certain Consolidated Balance Sheet accounts are as follows:",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00413",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 116,
+   "page_end": 116,
+   "section": "Item 15. Exhibits, Financial Statement Schedules > 2. Financial Statement Schedule:",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0130"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 15. Exhibits, Financial Statement Schedules > 2. Financial Statement Schedule: | p.116]\n| Exhibit No. | Description |\n|---|---|\n| 101 | The following materials from the Company’s Annual Report on Form 10-K for the fiscal year ended May 27, |\n|  | 2018 formatted in eXtensible Business Reporting Language: (i) the Consolidated Balance Sheets; (ii) the |\n|  | Consolidated Statements of Earnings; (iii) the Consolidated Statements of Comprehensive Income; (iv) the |\n|  | Consolidated Statements of Total Equity and Redeemable Interest; (v) the Consolidated Statements of Cash |\n|  | Flows; (vi) the Notes to Consolidated Financial Statements; and (vii) Schedule II – Valuation of Qualifying |\n|  | Accounts. |",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00277",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 77,
+   "page_end": 77,
+   "section": "Item 8. Financial Statements and Supplementary Data > Total",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Total | p.77]\n$ 43.4 $ - $ 43.4 $ (7.2) $ - $ 36.2 $ (15.6) $ - $ (15.6) $ 7.2 $ - $ (8.4) (a) Includes related collateral offset in our Consolidated Balance Sheets. (b) Net fair value as recorded in our Consolidated Balance Sheets. (c) Fair value of assets that could be reported net in our Consolidated Balance Sheets. (d) Fair value of liabilities that could be reported net in our Consolidated Balance Sheets. (e) Fair value of assets and liabilities reported on a gross basis in our Consolidated Balance Sheets.",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00201",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 58,
+   "page_end": 58,
+   "section": "Item 8. Financial Statements and Supplementary Data > NOTE 1. BASIS OF PRESENTATION AND RECLASSIFICATIONS Basis of Presentation",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > NOTE 1. BASIS OF PRESENTATION AND RECLASSIFICATIONS Basis of Presentation | p.58]\nOur Consolidated Financial Statements include the accounts of General Mills, Inc. and all subsidiaries in which we have a controlling financial interest. Intercompany transactions and accounts, including any noncontrolling and redeemable interests’ share of those transactions, are eliminated in consolidation.\n\nOur fiscal year ends on the last Sunday in May.\n\nCertain reclassifications to our previously reported financial information have been made to conform to the current period presentation. See Note 2 for additional information.",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00193",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 55,
+   "page_end": 55,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets | p.55]\nSee accompanying notes to consolidated financial statements.",
+   "ticker": "GIS"
+  }
+ ],
+ "tool": "search_filings"
+}

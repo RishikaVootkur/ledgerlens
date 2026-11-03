@@ -1,0 +1,51 @@
+{
+ "args": {
+  "duration": "Q",
+  "fiscal_year": 2026,
+  "metric": "net_income",
+  "ticker": "JPM"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "accession": "0001628280-26-054343",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "Q",
+   "end": "2026-06-30",
+   "fact_id": "xbrl:JPM:NetIncomeLoss:2026-04-01_2026-06-30:USD",
+   "filed": "2026-08-06",
+   "filing_id": "JPM-10Q-2026Q2",
+   "fiscal_period": "Q2",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2026-04-01",
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 21155000000.0
+  },
+  {
+   "accession": "0001628280-26-029344",
+   "concept": "us-gaap:NetIncomeLoss",
+   "duration": "Q",
+   "end": "2026-03-31",
+   "fact_id": "xbrl:JPM:NetIncomeLoss:2026-01-01_2026-03-31:USD",
+   "filed": "2026-05-01",
+   "filing_id": "JPM-10Q-2026Q1",
+   "fiscal_period": "Q1",
+   "fiscal_year": 2026,
+   "form": "10-Q",
+   "label": "Net Income (Loss) Attributable to Parent",
+   "start": "2026-01-01",
+   "ticker": "JPM",
+   "unit": "USD",
+   "value": 16494000000.0
+  }
+ ],
+ "tool": "get_company_facts"
+}

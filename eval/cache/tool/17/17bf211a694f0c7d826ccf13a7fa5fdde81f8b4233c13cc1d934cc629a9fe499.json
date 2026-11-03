@@ -1,0 +1,129 @@
+{
+ "args": {
+  "doc_name": "BLOCK_2016_10K",
+  "query": "Total current assets Total current liabilities December 31, 2016"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00194",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 68,
+   "page_end": 68,
+   "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0033"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets | p.68]\n|  | Assets | December 31, 2016 | 2015 |\n|---|---|---|---|\n| Current assets: |  |  |  |\n| Cash and cash equivalents |  | $452,030 | $461,329 |\n| Short-term investments |  | 59,901 | — |\n| Restricted cash |  | 22,131 | 13,537 |\n| Settlements receivable |  | 321,102 | 142,727 |\n| Customer funds held |  | 43,574 | 9,446 |\n| Loans held for sale |  | 42,144 | 604 |\n| Merchant cash advance receivable, net |  | 4,212 | 36,473 |\n| Other current assets |  | 56,331 | 41,447 |\n| Total current assets |  | 1,001,425 | 705,563 |\n| Property and equipment, net |  | 88,328 | 87,222 |\n| Goodwill |  | 57,173 | 56,699 |\n| Acquired intangible assets, net |  | 19,292 | 26,776 |\n| Long-term investments |  | 27,366 | — |\n| Restricted cash |  | 14,584 | 14,686 |\n| Other assets |  | 3,194 | 3,826 |\n| Total assets |  | $1,211,362 | $894,772 |\n| Liabilities and Stockholders’ Equity |  |  |  |\n| Current liabilities: |  |  |  |\n| Accounts payable |  | $12,602 | $18,869 |\n| Customers payable |  | 388,058 | 215,365 |\n| Customer funds obligation |  | 43,574 | 9,446 |\n| Accrued transaction losses |  | 20,064 | 17,176 |\n| Accrued expenses |  | 39,543 | 44,401 |\n| Other current liabilities |  | 73,623 | 28,945 |\n| Total current liabilities |  | 577,464 | 334,202 |\n| Debt (Note 11) |  | — | — |\n| Other liabilities |  | 57,745 | 52,522 |\n| Total liabilities |  | 635,209 | 386,724 |\n| Commitments and contingencies (Note 16) |  |  |  |\n| Stockholders’ equity: |  |  |  |\n| Preferred stock, $0.0000001 par value: 100,000,000 | shares authorized at December 31, 2016 and December 31, 2015. None |  |  |\n| issued and outstanding at December 31, 2016 and December 31, 2015. |  | — | — |\n| Class A common stock, $0.0000001 par value: 1,000,000,000 shares authorized at December 31, 2016 and December 31, 2015; |  |  |  |\n| 198,746,620 and 31,717,133 issued and outstanding | at December 31, 2016 and December 31, 2015, respectively. | — | — |\n| Class B common stock, $0.0000001 par value: 500,000,000 shares authorized at December 31, 2016 and December 31, 2015; |  |  |  |\n| 165,800,756 and 303,232,312 issued and outstanding at December 31, 2016 and December 31, 2015, respectively. |  | — | — |\n| Additional paid-in capital |  | 1,357,381 | 1,116,882 |\n| Accumulated other comprehensive loss |  | (1,989) | (1,185) |\n| Accumulated deficit |  | (779,239) | (607,649) |\n| Total stockholders’ equity |  | 576,153 | 508,048 |\n| Total liabilities and stockholders’ equity |  | $1,211,362 | $894,772 |",
+   "ticker": "XYZ"
+  },
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00281",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 92,
+   "page_end": 92,
+   "section": "Item 8. Financial Statements And Supplementary Data > NOTE 10 - OTHER CONSOLIDATED BALANCE SHEET COMPONENTS (NON-CURRENT) Other Non-Current Assets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0054"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > NOTE 10 - OTHER CONSOLIDATED BALANCE SHEET COMPONENTS (NON-CURRENT) Other Non-Current Assets | p.92]\n|  | December 31, 2016 | December 31, 2015 |\n|---|---|---|\n| Deposits | $1,775 | $1,993 |\n| Deferred tax assets | 306 | 188 |\n| Other | 1,113 | 1,645 |\n| Total | $3,194 | $3,826 |",
+   "ticker": "XYZ"
+  },
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00283",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 93,
+   "page_end": 93,
+   "section": "Item 8. Financial Statements And Supplementary Data > Other Non-Current Liabilities",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0055"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > Other Non-Current Liabilities | p.93]\n|  | December 31, 2016 | December 31, 2015 |\n|---|---|---|\n| Deferred rent | $23,119 | $25,543 |\n| Employee early exercised stock options | 66 | 1,128 |\n| Deferred tax liabilities | 476 | 299 |\n| Statutory liabilities | 29,497 | 25,492 |\n| Other | 4,587 | 60 |\n| Total | $57,745 | $52,522 |",
+   "ticker": "XYZ"
+  },
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00279",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 92,
+   "page_end": 92,
+   "section": "Item 8. Financial Statements And Supplementary Data > Other Current Liabilities",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0053"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > Other Current Liabilities | p.92]\n|  | December 31, 2016 | December 31, 2015 |\n|---|---|---|\n| Settlements payable | $51,151 | $13,105 |\n| Employee early exercised stock options | 674 | 2,141 |\n| Accrued redemptions | 1,628 | 1,066 |\n| Current portion of deferred rent | 2,862 | 2,393 |\n| Deferred revenue | 5,407 | 6,623 |\n| Other | 11,901 | 3,617 |\n| Total | $73,623 | $28,945 |",
+   "ticker": "XYZ"
+  },
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00275",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 91,
+   "page_end": 91,
+   "section": "Item 8. Financial Statements And Supplementary Data > NOTE 9 - OTHER CONSOLIDATED BALANCE SHEET COMPONENTS (CURRENT) Other Current Assets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0051"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > NOTE 9 - OTHER CONSOLIDATED BALANCE SHEET COMPONENTS (CURRENT) Other Current Assets | p.91]\n|  | December 31, 2016 | December 31, 2015 |\n|---|---|---|\n| Inventory | $13,724 | $11,864 |\n| Accounts receivable | 6,191 | 4,808 |\n| Prepaid expenses | 7,365 | 7,101 |\n| Deferred magstripe reader costs | 3,911 | 4,018 |\n| Tenant improvement reimbursement receivable | 1,189 | 1,788 |\n| Deferred hardware costs | 4,546 | 1,709 |\n| Processing costs receivable | 8,593 | 7,847 |\n| Other | 10,812 | 2,312 |\n| Total | $56,331 | $41,447 |",
+   "ticker": "XYZ"
+  },
+  {
+   "chunk_id": "FB-BLOCK_2016_10K:section:00294",
+   "company": "Block",
+   "doc_name": "BLOCK_2016_10K",
+   "filing_id": "FB-BLOCK_2016_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2016,
+   "form": "10-K",
+   "has_table": true,
+   "page": 95,
+   "page_end": 95,
+   "section": "Item 8. Financial Statements And Supplementary Data > Note 13 - Income Taxes",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BLOCK_2016_10K:table:0060"
+   ],
+   "text": "[XYZ 10-K FY2016 | Item 8. Financial Statements And Supplementary Data > Note 13 - Income Taxes | p.95]\n|  | Balance at December 31, 2016 | 2015 | 2014 |\n|---|---|---|---|\n| Deferred tax assets: |  |  |  |\n| Capitalized costs | $61,897 | $67,051 | $28,102 |\n| Accrued expenses | 29,421 | 27,964 | 19,714 |\n| Net operating loss carryforwards | 65,507 | 36,633 | 54,528 |\n| Tax credit carryforwards | 38,927 | 25,349 | 11,662 |\n| Property, equipment and intangible assets | 5,721 | — | — |\n| Share-based compensation | 52,091 | 36,689 | 13,153 |\n| Other | 1,640 | 1,469 | 542 |\n| Total deferred tax assets | 255,204 | 195,155 | 127,701 |\n| Valuation allowance | (254,898) | (195,103) | (125,368) |\n| Total deferred tax assets, net of valuation allowance | 306 | 52 | 2,333 |\n| Deferred tax liabilities: |  |  |  |\n| Property, equipment and intangible assets | (476) | (163) | (2,333) |\n| Total deferred tax liabilities | (476) | (163) | (2,333) |\n| Net deferred tax liabilities | $(170) | $(111) | $— |",
+   "ticker": "XYZ"
+  }
+ ],
+ "tool": "search_filings"
+}
