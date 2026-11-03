@@ -1241,8 +1241,8 @@
     "ndcg_at_10": 0.6309297535714575
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "arithmetic",
+   "failure_note": "inputs gathered but the computed result is wrong"
   },
   {
    "qid": "xbrl-ko-10k2025fy-operating_income-yoy-abs",
@@ -1409,8 +1409,8 @@
     "ndcg_at_10": 0.6309297535714575
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "arithmetic",
+   "failure_note": "inputs gathered but the computed result is wrong"
   },
   {
    "qid": "xbrl-wmt-10k2026fy-revenue-yoy-pct",
@@ -2217,8 +2217,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-10420",
@@ -2296,8 +2296,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-04417",
@@ -2434,8 +2434,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-04660",
@@ -2642,8 +2642,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-03856",
@@ -2798,8 +2798,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "table_misread",
+   "failure_note": "evidence page gathered (with tables) but the answer is wrong"
   },
   {
    "qid": "fb-00499",
@@ -2893,8 +2893,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "retrieval_miss",
+   "failure_note": "no labeled evidence page was gathered"
   },
   {
    "qid": "fb-01091",
@@ -3254,8 +3254,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "table_misread",
+   "failure_note": "evidence page gathered (with tables) but the answer is wrong"
   },
   {
    "qid": "fb-01474",
@@ -3545,8 +3545,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-02416",
@@ -3608,8 +3608,8 @@
     "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "unans-premise-05",
@@ -4499,8 +4499,8 @@
     "citation_recall": null
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "answered a question the filings cannot answer"
   },
   {
    "qid": "unans-oldperiod-02",
@@ -4563,8 +4563,8 @@
     "citation_recall": null
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "answered a question the filings cannot answer"
   },
   {
    "qid": "unans-oldperiod-06",
