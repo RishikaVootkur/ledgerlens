@@ -1,0 +1,123 @@
+{
+ "args": {
+  "doc_name": "BESTBUY_2019_10K",
+  "query": "consolidated balance sheets total assets inventories receivables accounts payable total liabilities shareholders equity"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00222",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 62,
+   "page_end": 62,
+   "section": "Item 8. Financial Statements and Supplementary Data > Impairment of Long-Lived Assets and Costs Associated With Exit Activities",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Impairment of Long-Lived Assets and Costs Associated With Exit Activities | p.62]\nproperties included in Long-term liabilities on our Consolidated Balance Sheets was $11 million and $21 million , respectively. The obligation associated with vacant properties at February 2, 2019 , and February 3, 2018 , included amounts associated with our restructuring activities as further described in Note 9, Restructuring Charges .",
+   "ticker": "BBY"
+  },
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00184",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 52,
+   "page_end": 52,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BESTBUY_2019_10K:table:0037"
+   ],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets | p.52]\n|  | February 2, 2019 | February 3, 2018 |\n|---|---|---|\n| Assets |  |  |\n| Current assets |  |  |\n| Cash and cash equivalents | $1,980 | $1,101 |\n| Short-term investments | — | 2,032 |\n| Receivables, net | 1,015 | 1,049 |\n| Merchandise inventories | 5,409 | 5,209 |\n| Other current assets | 466 | 438 |\n| Total current assets | 8,870 | 9,829 |\n| Property and equipment |  |  |\n| Land and buildings | 637 | 623 |\n| Leasehold improvements | 2,119 | 2,327 |\n| Fixtures and equipment | 5,865 | 5,410 |\n| Property under capital and financing leases | 579 | 340 |\n| Gross property and equipment | 9,200 | 8,700 |\n| Less accumulated depreciation | 6,690 | 6,279 |\n| Net property and equipment | 2,510 | 2,421 |\n| Goodwill | 915 | 425 |\n| Other assets | 606 | 374 |\n| Total assets | $12,901 | $13,049 |\n| Liabilities and equity |  |  |\n| Current liabilities |  |  |\n| Accounts payable | $5,257 | $4,873 |\n| Unredeemed gift card liabilities | 290 | 385 |\n| Deferred revenue | 446 | 453 |\n| Accrued compensation and related expenses | 482 | 561 |\n| Accrued liabilities | 982 | 1,001 |\n| Current portion of long-term debt | 56 | 544 |\n| Total current liabilities | 7,513 | 7,817 |\n| Long-term liabilities | 750 | 809 |\n| Long-term debt | 1,332 | 811 |\n| Contingencies and commitments (Note 13) |  |  |\n| Equity |  |  |\n| Best Buy Co., Inc. Shareholders' Equity |  |  |\n| Preferred stock, $1.00 par value: Authorized — 400,000 shares; Issued and outstanding — none | — | — |\n| Common stock, $0.10 par value: Authorized — 1.0 billion shares; Issued and outstanding — 265,703,000 and |  |  |\n| 282,988,000 shares, respectively | 27 | 28 |\n| Additional paid-in capital | — | — |\n| Retained earnings | 2,985 | 3,270 |\n| Accumulated other comprehensive income | 294 | 314 |\n| Total equity | 3,306 | 3,612 |\n| Total liabilities and equity | $12,901 | $13,049 |",
+   "ticker": "BBY"
+  },
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00256",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 71,
+   "page_end": 71,
+   "section": "Item 8. Financial Statements and Supplementary Data > 4. Fair Value Measurements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > 4. Fair Value Measurements | p.71]\nAssets and liabilities that are measured at fair value on a nonrecurring basis relate primarily to our tangible fixed assets, goodwill and other intangible assets, which are remeasured when the derived fair value is below carrying value on our Consolidated Balance Sheets. For these assets, we do not periodically adjust carrying value to fair value, except in the event of impairment. When we determine that impairment has occurred, the carrying value of the asset is reduced to fair value and the difference is recorded within SG&A and Restructuring charges on our Consolidated Statements of Earnings for non-restructuring and restructuring charges, respectively.\n\nThe following table summarizes the fair value remeasurements related to continuing operations recorded in fiscal 2019 and fiscal 2018 ($ in millions):",
+   "ticker": "BBY"
+  },
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00209",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 59,
+   "page_end": 59,
+   "section": "Item 8. Financial Statements and Supplementary Data > Adopted Accounting Pronouncements",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BESTBUY_2019_10K:table:0043"
+   ],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Adopted Accounting Pronouncements | p.59]\n| Impact of Changes to Consolidated Balance Sheets | As Reported | February 2, 2019 Balances without Adoption of ASU 2014-09 | Effect of Change (1) Higher/(Lower) |\n|---|---|---|---|\n| Assets |  |  |  |\n| Other current assets | $466 | $410 | $56 |\n| Other assets | 606 | 625 | (19) |\n| Liabilities |  |  |  |\n| Unredeemed gift card liabilities | 290 | 352 | (62) |\n| Deferred revenue | 446 | 470 | (24) |\n| Accrued liabilities | 982 | 923 | 59 |\n| Equity |  |  |  |\n| Retained earnings | 2,985 | 2,921 | 64 |",
+   "ticker": "BBY"
+  },
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00261",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 72,
+   "page_end": 72,
+   "section": "Item 8. Financial Statements and Supplementary Data > 5. Derivative Instruments",
+   "strategy": "section",
+   "table_ids": [
+    "FB-BESTBUY_2019_10K:table:0055"
+   ],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > 5. Derivative Instruments | p.72]\n| Contract Type | Balance Sheet Location | Assets February 2, 2019 | February 3, 2018 |\n|---|---|---|---|\n| Derivatives designated as net investment hedges | Other current assets | $— | $2 |\n| Derivatives designated as interest rate swaps | Other assets | 26 | — |\n| Total |  | $26 | $2 |\n|  |  | Liabilities |  |\n| Contract Type | Balance Sheet Location | February 2, 2019 | February 3, 2018 |\n| Derivatives designated as net investment hedges | Accrued liabilities | $— | $7 |\n|  | Accrued liabilities and |  |  |\n| Derivatives designated as interest rate swaps | Long-term liabilities | 1 | 5 |\n| No hedge designation (foreign exchange forward contracts) | Accrued liabilities | — | 1 |\n| Total |  | $1 | $13 |",
+   "ticker": "BBY"
+  },
+  {
+   "chunk_id": "FB-BESTBUY_2019_10K:section:00177",
+   "company": "Best Buy",
+   "doc_name": "BESTBUY_2019_10K",
+   "filing_id": "FB-BESTBUY_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 50,
+   "page_end": 50,
+   "section": "Item 8. Financial Statements and Supplementary Data > Opinion on the Financial Statements",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[BBY 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Opinion on the Financial Statements | p.50]\nWe have audited the accompanying consolidated balance sheets of Best Buy Co., Inc. and subsidiaries (the \"Company\") as of February 2, 2019 and February 3, 2018, the related consolidated statements of earnings, comprehensive income, cash flows, and changes in shareholders’ equity for each of the three years in the period ended February 2, 2019, and the related notes and the schedule listed in the Index at Item 15 (collectively referred to as the \"financial statements\"). In our opinion, the financial statements present fairly, in all material respects, the financial position of the Company as of February 2, 2019 and February 3, 2018, and the results of its operations and its cash flows for each of the three years in the period ended February 2, 2019, in conformity with accounting principles generally accepted in the United States of America.\n\nWe have also audited, in accordance with the standards of the Public Company Accounting Oversight Board (United States) (PCAOB), the Company's internal control over financial reporting as of February 2, 2019, based on criteria established in Internal Control - Integrated Framework (2013) issued by the Committee of Sponsoring Organizations of the Treadway Commission and our report dated March 28, 2019, expressed an unqualified opinion on the Company's internal control over financial reporting.",
+   "ticker": "BBY"
+  }
+ ],
+ "tool": "search_filings"
+}

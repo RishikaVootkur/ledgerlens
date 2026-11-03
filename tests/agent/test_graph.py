@@ -459,3 +459,148 @@ def test_group_split_can_be_disabled(scripted):
     grouped = answer_json(answer="Total net sales were $416,161 million in 2025 [E1, E1].")
     queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(grouped), _resp(grouped)]
     assert run_agent("q", AgentConfig(split_grouped_markers=False)).refused
+
+
+def test_statements_needed_only_in_document_scope_or_when_named():
+    from ledgerlens.agent.graph import statements_needed
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    doc = SearchFilters(doc_name="WALMART_2018_10K")
+    dpo = "DPO is 365 * (average accounts payable) / (FY2018 COGS + change in inventory)"
+    assert statements_needed(dpo, doc) == ["balance_sheet", "income_statement"]
+    assert statements_needed("What was Apple's net income in fiscal 2025?", SearchFilters()) == []
+    capex = "Using the cash flow statement, what was capex?"
+    assert statements_needed(capex, SearchFilters(ticker="AAPL")) == ["cash_flow"]
+    assert statements_needed("Which segments does 3M report?", doc) == []
+
+
+def test_statement_search_adds_targeted_searches(scripted, monkeypatch):
+    queue, _ = scripted
+    captured = []
+    monkeypatch.setattr(
+        tools, "_search", lambda args, config: captured.append(args["query"]) or [CHUNK]
+    )
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    q = "What is FY2025 inventory turnover? Use COGS and average inventory."
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
+    reg = EvidenceRegistry()
+    result = run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"), registry=reg)
+    assert result.steps.count("search_filings") == 3
+    assert any("balance sheets" in c for c in captured) and any(
+        "statements of income" in c for c in captured
+    )
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(answer_json())]
+    off = run_agent(
+        q, AgentConfig(statement_search=False), filters=SearchFilters(doc_name="X_2025_10K")
+    )
+    assert off.steps.count("search_filings") == 1
+
+
+def test_mean_of_two_stated_inputs_is_derivable():
+    from ledgerlens.agent.graph import derivable
+
+    assert derivable(43_762.5e6, [46_092e6, 41_433e6], 0.05 / 43_762.5)
+
+
+def _chunk(cid, text, page):
+    return {
+        **CHUNK,
+        "chunk_id": f"X_2025_10K:section:{cid}",
+        "filing_id": "X",
+        "doc_name": "X_2025_10K",
+        "page": page,
+        "page_end": page,
+        "text": text,
+    }
+
+
+@pytest.fixture
+def statement_world(scripted, monkeypatch):
+    queue, seen = scripted
+    bs = [
+        _chunk("00010", "Balance sheet: inventories 6,854 and 7,367", 61),
+        _chunk("00011", "Note 11 leases", 90),
+        _chunk("00012", "Exhibit index", 120),
+        _chunk("00013", "Signatures", 130),
+    ]
+    inc = [
+        _chunk("00020", "Income statement: cost of sales 24,576", 59),
+        _chunk("00021", "MD&A margins", 30),
+        _chunk("00022", "Glossary", 5),
+    ]
+    ordinary = _chunk("00030", "Ordinary passage about strategy", 10)
+    model_hit = [bs[0], ordinary]  # the model's own search already found the balance sheet page
+
+    def fake_search(args, config):
+        q = args["query"]
+        if "balance sheets" in q:
+            return bs
+        if "statements of income" in q:
+            return inc
+        return model_hit
+
+    monkeypatch.setattr(tools, "_search", fake_search)
+    return queue, seen, bs, inc
+
+
+def _inventory_answer():
+    return answer_json(
+        answer="Inventories were 6,854 [E1].",
+        value="6,854",
+        scale="million",
+        citations=[{"ref": "E1", "quote": "inventories 6,854"}],
+    )
+
+
+def test_statement_hits_get_priority_even_if_already_gathered(statement_world):
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    queue, seen, bs, inc = statement_world
+    reg = EvidenceRegistry()
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY"), _resp(_inventory_answer())]
+    q = "What is FY2025 inventory turnover? COGS divided by average inventory."
+    run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"), registry=reg)
+    by_source = {i.source_id: i for i in reg.items.values()}
+    assert by_source[bs[0]["chunk_id"]].priority  # already gathered, still prioritized
+    assert by_source[bs[1]["chunk_id"]].priority and by_source[inc[0]["chunk_id"]].priority
+    assert bs[2]["chunk_id"] not in by_source and inc[2]["chunk_id"] not in by_source  # dropped
+    answer_prompt = seen[-1]["messages"][1]["content"]
+    # Priority statement pages come before ordinary passages in the answer evidence.
+    assert answer_prompt.index("Note 11 leases") < answer_prompt.index("Ordinary passage")
+    assert "Notes for financial-statement metrics" in answer_prompt
+
+
+def test_statement_search_runs_when_round_one_has_no_tool_calls(statement_world):
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    queue, _, _, _ = statement_world
+    queue += [_resp("READY"), _resp("READY"), _resp(_inventory_answer())]
+    q = "What is FY2025 inventory turnover? COGS divided by average inventory."
+    result = run_agent(q, AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K"))
+    assert result.steps.count("search_filings") == 2
+
+
+def test_no_note_and_no_search_for_ordinary_questions(statement_world):
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    queue, seen, _, _ = statement_world
+    queue += [_resp(tool_calls=[search_call()]), _resp("READY")]
+    queue += [_resp(_inventory_answer()) for _ in range(3)]
+    result = run_agent(
+        "Which segments does X report?", AgentConfig(), filters=SearchFilters(doc_name="X_2025_10K")
+    )
+    assert result.steps.count("search_filings") == 1
+    first_answer = next(x for x in seen if x["purpose"] == "answer")
+    assert "Notes for financial-statement metrics" not in first_answer["messages"][1]["content"]
+
+
+def test_statement_cues_need_scope_and_skip_deferred_revenue():
+    from ledgerlens.agent.graph import statements_needed
+    from ledgerlens.retrieval.filters import SearchFilters
+
+    named = "Using the balance sheet, what is the current ratio?"
+    assert statements_needed(named, SearchFilters()) == []  # unscoped: never search all companies
+    assert statements_needed(named, SearchFilters(ticker="KO")) == ["balance_sheet"]
+    doc = SearchFilters(doc_name="X_2025_10K")
+    assert "income_statement" not in statements_needed("How did deferred revenue change?", doc)

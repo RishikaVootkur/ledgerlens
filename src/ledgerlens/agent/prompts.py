@@ -49,6 +49,15 @@ Evidence:
 {evidence}
 {feedback}"""
 
+# Appended to the answer prompt only when a question's formula needs financial statements.
+STATEMENT_NOTE = """
+Notes for financial-statement metrics:
+- Statements word line items differently from formulas: COGS is often "cost of sales",
+  "cost of revenue" or "cost of products sold"; net income may be "net earnings".
+- Balance sheets show two year-ends side by side: an average between FY(n-1) and FY(n) is
+  (prior year-end + current year-end) / 2 from those two columns.
+- State each input you use with its citation, then the result."""
+
 REPAIR_FEEDBACK = """
 Your previous answer had problems: {problems}
 Fix them using only the evidence above, or refuse if the evidence cannot support an answer."""

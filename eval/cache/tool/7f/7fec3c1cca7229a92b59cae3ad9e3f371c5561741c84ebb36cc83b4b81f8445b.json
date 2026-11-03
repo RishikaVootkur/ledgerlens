@@ -1,0 +1,125 @@
+{
+ "args": {
+  "doc_name": "GENERALMILLS_2019_10K",
+  "query": "consolidated statements of income net sales revenue cost of sales operating income net income"
+ },
+ "config": {
+  "index_version": "446f34acdfa5-62209",
+  "k": 6,
+  "method": "hybrid",
+  "strategy": "section"
+ },
+ "result": [
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00186",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 53,
+   "page_end": 53,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Statements of Earnings",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0044"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Statements of Earnings | p.53]\n|  | Fiscal Year 2019 | 2018 | 2017 |\n|---|---|---|---|\n| Net sales | $16,865.2 | $15,740.4 | $15,619.8 |\n| Cost of sales | 11,108.4 | 10,304.8 | 10,052.0 |\n| Selling, general, and administrative expenses | 2,935.8 | 2,850.1 | 2,888.8 |\n| Divestitures loss | 30.0 | - | 6.5 |\n| Restructuring, impairment, and other exit costs | 275.1 | 165.6 | 180.4 |\n| Operating profit | 2,515.9 | 2,419.9 | 2,492.1 |\n| Benefit plan non-service income | (87.9) | (89.4) | (74.3) |\n| Interest, net | 521.8 | 373.7 | 295.1 |\n| Earnings before income taxes and after-tax earnings from joint ventures | 2,082.0 | 2,135.6 | 2,271.3 |\n| Income taxes | 367.8 | 57.3 | 655.2 |\n| After-tax earnings from joint ventures | 72.0 | 84.7 | 85.0 |\n| Net earnings, including earnings attributable to redeemable and noncontrolling |  |  |  |\n| interests | 1,786.2 | 2,163.0 | 1,701.1 |\n| Net earnings attributable to redeemable and noncontrolling interests | 33.5 | 32.0 | 43.6 |\n| Net earnings attributable to General Mills | $1,752.7 | $2,131.0 | $1,657.5 |\n| Earnings per share - basic | $2.92 | $3.69 | $2.82 |\n| Earnings per share - diluted | $2.90 | $3.64 | $2.77 |\n| Dividends per share | $1.96 | $1.96 | $1.92 |",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00239",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 67,
+   "page_end": 67,
+   "section": "Item 8. Financial Statements and Supplementary Data > Note 5. Investments In Unconsolidated Joint Ventures",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0057"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Note 5. Investments In Unconsolidated Joint Ventures | p.67]\n| In Millions | Fiscal Year 2019 | 2018 | 2017 |\n|---|---|---|---|\n| Net sales: |  |  |  |\n| CPW | $1,647.7 | $1,734.0 | $1,648.4 |\n| HDJ | 396.2 | 430.4 | 435.1 |\n| Total net sales | 2,043.9 | 2,164.4 | 2,083.5 |\n| Gross margin | 744.4 | 853.6 | 865.9 |\n| Earnings before income taxes | 155.4 | 216.2 | 243.3 |\n| Earnings after income taxes | 111.9 | 176.7 | 190.3 |",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00219",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 62,
+   "page_end": 62,
+   "section": "Item 8. Financial Statements and Supplementary Data > New Accounting Standards",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > New Accounting Standards | p.62]\nIn the first quarter of fiscal 2019, we adopted new accounting requirements related to the presentation of net periodic defined benefit pension expense, net periodic postretirement benefit expense, and net periodic postemployment benefit expense (collectively “net periodic benefit expense”). The new standard requires the service cost component of net periodic benefit expense to be recorded in the same line items as other employee compensation costs within our Consolidated Statements of Earnings. Other components of net periodic benefit expense must be presented separately outside of operating profit in our Consolidated Statements of Earnings. In addition, the new standard requires that only the service cost component of net periodic benefit expense is eligible for capitalization. The new standard requires retrospective adoption of the presentation of net periodic benefit expense and prospective application of the capitalization of the service cost component. The impact of the adoption of this standard on our results of operations was a decrease to our operating profit of $87.9 million, $89.4 million and $74.3 million and a corresponding increase to benefit plan non-service income of $87.9 million, $89.4 million and $74.3 million for fiscal 2019, fiscal 2018 and fiscal 2017, respectively. There were no changes to our reported segment operating profit.",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00395",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": false,
+   "page": 108,
+   "page_end": 109,
+   "section": "Item 8. Financial Statements and Supplementary Data > Glossary",
+   "strategy": "section",
+   "table_ids": [],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Glossary | pp.108-109]\nNet price realization. The impact of list and promoted price changes, net of trade and other price promotion costs.\n\nNet realizable value. The estimated selling price in the ordinary course of business, less reasonably predictable costs of completion, disposal, and transportation.\n\nNoncontrolling interests. Interests of consolidated subsidiaries held by third parties.\n\nNotional principal amount. The principal amount on which fixed-rate or floating-rate interest payments are calculated.\n\nOCI. Other comprehensive income (loss).\n\nOperating cash flow conversion rate. Net cash provided by operating activities, divided by net earnings, including earnings attributable to redeemable and noncontrolling interests.\n\nOperating cash flow to net debt ratio. Net Debt divided by cash provided by operating activities.\n\nOrganic net sales growth. Net sales growth adjusted for foreign currency translation, as well as acquisitions, divestitures, and a 53 rd week impact, when applicable.\n\nProject-related costs. Costs incurred related to our restructuring initiatives not included in restructuring charges.\n\nRedeemable interest. Interest of consolidated subsidiaries held by a third party that can be redeemed outside of our control and therefore cannot be classified as a noncontrolling interest in equity.\n\nReporting unit. An operating segment or a business one level below an operating segment.\n\nStrategic Revenue Management (SRM). A company-wide capability focused on generating sustainable benefits from net price realization and mix by identifying and executing against specific opportunities to apply tools including pricing, sizing, mix management, and promotion optimization across each of our businesses.\n\nSupply chain input costs. Costs incurred to produce and deliver product, including costs for ingredients and conversion, inventory management, logistics, and warehousing.\n\nTCJA. U.S. Tax Cuts and Jobs Act which was signed into law on December 22, 2017.\n\nTotal debt. Notes payable and long-term debt, including current portion.\n\nTranslation adjustments. The impact of the conversion of our foreign affiliates’ financial statements to United States dollars for the purpose of consolidating our financial statements.\n\nVariable interest entities (VIEs). A legal structure that is used for business purposes that either (1) does not have equity investors that have voting rights and share in all the entity’s profits and losses or (2) has equity investors that do not provide sufficient financial resources to support the entity’s activities.\n\nWorking capital. Current assets and current liabilities, all as of the last day of our fiscal year.",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00061",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 21,
+   "page_end": 21,
+   "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Fiscal 2019 Consolidated Results Of Operations",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0005"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Fiscal 2019 Consolidated Results Of Operations | p.21]\n| Fiscal 2019 | In millions, except per share | Fiscal 2019 vs. Fiscal 2018 | Percent of Net Sales | Constant- Currency Growth (a) |\n|---|---|---|---|---|\n| Net sales | $16,865.2 | 7 % |  | 9 % |\n| Operating profit | 2,515.9 | 4 % | 14.9 % |  |\n| Net earnings attributable to General Mills | 1,752.7 | (18) % |  |  |\n| Diluted EPS | $2.90 | (20) % |  |  |\n| Organic net sales growth rate (a) |  | Flat |  |  |\n| Adjusted operating profit (a) | 2,858.0 | 9 % | 16.9 % | 10 % |\n| Adjusted diluted EPS (a) | $3.22 | 4 % |  | 4 % |",
+   "ticker": "GIS"
+  },
+  {
+   "chunk_id": "FB-GENERALMILLS_2019_10K:section:00189",
+   "company": "General Mills",
+   "doc_name": "GENERALMILLS_2019_10K",
+   "filing_id": "FB-GENERALMILLS_2019_10K",
+   "fiscal_period": "FY",
+   "fiscal_year": 2019,
+   "form": "10-K",
+   "has_table": true,
+   "page": 54,
+   "page_end": 54,
+   "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Statements of Comprehensive Income",
+   "strategy": "section",
+   "table_ids": [
+    "FB-GENERALMILLS_2019_10K:table:0045"
+   ],
+   "text": "[GIS 10-K FY2019 | Item 8. Financial Statements and Supplementary Data > Consolidated Statements of Comprehensive Income | p.54]\n|  | Fiscal Year 2019 | 2018 | 2017 |\n|---|---|---|---|\n| Net earnings, including earnings attributable to redeemable and |  |  |  |\n| noncontrolling interests | $1,786.2 | $2,163.0 | $1,701.1 |\n| Other comprehensive income (loss), net of tax: |  |  |  |\n| Foreign currency translation | (82.8) | (37.0) | 6.3 |\n| Net actuarial (loss) income | (253.4) | 140.1 | 197.9 |\n| Other fair value changes: |  |  |  |\n| Securities | - | 1.2 | 0.8 |\n| Hedge derivatives | 12.1 | (50.8) | 53.3 |\n| Reclassification to earnings: |  |  |  |\n| Securities | (2.0) | (5.1) | - |\n| Hedge derivatives | 0.9 | 17.4 | (25.7) |\n| Amortization of losses and prior service costs | 84.6 | 117.6 | 122.5 |\n| Other comprehensive (loss) income, net of tax | (240.6) | 183.4 | 355.1 |\n| Total comprehensive income | 1,545.6 | 2,346.4 | 2,056.2 |\n| Comprehensive (loss) income attributable to redeemable and |  |  |  |\n| noncontrolling interests | (10.7) | 70.5 | 31.0 |\n| Comprehensive income attributable to General Mills | $1,556.3 | $2,275.9 | $2,025.2 |",
+   "ticker": "GIS"
+  }
+ ],
+ "tool": "search_filings"
+}

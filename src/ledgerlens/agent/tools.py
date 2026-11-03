@@ -124,20 +124,33 @@ class EvidenceItem:
     text: str
     header: str
     doc_name: str | None = None
+    # Shown to the answer step before ordinary passages (e.g. financial statements a
+    # question's formula needs), so they cannot be crowded out of the evidence budget.
+    priority: bool = False
 
 
 @dataclass
 class EvidenceRegistry:
     items: dict[str, EvidenceItem] = field(default_factory=dict)
     _by_source: dict[str, str] = field(default_factory=dict)
+    _issued: int = 0  # refs are never reused, even after a drop
 
     def add(self, item: EvidenceItem) -> EvidenceItem:
         if existing := self._by_source.get(item.source_id):
             return self.items[existing]
-        item.ref = f"E{len(self.items) + 1}"
+        self._issued += 1
+        item.ref = f"E{self._issued}"
         self.items[item.ref] = item
         self._by_source[item.source_id] = item.ref
         return item
+
+    def ref_for(self, source_id: str) -> str | None:
+        return self._by_source.get(source_id)
+
+    def drop(self, ref: str) -> None:
+        item = self.items.pop(ref, None)
+        if item is not None:
+            self._by_source.pop(item.source_id, None)
 
     def chunk_ids(self) -> list[str]:
         return [i.source_id for i in self.items.values() if i.kind == "chunk"]
@@ -178,6 +191,14 @@ def resolve_index_version(config: RetrievalConfig) -> str:
         return config.index_version
     path = get_settings().data_dir / "index" / f"version_{config.strategy}.txt"
     return path.read_text().strip() if path.exists() else "none"
+
+
+def search_results(args: dict[str, Any], config: RetrievalConfig) -> list[dict[str, Any]]:
+    """Ranked chunks for a search, through the same cache `run_tool` uses."""
+    result: list[dict[str, Any]] = _cached_tool(
+        "search_filings", args, config, lambda: _search(args, config)
+    )
+    return result
 
 
 def _search(args: dict[str, Any], config: RetrievalConfig) -> list[dict[str, Any]]:

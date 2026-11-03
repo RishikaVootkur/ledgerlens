@@ -32,6 +32,7 @@ from ledgerlens.agent.tools import (
     openai_tools,
     parse_arguments,
     run_tool,
+    search_results,
 )
 from ledgerlens.llm import DEFAULT_ANSWER_MODEL, ToolCall, complete, track_usage
 from ledgerlens.retrieval.filters import SearchFilters
@@ -66,6 +67,11 @@ class AgentConfig:
     # Split grouped citation markers like [E1, E4] before the self-check. Off reproduces
     # the original parser, which saw no citation in a grouped marker.
     split_grouped_markers: bool = True
+    # Financial-statement-aware retrieval: when a question needs figures from specific
+    # statements (FinanceBench metric questions often need two), also search each of
+    # those statements in the first round. Off reproduces the original retrieval, where
+    # the model often found one statement and refused for lack of the other.
+    statement_search: bool = True
     # ~3,500 tokens of numeric text: the answer prompt must fit one Groq free-tier
     # request (7,000 input tokens per minute for Qwen3.8 27B) with room for a repair.
     answer_evidence_chars: int = 10000
@@ -94,6 +100,57 @@ class _Run:
 
 
 # ------------------------------------------------------------------ helpers
+
+# Statement -> (cue pattern, search query). Line-item cues map a formula's inputs to the
+# statement that reports them (average inventory -> balance sheet, COGS -> income).
+STATEMENTS: dict[str, tuple[re.Pattern[str], str]] = {
+    "balance_sheet": (
+        re.compile(
+            r"balance sheet|statement of financial position|total assets|inventor|"
+            r"accounts payable|receivable|working capital|current (?:assets|liabilities)|"
+            r"total debt|shareholders.? equity|stockholders.? equity",
+            re.IGNORECASE,
+        ),
+        "consolidated balance sheets total assets inventories receivables accounts payable "
+        "total liabilities shareholders equity",
+    ),
+    "income_statement": (
+        re.compile(
+            r"income statement|statement of (?:income|operations|earnings)|p&l|cogs|"
+            r"cost of (?:goods|sales|revenue)|net income|operating income|gross (?:margin|profit)|"
+            r"ebitda|interest expense|(?<!deferred )revenue|net sales",
+            re.IGNORECASE,
+        ),
+        "consolidated statements of income net sales revenue cost of sales operating income "
+        "net income",
+    ),
+    "cash_flow": (
+        re.compile(
+            r"cash flow|capital expenditure|capex|operating activities|dividends paid|"
+            r"purchases? of property",
+            re.IGNORECASE,
+        ),
+        "consolidated statements of cash flows net cash provided by operating activities "
+        "capital expenditures purchases of property plant and equipment",
+    ),
+}
+_NAMED_STATEMENT = re.compile(
+    r"balance sheet|statement of (?:financial position|income|operations|earnings|cash flows?)|"
+    r"income statement|cash flow statement",
+    re.IGNORECASE,
+)
+
+
+def statements_needed(question: str, filters: SearchFilters) -> list[str]:
+    """Statements to search for this question. Only when the search is scoped to one company
+    or document, and either scoped to a single document (FinanceBench's setting) or the
+    question names a statement outright, so ordinary metric questions answered from XBRL
+    facts are unaffected and an unscoped search never pulls in other companies."""
+    if not (filters.doc_name or filters.filing_id or filters.ticker):
+        return []
+    if filters.doc_name is None and not _NAMED_STATEMENT.search(question):
+        return []
+    return [name for name, (cue, _) in STATEMENTS.items() if cue.search(question)]
 
 
 def effective_args(name: str, raw: str, filters: SearchFilters) -> dict[str, Any]:
@@ -133,8 +190,16 @@ def _evidence_brief(registry: EvidenceRegistry, chars: int = 300, max_items: int
 
 
 def _evidence_full(registry: EvidenceRegistry, budget: int) -> str:
-    # Facts and calculations first (short and exact), then passages in retrieval order.
-    ordered = sorted(registry.items.values(), key=lambda i: {"fact": 0, "calc": 1}.get(i.kind, 2))
+    # Facts and calculations first (short and exact), then priority passages (statements a
+    # formula needs), then the other passages in retrieval order.
+    def rank(item: EvidenceItem) -> int:
+        if item.kind == "fact":
+            return 0
+        if item.kind == "calc":
+            return 1
+        return 2 if item.priority else 3
+
+    ordered = sorted(registry.items.values(), key=rank)
     parts, used = [], 0
     for item in ordered:
         block = f"[{item.ref}] {item.header}\n{item.text}"
@@ -256,7 +321,7 @@ def stated_precision(text: str) -> dict[float, float]:
 
 
 def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
-    """True if `value` is one arithmetic step from two of `operands` (sum, difference,
+    """True if `value` is one arithmetic step from two of `operands` (sum, difference, mean,
     either ratio, either ratio as a percent, or a percent change), equal within `rel_tol`
     (half a unit of the last digit the answer wrote).
 
@@ -274,6 +339,7 @@ def derivable(value: float, operands: list[float], rel_tol: float) -> bool:
             ops = (
                 a + b,
                 b - a,
+                (a + b) / 2,  # averages of two year-end balances
                 b / a,
                 a / b,
                 b / a * 100,
@@ -418,11 +484,35 @@ def build_graph(run: _Run) -> Any:
             run.on_step(tc.name, json.dumps(args)[:200])
             steps.append(tc.name)
             del result  # evidence is in the registry; the next gather round sees a brief
+        if cfg.statement_search and state.get("round", 0) == 1:
+            for name in statements_needed(state["question"], filters):
+                args = effective_args(
+                    "search_filings", json.dumps({"query": STATEMENTS[name][1]}), filters
+                )
+                before = set(run.registry.items)
+                run_tool("search_filings", args, run.registry, cfg.retrieval)
+                ranked = [h["chunk_id"] for h in search_results(args, cfg.retrieval)]
+                for rank, chunk_id in enumerate(ranked):
+                    ref = run.registry.ref_for(chunk_id)
+                    if ref is None:
+                        continue
+                    if rank < 2:  # the statement itself is almost always a top-2 hit
+                        run.registry.items[ref].priority = True
+                    elif ref not in before:  # lower hits add noise unless already gathered
+                        run.registry.drop(ref)
+                run.on_step("search_filings", f"statement search: {name.replace('_', ' ')}")
+                steps.append("search_filings")
         return {"pending": [], "steps": steps}
 
     def after_gather(state: State) -> str:
         if state.get("pending") and state.get("round", 0) <= cfg.max_rounds:
             return "tools"
+        if (
+            state.get("round", 0) == 1
+            and cfg.statement_search
+            and statements_needed(state["question"], state["filters"])
+        ):
+            return "tools"  # statement searches still run when round 1 proposes no calls
         return "answer"
 
     def after_tools(state: State) -> str:
@@ -430,6 +520,9 @@ def build_graph(run: _Run) -> Any:
 
     def answer(state: State) -> State:
         run.on_step("answer", "writing a cited answer")
+        needs_statements = cfg.statement_search and bool(
+            statements_needed(state["question"], state["filters"])
+        )
         problems = state.get("problems") or []
         feedback = prompts.REPAIR_FEEDBACK.format(problems="; ".join(problems)) if problems else ""
         resp = complete(
@@ -442,7 +535,7 @@ def build_graph(run: _Run) -> Any:
                         question=state["question"],
                         evidence=_evidence_full(run.registry, cfg.answer_evidence_chars)
                         or "(no evidence was found)",
-                        feedback=feedback,
+                        feedback=(prompts.STATEMENT_NOTE if needs_statements else "") + feedback,
                     ),
                 },
             ],

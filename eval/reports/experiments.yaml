@@ -3,8 +3,8 @@
 # each table's baseline row (Holm-adjusted across the metrics of that comparison).
 
 headline:
-  run_id: final-test
-  title: "Held-out test subsample (120 questions): Gemini 3.5 Flash-Lite, hybrid retrieval, all fixes"
+  run_id: final-test-v2
+  title: "Held-out test subsample (120 questions): Gemini 3.5 Flash-Lite, hybrid retrieval, all four fixes"
   metrics: [numeric_correct, judge_correct, refusal_correct, citation_precision, citation_recall, model_latency_p50_ms, cost_usd_mean]
 
 tables:
@@ -35,23 +35,41 @@ tables:
   - id: ablation-agent
     title: "Agent components (62-question dev slice)"
     description: "Gemini 3.5 Flash-Lite. Removing the XBRL facts tool, or the number verification and citation self-check."
-    baseline: Full agent
+    baseline: "Full agent (fixes 1-3)"
     columns: [numeric_correct, judge_correct, refusal_correct, tokens_mean]
     rows:
-      - {name: "Full agent", run_id: ablation_default-dev}
+      - {name: "Full agent (fixes 1-3)", run_id: ablation_no_statement_search-dev}
       - {name: "Without XBRL facts tool", run_id: ablation_no_xbrl-dev}
       - {name: "Without verification and self-check", run_id: ablation_no_checks-dev}
 
   - id: error-fixes
     title: "Targeted fixes from error analysis (62-question dev slice)"
-    description: "Each row turns one fix off. Deltas are the cost of removing that fix."
-    baseline: All fixes
+    description: "Each row turns one fix off (these runs predate fix 4). Deltas are the cost of removing that fix."
+    baseline: Fixes 1-3
     columns: [numeric_correct, judge_correct, refusal_correct, tokens_mean]
     rows:
-      - {name: "All fixes", run_id: ablation_default-dev}
+      - {name: "Fixes 1-3", run_id: ablation_no_statement_search-dev}
       - {name: "Without fix 1: repeated tool calls", run_id: ablation_no_dedupe-dev}
       - {name: "Without fix 2: derived numbers", run_id: ablation_no_derive-dev}
       - {name: "Without fix 3: grouped citation markers", run_id: ablation_no_group_split-dev}
+
+  - id: fix4-dev
+    title: "Fix 4: statement-aware retrieval (62-question dev slice)"
+    description: "Built after the first held-out run to address FinanceBench false refusals; developed on dev only."
+    baseline: Before fix 4
+    columns: [numeric_correct, judge_correct, refusal_correct, recall_at_10, tokens_mean]
+    rows:
+      - {name: "Before fix 4", run_id: ablation_no_statement_search-dev}
+      - {name: "With fix 4", run_id: ablation_default-dev}
+
+  - id: fix4-test
+    title: "Fix 4 on the held-out test subsample (120 questions)"
+    description: "The test split was run once before fix 4 and once after; both runs are shown."
+    baseline: Before fix 4
+    columns: [numeric_correct, judge_correct, refusal_correct, recall_at_10, citation_recall]
+    rows:
+      - {name: "Before fix 4", run_id: final-test}
+      - {name: "With fix 4", run_id: final-test-v2}
 
   - id: model-comparison
     title: "Models (20-question smoke slice)"
@@ -63,6 +81,6 @@ tables:
       - {name: "Gemini 3.5 Flash-Lite", run_id: model_flash_lite_smoke-dev}
       - {name: "Qwen3 8B (local Ollama)", run_id: model-ollama-qwen3-8b-smoke}
 
-failures_from: [final-test]
+failures_from: [final-test-v2]
 max_failure_examples: 30
 judge_calibration: eval/reports/judge_calibration_groq-gpt-oss-120b_test.json

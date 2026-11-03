@@ -3,7 +3,13 @@ from datetime import date
 import pytest
 
 from ledgerlens.agent import tools, xbrl
-from ledgerlens.agent.tools import EvidenceRegistry, RetrievalConfig, openai_tools, run_tool
+from ledgerlens.agent.tools import (
+    EvidenceItem,
+    EvidenceRegistry,
+    RetrievalConfig,
+    openai_tools,
+    run_tool,
+)
 from ledgerlens.config import get_settings
 from ledgerlens.llm.cache import CacheMissError
 
@@ -182,3 +188,12 @@ def test_index_version_auto_reads_fingerprint(isolated, monkeypatch, tmp_path):
     (tmp_path / "index" / "version_section.txt").write_text("abc123\n")
     assert resolve_index_version(RetrievalConfig()) == "abc123"
     assert resolve_index_version(RetrievalConfig(index_version="pinned")) == "pinned"
+
+
+def test_registry_refs_are_never_reused_after_drop():
+    reg = EvidenceRegistry()
+    for i in range(3):
+        reg.add(EvidenceItem("", "chunk", f"s{i}", "F", "S", 1, 1, "t", "h"))
+    reg.drop("E2")
+    item = reg.add(EvidenceItem("", "chunk", "s9", "F", "S", 1, 1, "t", "h"))
+    assert item.ref == "E4" and set(reg.items) == {"E1", "E3", "E4"}

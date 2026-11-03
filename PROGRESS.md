@@ -9,6 +9,7 @@ Newest entry first. Updated at the end of every PR so the build can resume from 
 - Blockers needing the user:
   1. `SEC_USER_AGENT` repo secret (the live-eval workflow skips until it exists; `GEMINI_API_KEY` is set).
   2. Phoenix 21 has login on: put a Phoenix system API key in `.env` as `PHOENIX_API_KEY` (with `PHOENIX_ENDPOINT`) to see traces. Tracing is verified against a local OTLP receiver.
+- Fix 4 (statement-aware retrieval, D21) came after the first held-out run; the test split was re-run once and both runs are reported.
 - Known follow-ups: re-ingest with the improved parser from PR #13 (better section labels for INTC/JPM/LIN, no duplicated PDF table text) and re-run the evals; restrict the XBRL tool to the corpus filings' fiscal years (D20); embed fixed chunks for the FinanceBench test documents.
 
 ## Environment facts (checked 2026-11-01 to 11-03)
@@ -26,7 +27,7 @@ Newest entry first. Updated at the end of every PR so the build can resume from 
 - Retrieval (FinanceBench dev, n=60): hybrid MRR 0.235 vs BM25 0.167 (Holm p = 0.001).
 - Agent, 62-question dev slice, Flash-Lite: numeric 0.812, judge 0.550, refusal 0.871; without XBRL tool numeric 0.656.
 - Models on the smoke slice: Groq Qwen3.8 27B 0.95, Flash-Lite 0.95, local Qwen3 8B 0.40.
-- Held-out test (120 questions, run once): numeric 0.806 [0.70, 0.88], judge 0.556, unanswerable refusal 1.00 (24/24), citation precision 1.00, citation recall 0.91, 3.4 s, $0.0032/question. Main weakness: 31% false refusals on FinanceBench.
+- Held-out test (120 questions): before fix 4 numeric 0.806 [0.70, 0.88], judge 0.556, unanswerable refusal 24/24, citation precision 1.00, recall 0.91, FinanceBench false refusals 31%; after fix 4 numeric and judge unchanged, FinanceBench false refusals 28%, citation recall 0.89, citation precision 0.994.
 
 ## Working agreements
 
