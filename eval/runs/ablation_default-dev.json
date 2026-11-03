@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
  "run_id": "ablation_default-dev",
- "created_at": "2026-11-03T04:53:18.603886Z",
- "git_sha": "3bd854d",
+ "created_at": "2026-11-03T23:16:08.238420Z",
+ "git_sha": "d734fd5",
  "config_name": "ablation_default",
  "config": {
   "name": "ablation_default",
@@ -19,6 +19,8 @@
   "self_check": true,
   "dedupe_tool_calls": true,
   "derive_numbers": true,
+  "split_grouped_markers": true,
+  "statement_search": true,
   "datasets": [
    "xbrl",
    "financebench",
@@ -47,15 +49,15 @@
    "n": 35
   },
   "citation_recall": {
-   "value": 0.8421052631578947,
-   "ci_low": 0.6958318822077686,
-   "ci_high": 0.9255613658484106,
+   "value": 0.8552631578947368,
+   "ci_low": 0.7368421052631579,
+   "ci_high": 0.9473684210526315,
    "n": 38
   },
   "cost_usd_mean": {
-   "value": 0.003226488709677419,
-   "ci_low": 0.002992616612903225,
-   "ci_high": 0.003486344193548387,
+   "value": 0.0032206919354838704,
+   "ci_low": 0.0029981141935483875,
+   "ci_high": 0.003467719072580645,
    "n": 62
   },
   "error_rate": {
@@ -71,51 +73,51 @@
    "n": 20
   },
   "latency_p50_ms": {
-   "value": 76.1,
-   "ci_low": 62.080000000000005,
-   "ci_high": 89.3,
+   "value": 10.2,
+   "ci_low": 8.54875,
+   "ci_high": 11.0,
    "n": 62
   },
   "latency_p95_ms": {
-   "value": 15780.314999999975,
-   "ci_low": 435.1,
-   "ci_high": 23996.6,
+   "value": 8275.305,
+   "ci_low": 7038.319999999998,
+   "ci_high": 9111.603999999073,
    "n": 62
   },
   "model_latency_p50_ms": {
-   "value": 3307.9000000000005,
-   "ci_low": 3181.7,
-   "ci_high": 3441.0,
+   "value": 3308.5000000000005,
+   "ci_low": 3191.15,
+   "ci_high": 3495.2000000000003,
    "n": 62
   },
   "model_latency_p95_ms": {
-   "value": 5406.320000000001,
-   "ci_low": 4264.4,
-   "ci_high": 5943.599999999999,
+   "value": 5144.884999999999,
+   "ci_low": 4258.754999999999,
+   "ci_high": 5603.299999999999,
    "n": 62
   },
   "mrr": {
-   "value": 0.6565174614581729,
-   "ci_low": 0.5493594292729669,
-   "ci_high": 0.7661543084715021,
+   "value": 0.6586368698275812,
+   "ci_low": 0.5519237770491475,
+   "ci_high": 0.7666768582208305,
    "n": 44
   },
   "ndcg_at_10": {
-   "value": 0.6988108984256816,
-   "ci_low": 0.6000255172202714,
-   "ci_high": 0.7991039554488802,
+   "value": 0.7094412901505895,
+   "ci_low": 0.6152729507403348,
+   "ci_high": 0.8056380614671839,
    "n": 44
   },
   "numeric_correct": {
-   "value": 0.8125,
-   "ci_low": 0.6469084479862404,
-   "ci_high": 0.9111045531043405,
+   "value": 0.84375,
+   "ci_low": 0.682458504024696,
+   "ci_high": 0.9313557971749429,
    "n": 32
   },
   "recall_at_10": {
-   "value": 0.8863636363636364,
-   "ci_low": 0.7954545454545454,
-   "ci_high": 0.9659090909090909,
+   "value": 0.9204545454545454,
+   "ci_low": 0.8409090909090909,
+   "ci_high": 0.9772727272727273,
    "n": 44
   },
   "recall_at_5": {
@@ -131,9 +133,9 @@
    "n": 62
   },
   "tokens_mean": {
-   "value": 8170.435483870968,
-   "ci_low": 7615.93064516129,
-   "ci_high": 8790.406048387096,
+   "value": 8235.91935483871,
+   "ci_low": 7675.028629032258,
+   "ci_high": 8878.429435483871,
    "n": 62
   }
  },
@@ -146,15 +148,15 @@
     "n": 11
    },
    "citation_recall": {
-    "value": 0.5714285714285714,
-    "ci_low": 0.3259064457965074,
-    "ci_high": 0.7861920109552588,
+    "value": 0.6071428571428571,
+    "ci_low": 0.35714285714285715,
+    "ci_high": 0.8571428571428571,
     "n": 14
    },
    "cost_usd_mean": {
-    "value": 0.00366043,
-    "ci_low": 0.0032175596249999993,
-    "ci_high": 0.004208131999999999,
+    "value": 0.00364246,
+    "ci_low": 0.0032240235,
+    "ci_high": 0.004196475249999999,
     "n": 20
    },
    "error_rate": {
@@ -170,51 +172,51 @@
     "n": 20
    },
    "latency_p50_ms": {
-    "value": 79.44999999999999,
-    "ci_low": 54.95,
-    "ci_high": 96.65,
+    "value": 4882.2,
+    "ci_low": 13.45,
+    "ci_high": 7837.25,
     "n": 20
    },
    "latency_p95_ms": {
-    "value": 159.82999999999998,
-    "ci_low": 131.13,
-    "ci_high": 162.3,
+    "value": 9301.135000000006,
+    "ci_low": 8193.7,
+    "ci_high": 16130.4,
     "n": 20
    },
    "model_latency_p50_ms": {
-    "value": 3358.9500000000003,
-    "ci_low": 3138.45,
-    "ci_high": 3813.2000000000003,
+    "value": 3440.3500000000004,
+    "ci_low": 3140.75,
+    "ci_high": 3862.7999999999997,
     "n": 20
    },
    "model_latency_p95_ms": {
-    "value": 6230.180000000004,
-    "ci_low": 4264.4,
+    "value": 5478.730000000005,
+    "ci_low": 4233.185000000006,
     "ci_high": 11675.2,
     "n": 20
    },
    "mrr": {
-    "value": 0.3943384152079804,
-    "ci_low": 0.2607640457368718,
-    "ci_high": 0.5454767316017316,
+    "value": 0.3990011136206788,
+    "ci_low": 0.26633283338038766,
+    "ci_high": 0.5474636093073593,
     "n": 20
    },
    "ndcg_at_10": {
-    "value": 0.4481050504650623,
-    "ci_low": 0.31423768093185106,
-    "ci_high": 0.5899039865901653,
+    "value": 0.47149191225985965,
+    "ci_low": 0.3455415883828146,
+    "ci_high": 0.6060910722440096,
     "n": 20
    },
    "numeric_correct": {
-    "value": 0.5,
-    "ci_low": 0.21521606221387757,
-    "ci_high": 0.7847839377861224,
+    "value": 0.625,
+    "ci_low": 0.30574239460262737,
+    "ci_high": 0.8631557141764026,
     "n": 8
    },
    "recall_at_10": {
-    "value": 0.75,
-    "ci_low": 0.575,
-    "ci_high": 0.9,
+    "value": 0.825,
+    "ci_low": 0.675,
+    "ci_high": 0.95,
     "n": 20
    },
    "recall_at_5": {
@@ -230,9 +232,9 @@
     "n": 20
    },
    "tokens_mean": {
-    "value": 9192.2,
-    "ci_low": 8238.2525,
-    "ci_high": 10331.335,
+    "value": 9395.2,
+    "ci_low": 8440.5725,
+    "ci_high": 10609.00625,
     "n": 20
    }
   },
@@ -250,15 +252,15 @@
     "n": 18
    },
    "latency_p50_ms": {
-    "value": 70.85,
-    "ci_low": 51.8,
-    "ci_high": 9151.0,
+    "value": 5.15,
+    "ci_low": 4.65,
+    "ci_high": 5.85,
     "n": 18
    },
    "latency_p95_ms": {
-    "value": 24022.085,
-    "ci_low": 10392.2,
-    "ci_high": 24166.5,
+    "value": 6.884999999999997,
+    "ci_low": 5.915,
+    "ci_high": 8.5,
     "n": 18
    },
    "model_latency_p50_ms": {
@@ -312,15 +314,15 @@
     "n": 24
    },
    "latency_p50_ms": {
-    "value": 73.25,
-    "ci_low": 53.2,
-    "ci_high": 147.5,
+    "value": 10.4,
+    "ci_low": 9.1,
+    "ci_high": 10.853749999999978,
     "n": 24
    },
    "latency_p95_ms": {
-    "value": 995.1649999999986,
-    "ci_low": 188.7,
-    "ci_high": 1113.0,
+    "value": 12.364999999999998,
+    "ci_low": 11.084999999999999,
+    "ci_high": 13.1,
     "n": 24
    },
    "model_latency_p50_ms": {
@@ -380,11 +382,11 @@
   }
  },
  "usage_total": {
-  "prompt_tokens": 484716,
-  "completion_tokens": 21851,
-  "llm_calls": 241,
-  "cost_usd": 0.2000423,
-  "latency_ms": 221967.79999999996
+  "prompt_tokens": 489493,
+  "completion_tokens": 21134,
+  "llm_calls": 240,
+  "cost_usd": 0.19968290000000002,
+  "latency_ms": 221201.49999999997
  },
  "results": [
   {
@@ -430,7 +432,7 @@
      "latency_ms": 3995.3
     }
    },
-   "wall_ms": 53.2,
+   "wall_ms": 9.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -504,7 +506,7 @@
      "latency_ms": 2865.5
     }
    },
-   "wall_ms": 435.1,
+   "wall_ms": 10.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -578,7 +580,7 @@
      "latency_ms": 3357.7
     }
    },
-   "wall_ms": 421.0,
+   "wall_ms": 11.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -654,7 +656,7 @@
      "latency_ms": 5603.299999999999
     }
    },
-   "wall_ms": 64.4,
+   "wall_ms": 11.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -721,7 +723,7 @@
      "latency_ms": 2718.2
     }
    },
-   "wall_ms": 1113.0,
+   "wall_ms": 10.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -801,7 +803,7 @@
      "latency_ms": 3248.8
     }
    },
-   "wall_ms": 1094.0,
+   "wall_ms": 10.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -872,7 +874,7 @@
      "latency_ms": 3610.0
     }
    },
-   "wall_ms": 176.8,
+   "wall_ms": 10.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -943,7 +945,7 @@
      "latency_ms": 3356.8
     }
    },
-   "wall_ms": 188.7,
+   "wall_ms": 11.0,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1009,7 +1011,7 @@
      "latency_ms": 2915.6
     }
    },
-   "wall_ms": 123.5,
+   "wall_ms": 8.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1083,7 +1085,7 @@
      "latency_ms": 2391.2
     }
    },
-   "wall_ms": 81.2,
+   "wall_ms": 8.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1152,7 +1154,7 @@
      "latency_ms": 4329.1
     }
    },
-   "wall_ms": 32.1,
+   "wall_ms": 8.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1229,7 +1231,7 @@
      "latency_ms": 4151.5
     }
    },
-   "wall_ms": 147.5,
+   "wall_ms": 9.1,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -1311,7 +1313,7 @@
      "latency_ms": 4729.3
     }
    },
-   "wall_ms": 276.9,
+   "wall_ms": 10.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1397,7 +1399,7 @@
      "latency_ms": 3761.6
     }
    },
-   "wall_ms": 47.4,
+   "wall_ms": 10.3,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 1.0,
@@ -1474,7 +1476,7 @@
      "latency_ms": 5411.700000000001
     }
    },
-   "wall_ms": 55.0,
+   "wall_ms": 11.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1555,7 +1557,7 @@
      "latency_ms": 3797.0
     }
    },
-   "wall_ms": 112.9,
+   "wall_ms": 12.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1624,7 +1626,7 @@
      "latency_ms": 3181.7
     }
    },
-   "wall_ms": 42.5,
+   "wall_ms": 10.5,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1702,7 +1704,7 @@
      "latency_ms": 3495.2000000000003
     }
    },
-   "wall_ms": 73.5,
+   "wall_ms": 13.1,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1771,7 +1773,7 @@
      "latency_ms": 3592.2
     }
    },
-   "wall_ms": 39.4,
+   "wall_ms": 6.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1840,7 +1842,7 @@
      "latency_ms": 3604.5
     }
    },
-   "wall_ms": 34.1,
+   "wall_ms": 8.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1917,7 +1919,7 @@
      "latency_ms": 3384.0
     }
    },
-   "wall_ms": 64.9,
+   "wall_ms": 9.8,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -1986,7 +1988,7 @@
      "latency_ms": 3198.8
     }
    },
-   "wall_ms": 73.0,
+   "wall_ms": 11.2,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2063,7 +2065,7 @@
      "latency_ms": 3638.4000000000005
     }
    },
-   "wall_ms": 52.3,
+   "wall_ms": 11.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2132,7 +2134,7 @@
      "latency_ms": 3538.0
     }
    },
-   "wall_ms": 6.8,
+   "wall_ms": 8.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2159,7 +2161,7 @@
    "gold_value": -3.7,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
+    "answer": "The provided filings do not include the Cost of Goods Sold (COGS) for General Mills in FY 2019, so the cash conversion cycle cannot be calculated.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -2177,34 +2179,38 @@
      "FB-GENERALMILLS_2019_10K:section:00066",
      "FB-GENERALMILLS_2019_10K:section:00304",
      "FB-GENERALMILLS_2019_10K:section:00219",
+     "FB-GENERALMILLS_2019_10K:section:00195",
+     "FB-GENERALMILLS_2019_10K:section:00275",
+     "FB-GENERALMILLS_2019_10K:section:00395",
+     "FB-GENERALMILLS_2019_10K:section:00061",
      "FB-GENERALMILLS_2019_10K:section:00384",
-     "FB-GENERALMILLS_2019_10K:section:00191"
+     "FB-GENERALMILLS_2019_10K:section:00386",
+     "FB-GENERALMILLS_2019_10K:section:00408",
+     "FB-GENERALMILLS_2019_10K:section:00284",
+     "FB-GENERALMILLS_2019_10K:section:00407"
     ],
     "steps": [
      "plan",
      "search_filings",
      "search_filings",
+     "search_filings",
+     "search_filings",
      "plan",
      "search_filings",
      "plan",
      "search_filings",
      "answer",
-     "verify",
-     "self_check",
-     "answer",
-     "verify",
-     "self_check",
-     "unresolved: numbers: these numbers do not appear in the evidence: 50.56, 50.41"
+     "self_check"
     ],
     "usage": {
-     "prompt_tokens": 14991,
-     "completion_tokens": 859,
-     "llm_calls": 5,
-     "cost_usd": 0.006644799999999999,
-     "latency_ms": 5943.599999999999
+     "prompt_tokens": 12567,
+     "completion_tokens": 269,
+     "llm_calls": 4,
+     "cost_usd": 0.0044426,
+     "latency_ms": 4998.3
     }
    },
-   "wall_ms": 159.7,
+   "wall_ms": 3244.4,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -2232,7 +2238,7 @@
    "gold_value": -0.02,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "The provided filings do not supply the total assets and net income figures required to calculate AES's FY2022 return on assets (ROA).",
+    "answer": "The filings do not provide the consolidated balance sheet and total assets for AES Corporation for FY2021 and FY2022, so the return on assets (ROA) cannot be calculated.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -2250,20 +2256,24 @@
      "FB-AES_2022_10K:section:00319",
      "FB-AES_2022_10K:section:00367",
      "FB-AES_2022_10K:section:00544",
+     "FB-AES_2022_10K:section:00409",
+     "FB-AES_2022_10K:section:00651",
+     "FB-AES_2022_10K:section:00535",
+     "FB-AES_2022_10K:section:00322",
      "FB-AES_2022_10K:section:00636",
-     "FB-AES_2022_10K:section:00656",
-     "FB-AES_2022_10K:section:00205",
-     "FB-AES_2022_10K:section:00532",
      "FB-AES_2022_10K:section:00318",
      "FB-AES_2022_10K:section:00612",
      "FB-AES_2022_10K:section:00489",
-     "FB-AES_2022_10K:section:00409",
      "FB-AES_2022_10K:section:00470",
+     "FB-AES_2022_10K:section:00205",
      "FB-AES_2022_10K:section:00539",
-     "FB-AES_2022_10K:section:00274"
+     "FB-AES_2022_10K:section:00274",
+     "FB-AES_2022_10K:section:00321"
     ],
     "steps": [
      "plan",
+     "search_filings",
+     "search_filings",
      "search_filings",
      "search_filings",
      "plan",
@@ -2276,14 +2286,14 @@
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 10556,
+     "prompt_tokens": 11429,
      "completion_tokens": 383,
      "llm_calls": 4,
-     "cost_usd": 0.004124299999999999,
-     "latency_ms": 3784.9000000000005
+     "cost_usd": 0.0043862,
+     "latency_ms": 3640.4
     }
    },
-   "wall_ms": 162.3,
+   "wall_ms": 6520.0,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -2311,7 +2321,7 @@
    "gold_value": 5409000000.0,
    "gold_unit": "USD",
    "prediction": {
-    "answer": "At the end of fiscal year 2019 (February 2, 2019), Best Buy's merchandise inventories were $5,409 million [1].",
+    "answer": "Best Buy's total amount of merchandise inventories at the end of fiscal year 2019 (February 2, 2019) was $5,409 million [1].",
     "refused": false,
     "answer_value": 5409000000.0,
     "answer_unit": "USD",
@@ -2322,7 +2332,7 @@
       "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Balance Sheets",
       "page": 52,
       "page_end": 52,
-      "quote": "Merchandise inventories | 5,409"
+      "quote": "Merchandise inventories | 5,409 | 5,209"
      }
     ],
     "retrieved_chunk_ids": [
@@ -2331,10 +2341,13 @@
      "FB-BESTBUY_2019_10K:section:00184",
      "FB-BESTBUY_2019_10K:section:00303",
      "FB-BESTBUY_2019_10K:section:00183",
-     "FB-BESTBUY_2019_10K:section:00227"
+     "FB-BESTBUY_2019_10K:section:00227",
+     "FB-BESTBUY_2019_10K:section:00222",
+     "FB-BESTBUY_2019_10K:section:00256"
     ],
     "steps": [
      "plan",
+     "search_filings",
      "search_filings",
      "plan",
      "get_table",
@@ -2344,14 +2357,14 @@
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 6890,
-     "completion_tokens": 205,
+     "prompt_tokens": 7854,
+     "completion_tokens": 215,
      "llm_calls": 4,
-     "cost_usd": 0.0025795,
-     "latency_ms": 3159.6
+     "cost_usd": 0.0028937,
+     "latency_ms": 3244.8999999999996
     }
    },
-   "wall_ms": 78.6,
+   "wall_ms": 7211.9,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2379,7 +2392,7 @@
    "gold_value": 42.69,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "The filings do not provide the accounts payable balances for FY2017 and FY2018 necessary to calculate average accounts payable.",
+    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
     "refused": true,
     "answer_value": null,
     "answer_unit": null,
@@ -2391,12 +2404,13 @@
      "FB-WALMART_2018_10K:section:00189",
      "FB-WALMART_2018_10K:section:00240",
      "FB-WALMART_2018_10K:section:00220",
-     "FB-WALMART_2018_10K:section:00211",
-     "FB-WALMART_2018_10K:section:00262",
+     "FB-WALMART_2018_10K:section:00213",
      "FB-WALMART_2018_10K:section:00200",
+     "FB-WALMART_2018_10K:section:00211",
+     "FB-WALMART_2018_10K:section:00158",
+     "FB-WALMART_2018_10K:section:00262",
      "FB-WALMART_2018_10K:section:00210",
      "FB-WALMART_2018_10K:section:00214",
-     "FB-WALMART_2018_10K:section:00213",
      "FB-WALMART_2018_10K:section:00145",
      "FB-WALMART_2018_10K:section:00203",
      "FB-WALMART_2018_10K:section:00301"
@@ -2406,22 +2420,29 @@
      "search_filings",
      "get_company_facts",
      "get_company_facts",
+     "search_filings",
+     "search_filings",
      "plan",
      "search_filings",
      "search_filings",
      "plan",
      "answer",
-     "self_check"
+     "verify",
+     "self_check",
+     "answer",
+     "verify",
+     "self_check",
+     "unresolved: numbers: these numbers do not appear in the evidence: 44.15"
     ],
     "usage": {
-     "prompt_tokens": 11181,
-     "completion_tokens": 368,
-     "llm_calls": 4,
-     "cost_usd": 0.0042743,
-     "latency_ms": 3394.8
+     "prompt_tokens": 15957,
+     "completion_tokens": 935,
+     "llm_calls": 5,
+     "cost_usd": 0.0071246,
+     "latency_ms": 5152.6
     }
    },
-   "wall_ms": 87.2,
+   "wall_ms": 16130.4,
    "scores": {
     "numeric_correct": 0.0,
     "refusal_correct": 0.0,
@@ -2449,7 +2470,7 @@
    "gold_value": 1.73,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "Block's working capital ratio for FY 2016 was 1.73, calculated by dividing total current assets of $1,001,425 thousand by total current liabilities of $577,464 thousand [1].",
+    "answer": "Block's FY2016 working capital ratio is 1.73, calculated by dividing total current assets of $1,001,425 thousand by total current liabilities of $577,464 thousand as of December 31, 2016 [1].",
     "refused": false,
     "answer_value": 1.73,
     "answer_unit": "ratio",
@@ -2460,7 +2481,7 @@
       "section": "Item 8. Financial Statements And Supplementary Data > Consolidated Balance Sheets",
       "page": 68,
       "page_end": 68,
-      "quote": "Total current liabilities |  | 577,464"
+      "quote": "Total current liabilities: 577,464"
      }
     ],
     "retrieved_chunk_ids": [
@@ -2471,28 +2492,28 @@
      "FB-BLOCK_2016_10K:section:00281",
      "FB-BLOCK_2016_10K:section:00105",
      "FB-BLOCK_2016_10K:section:00275",
-     "FB-BLOCK_2016_10K:section:00294"
+     "FB-BLOCK_2016_10K:section:00188"
     ],
     "steps": [
      "plan",
      "search_filings",
+     "search_filings",
      "plan",
      "get_table",
      "plan",
-     "search_filings",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 8953,
-     "completion_tokens": 318,
+     "prompt_tokens": 9261,
+     "completion_tokens": 275,
      "llm_calls": 4,
-     "cost_usd": 0.0034809,
-     "latency_ms": 3651.2
+     "cost_usd": 0.0034658,
+     "latency_ms": 3297.1000000000004
     }
    },
-   "wall_ms": 135.5,
+   "wall_ms": 8279.6,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2520,18 +2541,18 @@
    "gold_value": 1577000000.0,
    "gold_unit": "USD",
    "prediction": {
-    "answer": "In FY 2018, 3M's capital expenditures, represented by purchases of property, plant and equipment (PP&E), were $1,577 million [1].",
+    "answer": "For fiscal year 2018, 3M's capital expenditures, represented by purchases of property, plant and equipment (PP&E) in the cash flow statement, were $1,577 million [1].",
     "refused": false,
     "answer_value": 1577000000.0,
     "answer_unit": "USD",
     "citations": [
      {
-      "chunk_id": "FB-3M_2018_10K:section:00142",
+      "chunk_id": "FB-3M_2018_10K:section:00177",
       "filing_id": "FB-3M_2018_10K",
-      "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > 6,439 Cash Flows from Investing Activities: Years ended December 31",
-      "page": 46,
-      "page_end": 46,
-      "quote": "Purchases of property, plant and equipment (PP&E) | $(1,577)"
+      "section": "Item 8. Financial Statements and Supplementary Data > Consolidated Statement of Cash Flow s Years ended December 31",
+      "page": 60,
+      "page_end": 60,
+      "quote": "Purchases of property, plant and equipment (PP&E) | (1,577)"
      }
     ],
     "retrieved_chunk_ids": [
@@ -2540,36 +2561,42 @@
      "FB-3M_2018_10K:section:00142",
      "FB-3M_2018_10K:section:00115",
      "FB-3M_2018_10K:section:00141",
-     "FB-3M_2018_10K:section:00148"
+     "FB-3M_2018_10K:section:00148",
+     "FB-3M_2018_10K:section:00151",
+     "FB-3M_2018_10K:section:00177",
+     "FB-3M_2018_10K:section:00143",
+     "FB-3M_2018_10K:section:00182"
     ],
     "steps": [
      "plan",
      "search_filings",
+     "search_filings",
      "plan",
      "get_table",
+     "search_filings",
      "plan",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 7167,
-     "completion_tokens": 223,
+     "prompt_tokens": 9060,
+     "completion_tokens": 282,
      "llm_calls": 4,
-     "cost_usd": 0.0027076,
-     "latency_ms": 3094.6
+     "cost_usd": 0.003423,
+     "latency_ms": 3560.8
     }
    },
-   "wall_ms": 130.9,
+   "wall_ms": 8193.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
     "citation_precision": 1.0,
-    "citation_recall": 0.0,
+    "citation_recall": 1.0,
     "recall_at_5": 0.0,
-    "recall_at_10": 0.0,
-    "mrr": 0.0,
-    "ndcg_at_10": 0.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.125,
+    "ndcg_at_10": 0.31546487678572877,
     "judge_correct": 1.0
    },
    "error": null,
@@ -2588,11 +2615,28 @@
    "gold_value": 3.46,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "The filings I could retrieve do not support a reliable answer to this question.",
-    "refused": true,
-    "answer_value": null,
-    "answer_unit": null,
-    "citations": [],
+    "answer": "Nike's FY2021 inventory turnover ratio is 3.46, calculated using FY2021 cost of sales of $24,576 million [1] and average inventories between FY2020 ($7,367 million) and FY2021 ($6,854 million) of $7,110.5 million [2].",
+    "refused": false,
+    "answer_value": 3.46,
+    "answer_unit": "ratio",
+    "citations": [
+     {
+      "chunk_id": "FB-NIKE_2021_10K:section:00180",
+      "filing_id": "FB-NIKE_2021_10K",
+      "section": "Item 8. Financial Statements And Supplementary > Consolidated Statements Of Income",
+      "page": 59,
+      "page_end": 59,
+      "quote": "Cost of sales 24,576"
+     },
+     {
+      "chunk_id": "FB-NIKE_2021_10K:section:00218",
+      "filing_id": "FB-NIKE_2021_10K",
+      "section": "Item 8. Financial Statements And Supplementary > Note 2 — Inventories",
+      "page": 71,
+      "page_end": 71,
+      "quote": "Inventory balances of $6,854 million and $7,367 million as of May 31, 2021 and 2020, respectively"
+     }
+    ],
     "retrieved_chunk_ids": [
      "FB-NIKE_2021_10K:section:00314",
      "FB-NIKE_2021_10K:section:00203",
@@ -2600,50 +2644,48 @@
      "FB-NIKE_2021_10K:section:00196",
      "FB-NIKE_2021_10K:section:00143",
      "FB-NIKE_2021_10K:section:00356",
+     "FB-NIKE_2021_10K:section:00185",
+     "FB-NIKE_2021_10K:section:00230",
      "FB-NIKE_2021_10K:section:00180",
-     "FB-NIKE_2021_10K:section:00289",
-     "FB-NIKE_2021_10K:section:00338",
-     "FB-NIKE_2021_10K:section:00183"
+     "FB-NIKE_2021_10K:section:00182"
     ],
     "steps": [
      "plan",
      "search_filings",
-     "plan",
      "search_filings",
-     "get_company_facts",
+     "search_filings",
      "plan",
      "calculate",
+     "plan",
+     "get_company_facts",
+     "get_company_facts",
      "answer",
      "verify",
-     "self_check",
-     "answer",
-     "verify",
-     "self_check",
-     "unresolved: numbers: these numbers do not appear in the evidence: 7.1105e+09"
+     "self_check"
     ],
     "usage": {
-     "prompt_tokens": 11823,
-     "completion_tokens": 928,
-     "llm_calls": 5,
-     "cost_usd": 0.0058668999999999995,
-     "latency_ms": 5304.099999999999
+     "prompt_tokens": 10089,
+     "completion_tokens": 448,
+     "llm_calls": 4,
+     "cost_usd": 0.0041467,
+     "latency_ms": 3884.0999999999995
     }
    },
-   "wall_ms": 77.6,
+   "wall_ms": 8374.0,
    "scores": {
-    "numeric_correct": 0.0,
-    "refusal_correct": 0.0,
-    "citation_precision": null,
-    "citation_recall": null,
+    "numeric_correct": 1.0,
+    "refusal_correct": 1.0,
+    "citation_precision": 1.0,
+    "citation_recall": 0.5,
     "recall_at_5": 0.0,
-    "recall_at_10": 0.5,
+    "recall_at_10": 1.0,
     "mrr": 0.14285714285714285,
-    "ndcg_at_10": 0.20438239758848611,
-    "judge_correct": 0.0
+    "ndcg_at_10": 0.3889580943680543,
+    "judge_correct": 1.0
    },
    "error": null,
-   "failure_category": "bad_refusal",
-   "failure_note": "refused although the filings answer it"
+   "failure_category": null,
+   "failure_note": null
   },
   {
    "qid": "fb-03856",
@@ -2657,7 +2699,7 @@
    "gold_value": 0.83,
    "gold_unit": "ratio",
    "prediction": {
-    "answer": "Adobe's FY2017 operating cash flow ratio is 0.83, calculated using net cash provided by operating activities of $2,912,853,000 [1] divided by total current liabilities of $3,527,457,000 [2].",
+    "answer": "Adobe's FY2017 operating cash flow ratio is 0.83, based on net cash provided by operating activities of 2,912,853,000 USD [1] divided by total current liabilities of 3,527,457,000 USD [2] as of December 1, 2017.",
     "refused": false,
     "answer_value": 0.83,
     "answer_unit": "ratio",
@@ -2668,7 +2710,7 @@
       "section": "XBRL companyfacts",
       "page": null,
       "page_end": null,
-      "quote": "Net Cash Provided by (Used in) Operating Activities (us-gaap:NetCashProvidedByUsedInOperatingActivities): 2,912,853,000 USD"
+      "quote": "2,912,853,000 USD for 2016-12-03 to 2017-12-01 [FY]"
      },
      {
       "chunk_id": "xbrl:ADBE:LiabilitiesCurrent:2017-12-01:USD",
@@ -2676,7 +2718,7 @@
       "section": "XBRL companyfacts",
       "page": null,
       "page_end": null,
-      "quote": "Liabilities, Current (us-gaap:LiabilitiesCurrent): 3,527,457,000 USD for as of 2017-12-01"
+      "quote": "3,527,457,000 USD for as of 2017-12-01 [instant]"
      }
     ],
     "retrieved_chunk_ids": [
@@ -2690,7 +2732,11 @@
      "FB-ADOBE_2017_10K:section:00255",
      "FB-ADOBE_2017_10K:section:00188",
      "FB-ADOBE_2017_10K:section:00190",
-     "FB-ADOBE_2017_10K:section:00098"
+     "FB-ADOBE_2017_10K:section:00098",
+     "FB-ADOBE_2017_10K:section:00220",
+     "FB-ADOBE_2017_10K:section:00242",
+     "FB-ADOBE_2017_10K:section:00160",
+     "FB-ADOBE_2017_10K:section:00161"
     ],
     "steps": [
      "plan",
@@ -2698,23 +2744,24 @@
      "get_company_facts",
      "search_filings",
      "search_filings",
+     "search_filings",
+     "search_filings",
      "plan",
      "calculate",
      "plan",
-     "calculate",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 10688,
-     "completion_tokens": 577,
+     "prompt_tokens": 9784,
+     "completion_tokens": 570,
      "llm_calls": 4,
-     "cost_usd": 0.0046489,
-     "latency_ms": 3629.2
+     "cost_usd": 0.0043602,
+     "latency_ms": 3605.7
     }
    },
-   "wall_ms": 74.6,
+   "wall_ms": 8941.7,
    "scores": {
     "numeric_correct": 1.0,
     "refusal_correct": 1.0,
@@ -2742,7 +2789,7 @@
    "gold_value": null,
    "gold_unit": "text",
    "prediction": {
-    "answer": "PayPal has positive working capital of $12,416 million for fiscal year 2022 [1]. Total current assets were $57,517 million and total current liabilities were $45,101 million as of December 31, 2022 [1].",
+    "answer": "PayPal has positive working capital for FY2022 of $12,416 million [1], calculated as total current assets of $57,517 million minus total current liabilities of $45,101 million [1].",
     "refused": false,
     "answer_value": 12416000000.0,
     "answer_unit": "USD",
@@ -2753,7 +2800,7 @@
       "section": "Item 15. Exhibits, Financial Statement Schedules > CONSOLIDATED BALANCE SHEETS As of December 31,",
       "page": 61,
       "page_end": 61,
-      "quote": "Total current liabilities | 45,101 | 43,029"
+      "quote": "Total current liabilities | 45,101"
      }
     ],
     "retrieved_chunk_ids": [
@@ -2769,8 +2816,9 @@
     "steps": [
      "plan",
      "search_filings",
-     "plan",
      "search_filings",
+     "plan",
+     "get_table",
      "plan",
      "search_filings",
      "answer",
@@ -2778,14 +2826,14 @@
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 7886,
-     "completion_tokens": 337,
+     "prompt_tokens": 8207,
+     "completion_tokens": 284,
      "llm_calls": 4,
-     "cost_usd": 0.0032083,
-     "latency_ms": 3223.8999999999996
+     "cost_usd": 0.0031721,
+     "latency_ms": 3050.8
     }
    },
-   "wall_ms": 90.4,
+   "wall_ms": 7863.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -2880,7 +2928,7 @@
      "latency_ms": 4264.4
     }
    },
-   "wall_ms": 102.9,
+   "wall_ms": 23.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -2957,7 +3005,7 @@
      "latency_ms": 3841.5
     }
    },
-   "wall_ms": 59.8,
+   "wall_ms": 12.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -2985,7 +3033,7 @@
    "gold_value": null,
    "gold_unit": "text",
    "prediction": {
-    "answer": "Operating activities brought in the most cash flow for Best Buy in FY2023, providing $1,824 million [1]. In comparison, investing activities used $962 million and financing activities used $1,806 million [1].",
+    "answer": "Operating activities brought in the most cash flow for Best Buy in FY 2023, providing $1,824 million, compared to investing activities which used $962 million and financing activities which used $1,806 million [1].",
     "refused": false,
     "answer_value": 1824000000.0,
     "answer_unit": "USD",
@@ -3006,31 +3054,29 @@
      "FB-BESTBUY_2023_10K:section:00117",
      "FB-BESTBUY_2023_10K:section:00123",
      "FB-BESTBUY_2023_10K:section:00184",
-     "FB-BESTBUY_2023_10K:section:00150",
-     "FB-BESTBUY_2023_10K:section:00171",
-     "FB-BESTBUY_2023_10K:section:00169"
+     "FB-BESTBUY_2023_10K:section:00129",
+     "FB-BESTBUY_2023_10K:section:00119"
     ],
     "steps": [
      "plan",
      "search_filings",
-     "plan",
-     "get_table",
      "search_filings",
      "plan",
      "get_table",
+     "plan",
      "answer",
      "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 8127,
-     "completion_tokens": 351,
+     "prompt_tokens": 8267,
+     "completion_tokens": 283,
      "llm_calls": 4,
-     "cost_usd": 0.0033156,
-     "latency_ms": 3323.1000000000004
+     "cost_usd": 0.0031875999999999996,
+     "latency_ms": 3319.9000000000005
     }
    },
-   "wall_ms": 143.5,
+   "wall_ms": 7065.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3096,7 +3142,7 @@
      "latency_ms": 2182.1000000000004
     }
    },
-   "wall_ms": 32.1,
+   "wall_ms": 14.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3166,7 +3212,7 @@
      "latency_ms": 2976.8999999999996
     }
    },
-   "wall_ms": 50.1,
+   "wall_ms": 11.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3241,7 +3287,7 @@
      "latency_ms": 3097.3
     }
    },
-   "wall_ms": 80.3,
+   "wall_ms": 10.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3311,7 +3357,7 @@
      "latency_ms": 4633.5
     }
    },
-   "wall_ms": 27.5,
+   "wall_ms": 8.4,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3386,7 +3432,7 @@
      "latency_ms": 11675.2
     }
    },
-   "wall_ms": 22.7,
+   "wall_ms": 8.3,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3414,28 +3460,11 @@
    "gold_value": null,
    "gold_unit": "text",
    "prediction": {
-    "answer": "Amcor's Adjusted EBITDA for the full year 2023 (Twelve Months Ended June 30, 2023) was $2,018 million [1][2].",
-    "refused": false,
-    "answer_value": 2018000000.0,
-    "answer_unit": "USD",
-    "citations": [
-     {
-      "chunk_id": "FB-AMCOR_2023Q4_EARNINGS:section:00051",
-      "filing_id": "FB-AMCOR_2023Q4_EARNINGS",
-      "section": "and tax (EBIT), Net income, Earnings per share (EPS) and Free Cash Flow",
-      "page": 12,
-      "page_end": 12,
-      "quote": "Adjusted EBITDA, EBIT, Net income and EPS 2,018 1,608 1,089 73.3"
-     },
-     {
-      "chunk_id": "FB-AMCOR_2023Q4_EARNINGS:section:00006",
-      "filing_id": "FB-AMCOR_2023Q4_EARNINGS",
-      "section": "repurchases and a compelling and growing dividend.”",
-      "page": 1,
-      "page_end": 1,
-      "quote": "EBITDA 2,117 2,018"
-     }
-    ],
+    "answer": "The provided filings do not disclose Amcor's total Adjusted non-GAAP EBITDA for the full fiscal year 2023,.",
+    "refused": true,
+    "answer_value": null,
+    "answer_unit": null,
+    "citations": [],
     "retrieved_chunk_ids": [
      "FB-AMCOR_2023Q4_EARNINGS:section:00040",
      "FB-AMCOR_2023Q4_EARNINGS:section:00048",
@@ -3443,6 +3472,8 @@
      "FB-AMCOR_2023Q4_EARNINGS:section:00049",
      "FB-AMCOR_2023Q4_EARNINGS:section:00000",
      "FB-AMCOR_2023Q4_EARNINGS:section:00011",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00043",
+     "FB-AMCOR_2023Q4_EARNINGS:section:00044",
      "FB-AMCOR_2023Q4_EARNINGS:section:00051",
      "FB-AMCOR_2023Q4_EARNINGS:section:00006",
      "FB-AMCOR_2023Q4_EARNINGS:section:00016",
@@ -3451,38 +3482,38 @@
     "steps": [
      "plan",
      "search_filings",
+     "search_filings",
      "plan",
      "get_table",
      "search_filings",
      "plan",
      "get_table",
      "answer",
-     "verify",
      "self_check"
     ],
     "usage": {
-     "prompt_tokens": 9013,
-     "completion_tokens": 324,
+     "prompt_tokens": 9577,
+     "completion_tokens": 212,
      "llm_calls": 4,
-     "cost_usd": 0.0035139,
-     "latency_ms": 3176.1
+     "cost_usd": 0.0034031,
+     "latency_ms": 3164.2
     }
    },
-   "wall_ms": 88.0,
+   "wall_ms": 7810.8,
    "scores": {
     "numeric_correct": null,
-    "refusal_correct": 1.0,
-    "citation_precision": 1.0,
-    "citation_recall": 1.0,
+    "refusal_correct": 0.0,
+    "citation_precision": null,
+    "citation_recall": null,
     "recall_at_5": 0.0,
     "recall_at_10": 1.0,
-    "mrr": 0.14285714285714285,
-    "ndcg_at_10": 0.3333333333333333,
-    "judge_correct": 1.0
+    "mrr": 0.1111111111111111,
+    "ndcg_at_10": 0.3010299956639812,
+    "judge_correct": 0.0
    },
    "error": null,
-   "failure_category": null,
-   "failure_note": null
+   "failure_category": "bad_refusal",
+   "failure_note": "refused although the filings answer it"
   },
   {
    "qid": "fb-01865",
@@ -3532,7 +3563,7 @@
      "latency_ms": 3109.0
     }
    },
-   "wall_ms": 22.3,
+   "wall_ms": 18.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -3595,7 +3626,7 @@
      "latency_ms": 3117.3
     }
    },
-   "wall_ms": 31.4,
+   "wall_ms": 11.3,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -3664,7 +3695,7 @@
      "latency_ms": 3352.2000000000003
     }
    },
-   "wall_ms": 22.7,
+   "wall_ms": 8.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3721,7 +3752,7 @@
      "latency_ms": 3377.1000000000004
     }
    },
-   "wall_ms": 10392.2,
+   "wall_ms": 6.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3774,7 +3805,7 @@
      "latency_ms": 3090.8
     }
    },
-   "wall_ms": 89.3,
+   "wall_ms": 6.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3829,7 +3860,7 @@
      "latency_ms": 3183.5
     }
    },
-   "wall_ms": 53.2,
+   "wall_ms": 6.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3884,7 +3915,7 @@
      "latency_ms": 2883.4
     }
    },
-   "wall_ms": 46.7,
+   "wall_ms": 5.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3946,7 +3977,7 @@
      "latency_ms": 3130.2000000000003
     }
    },
-   "wall_ms": 22169.4,
+   "wall_ms": 5.3,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -3997,7 +4028,7 @@
      "latency_ms": 2964.5
     }
    },
-   "wall_ms": 30.6,
+   "wall_ms": 4.0,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4056,7 +4087,7 @@
      "latency_ms": 3292.7000000000003
     }
    },
-   "wall_ms": 16063.9,
+   "wall_ms": 5.1,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4117,7 +4148,7 @@
      "latency_ms": 3260.5
     }
    },
-   "wall_ms": 24166.5,
+   "wall_ms": 5.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4176,7 +4207,7 @@
      "latency_ms": 3085.8
     }
    },
-   "wall_ms": 23996.6,
+   "wall_ms": 4.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4232,7 +4263,7 @@
      "latency_ms": 2745.9
     }
    },
-   "wall_ms": 71.2,
+   "wall_ms": 5.2,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4289,7 +4320,7 @@
      "latency_ms": 2678.8999999999996
     }
    },
-   "wall_ms": 57.7,
+   "wall_ms": 4.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4342,7 +4373,7 @@
      "latency_ms": 2893.4
     }
    },
-   "wall_ms": 7909.8,
+   "wall_ms": 4.5,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4386,7 +4417,7 @@
      "latency_ms": 2190.2
     }
    },
-   "wall_ms": 29.9,
+   "wall_ms": 3.6,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4437,7 +4468,7 @@
      "latency_ms": 2500.4
     }
    },
-   "wall_ms": 70.5,
+   "wall_ms": 3.7,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
@@ -4491,7 +4522,7 @@
      "latency_ms": 2243.3
     }
    },
-   "wall_ms": 40.6,
+   "wall_ms": 3.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -4555,7 +4586,7 @@
      "latency_ms": 3250.5
     }
    },
-   "wall_ms": 56.9,
+   "wall_ms": 5.9,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 0.0,
@@ -4612,7 +4643,7 @@
      "latency_ms": 3386.8
     }
    },
-   "wall_ms": 81.2,
+   "wall_ms": 4.8,
    "scores": {
     "numeric_correct": null,
     "refusal_correct": 1.0,
